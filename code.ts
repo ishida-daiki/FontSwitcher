@@ -17,7 +17,6 @@ figma.ui.onmessage = async (msg) => {
       await figma.loadFontAsync({ family: "SF Pro", style: "Semibold" });
 
       const characters = textNode.characters;
-      const updatedTextSegments = [];
 
       for (const segment of textNode.getStyledTextSegments(['fontName', 'fontWeight'])) {
         const { start, end } = segment;
