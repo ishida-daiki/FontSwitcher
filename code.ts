@@ -1,35 +1,54 @@
-// This plugin will open a window to prompt the user to enter a number, and
-// it will then create that many rectangles on the screen.
+figma.showUI(__html__);
 
-// This file holds the main code for plugins. Code in this file has access to
-// the *figma document* via the figma global object.
-// You can access browser APIs in the <script> tag inside "ui.html" which has a
-// full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
+figma.ui.onmessage = async (msg) => {
+  if (msg.type === 'analyzeAndUpdateText') {
+    const nodes = figma.currentPage.findAll(node => node.type === 'TEXT') as TextNode[];
 
-// This shows the HTML page in "ui.html".
-figma.showUI(__html__, { themeColors: true });
-// figma.ui.resize(600, 300);
+    for (const textNode of nodes) {
+      // テキストノードに既に設定されているフォントをロード
+      if (textNode.fontName !== figma.mixed) {
+        await figma.loadFontAsync(textNode.fontName as FontName);
+      }
 
-// Calls to "parent.postMessage" from within the HTML page will trigger this
-// callback. The callback will be passed the "pluginMessage" property of the
-// posted message.
-figma.ui.onmessage = (msg) => {
-  // One way of distinguishing between different types of messages sent from
-  // your HTML page is to use an object with a "type" property like this.
-  if (msg.type === "create-rectangles") {
-    const nodes: SceneNode[] = [];
-    for (let i = 0; i < msg.count; i++) {
-      const rect = figma.createRectangle();
-      rect.x = i * 150;
-      rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.5, b: 0 } }];
-      figma.currentPage.appendChild(rect);
-      nodes.push(rect);
+      // ここで予め必要なフォントをロードしておきます
+      await figma.loadFontAsync({ family: "Noto Sans", style: "Regular" });
+      await figma.loadFontAsync({ family: "Helvetica", style: "Regular" });
+      // "SF Pro"のフォントウェイトが「Bold」なのか「Semibold」なのかなど、実際のプロジェクトで利用しているフォントウェイトに合わせて変更する
+      await figma.loadFontAsync({ family: "SF Pro", style: "Semibold" });
+
+      const characters = textNode.characters;
+      const updatedTextSegments = [];
+
+      for (const segment of textNode.getStyledTextSegments(['fontName', 'fontWeight'])) {
+        const { start, end } = segment;
+        const textSegment = characters.slice(start, end);
+        
+        let fontName: FontName;
+
+        // 日本語文字判定
+        if (/[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u4E00-\u9FAF\u3400-\u4DBF]/.test(textSegment)) {
+          fontName = { family: "Noto Sans", style: "Regular" };
+        }
+        // 英語文字判定
+        else if (/[a-zA-Z]/.test(textSegment)) {
+          fontName = { family: "SF Pro Text", style: "Semibold" };
+        }
+        // 数字判定
+        else if (/\d/.test(textSegment)) {
+          fontName = { family: "Helvetica", style: "Regular" };
+        }
+        else {
+          // それ以外の文文字の場合は変更を適用させない
+          continue;
+        }
+        
+        for (let i = start; i < end; i++) {
+          await figma.loadFontAsync(fontName);
+          textNode.setRangeFontName(i, i + 1, fontName);
+        }
+      }
     }
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
+    
+    figma.closePlugin();
   }
-
-  // Make sure to close the plugin when you're done. Otherwise the plugin will
-  // keep running, which shows the cancel button at the bottom of the screen.
-  figma.closePlugin();
 };
