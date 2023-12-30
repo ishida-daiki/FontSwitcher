@@ -1,57 +1,59 @@
-<Style>
+<!-- <Style>
   body {
     margin: 0;
-    background-color: var(--figma-color-bg);
+    background: var(--figma-color-bg-secondary);
     color: var(--figma-color-text);
-  }
-  .wrapper {
+    font-family: 'Inter';
+    font-size: 11px;
+    font-weight: 400;
     width: 100%;
-    height: 100%;
-    flex-direction: column;
+  }
+  .tab {
+    width: 100%;
+    background: var(--figma-color-bg);
+    border-bottom: 1px var(--figma-color-border) solid;
+    padding: 0px 8px;
     display: flex;
+    gap: 0;
+  }
+  .tablinks {
+    font-family: 'Inter';
+    font-size: 11px;
+    color: var(--figma-color-text-disabled);
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
+    background: none;
+  }
+  .tab .tablinks .select {
+    color: var(--figma-color-text-onselected);
+    font-weight: 700;
   }
   .container {
-    background: white;
-    border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, .1));
-    display: flex;
-  }
-  .title_container {
-    width: 260px;
-    padding: 1rem;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .title_container_select {
-    /* background: #2C2C2C; */
-    background: var(--figma-color-bg-inverse);
-  }
-  .title_container_not_select {
-    background: white;
+    margin: 16px;
+    height: 100%;
   }
   .title {
-    font-size: 14px;
-    font-family: Inter;
-    word-wrap: break-word;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 12px;
+    margin-bottom: 12px;
   }
   .select {
-    color: white;
+    color: var(--figma-color-text);
     font-weight: 600;
   }
-
   .not_select {
-    color: #6E6E6E;
+    color: var(--figma-color-text);
     font-weight: 400;
   }
   .topic {
-    color: #2C2C2C;
-    font-size: 0.8rem;
-    font-family: Inter;
     font-weight: 700;
     word-wrap: break-word
   }
-  .contents {
-    padding: 20px;
+  .content {
     gap: 8px;
     display: flex;
     flex-direction: column;
@@ -62,38 +64,19 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-radius: 12px;
-    background: #FAFAFA;
-    border: 1px #CACACA solid;
-  }
-  .layer_content {
-    color: #2C2C2C;
-    font-size: 0.8rem;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: 20px;
-    word-wrap: break-word
-  }
-  .style_container {
-    gap: 16px;
-    display: flex;
-    flex-direction: column;
+    background: var(--figma-color-bg);
+    border: 1px  var(--figma-color-border) solid;
   }
 </Style>
-
-<link rel="stylesheet" href="./node_modules/figma-plugin-ds/dist/figma-plugin-ds.css">
-
 <body>
-  <div class="wrapper">
-    <div class="container">
-        <div class="title_container title_container_select">
-            <div class="title select">スタイルリスト</div>
-        </div>
-        <div class="title_container title_container_not_select">
-            <div class="title not_select">新規追加</div>
-        </div>
-    </div>
-    <div class="contents">
-      <div class="topic">レイヤーを選択</div>
+  <div class="tab">
+    <button class="tablinks select" onclick="openTab(event, 'Tab1')">Style List</button>
+    <button class="tablinks" onclick="openTab(event, 'Tab2')">Add Style</button>
+  </div>
+  <div class="container">
+    <div class="content">
+      <div class="topic">Select Frame</div>
+      <div class="topic">Frame が選択されていません</div>
       <div class="layer_cantainer">
         <div class="layer_content">Mac 環境確認用</div>
         <div>
@@ -101,16 +84,45 @@
         </div>
       </div>
     </div>
-    <div class="contents">
-      <div class="topic">スタイルを選択</div>
-      <div class="style_container">
-        <div class="layer_cantainer">
-          <div class="layer_content">Mac 環境確認用</div>
-          <div>
-            <i data-testid="DeleteIcon"></i>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </body>
+<button id="reflect">reflect</button>
+
+<script>
+  // UIのHTML中のスクリプトは以下のようになります。
+  // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
+  const code = document.getElementById('reflect').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'reflect'}}, '*');
+  }
+</script> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Analyzer Plugin</title>
+    <style>
+       /* Add your styles here */
+       body {
+          margin: 0;
+          padding: 8px;
+       }
+       
+       button {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 8px;
+       }
+    </style>
+</head>
+<body>
+    <button id="analyzeBtn">Analyze and Update Text</button>
+
+    <script>
+    // When the button is clicked, the plugin will start the text analysis and update
+    document.getElementById('analyzeBtn').addEventListener('click', () => {
+        parent.postMessage({ pluginMessage: { type: 'analyzeAndUpdateText' } }, '*');
+    });
+    </script>
+</body>
+</html>
