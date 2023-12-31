@@ -1,10 +1,21 @@
-figma.showUI(__html__);
+figma.showUI(__html__, {themeColors: true, height: 500, width: 400});
 
 figma.ui.onmessage = async (msg) => {
   if (msg.type === 'analyzeAndUpdateText') {
-    const nodes = figma.currentPage.findAll(node => node.type === 'TEXT') as TextNode[];
+    const selectedNodes = figma.currentPage.selection;
 
-    for (const textNode of nodes) {
+    // 選択中のすべてのノードを探索してテキストノードを収集
+    const textNodes = selectedNodes.reduce<TextNode[]>((collection, currentNode) => {
+      if ("children" in currentNode) {
+        const frameTextNodes = currentNode.findAll(node => node.type === 'TEXT') as TextNode[];
+        return collection.concat(frameTextNodes);
+      } else if (currentNode.type === 'TEXT') {
+        collection.push(currentNode);
+      }
+      return collection;
+    }, []);
+
+    for (const textNode of textNodes) {
       // テキストノードに既に設定されているフォントをロード
       if (textNode.fontName !== figma.mixed) {
         await figma.loadFontAsync(textNode.fontName as FontName);
