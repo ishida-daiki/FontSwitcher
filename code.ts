@@ -1,4 +1,4 @@
-figma.showUI(__html__, {themeColors: true, height: 500, width: 400});
+figma.showUI(__html__, {themeColors: true, height: 400, width: 400});
 
 // Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
@@ -66,9 +66,16 @@ figma.ui.onmessage = async (msg) => {
 
 // 選択した要素を変更したときに発生するイベント
 figma.on('selectionchange', () => {
-  for(const node of figma.currentPage.selection) {
-    if(node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION') {
-      figma.ui.postMessage({ type: 'update-name', name: node.name });
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    // 何も選択されていない場合
+    figma.ui.postMessage({ type: 'selection-cleared' });
+  } else {
+    for (const node of selection) {
+      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
+        figma.ui.postMessage({ type: 'update-name', name: node.name });
+      }
     }
   }
 });

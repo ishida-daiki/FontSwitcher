@@ -93,11 +93,19 @@
   .tabList__layer-container {
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
     padding: 4 12px;
     border-radius: 8px;
     background: var(--figma-color-bg);
     border: 1px  var(--figma-color-border) solid;
     align-items: center;
+  }
+  .tabList__layer-container:hover {
+    background: var(--figma-color-bg-hover);
+  }
+  .tabList__layer-container.active {
+    background: var(--figma-color-bg);
+    border: 1px var(--figma-color-border-oncomponent) solid;
   }
   .tabList__layer-contents {
     display: flex;
@@ -108,6 +116,7 @@
     height: 32px;
     border: none;
     background: none;
+    cursor: pointer;
   }
   .tabList__layer-content {
     font-weight: 400;
@@ -145,7 +154,7 @@
     display: grid;
     place-content: center;
     height: 100%;
-    background-color: #f9f9f9;
+    background-color: var(--figma-color-bg-secondary);
     padding: 0 16px;
   }
   .center {
@@ -183,15 +192,6 @@
       </div>
     </div>
     <div class="container__border"></div>
-
-    <!-- <div class="content">
-      <h2 class="title">Select Frame</h2>
-      <select class="text-sm py-1 px-3 rounded-lg">
-        <option disabled="" selected="">Select prototype flow</option>
-        <option value="2:3012">Flow 1</option>
-      </select>
-      <p class="topic error">Frame が選択されていません</p>
-    </div> -->
     <div class="tabList__content">
       <h2 class="tabList__title">Select Style</h2>
       <ul class="tabList__layer-contents">
@@ -206,7 +206,7 @@
           </button>
         </li>
         <li class="tabList__layer-container">
-          <h3 class="tabList__layer-content">Mac 環境確認用</h3>
+          <h3 class="tabList__layer-content">Windows 環境確認用</h3>
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
               <svg class="tabList__svg" 'xmlns="http://www.w3.org/2000/svg" width="16" height="6" viewBox="0 0 16 6">
@@ -226,8 +226,9 @@
 </body>
 
 <script>
-  // タブの要素を取得します。
+  // 要素を取得します。
   const tabs = document.querySelectorAll('.tabList__item');
+  const textStyles = document.querySelectorAll('.tabList__layer-container')
   const indicator = document.querySelector('.tabList-active-indicator');
 
   // タブが選択された際の関数を定義します。
@@ -255,12 +256,25 @@
   activateTab(tabs[0]); // 最初のタブをアクティブとする
   
 
+  // 設定するスタイルをクリックした際のイベントリスナーを追加します。
+  textStyles.forEach(textStyle => {
+    textStyle.addEventListener('click', () => {
+      if(!textStyle.classList.contains('active')) {
+        textStyle.classList.add('active');
+      } else {
+        textStyle.classList.remove('active');
+      }
+    });
+  });
+
   // メッセージがプラグインから送信されたときにイベントを発火させる
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
+    const textElement = document.querySelector('.listMessage .text.center'); // textElementをここで定義
 
-    if (message && message.type === 'update-name') {
-      const textElement = document.querySelector('.listMessage .text.center');
+    if (message.type === 'selection-cleared') {
+      textElement.textContent = '選択してね';
+    } else if (message.type === 'update-name') {
       textElement.textContent = message.name;
     }
   };
