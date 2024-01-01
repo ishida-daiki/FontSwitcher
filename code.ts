@@ -1,5 +1,6 @@
 figma.showUI(__html__, {themeColors: true, height: 500, width: 400});
 
+// Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
   if (msg.type === 'analyzeAndUpdateText') {
     const selectedNodes = figma.currentPage.selection;
@@ -59,6 +60,15 @@ figma.ui.onmessage = async (msg) => {
       }
     }
     
-    figma.closePlugin();
+    // figma.closePlugin();
   }
 };
+
+// 選択した要素を変更したときに発生するイベント
+figma.on('selectionchange', () => {
+  for(const node of figma.currentPage.selection) {
+    if(node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION') {
+      figma.ui.postMessage({ type: 'update-name', name: node.name });
+    }
+  }
+});
