@@ -1,10 +1,22 @@
-figma.showUI(__html__);
+figma.showUI(__html__, {themeColors: true, height: 400, width: 400});
 
+// Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
   if (msg.type === 'analyzeAndUpdateText') {
-    const nodes = figma.currentPage.findAll(node => node.type === 'TEXT') as TextNode[];
+    const selectedNodes = figma.currentPage.selection;
 
-    for (const textNode of nodes) {
+    // 選択中のすべてのノードを探索してテキストノードを収集
+    const textNodes = selectedNodes.reduce<TextNode[]>((collection, currentNode) => {
+      if ("children" in currentNode) {
+        const frameTextNodes = currentNode.findAll(node => node.type === 'TEXT') as TextNode[];
+        return collection.concat(frameTextNodes);
+      } else if (currentNode.type === 'TEXT') {
+        collection.push(currentNode);
+      }
+      return collection;
+    }, []);
+
+    for (const textNode of textNodes) {
       // テキストノードに既に設定されているフォントをロード
       if (textNode.fontName !== figma.mixed) {
         await figma.loadFontAsync(textNode.fontName as FontName);
@@ -17,7 +29,6 @@ figma.ui.onmessage = async (msg) => {
       await figma.loadFontAsync({ family: "SF Pro", style: "Semibold" });
 
       const characters = textNode.characters;
-      const updatedTextSegments = [];
 
       for (const segment of textNode.getStyledTextSegments(['fontName', 'fontWeight'])) {
         const { start, end } = segment;
@@ -49,6 +60,22 @@ figma.ui.onmessage = async (msg) => {
       }
     }
     
-    figma.closePlugin();
+    // figma.closePlugin();
   }
 };
+
+// 選択した要素を変更したときに発生するイベント
+figma.on('selectionchange', () => {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    // 何も選択されていない場合
+    figma.ui.postMessage({ type: 'selection-cleared' });
+  } else {
+    for (const node of selection) {
+      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
+        figma.ui.postMessage({ type: 'update-name', name: node.name });
+      }
+    }
+  }
+});

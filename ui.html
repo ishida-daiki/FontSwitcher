@@ -1,18 +1,135 @@
-<!-- <Style>
+<Style>
+  /* Reset CSS */
+  html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    list-style: none;
+  }
+
   body {
     margin: 0;
-    background: var(--figma-color-bg-secondary);
+    background-color: var(--figma-color-bg);
     color: var(--figma-color-text);
     font-family: 'Inter';
     font-size: 11px;
     font-weight: 400;
     width: 100%;
   }
-  .tab {
-    width: 100%;
-    background: var(--figma-color-bg);
+  .tabList {
+    position: relative;
     border-bottom: 1px var(--figma-color-border) solid;
-    padding: 0px 8px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 40px;
+  }
+  .tabList__items {
+    display: flex;
+    gap: 8px;
+    color: var(--figma-color-text-onselected);
+    height: 100%;
+  }
+  .tabList__item {
+    display: flex;
+    align-items: center;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    height: 100%;
+  }
+  .tabList__text {
+    font-size: .75rem;
+    font-weight: bold;
+    color: var(--figma-color-text-disabled);
+  }
+  /* 選択されたタブのテキストスタイル */
+  .tabList__item--active .tabList__text {
+    /* 太字にする */
+    color: var(--figma-color-text);
+  }
+  /* 選択インジケーターのスタイル */
+  .tabList-active-indicator {
+    height: 2px; /* インジケーターの高さ */
+    background-color: var(--figma-color-bg-component); /* インジケーターの色 */
+    width: 100%; /* インジケーターの幅をタブの幅に合わせる */
+    position: absolute; /* インジケーターの位置を絶対指定 */
+    bottom: -1px; /* インジケーターをタブの下端に位置するように */
+    left: 0;
+  }
+  /* 非アクティブなタブを隠す */
+  .tabList-active-indicator--inactive {
+    display: none;
+  }
+  .button-submit {
+    padding: 0.7rem 1.5rem;
+    width: 80px;
+    border-radius: 4px;
+    border: var(--figma-color-border-component);
+    color: var(--figma-color-text-onbrand);
+    background: var(--figma-color-bg-component);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 16px;
+  }
+  .error {
+    color: var(--figma-color-text-danger);
+  }
+
+  .tabList__content {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tabList__title {
+    font-weight: 700;
+  }
+  .tabList__layer-container {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 4 12px;
+    border-radius: 8px;
+    background: var(--figma-color-bg);
+    border: 1px  var(--figma-color-border) solid;
+    align-items: center;
+  }
+  .tabList__layer-container:hover {
+    background: var(--figma-color-bg-hover);
+  }
+  .tabList__layer-container.active {
+    background: var(--figma-color-bg);
+    border: 1px var(--figma-color-border-oncomponent) solid;
+  }
+  .tabList__layer-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tabList__options-button {
+    height: 32px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .tabList__layer-content {
+    font-weight: 400;
+  }
+  
+
+
+  .text-sm {
+    font-size: .875rem;
+  }
+  .tab {
+    margin: 0;
+    padding: 0;
     display: flex;
     gap: 0;
   }
@@ -27,102 +144,145 @@
     border: none;
     background: none;
   }
-  .tab .tablinks .select {
-    color: var(--figma-color-text-onselected);
-    font-weight: 700;
+
+  .listContainer {
+    overflow: auto;
+    padding: 0;
+    height: 96px;
   }
-  .container {
-    margin: 16px;
+  .listMessage {
+    display: grid;
+    place-content: center;
     height: 100%;
+    background-color: var(--figma-color-bg-secondary);
+    padding: 0 16px;
   }
-  .title {
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 12px;
-    margin-bottom: 12px;
+  .center {
+    text-align: center;
   }
-  .select {
+  .text {
+    padding-top: 1px;
     color: var(--figma-color-text);
-    font-weight: 600;
+    pointer-events: none;
   }
-  .not_select {
-    color: var(--figma-color-text);
-    font-weight: 400;
+  .container__border {
+    height: 1px;
+    background: var(--figma-color-border);
   }
-  .topic {
-    font-weight: 700;
-    word-wrap: break-word
-  }
-  .content {
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
-  }
-  .layer_cantainer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 12px;
-    background: var(--figma-color-bg);
-    border: 1px  var(--figma-color-border) solid;
-  }
+
 </Style>
 <body>
-  <div class="tab">
-    <button class="tablinks select" onclick="openTab(event, 'Tab1')">Style List</button>
-    <button class="tablinks" onclick="openTab(event, 'Tab2')">Add Style</button>
+  <!-- tabList -->
+  <div class="tabList">
+    <ul class="tabList__items">
+      <li class="tabList__item">
+        <span class="tabList__text">Apply Styles</span>
+      </li>
+      <li class="tabList__item">
+        <span class="tabList__text">Create Style</span>
+      </li>
+    </ul>
+    <div class="tabList-active-indicator"></div>
   </div>
+
   <div class="container">
-    <div class="content">
-      <div class="topic">Select Frame</div>
-      <div class="topic">Frame が選択されていません</div>
-      <div class="layer_cantainer">
-        <div class="layer_content">Mac 環境確認用</div>
-        <div>
-          <i data-testid="DeleteIcon"></i>
-        </div>
+    <div class="listContainer">
+      <div class="listMessage">
+        <p class="text center">Select the element whose text you want to change</p>
       </div>
     </div>
+    <div class="container__border"></div>
+    <div class="tabList__content">
+      <h2 class="tabList__title">Select Style</h2>
+      <ul class="tabList__layer-contents">
+        <li class="tabList__layer-container">
+          <h3 class="tabList__layer-content">Mac 環境確認用</h3>
+          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="tabList__svg-container">
+              <svg class="tabList__svg" 'xmlns="http://www.w3.org/2000/svg" width="16" height="6" viewBox="0 0 16 6">
+                <path fill-opacity="1" fill-rule="nonzero" stroke="none" d="M3.5 3c0 .828-.672 1.5-1.5 1.5C1.172 4.5.5 3.828.5 3c0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5zm6 0c0 .828-.672 1.5-1.5 1.5-.828 0-1.5-.672-1.5-1.5 0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5zM14 4.5c.828 0 1.5-.672 1.5-1.5 0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5 0 .828.672 1.5 1.5 1.5z"></path>
+              </svg>
+            </span>
+          </button>
+        </li>
+        <li class="tabList__layer-container">
+          <h3 class="tabList__layer-content">Windows 環境確認用</h3>
+          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="tabList__svg-container">
+              <svg class="tabList__svg" 'xmlns="http://www.w3.org/2000/svg" width="16" height="6" viewBox="0 0 16 6">
+                <path fill-opacity="1" fill-rule="nonzero" stroke="none" d="M3.5 3c0 .828-.672 1.5-1.5 1.5C1.172 4.5.5 3.828.5 3c0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5zm6 0c0 .828-.672 1.5-1.5 1.5-.828 0-1.5-.672-1.5-1.5 0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5zM14 4.5c.828 0 1.5-.672 1.5-1.5 0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5 0 .828.672 1.5 1.5 1.5z"></path>
+              </svg>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <button id="analyzeBtn" class="button-submit">Apply</button>
+    <!-- <p>
+      Values:
+      <input id="textbox" value="1, 3, 10, 28, 41, 87, 100, 114, 94, 68, 50, 23, 9, 3, 1">
+    </p> -->
   </div>
 </body>
-<button id="reflect">reflect</button>
 
 <script>
+  // 要素を取得します。
+  const tabs = document.querySelectorAll('.tabList__item');
+  const textStyles = document.querySelectorAll('.tabList__layer-container')
+  const indicator = document.querySelector('.tabList-active-indicator');
+
+  // タブが選択された際の関数を定義します。
+  function activateTab(tab) {
+    // すべてのタブからアクティブクラスを取り除きます。
+    tabs.forEach(t => {
+      t.classList.remove('tabList__item--active');
+    });
+    
+    // 選択されたタブにアクティブクラスを追加します。
+    tab.classList.add('tabList__item--active');
+    
+    // インジケーターを活性状態にして、選択されたタブの位置に合わせます。
+    indicator.style.display = 'block';
+    indicator.style.width = '74px';
+    indicator.style.left = `${tab.offsetLeft}px`;
+  }
+
+  // タブをクリックした際のイベントリスナーを追加します。
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab));
+  });
+
+  // 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
+  activateTab(tabs[0]); // 最初のタブをアクティブとする
+  
+
+  // 設定するスタイルをクリックした際のイベントリスナーを追加します。
+  textStyles.forEach(textStyle => {
+    textStyle.addEventListener('click', () => {
+      if(!textStyle.classList.contains('active')) {
+        textStyle.classList.add('active');
+      } else {
+        textStyle.classList.remove('active');
+      }
+    });
+  });
+
+  // メッセージがプラグインから送信されたときにイベントを発火させる
+  window.onmessage = (event) => {
+    const message = event.data.pluginMessage;
+    const textElement = document.querySelector('.listMessage .text.center'); // textElementをここで定義
+
+    if (message.type === 'selection-cleared') {
+      textElement.textContent = '選択してね';
+    } else if (message.type === 'update-name') {
+      textElement.textContent = message.name;
+    }
+  };
+
   // UIのHTML中のスクリプトは以下のようになります。
   // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
-  const code = document.getElementById('reflect').onclick = () => {
-    parent.postMessage({pluginMessage: {type: 'reflect'}}, '*');
-  }
-</script> -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Text Analyzer Plugin</title>
-    <style>
-       /* Add your styles here */
-       body {
-          margin: 0;
-          padding: 8px;
-       }
-       
-       button {
-          width: 100%;
-          padding: 8px;
-          margin-bottom: 8px;
-       }
-    </style>
-</head>
-<body>
-    <button id="analyzeBtn">Analyze and Update Text</button>
-
-    <script>
-    // When the button is clicked, the plugin will start the text analysis and update
-    document.getElementById('analyzeBtn').addEventListener('click', () => {
-        parent.postMessage({ pluginMessage: { type: 'analyzeAndUpdateText' } }, '*');
-    });
-    </script>
-</body>
-</html>
+  // When the button is clicked, the plugin will start the text analysis and update
+  document.getElementById('analyzeBtn').addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'analyzeAndUpdateText' } }, '*');
+  });
+</script>
