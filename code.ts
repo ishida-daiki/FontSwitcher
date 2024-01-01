@@ -1,4 +1,4 @@
-figma.showUI(__html__, {themeColors: true, height: 400, width: 400});
+figma.showUI(__html__, {themeColors: true, height: 400, width: 300});
 
 // Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
