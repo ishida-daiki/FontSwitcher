@@ -1,5 +1,24 @@
 figma.showUI(__html__, {themeColors: true, height: 400, width: 300});
 
+
+
+// 選択した要素を変更したときに発生するイベント
+figma.on('selectionchange', () => {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    // 何も選択されていない場合
+    figma.ui.postMessage({ type: 'selection-cleared' });
+  } else {
+    for (const node of selection) {
+      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
+        figma.ui.postMessage({ type: 'update-name', name: node.name });
+      }
+    }
+  }
+});
+
+
 // Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
   if (msg.type === 'analyzeAndUpdateText') {
@@ -63,19 +82,3 @@ figma.ui.onmessage = async (msg) => {
     // figma.closePlugin();
   }
 };
-
-// 選択した要素を変更したときに発生するイベント
-figma.on('selectionchange', () => {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    // 何も選択されていない場合
-    figma.ui.postMessage({ type: 'selection-cleared' });
-  } else {
-    for (const node of selection) {
-      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
-        figma.ui.postMessage({ type: 'update-name', name: node.name });
-      }
-    }
-  }
-});
