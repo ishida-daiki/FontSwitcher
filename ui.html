@@ -260,12 +260,13 @@
       textElement.style.color = 'var(--figma-color-text-disabled)';
       textElement.style.fontWeight = '400';
       hasSelection = false;
+      updateButtonState();
     } else if (message.type === 'update-name') {
       textElement.textContent = message.name;
       textElement.style.color = 'var(--figma-color-text)';
       textElement.style.fontWeight = '600';
       hasSelection = true;
-      console.log(hasSelection);
+      updateButtonState();
     }
   };
 
@@ -280,11 +281,18 @@
       // 他のスタイル名の選択を解除
       textStyles.forEach(ts => ts.classList.remove('active'));
       textStyle.classList.add('active');
-      update();
+      updateButtonState();
     });
   });
 
-  const update = () => {
+  // Applyボタンの初期状態を定義
+  applyBtn.disabled = true; // 最初は非活性化しておく
+
+  // Applyボタンの有効/無効ステータスを更新する関数
+  function updateButtonState() {
+    // selectedEnvがnullでないかをチェックして、isEnvSelectedを更新する
+    isEnvSelected = selectedEnv !== null;
+    // Applyボタンは環境が選択され、何かが選択されている場合のみ活性化する
     applyBtn.disabled = !(isEnvSelected && hasSelection);
   }
 
