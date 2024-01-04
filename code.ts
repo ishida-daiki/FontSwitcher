@@ -59,7 +59,8 @@ figma.ui.onmessage = async (msg) => {
     } catch (error) {
       // エラーをコンソールに出力
       console.error("Error processing text nodes:", error);
-      // エラー時にもローディングを非表示にする
+    }  finally {
+      // ローディングを非表示にする
       figma.ui.postMessage({ type: 'hide-loading' });
     }
   }
