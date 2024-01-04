@@ -164,6 +164,24 @@
     width: 16;
     height: 6;
   }
+  /* ローディングインジケーターのスタイル */
+  .loading-indicator {
+    /* 必要に応じて他のスタイルを追加 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  /* 非表示にするためのクラス */
+  .hidden {
+    display: none;
+  }
 
 </Style>
 <body>
@@ -214,6 +232,10 @@
     </div>
     <button id="analyzeBtn" class="button-submit">Apply</button>
   </div>
+  <!-- ローディングインジケーターのHTML例 -->
+  <div id="loadingIndicator" class="loading-indicator hidden">
+    Loading...
+  </div>
 </body>
 
 <script>
@@ -253,20 +275,34 @@
   // メッセージがプラグインから送信されたときにイベントを発火させる
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
+    // 共通のエレメントを取得
     const textElement = document.querySelector('.listMessage .text.center'); // textElementをここで定義
+    const loadingIndicator = document.getElementById('loadingIndicator');
 
-    if (message.type === 'selection-cleared') {
-      textElement.innerHTML = 'Select the element whose <br> text you want to change'
-      textElement.style.color = 'var(--figma-color-text-disabled)';
-      textElement.style.fontWeight = '400';
-      hasSelection = false;
-      updateButtonState();
-    } else if (message.type === 'update-name') {
-      textElement.textContent = message.name;
-      textElement.style.color = 'var(--figma-color-text)';
-      textElement.style.fontWeight = '600';
-      hasSelection = true;
-      updateButtonState();
+    switch (message.type) {
+      // 選択した要素関連メッセージ
+      case 'selection-cleared':
+        textElement.innerHTML = 'Select the element whose <br> text you want to change'
+        textElement.style.color = 'var(--figma-color-text-disabled)';
+        textElement.style.fontWeight = '400';
+        hasSelection = false;
+        updateButtonState();
+        break;
+      case 'update-name':
+        textElement.textContent = message.name;
+        textElement.style.color = 'var(--figma-color-text)';
+        textElement.style.fontWeight = '600';
+        hasSelection = true;
+        updateButtonState();
+        break;
+      
+      // ローディング表示関連メッセージ
+      case 'show-loading':
+        loadingIndicator.classList.remove('hidden');
+        break;
+      case 'hide-loading':
+        loadingIndicator.classList.add('hidden');
+        break;
     }
   };
 
