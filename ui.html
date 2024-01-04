@@ -63,22 +63,29 @@
     display: none;
   }
   .button-submit {
-    padding: 0.7rem 1.5rem;
-    width: 80px;
+    padding: 0.8rem 1.5rem;
+    width: 100%;
     border-radius: 4px;
-    border: var(--figma-color-border-secondary);
+    font-weight: 600;
+  }
+  .button-submit.disabled {
+    border: var(--figma-color-border-disabled);
+    color: var(--figma-color-text-disabled);
+    background: var(--figma-color-bg-disabled);;
+  }
+  .button-submit.active {
+    border: var(--figma-color-border-component);
     color: var(--figma-color-text-onbrand);
     background: var(--figma-color-bg-component);
-    font-weight: 600;
+  }
+  .button-submit.active:hover {
     cursor: pointer;
-  }
-  .button-submit:hover {
+    color: var(--figma-color-text-onbrand);
     background: var(--figma-color-bg-component-hover);
-    color: var(--figma-color-text-onbrand);
   }
-  .button-submit:active {
-    background: var(--figma-color-bg-component-pressed);
+  .button-submit.active:active {
     color: var(--figma-color-text-onbrand);
+    background: var(--figma-color-bg-component-pressed);
   }
   .container {
     display: flex;
@@ -230,7 +237,8 @@
         </li>
       </ul>
     </div>
-    <button id="analyzeBtn" class="button-submit">Apply</button>
+    <button id="analyzeBtn" class="button-submit disabled">Apply</button>
+    <!-- <button id="analyzeBtn" class="button-submit">Apply</button> -->
   </div>
   <!-- ローディングインジケーターのHTML例 -->
   <div id="loadingIndicator" class="loading-indicator hidden">
@@ -313,7 +321,6 @@
   textStyles.forEach(textStyle => {
     textStyle.addEventListener('click', () => {
       selectedEnv = textStyle.getAttribute('data-env');
-      isEnvSelected = selectedEnv !== null; // 環境が選択されているか確認
       // 他のスタイル名の選択を解除
       textStyles.forEach(ts => ts.classList.remove('active'));
       textStyle.classList.add('active');
@@ -330,6 +337,14 @@
     isEnvSelected = selectedEnv !== null;
     // Applyボタンは環境が選択され、何かが選択されている場合のみ活性化する
     applyBtn.disabled = !(isEnvSelected && hasSelection);
+
+    if (isEnvSelected && hasSelection) {
+      applyBtn.classList.remove('disabled');
+      applyBtn.classList.add('active');
+    } else {
+      applyBtn.classList.remove('active');
+      applyBtn.classList.add('disabled');
+    }
   }
 
   // UIのHTML中のスクリプトは以下のようになります。
