@@ -37,19 +37,32 @@ figma.ui.onmessage = async (msg) => {
         }
         return collection;
       }, []);
-  
-      // 必要なフォントのロード処理
-      const fontsToLoad = [
+
+      // Mac用のフォント設定
+      const fontsToLoadMac = [
         { family: "Noto Sans", style: "Regular" },
         { family: "Helvetica", style: "Regular" },
         { family: "SF Pro", style: "Semibold" }
       ];
+
+      // Windows用のフォント設定
+      const fontsToLoadWindows = [
+        // Windows用のフォント設定
+        { family: "Meiryo", style: "Regular" },
+        { family: "Arial", style: "Regular" },
+        { family: "Yu Gothic", style: "Bold" }
+      ];
+
+      // MacとWindowsのフォントの設定をマージします
+      const fontsToLoad = [...fontsToLoadMac, ...fontsToLoadWindows];
+
+      // マージされたフォント設定に基づいてフォントをロードします
       for (const font of fontsToLoad) {
         await figma.loadFontAsync(font);
       }
   
       for (const textNode of textNodes) {
-        await processTextNodes(textNode);
+        await processTextNodes(textNode, msg.fontSettings.env);
       }
   
       // ローディングを非表示にする
@@ -67,7 +80,7 @@ figma.ui.onmessage = async (msg) => {
 }
 
 // テキストノード処理ロジックを関数化
-async function processTextNodes(textNode: TextNode) {
+async function processTextNodes(textNode: TextNode, env: string) {
   // テキストノードに既に設定されているフォントをロード
   if (textNode.fontName !== figma.mixed) {
     await figma.loadFontAsync(textNode.fontName as FontName);
@@ -84,15 +97,15 @@ async function processTextNodes(textNode: TextNode) {
 
     // 日本語文字判定
     if (/[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u4E00-\u9FAF\u3400-\u4DBF]/.test(textSegment)) {
-      fontName = { family: "Noto Sans", style: "Regular" };
+      fontName = env === 'mac' ? { family: "Noto Sans", style: "Regular" } : fontName = { family: "Meiryo", style: "Regular" };
     }
     // 英語文字判定
     else if (/[a-zA-Z]/.test(textSegment)) {
-      fontName = { family: "SF Pro Text", style: "Semibold" };
+      fontName = env === 'mac' ? { family: "SF Pro Text", style: "Semibold" } : { family: "Arial", style: "Regular" };
     }
     // 数字判定
     else if (/\d/.test(textSegment)) {
-      fontName = { family: "Helvetica", style: "Regular" };
+      fontName = env === 'mac' ? { family: "Helvetica", style: "Regular" } : { family: "Yu Gothic", style: "Bold" };
     }
     else {
       // それ以外の文文字の場合は変更を適用させない
