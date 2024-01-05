@@ -219,14 +219,17 @@
     </ul>
     <div class="tabList-active-indicator"></div>
   </div>
-
+  <!-- 要素選択 and  -->
   <div class="container">
+    <!-- 要素選択 -->
     <div class="listContainer">
       <div class="listMessage">
         <p class="text center">Select the element whose <br> text you want to change</p>
       </div>
     </div>
+    <!-- 区切り線 -->
     <div class="container__border"></div>
+    <!-- 登録したテキストスタイル一覧 -->
     <div class="tabList__content">
       <h2 class="tabList__title">Select Style</h2>
       <ul class="tabList__layer-contents">
@@ -252,10 +255,10 @@
         </li>
       </ul>
     </div>
+    <!-- 反映ボタン -->
     <button id="analyzeBtn" class="button-submit disabled">Apply</button>
-    <!-- <button id="analyzeBtn" class="button-submit">Apply</button> -->
   </div>
-  <!-- ローディングインジケーターのHTML例 -->
+  <!-- ローディングインジケーター -->
   <div id="loadingIndicator" class="loading-indicator hidden">
     <svg class="progress-ring" viewBox="0 0 240 240">
       <circle
@@ -269,11 +272,8 @@
       />
     </svg>
     <span class="progress-text">Applying fonts...</span> 
+  </div>
 </body>
-
-<!-- (240 / 2) - (stroke-width / 2)
-SVGの中心点X座標は幅の半分
-SVGの中心点Y座標は高さの半分 -->
 
 <script>
   // 要素を取得します。
