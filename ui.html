@@ -180,12 +180,27 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.75);
+    /* background: rgba(255, 255, 255, 0.75); */
+    background: var(--figma-color-bg-inverse);
     display: flex;
+    flex-direction: column;
+    align-content: center;
     align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    opacity: 95%;
   }
+  .progress-ring {
+    width: 240px;
+    height: 240px;
+  }
+  .progress-ring__circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  .progress-text {
+    color: var(--figma-color-text-onbrand);
+  }
+
   /* 非表示にするためのクラス */
   .hidden {
     display: none;
@@ -243,15 +258,30 @@
   </div>
   <!-- ローディングインジケーターのHTML例 -->
   <div id="loadingIndicator" class="loading-indicator hidden">
-    Loading...
-  </div>
+    <svg class="progress-ring" viewBox="0 0 240 240">
+      <circle
+        class="progress-ring__circle"
+        stroke="var(--figma-color-bg-component)"
+        stroke-width="10"
+        fill="transparent"
+        r="52"  
+        cx="120"
+        cy="120"
+      />
+    </svg>
+    <span class="progress-text">Applying fonts...</span> 
 </body>
+
+<!-- (240 / 2) - (stroke-width / 2)
+SVGの中心点X座標は幅の半分
+SVGの中心点Y座標は高さの半分 -->
 
 <script>
   // 要素を取得します。
   const tabs = document.querySelectorAll('.tabList__item');
   const textStyles = document.querySelectorAll('.tabList__layer-container')
   const indicator = document.querySelector('.tabList-active-indicator');
+  const loader = document.querySelectorAll('.loading-indicator');
 
   // 選択された要素とstyleの状態を表示
   let selectedEnv = null;
@@ -281,6 +311,23 @@
   // 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
   activateTab(tabs[0]); // 最初のタブをアクティブとする
 
+  // progress-ring__circleと同じ値をセットし、
+  // SVGの円周の長さを計算する式: 2 * Math.PI * r (半径)
+  const circumference = 2 * Math.PI * 52;
+
+  // 最初に円をリングとして表示するために、
+  // stroke-dasharrayとstroke-dashoffsetを円周の長さにセットします
+  const circle = document.querySelector('.progress-ring__circle');
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = circumference;
+
+  function setProgress(percent) {
+    // パーセントに応じたオフセットを計算します
+    const offset = circumference - (percent / 100 * circumference);
+    // オフセットを設定することでリングを描画します
+    circle.style.strokeDashoffset = offset;
+  }
+
   // メッセージがプラグインから送信されたときにイベントを発火させる
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
@@ -306,8 +353,14 @@
         break;
       
       // ローディング表示関連メッセージ
-      case 'show-loading':
+      // case 'show-loading':
+      //   loadingIndicator.classList.remove('hidden');
+      case 'update-progress':
         loadingIndicator.classList.remove('hidden');
+        // 進捗状況のパーセンテージを受け取る
+        const progressPercent = event.data.pluginMessage.progress;
+        // 進捗インジケータを更新する
+        setProgress(progressPercent);
         break;
       case 'hide-loading':
         loadingIndicator.classList.add('hidden');

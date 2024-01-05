@@ -60,9 +60,20 @@ figma.ui.onmessage = async (msg) => {
       for (const font of fontsToLoad) {
         await figma.loadFontAsync(font);
       }
+
+      // 処理するノードの数をカウント
+      const totalNodes = textNodes.length;
+      let processedNodes = 0;
   
       for (const textNode of textNodes) {
         await processTextNodes(textNode, msg.fontSettings.env);
+
+        // 処理されたノードの数をインクリメント
+        processedNodes++;
+
+        // 進捗率を計算してUIに送信
+        const progress = (processedNodes / totalNodes) * 100;
+        figma.ui.postMessage({ type: 'update-progress', progress: progress });
       }
   
       // ローディングを非表示にする
