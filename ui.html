@@ -19,6 +19,9 @@
     font-weight: 400;
     width: 100%;
   }
+  svg {
+    display: block;
+  }
   .tabList {
     position: relative;
     border-bottom: 1px var(--figma-color-border) solid;
@@ -103,7 +106,9 @@
     flex-direction: column;
   }
   .tabList__title {
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0.06px;
   }
   .tabList__layer-container {
     display: flex;
@@ -128,14 +133,29 @@
     gap: 8px;
   }
   .tabList__options-button {
-    height: 32px;
-    border-radius: 2px;
-    border: none;
-    background: none;
-    cursor: pointer;
+    border: 1px solid transparent; 
+    outline: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 32px; 
+    width: 32px; 
+    flex: 0 0 32px; 
+    line-height: 32px; 
+    cursor: default; 
+    fill: var(--figma-color-icon, #000);
+    color: var(--figma-color-icon, #000);
+    border-radius: 3px;
+    background-clip: padding-box; 
+    background-color: transparent;
   }
   .tabList__options-button:hover {
-    background: var(--figma-color-bg-tertiary);
+    background-color: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
+    border-radius: 3px;
+  }
+  /* ボタンがホバーされた時にポップアップを表示する */
+  .tabList__options-button:hover + .tabList__popup {
+    display: block;
   }
   .tabList__layer-content {
     font-weight: 400;
@@ -169,8 +189,8 @@
   }
   .tabList__svg {
     fill: var(--figma-color-icon);
-    width: 16;
-    height: 6;
+    width: 12;
+    height: 12;
   }
   /* ローディングインジケーターのスタイル */
   .loading-indicator {
@@ -352,6 +372,54 @@
     display: none;
   }
 
+  /* ルート要素 (Block) */
+.tabList__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* ポップアップコンテナ (Element) */
+.tabList__popup {
+  position: absolute;
+  bottom: -34px;
+  right: 0;
+  display: none;
+}
+
+/* ポップアップコンテナ (Element Modifier) */
+.tabList__popup--visible {
+  display: block;
+}
+
+/* ポップアップアローのコンテナ (Element) */
+.tabList__popup-arrow-container {
+  position: relative;
+}
+
+/* ポップアップの内容 (Element) */
+.tabList__popup-content {
+  height: 28px;
+  border-radius: 2px;
+  background: #222222;
+  color: #FFFFFF;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* ポップアップアロー (Element) */
+.tabList__popup-arrow {
+  position: absolute;
+  top: -6px;
+  left: 70px;
+  right: 0;
+}
+
 </Style>
 <body>
   <!-- tabList -->
@@ -378,7 +446,27 @@
     <div class="container__border"></div>
     <!-- 登録したテキストスタイル一覧 -->
     <div class="tabList__content">
-      <h2 class="tabList__title">Style List</h2>
+      <div class="tabList__container">
+        <h2 class="tabList__title">Style List</h2>
+        <button class="tabList__options-button" role="button" type="button" aria-label="追加">
+          <span class="svg-container">
+            <svg class="tabList__svg" 'xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill: var(--figma-color-icon); fill-opacity="1" fill-rule="nonzero" stroke="none" d="M5.5 5.5v-5h1v5h5v1h-5v5h-1v-5h-5v-1h5z"></path>
+            </svg>
+          </span>
+        </button>
+        <div class="tabList__popup">
+          <div class="tabList__popup-arrow-container">
+            <div class="tabList__popup-content">新しいスタイル</div>
+            <div class="tabList__popup-arrow">
+              <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <h2 class="tabList__title">Style List</h2> -->
       <ul class="tabList__layer-contents">
         <li class="tabList__layer-container" data-env="mac">
           <h3 class="tabList__layer-content">Mac 環境確認用</h3>
