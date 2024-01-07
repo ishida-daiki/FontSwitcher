@@ -87,6 +87,11 @@ figma.ui.onmessage = async (msg) => {
       // ローディングを非表示にする
       figma.ui.postMessage({ type: 'hide-loading' });
     }
+  } 
+  // メッセージ受信ハンドラ
+  else if (msg.type === 'load-fonts-request') {
+    const fonts = await figma.listAvailableFontsAsync();
+    figma.ui.postMessage({ type: 'load-fonts', fonts });
   }
 }
 

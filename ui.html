@@ -205,6 +205,156 @@
     display: none;
   }
 
+.select-content {
+  display: flex;
+}
+
+  /* Additional styles for 'select' dropdown */
+.select-container {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.select-dropdown {
+  padding: 4px;
+  border: 1px solid var(--figma-color-border);
+  background-color: var(--figma-color-bg);
+  border-radius: 4px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  appearance: none; /* Disables the native drop-down arrow */
+}
+
+.select-dropdown:focus {
+  outline: none;
+  border-color: var(--figma-color-border-focus);
+}
+
+/* Style for custom dropdown arrow */
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Makes sure the svg does not prevent clicking the select box */
+}
+
+.select-arrow svg {
+  fill: var(--figma-color-icon); /* Icon color */
+}
+
+.create-style.font-family {
+  display: flex;
+  flex-direction: column;
+  max-height: 295px;
+  top: calc(100% + 1px);
+  -webkit-font-smoothing: antialiased;
+  pointer-events: none;
+  /* visibility: hidden; */
+  background-color: #1e1e1e;
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--box-shadow-menu);
+  color: #fff;
+  font-size: var(--font-size-12);
+  left: 0;
+  min-width: 100%;
+  overflow-y: auto;
+  padding: var(--space-extra-small) 0;
+  position: absolute;
+}
+.font-family_label {
+  position: relative;
+  /* overflow: hidden; */
+  padding: 4px var(--space-medium) 4px 32px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.font-family_labelText {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.font-menu {
+  width: 164px;
+  height: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background: #222222;
+  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.20);
+  border-radius: 2px;
+  border: 0.50px solid rgba(0, 0, 0, 0.10);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+
+
+.font-menu__item {
+  width: 164px;
+  height: 24px;
+  position: relative;
+}
+
+.font-menu__item--active {
+  background: #18A0FB;
+}
+.font-menu__divider {
+  width: 164px;
+  height: 17px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.font-menu__divider_item {
+  width: 100%;
+  border: 1px rgba(255, 255, 255, 0.20) solid;
+}
+
+.font-menu__text {
+  display: flex;
+  align-items: center;
+  width: 116px;
+  height: 24px;
+  left: 32px;
+  top: 0px;
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.06px;
+  word-wrap: break-word;
+}
+
+.font-menu__icon {
+  width: 16px;
+  height: 16px;
+  left: 8px;
+  top: 4px;
+  position: absolute;
+}
+
+.font-menu__icon-img {
+  width: 9.91px;
+  height: 7.62px;
+  left: 3.29px;
+  top: 3.79px;
+  position: absolute;
+}
+
 </Style>
 <body>
   <!-- tabList -->
@@ -231,7 +381,7 @@
     <div class="container__border"></div>
     <!-- 登録したテキストスタイル一覧 -->
     <div class="tabList__content">
-      <h2 class="tabList__title">Select Style</h2>
+      <h2 class="tabList__title">Style List</h2>
       <ul class="tabList__layer-contents">
         <li class="tabList__layer-container" data-env="mac">
           <h3 class="tabList__layer-content">Mac 環境確認用</h3>
@@ -257,6 +407,45 @@
     </div>
     <!-- 反映ボタン -->
     <button id="analyzeBtn" class="button-submit disabled">Apply</button>
+
+    <div class="font-menu" role="menu">
+      <div class="font-menu__item font-menu__item--active" role="menuitem">    
+        <div class="font-menu__text">Value 1</div>
+        <div class="font-menu__icon">
+          <img class="font-menu__icon-img" src="https://via.placeholder.com/10x8" alt="Icon Description" />
+        </div>
+      </div>
+      <div class="font-menu__item" role="menuitem">
+        <div class="font-menu__text">Value 2</div>
+      </div>
+      <div class="font-menu__divider" role="menuitem">
+        <hr class="font-menu__divider_item" />  <!-- Use <hr> for semantic divider -->
+      </div>
+      <div class="font-menu__item" role="menuitem">
+        <div class="font-menu__text">Add new…</div>
+      </div>
+    </div>
+
+
+    <!-- fontFamilyのカスタムリスト -->
+    <!-- <div class="_textbox_sir3b_1">
+      <div>
+        <input class="_input_1m36p_59" id="fontFamilyInput" autocomplete="off" placeholder="Select Font Family">
+        <div id="fontFamilyListContainer" class="create-style font-family">
+          
+          <label class="font-family_label">
+            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
+            <div style="width: 100%; height: 100%; color: white; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; letter-spacing: 0.06px; word-wrap: break-word">Value 1</div>
+          </label>
+          <label class="font-family_label">
+            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
+          </label>
+          <label class="font-family_label">
+            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
+          </label>
+        </div>
+      </div>
+    </div> -->
   </div>
   <!-- ローディングインジケーター -->
   <div id="loadingIndicator" class="loading-indicator hidden">
@@ -287,6 +476,11 @@
   let hasSelection = false;
   let isEnvSelected = false;
 
+  // 利用可能な全フォント情報を格納する変数
+  let availableFonts = [];
+
+  // 利用可能なフォントをロードするためにメインスクリプトに要求する
+  parent.postMessage({ pluginMessage: { type: 'load-fonts-request' } }, '*');
 
   // タブが選択された際の関数を定義します。
   function activateTab(tab) {
@@ -330,6 +524,7 @@
   // メッセージがプラグインから送信されたときにイベントを発火させる
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
+
     // 共通のエレメントを取得
     const textElement = document.querySelector('.listMessage .text.center'); // textElementをここで定義
     const loadingIndicator = document.getElementById('loadingIndicator');
@@ -364,8 +559,66 @@
       case 'hide-loading':
         loadingIndicator.classList.add('hidden');
         break;
+
+      // figma内のfont.familyとstyleをselectボックス内に追加
+      case 'load-fonts':
+        const fontFamilySelect = document.getElementById('fontFamilySelect');
+        availableFonts = message.fonts;
+
+        // 既に追加されたフォントファミリー名を記録するためのSetを作成
+        const addedFontFamilies = new Set();
+        console.log(availableFonts);
+        
+        availableFonts.forEach((font) => {
+          if(!addedFontFamilies.has(font.fontName.family)) {
+            // Setにフォントファミリー名を追加
+            addedFontFamilies.add(font.fontName.family);
+
+            const option = document.createElement('option');
+            option.value = font.fontName.family;
+            option.textContent = font.fontName.family;
+            fontFamilySelect.appendChild(option);
+          }
+        });
+        break;
     }
   };
+
+  // // 処理を追加
+  // let fontFamilies = []; // 利用可能なfontFamilyの情報を保持する配列
+  // document.getElementById('fontFamilyInput').addEventListener('click', function() {
+  //   const listContainer = document.getElementById('fontFamilyListContainer');
+  //   if (fontFamilies.length > 0) {
+  //     listContainer.classList.remove('hidden'); // リストを表示する
+  //     listContainer.innerHTML = ''; // 一度リストをクリアする
+  //     fontFamilies.forEach(function(family) {
+  //       // フォントファミリー名に基づいて新しいラベル要素を作成
+  //       const label = document.createElement('label');
+  //       label.classList.add('font-family_label'); // ここにスタイルクラスを適用
+  //       const input = document.createElement('input');
+  //       input.classList.add('font-family_labelText'); // ここにスタイルクラスを適用
+  //       label.appendChild(input)
+  //       input.value = family; // フォントファミリー名を表示
+  //       input.onclick = function() {
+  //         document.getElementById('fontFamilyInput').value = family; // Inputにフォントファミリー名をセット
+  //         listContainer.classList.add('hidden'); // リストを隠す
+  //       };
+  //       listContainer.appendChild(label);
+  //     });
+  //   }
+  // });
+
+  // // フォントファミリーの情報は、プラグインから動的に取得されます。
+  // window.onmessage = (event) => {
+  //   const { type, fonts } = event.data.pluginMessage;
+  //   if (type === 'load-fonts') {
+  //     fonts.forEach((font) => {
+  //       if (!fontFamilies.includes(font.fontName.family)) {
+  //         fontFamilies.push(font.fontName.family); // ユニークなフォントファミリー名を配列に追加
+  //       }
+  //     });
+  //   }
+  // };
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
