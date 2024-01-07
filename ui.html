@@ -199,12 +199,6 @@
   .progress-text {
     color: var(--figma-color-text-oninverse);
   }
-
-  /* 非表示にするためのクラス */
-  .hidden {
-    display: none;
-  }
-
 .select-content {
   display: flex;
 }
@@ -252,7 +246,6 @@
   top: calc(100% + 1px);
   -webkit-font-smoothing: antialiased;
   pointer-events: none;
-  /* visibility: hidden; */
   background-color: #1e1e1e;
   border-radius: var(--border-radius-2);
   box-shadow: var(--box-shadow-menu);
@@ -266,7 +259,6 @@
 }
 .font-family_label {
   position: relative;
-  /* overflow: hidden; */
   padding: 4px var(--space-medium) 4px 32px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -285,7 +277,7 @@
 }
 
 .font-menu {
-  width: 164px;
+  width: 100%;
   height: 100%;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -302,16 +294,16 @@
 
 
 .font-menu__item {
-  width: 164px;
+  width: 100%;
   height: 24px;
   position: relative;
 }
-
-.font-menu__item--active {
+.font-menu__item:hover {
   background: #18A0FB;
 }
+
 .font-menu__divider {
-  width: 164px;
+  width: 100%;
   height: 17px;
   position: relative;
   display: flex;
@@ -325,7 +317,7 @@
 .font-menu__text {
   display: flex;
   align-items: center;
-  width: 116px;
+  width: 100%;
   height: 24px;
   left: 32px;
   top: 0px;
@@ -354,6 +346,11 @@
   top: 3.79px;
   position: absolute;
 }
+
+  /* 非表示にするためのクラス */
+  .hidden {
+    display: none;
+  }
 
 </Style>
 <body>
@@ -408,44 +405,17 @@
     <!-- 反映ボタン -->
     <button id="analyzeBtn" class="button-submit disabled">Apply</button>
 
-    <div class="font-menu" role="menu">
-      <div class="font-menu__item font-menu__item--active" role="menuitem">    
-        <div class="font-menu__text">Value 1</div>
-        <div class="font-menu__icon">
-          <img class="font-menu__icon-img" src="https://via.placeholder.com/10x8" alt="Icon Description" />
-        </div>
-      </div>
-      <div class="font-menu__item" role="menuitem">
-        <div class="font-menu__text">Value 2</div>
-      </div>
-      <div class="font-menu__divider" role="menuitem">
-        <hr class="font-menu__divider_item" />  <!-- Use <hr> for semantic divider -->
-      </div>
-      <div class="font-menu__item" role="menuitem">
-        <div class="font-menu__text">Add new…</div>
-      </div>
-    </div>
+    
 
 
     <!-- fontFamilyのカスタムリスト -->
-    <!-- <div class="_textbox_sir3b_1">
+    <div class="_textbox_sir3b_1">
       <div>
         <input class="_input_1m36p_59" id="fontFamilyInput" autocomplete="off" placeholder="Select Font Family">
-        <div id="fontFamilyListContainer" class="create-style font-family">
-          
-          <label class="font-family_label">
-            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
-            <div style="width: 100%; height: 100%; color: white; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; letter-spacing: 0.06px; word-wrap: break-word">Value 1</div>
-          </label>
-          <label class="font-family_label">
-            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
-          </label>
-          <label class="font-family_label">
-            <input class="font-family_labelText" value=".Aqua" style="width: 100%;">
-          </label>
+        <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
   <!-- ローディングインジケーター -->
   <div id="loadingIndicator" class="loading-indicator hidden">
@@ -477,7 +447,7 @@
   let isEnvSelected = false;
 
   // 利用可能な全フォント情報を格納する変数
-  let availableFonts = [];
+  let availableFonts = []; // Figma APIから取得するデータ
 
   // 利用可能なフォントをロードするためにメインスクリプトに要求する
   parent.postMessage({ pluginMessage: { type: 'load-fonts-request' } }, '*');
@@ -562,51 +532,46 @@
 
       // figma内のfont.familyとstyleをselectボックス内に追加
       case 'load-fonts':
-        const fontFamilySelect = document.getElementById('fontFamilySelect');
-        availableFonts = message.fonts;
-
-        // 既に追加されたフォントファミリー名を記録するためのSetを作成
-        const addedFontFamilies = new Set();
-        console.log(availableFonts);
+        const listContainer = document.getElementById('fontFamilyListContainer');
+        listContainer.innerHTML = '';  // 既存のリスト内容を一度クリアする
+        availableFonts = message.fonts;  // メッセージからフォント情報を取得する
         
+        // 重複せずにフォントファミリー名を記録するためのSetを作成
+        const addedFontFamilies = new Set();
         availableFonts.forEach((font) => {
-          if(!addedFontFamilies.has(font.fontName.family)) {
-            // Setにフォントファミリー名を追加
-            addedFontFamilies.add(font.fontName.family);
+          // フォントファミリー名が既に追加されていなければ操作を行う
+          if (!addedFontFamilies.has(font.fontName.family)) {
+            addedFontFamilies.add(font.fontName.family);  // Setにフォントファミリー名を追加
 
-            const option = document.createElement('option');
-            option.value = font.fontName.family;
-            option.textContent = font.fontName.family;
-            fontFamilySelect.appendChild(option);
+            // 新しいフォントファミリーのメニュー項目を作成
+            const item = document.createElement('div');
+            item.className = 'font-menu__item';
+            item.setAttribute('role', 'menuitem');
+
+            // フォントファミリー名を表示するためのテキスト部分を作成
+            const text = document.createElement('div');
+            text.className = 'font-menu__text';
+            text.textContent = font.fontName.family;
+            item.appendChild(text);
+
+            // リストにメニュー項目を追加
+            listContainer.appendChild(item);
+            // 利用可能なfontFamilyの情報を保持する配列（サンプルで用意）
           }
+          const listInput = document.getElementById('fontFamilyInput');
+          listInput.addEventListener('click', function() {
+            if (listContainer.classList.contains('hidden')) {
+              listContainer.classList.remove('hidden'); // リストを表示する
+            } else {
+              listContainer.classList.add('hidden'); // リストを表示する
+            }
+          });
         });
-        break;
+      break;
     }
   };
 
-  // // 処理を追加
-  // let fontFamilies = []; // 利用可能なfontFamilyの情報を保持する配列
-  // document.getElementById('fontFamilyInput').addEventListener('click', function() {
-  //   const listContainer = document.getElementById('fontFamilyListContainer');
-  //   if (fontFamilies.length > 0) {
-  //     listContainer.classList.remove('hidden'); // リストを表示する
-  //     listContainer.innerHTML = ''; // 一度リストをクリアする
-  //     fontFamilies.forEach(function(family) {
-  //       // フォントファミリー名に基づいて新しいラベル要素を作成
-  //       const label = document.createElement('label');
-  //       label.classList.add('font-family_label'); // ここにスタイルクラスを適用
-  //       const input = document.createElement('input');
-  //       input.classList.add('font-family_labelText'); // ここにスタイルクラスを適用
-  //       label.appendChild(input)
-  //       input.value = family; // フォントファミリー名を表示
-  //       input.onclick = function() {
-  //         document.getElementById('fontFamilyInput').value = family; // Inputにフォントファミリー名をセット
-  //         listContainer.classList.add('hidden'); // リストを隠す
-  //       };
-  //       listContainer.appendChild(label);
-  //     });
-  //   }
-  // });
+  
 
   // // フォントファミリーの情報は、プラグインから動的に取得されます。
   // window.onmessage = (event) => {
