@@ -109,7 +109,7 @@
   .tabList__content {
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 8 0px;
   }
   .tabList__title {
     font-weight: 600;
@@ -120,18 +120,10 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    padding: 0 8px;
+    padding: 0 16px;
     border-radius: 2px;
-    background: var(--figma-color-bg);
     align-items: center;
     height: 30px;
-  }
-  .tabList__layer-container:hover {
-    background: var(--figma-color-bg-hover);
-  }
-  .tabList__layer-container.active {
-    background: var(--figma-color-bg);
-    border: 1px var(--figma-color-border-oncomponent) solid;
   }
   .tabList__layer-contents {
     display: flex;
@@ -200,7 +192,8 @@
     background: var(--figma-color-border);
   }
   .tabList__svg {
-    fill: var(--figma-color-icon);
+    /* fill: var(--figma-color-icon); */
+    fill: var(--figma-color-icon-secondary);
     width: 32;
     height: 32;
   }
@@ -391,7 +384,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 0 8px;
+  padding: 0 8 0 16px;
 }
 
 /* ポップアップコンテナ (Element) */
@@ -467,7 +460,7 @@
   /* ホバーやフォーカス時の追加スタイル。例えば背景色を変更するなど */
   background: var(--figma-color-bg-hover);
 }
-.dropdown__button.font-family:focus {
+.dropdown__button.font-family:focus-visible {
   border: 2px solid var(--figma-color-border-selected);
 }
 .dropdown__button.font-weight:hover,
@@ -489,9 +482,71 @@
 }
 .dropdown__button_container {
   display: flex;
-    flex-direction: column;
-    flex-grow: 3;
+  flex-direction: column;
+  flex-grow: 3;
 }
+.create-style__content {
+  box-sizing: border-box;
+  padding: 16px;
+  width: 100%;
+  height: max-content;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  align-items: center;
+}
+.create-style__label {
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: left;
+  color: var(--figma-color-text, #333333);
+  fill: var(--figma-color-icon, #333333);
+  border-radius: 2px;
+  cursor: default;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+.create-style__input {
+  grid-column-start: 1;
+  padding: 0 8px;
+  margin: 1 0px;
+  border: 1px solid var(--figma-color-border);
+  width: calc(100% - 96px);
+  background-color: var(--color-bg);
+  grid-column-end: span 28;
+  color: var(--figma-color-text);
+  fill: var(--figma-color-icon);
+  border-radius: 2px;
+  cursor: default;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  height: 28px;
+  font-size: 11px;
+  border-radius: 2px;
+}
+.create-style__input:focus-visible {
+  border: 1px solid var(--figma-color-border-selected, #0d99ff);
+}
+.styleList-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border-radius: 2px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  height: 34px;
+}
+.styleList-content:hover {
+  border: 1px solid var(--figma-color-bg-component);
+}
+.styleList-content:active,
+.styleList-content:focus-visible {
+  background-color: var(--figma-color-bg-selected, #daebf7);
+}
+
 
 </Style>
 <body>
@@ -522,11 +577,18 @@
     <div class="tabList__content">
       <div class="tabList__container">
         <h2 class="tabList__title">Style List</h2>
+        <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <span class="tabList__svg-container">
+            <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill="black" fill-opacity="0.8"/>
+            </svg>  
+          </span>
+        </button>
       </div>
 
       <!-- <h2 class="tabList__title">Style List</h2> -->
       <ul class="tabList__layer-contents">
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="mac">
             <h3 class="tabList__layer-content">Mac 環境確認用</h3>
           </div>
@@ -565,7 +627,7 @@
             </div>
           </div>
         </li>
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
@@ -604,7 +666,7 @@
             </div>
           </div>
         </li>
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
@@ -643,7 +705,7 @@
             </div>
           </div>
         </li>
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
@@ -682,7 +744,7 @@
             </div>
           </div>
         </li>
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
@@ -721,7 +783,7 @@
             </div>
           </div>
         </li>
-        <li style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <li class="styleList-content">
           <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
@@ -783,6 +845,14 @@
 
   <!-- Create Style  -->
   <div class="create-style-container hidden">
+    <!-- 要素選択 -->
+    <div class="create-style__content">
+      <label class="create-style__label" dir="auto">Name</label>
+      <input type="text" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value>
+    </div>
+    <!-- 区切り線 -->
+    <div class="container__border"></div>
+
     <div class="tabList__content">
       <div class="tabList__container" id="mainView">
         <h2 class="tabList__title">Japanese</h2>
