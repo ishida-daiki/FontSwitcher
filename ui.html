@@ -156,14 +156,14 @@
   .tabList__options-button.delete {
     position: absolute;
     right: 8;
-    top: 1;
-    bottom: 1;
+    top: 4;
+    bottom: 4;
   }
   .tabList__options-button.edit {
     position: absolute;
     right: 40;
-    top: 1;
-    bottom: 1;
+    top: 4;
+    bottom: 4;
   }
   .tabList__options-button:hover {
     background-color: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
@@ -178,6 +178,7 @@
   }
   .tabList__layer-content {
     font-weight: 400;
+    letter-spacing: 0.055px;
   }
   
 
@@ -401,6 +402,17 @@
   position: relative;
   padding: 0 8 0 16px;
 }
+  /* ルート要素 (Block) */
+.tabList__container__title {
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0 8 0 16px;
+  color: var(--figma-color-text-secondary);
+  font-weight: 500;
+}
 
 /* ポップアップコンテナ (Element) */
 .tabList__popup {
@@ -512,6 +524,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--figma-color-border);
 }
 .create-style__label {
   -webkit-user-select: none;
@@ -558,14 +571,14 @@
   box-sizing: border-box;
   outline: 1px solid transparent;
   outline-offset: -1px;
-  height: 34px;
+  height: 40px;
 }
 .styleList-content:hover {
-  outline: 1px solid var(--figma-color-border-selected);
+  outline: 1px solid var(--figma-color-bg-component, #7b61ff);
   color: var(--figma-color-text);
 }
 .styleList-content.active {
-  background: var(--figma-color-bg-selected);
+  background-color: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
   color: var(--figma-color-text);
   outline: 1px solid transparent;
 }
@@ -593,6 +606,29 @@
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
+}
+.create-style-content {
+  box-sizing: border-box;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  position: relative;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  border-top: 1px solid var(--figma-color-border);
+}
+.create-style-tabList__container {
+  padding: 8 0px;
+  display: flex;
+  flex-direction: column;
+}
+input::placeholder {
+  color: var(--figma-color-text-tertiary, #0000004d); /* 好きな薄い色に変更してください */
+  opacity: 1; /* 不透明度を設定することもできます（必須ではありません） */
 }
 
 </Style>
@@ -741,85 +777,54 @@
       <label class="create-style__label" dir="auto">Name</label>
       <input type="text" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value>
     </div>
-    <!-- 区切り線 -->
-    <div class="container__border"></div>
 
-    <div class="tabList__content">
-      <div class="tabList__container" id="mainView">
-        <h2 class="tabList__title">Japanese</h2>
+    <div class="create-style-tabList__container">
+      <div class="tabList__container">
+        <h2 class="tabList__title">Settings</h2>
+        <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <span class="tabList__svg-container">
+            <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill-opacity="0.8"/>
+            </svg>  
+          </span>
+        </button>
       </div>
-
-      <div class="dropdown">
-        <div class="dropdown__button_container">
-          <button class="dropdown__button font-family" id="fontFamilyInput">
-            <span class="dropdown__label">Yu Gothic</span>
-          </button>
-          <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
-          </div>
-        </div>
-        <div class="dropdown__button font-weight" aria-hidden="true">
-          <span class="dropdown__label">Regular</span>
-          <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-            <span class="svg-container">
-              <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-              </svg>
+      <div class="tabList__content">
+        <div class="tabList__container__title" id="mainView">
+          <h2 class="tabList__title">Japanese</h2>
+          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="tabList__svg-container">
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
+            </svg>
             </span>
+          </button>
+        </div>
+  
+        <div class="dropdown">
+          <div class="dropdown__button_container">
+            <button class="dropdown__button font-family" id="fontFamilyInput">
+              <span class="dropdown__label">Yu Gothic</span>
+            </button>
+            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
+            </div>
+          </div>
+          <div class="dropdown__button font-weight" aria-hidden="true">
+            <span class="dropdown__label">Regular</span>
+            <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
+              <span class="svg-container">
+                <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+                  <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="tabList__content">
-      <div class="tabList__container" id="mainView">
-        <h2 class="tabList__title">English</h2>
-      </div>
 
-      <div class="dropdown">
-        <div class="dropdown__button_container">
-          <button class="dropdown__button font-family" id="fontFamilyInput">
-            <span class="dropdown__label">Yu Gothic</span>
-          </button>
-          <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
-          </div>
-        </div>
-        <div class="dropdown__button font-weight" aria-hidden="true">
-          <span class="dropdown__label">Regular</span>
-          <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-            <span class="svg-container">
-              <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tabList__content">
-      <div class="tabList__container" id="mainView">
-        <h2 class="tabList__title">Number</h2>
-      </div>
-
-      <div class="dropdown">
-        <div class="dropdown__button_container">
-          <button class="dropdown__button font-family" id="fontFamilyInput">
-            <span class="dropdown__label">Yu Gothic</span>
-          </button>
-          <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
-          </div>
-        </div>
-        <div class="dropdown__button font-weight" aria-hidden="true">
-          <span class="dropdown__label">Regular</span>
-          <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-            <span class="svg-container">
-              <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div data-layer="" class="css-hnw4ih">
+    <div class="create-style-content">
+      <label tabindex="0" class="create-style-label">Create style</label>
       <button tabindex="0" class="create-style-button">Create style</button>
     </div>
   </div>
