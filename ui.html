@@ -119,7 +119,7 @@
   .tabList__layer-container {
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
+    cursor: default;
     padding: 0 16px;
     border-radius: 2px;
     align-items: center;
@@ -142,12 +142,11 @@
     flex: 0 0 32px;
     line-height: 32px;
     cursor: default;
-    fill: var(--figma-color-icon, #000);
-    color: var(--figma-color-icon, #000);
+    fill: var(--figma-color-icon, #333333);
+    color: var(--figma-color-icon, #333333);
     border-radius: 3px;
     background-clip: padding-box;
     background-color: transparent;
-    --color-icon: var(--color-icon-secondary, #b3b3b3);
     transition: .1s fill ease-out,.1s color ease-out;
   }
   .tabList__options-button:hover {
@@ -435,8 +434,8 @@
   display: flex;
   align-items: center;
   padding-right: 4px;
-  color: var(--color-text, #333333);
-  fill: var(--color-icon, #333333);
+  color: var(--figma-color-text, #333333);
+  fill: var(--figma-color-icon, #333333);
   border-radius: 2px;
   cursor: default;
   box-sizing: border-box;
@@ -534,17 +533,20 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  border-radius: 2px;
   box-sizing: border-box;
   border: 1px solid transparent;
   height: 34px;
 }
 .styleList-content:hover {
-  border: 1px solid var(--figma-color-bg-component);
+  border: 1px solid var(--figma-color-border-selected);
 }
-.styleList-content:active,
+.styleList-content.active {
+  background: var(--figma-color-bg-selected);
+  border: 1px solid transparent;
+}
 .styleList-content:focus-visible {
-  background-color: var(--figma-color-bg-selected, #daebf7);
+  border: 1px solid var(--figma-color-border-selected);
+  background: var(--figma-color-bg-selected);
 }
 
 
@@ -580,7 +582,7 @@
         <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
           <span class="tabList__svg-container">
             <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill="black" fill-opacity="0.8"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill-opacity="0.8"/>
             </svg>  
           </span>
         </button>
@@ -588,14 +590,14 @@
 
       <!-- <h2 class="tabList__title">Style List</h2> -->
       <ul class="tabList__layer-contents">
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="mac">
+        <li class="styleList-content" data-env="mac">
+          <div class="tabList__layer-container" style="flex-grow: 2;">
             <h3 class="tabList__layer-content">Mac 環境確認用</h3>
           </div>
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
             </svg>
             </span>
           </button>
@@ -612,7 +614,7 @@
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
               <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill-opacity="0.8"></path>
               </svg>
             </span>
           </button>
@@ -627,14 +629,14 @@
             </div>
           </div>
         </li>
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
+        <li class="styleList-content" data-env="windows">
+          <div class="tabList__layer-container" style="flex-grow: 2;">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"  fill-opacity="0.8"/>
             </svg>
             </span>
           </button>
@@ -651,7 +653,7 @@
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
               <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z"  fill-opacity="0.8"></path>
               </svg>
             </span>
           </button>
@@ -666,14 +668,14 @@
             </div>
           </div>
         </li>
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
+        <li class="styleList-content" data-env="windows">
+          <div class="tabList__layer-container" style="flex-grow: 2;">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"  fill-opacity="0.8"/>
             </svg>
             </span>
           </button>
@@ -690,7 +692,7 @@
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
               <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z"  fill-opacity="0.8"></path>
               </svg>
             </span>
           </button>
@@ -705,14 +707,14 @@
             </div>
           </div>
         </li>
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
+        <li class="styleList-content" data-env="windows">
+          <div class="tabList__layer-container" style="flex-grow: 2;">
             <h3 class="tabList__layer-content">windows 環境確認用</h3>
           </div>
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
             </svg>
             </span>
           </button>
@@ -729,85 +731,7 @@
           <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="tabList__svg-container">
               <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
-              </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
-            <h3 class="tabList__layer-content">windows 環境確認用</h3>
-          </div>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
-              </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="styleList-content">
-          <div class="tabList__layer-container" style="flex-grow: 2;" data-env="windows">
-            <h3 class="tabList__layer-content">windows 環境確認用</h3>
-          </div>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill="black" fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill="black" fill-opacity="0.8"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill-opacity="0.8"></path>
               </svg>
             </span>
           </button>
@@ -871,7 +795,7 @@
           <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
             <span class="svg-container">
               <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill="#000" fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
               </svg>
             </span>
           </div>
@@ -896,7 +820,7 @@
           <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
             <span class="svg-container">
               <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill="#000" fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
               </svg>
             </span>
           </div>
@@ -921,7 +845,7 @@
           <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
             <span class="svg-container">
               <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                <path fill="#000" fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
               </svg>
             </span>
           </div>
@@ -936,7 +860,7 @@
   const tabs = document.querySelectorAll('.tabList__item');
   const tabContentsApplyStyle = document.querySelectorAll('.apply-style-container');
   const tabContentsCreateStyle = document.querySelectorAll('.create-style-container');
-  const textStyles = document.querySelectorAll('.tabList__layer-container')
+  const textStyles = document.querySelectorAll('.styleList-content')
   const indicator = document.querySelector('.tabList-active-indicator');
   const loader = document.querySelectorAll('.loading-indicator');
 
