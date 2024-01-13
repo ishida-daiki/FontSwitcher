@@ -982,7 +982,8 @@ input::placeholder {
             listContainer.appendChild(item);
             // 利用可能なfontFamilyの情報を保持する配列（サンプルで用意）
           }
-          const listInput = document.getElementById('fontFamilyInput');
+        });
+        const listInput = document.getElementById('fontFamilyInput');
           listInput.addEventListener('click', function() {
             if (listContainer.classList.contains('hidden')) {
               listContainer.classList.remove('hidden'); // リストを表示する
@@ -990,24 +991,19 @@ input::placeholder {
               listContainer.classList.add('hidden'); // リストを表示する
             }
           });
+        // 各フォント選択項目にイベントリスナーを設定する
+        listContainer.childNodes.forEach((item) => {
+          item.addEventListener('click', () => {
+            const fontName = item.textContent; // フォント名を取得する
+            const fontFamilyLabel = document.querySelector('.dropdown__label'); //<label>要素を選択する
+            fontFamilyLabel.textContent = fontName; // フォント名を更新する
+            listContainer.classList.add('hidden'); // フォントリストを非表示にする
+          });
         });
       break;
     }
   };
 
-  
-
-  // // フォントファミリーの情報は、プラグインから動的に取得されます。
-  // window.onmessage = (event) => {
-  //   const { type, fonts } = event.data.pluginMessage;
-  //   if (type === 'load-fonts') {
-  //     fonts.forEach((font) => {
-  //       if (!fontFamilies.includes(font.fontName.family)) {
-  //         fontFamilies.push(font.fontName.family); // ユニークなフォントファミリー名を配列に追加
-  //       }
-  //     });
-  //   }
-  // };
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
