@@ -318,18 +318,18 @@
 }
 
 .font-menu {
-  width: 100%;
-  height: 100%;
+  width: 164px;
   padding-top: 8px;
   padding-bottom: 8px;
   background: #222222;
   box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.20);
   border-radius: 2px;
   border: 0.50px solid rgba(0, 0, 0, 0.10);
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: inline-flex;
+  position: absolute;
+  right: 8px;
+  z-index: 100;
+  max-height: 164px;
+  overflow-y: auto;
 }
 
 
@@ -970,7 +970,6 @@ input::placeholder {
       // figma内のfont.familyとstyleをselectボックス内に追加
       case 'load-fonts':
         const fontFamilyListContainer = document.getElementById('fontFamilyListContainer');
-        const fontWeightListContainer = document.getElementById('fontWeightListContainer');
         fontFamilyListContainer.innerHTML = '';  // 既存のリスト内容を一度クリアする
         availableFonts = message.fonts;  // メッセージからフォント情報を取得する
         
@@ -998,13 +997,13 @@ input::placeholder {
           }
         });
         const listInput = document.getElementById('fontFamilyInput');
-          listInput.addEventListener('click', function() {
-            if (fontFamilyListContainer.classList.contains('hidden')) {
-              fontFamilyListContainer.classList.remove('hidden'); // リストを表示する
-            } else {
-              fontFamilyListContainer.classList.add('hidden'); // リストを表示する
-            }
-          });
+        listInput.addEventListener('click', function() {
+          if (fontFamilyListContainer.classList.contains('hidden')) {
+            fontFamilyListContainer.classList.remove('hidden'); // リストを表示する
+          } else {
+            fontFamilyListContainer.classList.add('hidden'); // リストを表示する
+          }
+        });
         // 各フォント選択項目にイベントリスナーを設定する
         fontFamilyListContainer.childNodes.forEach((item) => {
           item.addEventListener('click', () => {
@@ -1012,18 +1011,29 @@ input::placeholder {
             const fontFamilyLabel = document.querySelector('.dropdown__label'); //<label>要素を選択する
             fontFamilyLabel.textContent = fontName; // フォント名を更新する
             fontFamilyListContainer.classList.add('hidden'); // フォントリストを非表示にする
-            showFontWeightLists(item.textContent, fontWeightListContainer)
+            makeFontWeightLists(item.textContent, fontWeightListContainer)
           });
+        });
+        const fontWeightSelect = document.getElementById('fontWeightSelect');
+        fontWeightSelect.addEventListener('click', function() {
+          if (fontWeightListContainer.classList.contains('hidden')) {
+            // 現在のフォントファミリーラベルからフォント名を取得
+            const currentFontFamily = document.querySelector('.dropdown__button.font-family .dropdown__label').textContent;
+            // 表示されるべきフォントウェイト一覧を表示する
+            makeFontWeightLists(currentFontFamily, fontWeightListContainer);
+            fontWeightListContainer.classList.remove('hidden');
+          } else {
+            fontWeightListContainer.classList.add('hidden'); // リストを閉じる
+          }
         });
         break;
       }
     };
-    
+
   // フォントウェイトを表示する関数
-  function showFontWeightLists(fontFamilyName, fontWeightListContainer) {
+  function makeFontWeightLists(fontFamilyName, fontWeightListContainer) {
     fontWeightListContainer.innerHTML = ''; // コンテナをクリア
 
-    // 選択されたフォントファミリーに対応するフォントウェイトを取得してリスト表示する
     const fontWeights = availableFonts.filter(font => font.fontName.family === fontFamilyName);
 
     fontWeights.forEach((font) => {
@@ -1035,7 +1045,7 @@ input::placeholder {
       // フォントウェイト名を表示するためのテキスト部分を作成
       const text = document.createElement('div');
       text.className = 'font-menu__text';
-      text.textContent = `${font.fontName.style}`;
+      text.textContent = font.fontName.style;
       item.appendChild(text);
 
       // リストにメニュー項目を追加
@@ -1044,15 +1054,11 @@ input::placeholder {
       // 項目がクリックされた時の処理を追加
       item.addEventListener('click', () => {
         const fontWeightLabel = document.querySelector('.dropdown__button.font-weight .dropdown__label');
-        fontWeightLabel.textContent = `${font.fontName.style}`;
+        fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add('hidden'); // フォントウェイトリストを閉じる
       });
     });
-
-    // リストコンテナを表示
-    fontWeightListContainer.classList.remove('hidden');
   }
-
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
