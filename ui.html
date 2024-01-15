@@ -318,7 +318,7 @@
 }
 
 .font-menu {
-  width: 164px;
+  width: 178px;
   padding-top: 8px;
   padding-bottom: 8px;
   background: #222222;
@@ -338,9 +338,17 @@
   width: 100%;
   height: 24px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .font-menu__item:hover {
   background: #18A0FB;
+}
+.menuitem__item__icon {
+  position: absolute;
+  left: 8px;
+  width: 20px;
+  height: 16px;
 }
 
 .font-menu__divider {
@@ -812,7 +820,51 @@ input::placeholder {
   
         <div class="dropdown">
           <div class="dropdown__button_container font-family">
-            <button class="dropdown__button font-family" id="fontFamilyInput">
+            <button class="dropdown__button font-family">
+              <span class="dropdown__label">Yu Gothic</span>
+            </button>
+            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
+            </div>
+          </div>
+          <div class="dropdown__button_container font-weight">
+            <div class="dropdown__button font-weight" id="fontWeightSelect" style="width: 100%;">
+              <span class="dropdown__label">Regular</span>
+              <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
+                <span class="svg-container">
+                  <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="font-menu hidden" role="menu" id="fontWeightListContainer">
+              <div class="font-menu__item" role="menuitem">
+                <svg class="menuitem__item__icon hidden" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"/>
+                </svg>
+                <div class="font-menu__text">
+                  font.fontName.style
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="tabList__content">
+        <div class="tabList__container__title" id="mainView">
+          <h2 class="tabList__title">English</h2>
+          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="tabList__svg-container">
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
+            </svg>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown">
+          <div class="dropdown__button_container font-family">
+            <button class="dropdown__button font-family">
               <span class="dropdown__label">Yu Gothic</span>
             </button>
             <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
@@ -834,6 +886,42 @@ input::placeholder {
           </div>
         </div>
       </div>
+
+      <div class="tabList__content">
+        <div class="tabList__container__title" id="mainView">
+          <h2 class="tabList__title">Number</h2>
+          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="tabList__svg-container">
+              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
+            </svg>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown">
+          <div class="dropdown__button_container font-family">
+            <button class="dropdown__button font-family">
+              <span class="dropdown__label">Yu Gothic</span>
+            </button>
+            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
+            </div>
+          </div>
+          <div class="dropdown__button_container font-weight">
+            <div class="dropdown__button font-weight" id="fontWeightSelect" style="width: 100%;">
+              <span class="dropdown__label">Regular</span>
+              <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
+                <span class="svg-container">
+                  <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="font-menu hidden" role="menu" id="fontWeightListContainer">
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
 
     <div class="create-style-content">
@@ -996,24 +1084,28 @@ input::placeholder {
             // 利用可能なfontFamilyの情報を保持する配列（サンプルで用意）
           }
         });
-        const listInput = document.getElementById('fontFamilyInput');
-        listInput.addEventListener('click', function() {
-          if (fontFamilyListContainer.classList.contains('hidden')) {
-            fontFamilyListContainer.classList.remove('hidden'); // リストを表示する
-          } else {
-            fontFamilyListContainer.classList.add('hidden'); // リストを表示する
-          }
-        });
-        // 各フォント選択項目にイベントリスナーを設定する
-        fontFamilyListContainer.childNodes.forEach((item) => {
-          item.addEventListener('click', () => {
-            const fontName = item.textContent; // フォント名を取得する
-            const fontFamilyLabel = document.querySelector('.dropdown__label'); //<label>要素を選択する
-            fontFamilyLabel.textContent = fontName; // フォント名を更新する
-            fontFamilyListContainer.classList.add('hidden'); // フォントリストを非表示にする
-            makeFontWeightLists(item.textContent, fontWeightListContainer)
+        const listInputs = document.querySelectorAll('.dropdown__button.font-family');
+        listInputs.forEach((listInput) => {
+          listInput.addEventListener('click', function() {
+            if (fontFamilyListContainer.classList.contains('hidden')) {
+              fontFamilyListContainer.classList.remove('hidden'); // リストを表示する
+            } else {
+              fontFamilyListContainer.classList.add('hidden'); // リストを表示する
+            }
           });
-        });
+          // 各フォント選択項目にイベントリスナーを設定する
+          fontFamilyListContainer.childNodes.forEach((item) => {
+            item.addEventListener('click', () => {
+              const fontName = item.textContent; // フォント名を取得する
+              const fontFamilyLabels = listInput.querySelectorAll('.dropdown__label'); //<label>要素を選択する
+              fontFamilyLabels.forEach((label) => {
+                label.textContent = fontName; // フォント名を更新する
+              }) 
+              fontFamilyListContainer.classList.add('hidden'); // フォントリストを非表示にする
+              makeFontWeightLists(item.textContent, fontWeightListContainer)
+            });
+          });
+        })
         const fontWeightSelect = document.getElementById('fontWeightSelect');
         fontWeightSelect.addEventListener('click', function() {
           if (fontWeightListContainer.classList.contains('hidden')) {
@@ -1036,6 +1128,26 @@ input::placeholder {
 
     const fontWeights = availableFonts.filter(font => font.fontName.family === fontFamilyName);
 
+    function createCheckIcon() {
+      const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
+      const checkIcon = document.createElementNS(namespace, 'svg');
+      checkIcon.setAttribute('class', 'menuitem__item__icon hidden');
+      checkIcon.setAttribute('viewBox', '0 0 16 16');
+      checkIcon.setAttribute('fill', 'none');
+
+      const path = document.createElementNS(namespace, 'path');
+      path.setAttribute('fill-rule', 'evenodd');
+      path.setAttribute('clip-rule', 'evenodd');
+      path.setAttribute('d', 'M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z');
+      path.setAttribute('fill', 'white');
+
+      checkIcon.appendChild(path);
+      return checkIcon;
+    }
+
+    // すべてのフォントウェイトのメニュー項目を保持する配列
+    let allFontWeightItems = [];
+
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
       const item = document.createElement('div');
@@ -1048,14 +1160,30 @@ input::placeholder {
       text.textContent = font.fontName.style;
       item.appendChild(text);
 
+      // チェックアイコンを追加
+      const checkIcon = createCheckIcon();
+      item.appendChild(checkIcon);
+
       // リストにメニュー項目を追加
       fontWeightListContainer.appendChild(item);
+
+      // 作成したメニュー項目を配列に追加
+      allFontWeightItems.push(item);
 
       // 項目がクリックされた時の処理を追加
       item.addEventListener('click', () => {
         const fontWeightLabel = document.querySelector('.dropdown__button.font-weight .dropdown__label');
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add('hidden'); // フォントウェイトリストを閉じる
+
+        // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
+        allFontWeightItems.forEach(cItem => {
+          const icon = cItem.querySelector('.menuitem__item__icon');
+          if (icon) icon.classList.add('hidden');
+        });
+
+        // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
+        checkIcon.classList.remove('hidden');
       });
     });
   }
