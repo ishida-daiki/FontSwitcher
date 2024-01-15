@@ -10,7 +10,7 @@ figma.on('selectionchange', () => {
     figma.ui.postMessage({ type: 'selection-cleared' });
   } else {
     for (const node of selection) {
-      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
+      if (node.type === 'FRAME' || node.type === 'GROUP' || node.type === 'SECTION' || node.type === 'COMPONENT_SET' || node.type === 'COMPONENT' || node.type === 'INSTANCE' || node.type === 'TEXT') {
         figma.ui.postMessage({ type: 'update-name', name: node.name });
       }
     }
@@ -87,6 +87,11 @@ figma.ui.onmessage = async (msg) => {
       // ローディングを非表示にする
       figma.ui.postMessage({ type: 'hide-loading' });
     }
+  } 
+  // メッセージ受信ハンドラ
+  else if (msg.type === 'load-fonts-request') {
+    const fonts = await figma.listAvailableFontsAsync();
+    figma.ui.postMessage({ type: 'load-fonts', fonts });
   }
 }
 
