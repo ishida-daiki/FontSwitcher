@@ -1145,8 +1145,10 @@ input::placeholder {
       return checkIcon;
     }
 
-    // すべてのフォントウェイトのメニュー項目を保持する配列
     let allFontWeightItems = [];
+    let defaultFontWeight;
+    // 'Regular' があるかどうか確認し、設定する
+    const regularFontWeight = fontWeights.find(font => font.fontName.style === 'Regular');
 
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
@@ -1181,12 +1183,34 @@ input::placeholder {
           const icon = cItem.querySelector('.menuitem__item__icon');
           if (icon) icon.classList.add('hidden');
         });
+        updateCheckState(item, allFontWeightItems, checkIcon);
 
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
         checkIcon.classList.remove('hidden');
       });
+
+      // デフォルトフォントウェイトを特定する
+      if (!defaultFontWeight || font.fontName.style === 'Regular') {
+        defaultFontWeight = item;
+      }
     });
+    // デフォルトフォントウェイトをラベルとチェック状態に設定する
+    if (defaultFontWeight) {
+      const defaultLabel = document.querySelector('.dropdown__button.font-weight .dropdown__label');
+      defaultLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
+      updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
+    }
   }
+
+  // チェック状態の更新を行う関数を追加
+  function updateCheckState(selectedItem, allItems, selectedCheckIcon) {
+    allItems.forEach(cItem => {
+      const icon = cItem.querySelector('.menuitem__item__icon');
+      if (icon) icon.classList.add('hidden');
+    });
+    selectedCheckIcon.classList.remove('hidden');
+  }
+
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
