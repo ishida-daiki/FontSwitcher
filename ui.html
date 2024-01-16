@@ -789,13 +789,74 @@
         <div class="create-style__styles" id="mainView">
           <h2 class="create-style__tab-title">Japanese</h2>
         </div>
-  
         <div class="create-style__dropdown">
           <div class="create-style__dropdown-group font-family">
             <button class="create-style__dropdown-toggle font-family">
-              <span class="create-style__dropdown-label">Yu Gothic</span>
+              <span class="create-style__dropdown-label">Noto Sans JP</span>
             </button>
-            <div class="create-style__font-menu hidden" role="menu" id="fontFamilyListContainer">
+            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
+              <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
+            </div>
+          </div>
+          <div class="create-style__dropdown-group font-weight">
+            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+              <span class="create-style__dropdown-label">Regular</span>
+              <div class="create-style__dropdown-icon-container">
+                <span class="create-style__svg-container">
+                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+              <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="create-style__content">
+        <div class="create-style__styles" id="mainView">
+          <h2 class="create-style__tab-title">English</h2>
+        </div>
+        <div class="create-style__dropdown">
+          <div class="create-style__dropdown-group font-family">
+            <button class="create-style__dropdown-toggle font-family">
+              <span class="create-style__dropdown-label">SF Pro</span>
+            </button>
+            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
+              <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
+            </div>
+          </div>
+          <div class="create-style__dropdown-group font-weight">
+            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+              <span class="create-style__dropdown-label">Regular</span>
+              <div class="create-style__dropdown-icon-container">
+                <span class="create-style__svg-container">
+                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+              <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="create-style__content">
+        <div class="create-style__styles" id="mainView">
+          <h2 class="create-style__tab-title">Number</h2>
+        </div>
+        <div class="create-style__dropdown">
+          <div class="create-style__dropdown-group font-family">
+            <button class="create-style__dropdown-toggle font-family">
+              <span class="create-style__dropdown-label">Helvetica</span>
+            </button>
+            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
@@ -950,15 +1011,32 @@
 
       // figma内のfont.familyとstyleをselectボックス内に追加
       case 'load-fonts':
-        const fontFamilyListContainer = document.getElementById('fontFamilyListContainer');
-        fontFamilyListContainer.innerHTML = '';  // 既存のリスト内容を一度クリアする
-        availableFonts = message.fonts;  // メッセージからフォント情報を取得する
+        const fontFamilyListContainers = document.querySelectorAll('.font-family-list-container')
+        
+        // メッセージからフォント情報を取得する
+        availableFonts = message.fonts;  
         
         // 重複せずにフォントファミリー名を記録するためのSetを作成
         const addedFontFamilies = new Set();
-        availableFonts.forEach((font) => {
-          // フォントファミリー名が既に追加されていなければ操作を行う
-          if (!addedFontFamilies.has(font.fontName.family)) {
+
+        const dropDownToggles = document.querySelectorAll('.create-style__dropdown-toggle.font-family');
+        dropDownToggles.forEach((toggle) => {
+          toggle.addEventListener('click', () => {
+            // ボタンに関連づけられたリストコンテナを取得する
+            const listContainer = toggle.nextElementSibling; // この例ではリストコンテナはボタンの次の要素という仮定です
+            if (listContainer) {
+              listContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+            }
+          });
+        });
+        
+        fontFamilyListContainers.forEach((listContainer) => {
+          // 既存のリスト内容を一度クリアする
+          fontFamilyListContainers.innerHTML = '';
+
+          // 各コンテナに同じフォントリストを追加する
+          availableFonts.forEach((font) => {
+            // フォントファミリー名が既に追加されていなければ操作を行う
             addedFontFamilies.add(font.fontName.family);  // Setにフォントファミリー名を追加
 
             // 新しいフォントファミリーのメニュー項目を作成
@@ -973,29 +1051,23 @@
             item.appendChild(text);
 
             // リストにメニュー項目を追加
-            fontFamilyListContainer.appendChild(item);
-            // 利用可能なfontFamilyの情報を保持する配列（サンプルで用意）
-          }
-        });
-        const listInputs = document.querySelectorAll('.create-style__dropdown-toggle.font-family');
-        listInputs.forEach((listInput) => {
-          listInput.addEventListener('click', function() {
-            if (fontFamilyListContainer.classList.contains('hidden')) {
-              fontFamilyListContainer.classList.remove('hidden'); // リストを表示する
-            } else {
-              fontFamilyListContainer.classList.add('hidden'); // リストを表示する
-            }
+            listContainer.appendChild(item);
           });
-          // 各フォント選択項目にイベントリスナーを設定する
-          fontFamilyListContainer.childNodes.forEach((item) => {
-            item.addEventListener('click', () => {
-              const fontName = item.textContent; // フォント名を取得する
-              const fontFamilyLabels = listInput.querySelectorAll('.create-style__dropdown-label'); //<label>要素を選択する
-              fontFamilyLabels.forEach((label) => {
-                label.textContent = fontName; // フォント名を更新する
-              }) 
-              fontFamilyListContainer.classList.add('hidden'); // フォントリストを非表示にする
-              makeFontWeightLists(item.textContent, fontWeightListContainer)
+          listContainer.childNodes.forEach((item) => {
+            item.addEventListener('click', (event) => {
+              const fontName = item.textContent;
+              // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
+              const dropDown = listContainer.closest('.create-style__dropdown');
+              const label = dropDown.querySelector('.create-style__dropdown-label');
+              if (label) {
+                label.textContent = fontName;
+              }
+
+              listContainer.classList.add('hidden'); // 項目を選択した後、リストを閉じる
+              makeFontWeightLists(fontName, fontWeightListContainer);
+
+              // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
+              event.stopPropagation();
             });
           });
         })
