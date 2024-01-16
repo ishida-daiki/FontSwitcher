@@ -22,20 +22,20 @@
   svg {
     display: block;
   }
-  .tabList {
+  .tab-list {
     position: relative;
     border-bottom: 1px var(--figma-color-border) solid;
     padding-left: 1rem;
     padding-right: 1rem;
     height: 40px;
   }
-  .tabList__items {
+  .tab-list__items {
     display: flex;
     gap: 4px;
     color: var(--figma-color-text-onselected);
     height: 100%;
   }
-  .tabList__item {
+  .tab-list__item {
     display: flex;
     align-items: center;
     margin-right: 0.5rem;
@@ -43,21 +43,21 @@
     height: 100%;
     color: var(--figma-color-text-disabled);
   }
-  .tabList__item:hover {
+  .tab-list__item:hover {
     color: var(--figma-color-text);
   }
-  .tabList__text {
+  .tab-list__text {
     font-size: 11px;
     font-weight: 500;
   }
   /* 選択されたタブのテキストスタイル */
-  .tabList__item--active .tabList__text {
+  .tab-list__item--active .tab-list__text {
     /* 太字にする */
     font-weight: 600;
     color: var(--figma-color-text);
   }
   /* 選択インジケーターのスタイル */
-  .tabList-active-indicator {
+  .tab-list-active-indicator {
     height: 2px; /* インジケーターの高さ */
     background-color: var(--figma-color-bg-component); /* インジケーターの色 */
     width: 100%; /* インジケーターの幅をタブの幅に合わせる */
@@ -66,10 +66,10 @@
     left: 0;
   }
   /* 非アクティブなタブを隠す */
-  .tabList-active-indicator--inactive {
+  .tab-list-active-indicator--inactive {
     display: none;
   }
-  .button-submit {
+  .create-style__apply-button {
     position: absolute;
     left: 0;
     right: 0;
@@ -79,30 +79,30 @@
     border-radius: 30px;
     font-weight: 600;
   }
-  .button-submit.disabled {
+  .create-style__apply-button.disabled {
     border: var(--figma-color-border-disabled);
     color: var(--figma-color-text-disabled);
     background: var(--figma-color-bg-disabled);;
   }
-  .button-submit.active {
+  .create-style__apply-button.active {
     border: var(--figma-color-border-component);
     color: var(--figma-color-text-onbrand);
     background: var(--figma-color-bg-component);
   }
-  .button-submit.active:hover {
+  .create-style__apply-button.active:hover {
     cursor: pointer;
     color: var(--figma-color-text-onbrand);
     background: var(--figma-color-bg-component-hover);
   }
-  .button-submit.active:active {
+  .create-style__apply-button.active:active {
     color: var(--figma-color-text-onbrand);
     background: var(--figma-color-bg-component-pressed);
   }
-  .apply-style-container {
+  .apply-style {
     display: flex;
     flex-direction: column;
   }
-  .create-style-container {
+  .create-style {
     display: flex;
     flex-direction: column;
   }
@@ -110,17 +110,23 @@
     color: var(--figma-color-text-danger);
   }
 
-  .tabList__content {
+  .apply-style__content,
+  .create-style__content {
     display: flex;
     flex-direction: column;
     padding: 8 0px;
   }
-  .tabList__title {
+  .apply-style__title {
     font-weight: 600;
     line-height: 16px;
     letter-spacing: 0.06px;
   }
-  .tabList__layer-container {
+  .create-style__tab-title {
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+  }
+  .apply-style__item-content {
     display: flex;
     justify-content: space-between;
     cursor: default;
@@ -128,14 +134,15 @@
     border-radius: 2px;
     align-items: center;
     height: 30px;
+    flex-grow: 2;
   }
-  .tabList__layer-contents {
+  .apply-style__list {
     display: flex;
     flex-direction: column;
     color: var(--figma-color-text-secondary);
     transition: .1s color ease-out;
   }
-  .tabList__options-button {
+  .apply-style__options-button {
     border: 1px solid transparent;
     outline: none;
     display: flex;
@@ -153,44 +160,39 @@
     background-color: transparent;
     transition: .1s fill ease-out,.1s color ease-out;
   }
-  .tabList__options-button.delete {
+  .apply-style__options-button.delete {
     position: absolute;
     right: 8;
     top: 4;
     bottom: 4;
   }
-  .tabList__options-button.edit {
+  .apply-style__options-button.edit {
     position: absolute;
     right: 40;
     top: 4;
     bottom: 4;
   }
-  .tabList__options-button:hover {
+  .apply-style__options-button:hover {
     background-color: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
     border-radius: 3px;
   }
   /* ボタンがホバーされた時にポップアップを表示する */
-  .tabList__options-button:hover + .tabList__popup {
+  .apply-style__options-button:hover + .apply-style__popup {
     display: block;
   }
-  .tabList__options-button:active {
+  .apply-style__options-button:active {
     background: var(--figma-color-bg-brand);
   }
-  .tabList__layer-content {
+  .apply-style__item-title {
     font-weight: 400;
     letter-spacing: 0.055px;
   }
   
 
-  .listContainer {
-    overflow: auto;
-    padding: 0;
-    height: 96px;
-  }
-  .listMessage {
+  .apply-style__message {
     display: grid;
     place-content: center;
-    height: 100%;
+    height: 96px;
     background-color: var(--figma-color-bg-secondary);
     padding: 0 16px;
     line-height: 1.5;
@@ -203,11 +205,11 @@
     color: var(--figma-color-text-disabled);
     pointer-events: none;
   }
-  .container__border {
+  .apply-style__divider {
     height: 1px;
     background: var(--figma-color-border);
   }
-  .tabList__svg {
+  .apply-style__options-svg {
     /* fill: var(--figma-color-icon); */
     fill: var(--figma-color-icon-secondary);
     width: 32;
@@ -240,525 +242,508 @@
   .progress-text {
     color: var(--figma-color-text-oninverse);
   }
-.select-content {
-  display: flex;
-}
-
-  /* Additional styles for 'select' dropdown */
-.select-container {
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.select-dropdown {
-  padding: 4px;
-  border: 1px solid var(--figma-color-border);
-  background-color: var(--figma-color-bg);
-  border-radius: 4px;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  cursor: pointer;
-  appearance: none; /* Disables the native drop-down arrow */
-}
-
-.select-dropdown:focus {
-  outline: none;
-  border-color: var(--figma-color-border-focus);
-}
-
-/* Style for custom dropdown arrow */
-.select-arrow {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none; /* Makes sure the svg does not prevent clicking the select box */
-}
-
-.select-arrow svg {
-  fill: var(--figma-color-icon); /* Icon color */
-}
-
-.create-style.font-family {
-  display: flex;
-  flex-direction: column;
-  max-height: 295px;
-  top: calc(100% + 1px);
-  -webkit-font-smoothing: antialiased;
-  pointer-events: none;
-  background-color: #1e1e1e;
-  border-radius: var(--border-radius-2);
-  box-shadow: var(--box-shadow-menu);
-  color: #fff;
-  font-size: var(--font-size-12);
-  left: 0;
-  min-width: 100%;
-  overflow-y: auto;
-  padding: var(--space-extra-small) 0;
-  position: absolute;
-}
-.font-family_label {
-  position: relative;
-  padding: 4px var(--space-medium) 4px 32px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-}
-
-.font-family_labelText {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.font-menu {
-  width: 178px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  background: #222222;
-  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.20);
-  border-radius: 2px;
-  border: 0.50px solid rgba(0, 0, 0, 0.10);
-  position: absolute;
-  right: 8px;
-  z-index: 100;
-  max-height: 164px;
-  overflow-y: auto;
-}
-
-
-
-.font-menu__item {
-  width: 100%;
-  height: 24px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.font-menu__item:hover {
-  background: #18A0FB;
-}
-.menuitem__item__icon {
-  position: absolute;
-  left: 8px;
-  width: 20px;
-  height: 16px;
-}
-
-.font-menu__divider {
-  width: 100%;
-  height: 17px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.font-menu__divider_item {
-  width: 100%;
-  border: 1px rgba(255, 255, 255, 0.20) solid;
-}
-
-.font-menu__text {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 24px;
-  left: 32px;
-  top: 0px;
-  position: absolute;
-  color: white;
-  font-size: 12px;
-  font-family: Inter;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.06px;
-  word-wrap: break-word;
-}
-
-.font-menu__icon {
-  width: 16px;
-  height: 16px;
-  left: 8px;
-  top: 4px;
-  position: absolute;
-}
-
-.font-menu__icon-img {
-  width: 9.91px;
-  height: 7.62px;
-  left: 3.29px;
-  top: 3.79px;
-  position: absolute;
-}
-
-  /* 非表示にするためのクラス */
-  .hidden {
-    display: none;
+  .select-content {
+    display: flex;
   }
 
-  /* ルート要素 (Block) */
-.tabList__container {
-  height: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 0 8 0 16px;
-}
-  /* ルート要素 (Block) */
-.tabList__container__title {
-  height: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 0 8 0 16px;
-  color: var(--figma-color-text-secondary);
-  font-weight: 500;
-}
+    /* Additional styles for 'select' dropdown */
+  .select-container {
+    position: relative;
+    margin-bottom: 10px;
+  }
 
-/* ポップアップコンテナ (Element) */
-.tabList__popup {
-  position: absolute;
-  bottom: -34px;
-  right: 0;
-  display: none;
-  z-index: 100;
-}
+  .select-dropdown {
+    padding: 4px;
+    border: 1px solid var(--figma-color-border);
+    background-color: var(--figma-color-bg);
+    border-radius: 4px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    appearance: none; /* Disables the native drop-down arrow */
+  }
 
-/* ポップアップコンテナ (Element Modifier) */
-.tabList__popup--visible {
-  display: block;
-}
+  .select-dropdown:focus {
+    outline: none;
+    border-color: var(--figma-color-border-focus);
+  }
 
-/* ポップアップアローのコンテナ (Element) */
-.tabList__popup-arrow-container {
-  position: relative;
-}
+  /* Style for custom dropdown arrow */
+  .select-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Makes sure the svg does not prevent clicking the select box */
+  }
 
-/* ポップアップの内容 (Element) */
-.tabList__popup-content {
-  height: 28px;
-  border-radius: 2px;
-  background: #222222;
-  color: #FFFFFF;
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
-  padding: 0 8px;
-  display: flex;
-  align-items: center;
-}
+  .select-arrow svg {
+    fill: var(--figma-color-icon); /* Icon color */
+  }
 
-/* ポップアップアロー (Element) */
-.tabList__popup-arrow {
-  position: absolute;
-  top: -6px;
-  right: 10;
-}
-/* Dropdown Component Styles */
-.dropdown {
-  /* スタイルシートのリセットや追加のスタイリングが必要な場合はここに記述 */
-  display: flex;
-  margin: 0 16 0 8px;
-  align-items: flex-start;
-}
+  .create-style.font-family {
+    display: flex;
+    flex-direction: column;
+    max-height: 295px;
+    top: calc(100% + 1px);
+    -webkit-font-smoothing: antialiased;
+    pointer-events: none;
+    background-color: #1e1e1e;
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow-menu);
+    color: #fff;
+    font-size: var(--font-size-12);
+    left: 0;
+    min-width: 100%;
+    overflow-y: auto;
+    padding: var(--space-extra-small) 0;
+    position: absolute;
+  }
+  .font-family_label {
+    position: relative;
+    padding: 4px var(--space-medium) 4px 32px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
 
-.dropdown__button {
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  padding-right: 4px;
-  color: var(--figma-color-text, #333333);
-  fill: var(--figma-color-icon, #333333);
-  border-radius: 2px;
-  cursor: default;
-  box-sizing: border-box;
-  background-clip: padding-box;
-  height: 28px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  position: relative;
-  box-sizing: border-box;
-  margin-top: 1px;
-  padding: 0 4 0 8px;
-  margin: 1 0px;
-  background: transparent;
-}
-.dropdown__button.font-weight {
-  flex-grow: 1;
-  appearance: none; /* ブラウザデフォルトのスタイルを解除 */
-}
+  .font-family_labelText {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 
-.dropdown__button.font-family:hover,
-.dropdown__button.font-family:active {
-  /* ホバーやフォーカス時の追加スタイル。例えば背景色を変更するなど */
-  background: var(--figma-color-bg-hover);
-}
-.dropdown__button.font-family:focus-visible {
-  border: 2px solid var(--figma-color-border-selected);
-}
-.dropdown__button.font-weight:hover,
-.dropdown__button.font-weight:active {
-  border: 1px solid var(--figma-color-border, rgba(0, 0, 0, .1));
-  justify-content: space-between;
-}
+  .create-style__font-menu {
+    width: 178px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: #222222;
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.20);
+    border-radius: 2px;
+    border: 0.50px solid rgba(0, 0, 0, 0.10);
+    position: absolute;
+    right: 8px;
+    z-index: 100;
+    max-height: 164px;
+    overflow-y: auto;
+  }
 
-.dropdown__label {
-  max-width: calc(100% - 12px); /* アイコンの幅を考慮した幅を設定 */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
-.dropdown__icon {
-  width: 16px; /* SVGの大きさを指定 */
-  margin-left: auto; /* アイコンを右寄せする */
-}
-.dropdown__button_container.font-family {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 3;
-  max-width: 180px;
-}
-.dropdown__button_container.font-weight {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  max-width: 180px;
-}
-.create-style__content {
-  box-sizing: border-box;
-  padding: 16px;
-  width: 100%;
-  height: max-content;
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--figma-color-border);
-}
-.create-style__label {
-  -webkit-user-select: none;
-  user-select: none;
-  text-align: left;
-  color: var(--figma-color-text, #333333);
-  fill: var(--figma-color-icon, #333333);
-  border-radius: 2px;
-  cursor: default;
-  box-sizing: border-box;
-  background-clip: padding-box;
-}
-.create-style__input {
-  grid-column-start: 1;
-  padding: 0 8px;
-  margin: 1 0px;
-  border: 1px solid var(--figma-color-border);
-  width: calc(100% - 96px);
-  background-color: var(--color-bg);
-  grid-column-end: span 28;
-  color: var(--figma-color-text);
-  fill: var(--figma-color-icon);
-  border-radius: 2px;
-  cursor: default;
-  box-sizing: border-box;
-  background-clip: padding-box;
-  height: 28px;
-  font-size: 11px;
-  border-radius: 2px;
-}
-.create-style__input:focus-visible {
-  height: 30px;
-  margin-top: 0;
-  margin-bottom: 0;
-  border: 1px solid var(--figma-color-border-selected, #0d99ff);
-  outline: 1px solid var(--figma-color-border-selected, #0d99ff);
-  outline-offset: -2px;
-}
-.styleList-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  box-sizing: border-box;
-  outline: 1px solid transparent;
-  outline-offset: -1px;
-  height: 40px;
-}
-.styleList-content:hover {
-  outline: 1px solid var(--figma-color-bg-component, #7b61ff);
-  color: var(--figma-color-text);
-}
-.styleList-content.active {
-  background-color: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
-  color: var(--figma-color-text);
-  outline: 1px solid transparent;
-}
-.styleList-content.active .tabList__options-button:hover {
-  background-color: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, .06));
-}
-.styleList-content:focus-visible {
-  background: var(--figma-color-bg-selected);
-  color: var(--figma-color-text);
-}
-.create-style-button {
-  color: var(--figma-color-text-onbrand, #fff);
-  background-color: var(--figma-color-bg-brand);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  height: 32px;
-  line-height: 32px;
-  max-width: 200px;
-  padding: 0 12px;
-  border-radius: 6px;
-  -moz-outline-radius: 6px;
-  cursor: default;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.create-style-content {
-  box-sizing: border-box;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  position: relative;
-  padding: 16px;
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  align-items: center;
-  border-top: 1px solid var(--figma-color-border);
-}
-.create-style-tabList__container {
-  padding: 8 0px;
-  display: flex;
-  flex-direction: column;
-}
-input::placeholder {
-  color: var(--figma-color-text-tertiary, #0000004d); /* 好きな薄い色に変更してください */
-  opacity: 1; /* 不透明度を設定することもできます（必須ではありません） */
-}
 
+  .font-menu__item {
+    width: 100%;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .font-menu__item:hover {
+    background: #18A0FB;
+  }
+  .menuitem__item__icon {
+    position: absolute;
+    left: 8px;
+    width: 20px;
+    height: 16px;
+  }
+
+  .font-menu__divider {
+    width: 100%;
+    height: 17px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .font-menu__divider_item {
+    width: 100%;
+    border: 1px rgba(255, 255, 255, 0.20) solid;
+  }
+
+  .font-menu__text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 24px;
+    left: 32px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+    word-wrap: break-word;
+  }
+
+  .font-menu__icon {
+    width: 16px;
+    height: 16px;
+    left: 8px;
+    top: 4px;
+    position: absolute;
+  }
+
+  .font-menu__icon-img {
+    width: 9.91px;
+    height: 7.62px;
+    left: 3.29px;
+    top: 3.79px;
+    position: absolute;
+  }
+
+    /* 非表示にするためのクラス */
+    .hidden {
+      display: none;
+    }
+
+    /* ルート要素 (Block) */
+  .apply-style__styles {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 8 0 16px;
+  }
+    /* ルート要素 (Block) */
+  .create-style__tab-header {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 8 0 16px;
+  }
+    /* ルート要素 (Block) */
+  .create-style__styles {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 8 0 16px;
+    color: var(--figma-color-text-secondary);
+    font-weight: 500;
+  }
+
+  /* ポップアップコンテナ (Element) */
+  .apply-style__popup {
+    position: absolute;
+    bottom: -34px;
+    right: 0;
+    display: none;
+    z-index: 100;
+  }
+
+  /* ポップアップコンテナ (Element Modifier) */
+  .apply-style__popup--visible {
+    display: block;
+  }
+
+  /* ポップアップアローのコンテナ (Element) */
+  .apply-style__popup-arrow-container {
+    position: relative;
+  }
+
+  /* ポップアップの内容 (Element) */
+  .apply-style__popup-content {
+    height: 28px;
+    border-radius: 2px;
+    background: #222222;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ポップアップアロー (Element) */
+  .apply-style__popup-arrow {
+    position: absolute;
+    top: -6px;
+    right: 10;
+  }
+  /* Dropdown Component Styles */
+  .create-style__dropdown {
+    /* スタイルシートのリセットや追加のスタイリングが必要な場合はここに記述 */
+    display: flex;
+    margin: 0 16 0 8px;
+    align-items: flex-start;
+  }
+
+  .create-style__dropdown-toggle {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    padding-right: 4px;
+    color: var(--figma-color-text, #333333);
+    fill: var(--figma-color-icon, #333333);
+    border-radius: 2px;
+    cursor: default;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    height: 28px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 1px;
+    padding: 0 4 0 8px;
+    margin: 1 0px;
+    background: transparent;
+  }
+  .create-style__dropdown-toggle.font-weight {
+    flex-grow: 1;
+    appearance: none; /* ブラウザデフォルトのスタイルを解除 */
+  }
+
+  .create-style__dropdown-toggle.font-family:hover,
+  .create-style__dropdown-toggle.font-family:active {
+    /* ホバーやフォーカス時の追加スタイル。例えば背景色を変更するなど */
+    background: var(--figma-color-bg-hover);
+  }
+  .create-style__dropdown-toggle.font-family:focus-visible {
+    border: 2px solid var(--figma-color-border-selected);
+  }
+  .create-style__dropdown-toggle.font-weight:hover,
+  .create-style__dropdown-toggle.font-weight:active {
+    border: 1px solid var(--figma-color-border, rgba(0, 0, 0, .1));
+    justify-content: space-between;
+  }
+
+  .create-style__dropdown-label {
+    max-width: calc(100% - 12px); /* アイコンの幅を考慮した幅を設定 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .create-style__dropdown-icon-container {
+    width: 16px;
+    flex: 0 0 16px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--figma-color-icon-disabled);
+    fill: var(--figma-color-icon-disabled);
+  }
+
+  .create-style__dropdown-icon {
+    width: 16px; /* SVGの大きさを指定 */
+    margin-left: auto; /* アイコンを右寄せする */
+  }
+  .create-style__dropdown-group.font-family {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    max-width: 180px;
+  }
+  .create-style__dropdown-group.font-weight {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 180px;
+  }
+  .create-style__input-group {
+    box-sizing: border-box;
+    padding: 16px;
+    width: 100%;
+    height: max-content;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--figma-color-border);
+  }
+  .create-style__label {
+    -webkit-user-select: none;
+    user-select: none;
+    text-align: left;
+    color: var(--figma-color-text, #333333);
+    fill: var(--figma-color-icon, #333333);
+    border-radius: 2px;
+    cursor: default;
+    box-sizing: border-box;
+    background-clip: padding-box;
+  }
+  .create-style__input {
+    grid-column-start: 1;
+    padding: 0 8px;
+    margin: 1 0px;
+    border: 1px solid var(--figma-color-border);
+    width: calc(100% - 96px);
+    background-color: var(--color-bg);
+    grid-column-end: span 28;
+    color: var(--figma-color-text);
+    fill: var(--figma-color-icon);
+    border-radius: 2px;
+    cursor: default;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    height: 28px;
+    font-size: 11px;
+    border-radius: 2px;
+  }
+  .create-style__input:focus-visible {
+    height: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 1px solid var(--figma-color-border-selected, #0d99ff);
+    outline: 1px solid var(--figma-color-border-selected, #0d99ff);
+    outline-offset: -2px;
+  }
+  .apply-style__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    height: 40px;
+  }
+  .apply-style__item:hover {
+    outline: 1px solid var(--figma-color-bg-component, #7b61ff);
+    color: var(--figma-color-text);
+  }
+  .apply-style__item.active {
+    background-color: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
+    color: var(--figma-color-text);
+    outline: 1px solid transparent;
+  }
+  .apply-style__item.active .apply-style__options-button:hover {
+    background-color: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, .06));
+  }
+  .apply-style__item:focus-visible {
+    background: var(--figma-color-bg-selected);
+    color: var(--figma-color-text);
+  }
+  .create-style__submit-button {
+    color: var(--figma-color-text-onbrand, #fff);
+    background-color: var(--figma-color-bg-brand);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 32px;
+    line-height: 32px;
+    max-width: 200px;
+    padding: 0 12px;
+    border-radius: 6px;
+    -moz-outline-radius: 6px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .create-style__form-action {
+    box-sizing: border-box;
+    mix-blend-mode: normal;
+    overflow: hidden;
+    position: relative;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    border-top: 1px solid var(--figma-color-border);
+  }
+  .create-style__tabs {
+    padding: 8 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  input::placeholder {
+    color: var(--figma-color-text-tertiary, #0000004d); /* 好きな薄い色に変更してください */
+    opacity: 1; /* 不透明度を設定することもできます（必須ではありません） */
+  }
 </Style>
+
 <body>
-  <!-- tabList -->
-  <div class="tabList">
-    <ul class="tabList__items">
-      <li class="tabList__item">
-        <span class="tabList__text">Apply Styles</span>
+  <!-- tab-list -->
+  <div class="tab-list">
+    <ul class="tab-list__items">
+      <li class="tab-list__item">
+        <span class="tab-list__text">Apply styles</span>
       </li>
-      <li class="tabList__item">
-        <span class="tabList__text">Create Style</span>
+      <li class="tab-list__item">
+        <span class="tab-list__text">Create style</span>
       </li>
     </ul>
-    <div class="tabList-active-indicator"></div>
+    <div class="tab-list-active-indicator"></div>
   </div>
 
-  <!-- Apply Style  -->
-  <div class="apply-style-container">
+  <!-- Apply style  -->
+  <div class="apply-style">
     <!-- 要素選択 -->
-    <div class="listContainer">
-      <div class="listMessage">
-        <p class="text center">Select the element whose <br> text you want to change</p>
-      </div>
+    <div class="apply-style__message">
+      <p class="apply-style__text">Select the element whose <br> text you want to change</p>
     </div>
     <!-- 区切り線 -->
-    <div class="container__border"></div>
+    <div class="apply-style__divider"></div>
     <!-- 登録したテキストスタイル一覧 -->
-    <div class="tabList__content">
-      <div class="tabList__container">
-        <h2 class="tabList__title">Style List</h2>
-        <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-          <span class="tabList__svg-container">
-            <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="apply-style__content">
+      <div class="apply-style__styles">
+        <h2 class="apply-style__title">Style list</h2>
+        <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <span class="apply-style__options-svg-container">
+            <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill-opacity="0.8"/>
             </svg>  
           </span>
         </button>
       </div>
 
-      <!-- <h2 class="tabList__title">Style List</h2> -->
-      <ul class="tabList__layer-contents">
-        <li class="styleList-content" data-env="mac">
-          <div class="tabList__layer-container" style="flex-grow: 2;">
-            <h3 class="tabList__layer-content">Mac 環境確認用</h3>
+      <ul class="apply-style__list">
+        <li class="apply-style__item" data-env="mac">
+          <div class="apply-style__item-content">
+            <h3 class="apply-style__item-title">Mac 環境確認用</h3>
           </div>
-          <button class="tabList__options-button edit" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button class="apply-style__options-button edit" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="apply-style__options-svg-container">
+              <svg class="apply-style__options-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
-            </svg>
+              </svg>
             </span>
           </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
+
+          
+          <div class="apply-style__popup">
+            <div class="apply-style__popup-arrow-container">
+              <div class="apply-style__popup-content">スタイル設定を開く</div>
+              <div class="apply-style__popup-arrow">
                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
                 </svg>
               </div>
             </div>
           </div>
-          <button class="tabList__options-button delete" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <button class="apply-style__options-button delete" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+            <span class="apply-style__options-svg-container">
+              <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill-opacity="0.8"></path>
               </svg>
             </span>
           </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="styleList-content" data-env="windows">
-          <div class="tabList__layer-container" style="flex-grow: 2;">
-            <h3 class="tabList__layer-content">windows 環境確認用</h3>
-          </div>
-          <button class="tabList__options-button edit" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"  fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <button class="tabList__options-button delete" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z"  fill-opacity="0.8"></path>
-              </svg>
-            </span>
-          </button>
-          <div class="tabList__popup">
-            <div class="tabList__popup-arrow-container">
-              <div class="tabList__popup-content">スタイル設定を開く</div>
-              <div class="tabList__popup-arrow">
+          
+          <div class="apply-style__popup">
+            <div class="apply-style__popup-arrow-container">
+              <div class="apply-style__popup-content">スタイル設定を開く</div>
+              <div class="apply-style__popup-arrow">
                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
                 </svg>
@@ -769,175 +754,83 @@ input::placeholder {
       </ul>
     </div>
     <!-- 反映ボタン -->
-    <button id="analyzeBtn" class="button-submit disabled">Apply</button>
-    <!-- ローディングインジケーター -->
-    <div id="loadingIndicator" class="loading-indicator hidden">
-      <svg class="progress-ring" viewBox="0 0 240 240">
-        <circle
-          class="progress-ring__circle"
-          stroke="var(--figma-color-bg-component)"
-          stroke-width="10"
-          fill="transparent"
-          r="52"  
-          cx="120"
-          cy="120"
-        />
-      </svg>
-      <span class="progress-text">Applying fonts...</span> 
-    </div>
+    <button id="analyzeBtn" class="create-style__apply-button disabled">Apply</button>
+  </div>
+  
+  <!-- ローディングインジケーター -->
+  <div id="loadingIndicator" class="loading-indicator hidden">
+    <svg class="progress-ring" viewBox="0 0 240 240">
+      <circle
+        class="progress-ring__circle"
+        stroke="var(--figma-color-bg-component)"
+        stroke-width="10"
+        fill="transparent"
+        r="52"  
+        cx="120"
+        cy="120"
+      />
+    </svg>
+    <span class="progress-text">Applying fonts...</span> 
   </div>
 
-  <!-- Create Style  -->
-  <div class="create-style-container hidden">
-    <!-- 要素選択 -->
-    <div class="create-style__content">
-      <label class="create-style__label" dir="auto">Name</label>
-      <input type="text" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value>
+  <!-- Create style  -->
+  <div class="create-style hidden">
+    <!-- スタイル名 作成 -->
+    <div class="create-style__input-group">
+      <label class="create-style__label" for="styleNameInput">Style name</label>
+      <input type="text" id="styleNameInput" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value>
     </div>
 
-    <div class="create-style-tabList__container">
-      <div class="tabList__container">
-        <h2 class="tabList__title">Settings</h2>
-        <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-          <span class="tabList__svg-container">
-            <svg class="tabList__svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill-opacity="0.8"/>
-            </svg>  
-          </span>
-        </button>
+    <div class="create-style__tabs">
+      <div class="create-style__tab-header">
+        <h2 class="create-style__tab-title">Settings</h2>
       </div>
-      <div class="tabList__content">
-        <div class="tabList__container__title" id="mainView">
-          <h2 class="tabList__title">Japanese</h2>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
+      <div class="create-style__content">
+        <div class="create-style__styles" id="mainView">
+          <h2 class="create-style__tab-title">Japanese</h2>
         </div>
   
-        <div class="dropdown">
-          <div class="dropdown__button_container font-family">
-            <button class="dropdown__button font-family">
-              <span class="dropdown__label">Yu Gothic</span>
+        <div class="create-style__dropdown">
+          <div class="create-style__dropdown-group font-family">
+            <button class="create-style__dropdown-toggle font-family">
+              <span class="create-style__dropdown-label">Yu Gothic</span>
             </button>
-            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
+            <div class="create-style__font-menu hidden" role="menu" id="fontFamilyListContainer">
+              <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
-          <div class="dropdown__button_container font-weight">
-            <div class="dropdown__button font-weight" id="fontWeightSelect" style="width: 100%;">
-              <span class="dropdown__label">Regular</span>
-              <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-                <span class="svg-container">
-                  <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
+          <div class="create-style__dropdown-group font-weight">
+            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+              <span class="create-style__dropdown-label">Regular</span>
+              <div class="create-style__dropdown-icon-container">
+                <span class="create-style__svg-container">
+                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
                     <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
                   </svg>
                 </span>
               </div>
             </div>
-            <div class="font-menu hidden" role="menu" id="fontWeightListContainer">
-              <div class="font-menu__item" role="menuitem">
-                <svg class="menuitem__item__icon hidden" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"/>
-                </svg>
-                <div class="font-menu__text">
-                  font.fontName.style
-                </div>
-              </div>
+            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+              <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
         </div>
       </div>
-
-      <!-- <div class="tabList__content">
-        <div class="tabList__container__title" id="mainView">
-          <h2 class="tabList__title">English</h2>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown">
-          <div class="dropdown__button_container font-family">
-            <button class="dropdown__button font-family">
-              <span class="dropdown__label">Yu Gothic</span>
-            </button>
-            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
-            </div>
-          </div>
-          <div class="dropdown__button_container font-weight">
-            <div class="dropdown__button font-weight" id="fontWeightSelect" style="width: 100%;">
-              <span class="dropdown__label">Regular</span>
-              <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-                <span class="svg-container">
-                  <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-            <div class="font-menu hidden" role="menu" id="fontWeightListContainer">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tabList__content">
-        <div class="tabList__container__title" id="mainView">
-          <h2 class="tabList__title">Number</h2>
-          <button class="tabList__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
-            <span class="tabList__svg-container">
-              <svg class="tabList__svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
-            </svg>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown">
-          <div class="dropdown__button_container font-family">
-            <button class="dropdown__button font-family">
-              <span class="dropdown__label">Yu Gothic</span>
-            </button>
-            <div class="font-menu hidden" role="menu" id="fontFamilyListContainer">
-            </div>
-          </div>
-          <div class="dropdown__button_container font-weight">
-            <div class="dropdown__button font-weight" id="fontWeightSelect" style="width: 100%;">
-              <span class="dropdown__label">Regular</span>
-              <div style="width: 16px; flex: 0 0 16px; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; color: var(--figma-color-icon-disabled); fill: var(--figma-color-icon-disabled);">
-                <span class="svg-container">
-                  <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-            <div class="font-menu hidden" role="menu" id="fontWeightListContainer">
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
 
-    <div class="create-style-content">
-      <label tabindex="0" class="create-style-label">Create style</label>
-      <button tabindex="0" class="create-style-button">Create style</button>
+    <div class="create-style__form-action">
+      <button tabindex="0" class="create-style__submit-button">Create style</button>
     </div>
   </div>
 </body>
 
 <script>
   // 要素を取得します。
-  const tabs = document.querySelectorAll('.tabList__item');
-  const tabContentsApplyStyle = document.querySelectorAll('.apply-style-container');
-  const tabContentsCreateStyle = document.querySelectorAll('.create-style-container');
-  const textStyles = document.querySelectorAll('.styleList-content')
-  const indicator = document.querySelector('.tabList-active-indicator');
+  const tabs = document.querySelectorAll('.tab-list__item');
+  const tabContentsApplyStyle = document.querySelectorAll('.apply-style');
+  const tabContentsCreateStyle = document.querySelectorAll('.create-style');
+  const textStyles = document.querySelectorAll('.apply-style__item')
+  const indicator = document.querySelector('.tab-list-active-indicator');
   const loader = document.querySelectorAll('.loading-indicator');
 
   // 選択された要素とstyleの状態を表示
@@ -981,11 +874,11 @@ input::placeholder {
   function activateTab(tab) {
     // すべてのタブからアクティブクラスを取り除きます。
     tabs.forEach(t => {
-      t.classList.remove('tabList__item--active');
+      t.classList.remove('tab-list__item--active');
     });
     
     // 選択されたタブにアクティブクラスを追加します。
-    tab.classList.add('tabList__item--active');
+    tab.classList.add('tab-list__item--active');
     
     // インジケーターを活性状態にして、選択されたタブの位置に合わせます。
     indicator.style.display = 'block';
@@ -1021,7 +914,7 @@ input::placeholder {
     const message = event.data.pluginMessage;
 
     // 共通のエレメントを取得
-    const textElement = document.querySelector('.listMessage .text.center'); // textElementをここで定義
+    const textElement = document.querySelector('.apply-style__message .apply-style__text'); // textElementをここで定義
     const loadingIndicator = document.getElementById('loadingIndicator');
 
     switch (message.type) {
@@ -1084,7 +977,7 @@ input::placeholder {
             // 利用可能なfontFamilyの情報を保持する配列（サンプルで用意）
           }
         });
-        const listInputs = document.querySelectorAll('.dropdown__button.font-family');
+        const listInputs = document.querySelectorAll('.create-style__dropdown-toggle.font-family');
         listInputs.forEach((listInput) => {
           listInput.addEventListener('click', function() {
             if (fontFamilyListContainer.classList.contains('hidden')) {
@@ -1097,7 +990,7 @@ input::placeholder {
           fontFamilyListContainer.childNodes.forEach((item) => {
             item.addEventListener('click', () => {
               const fontName = item.textContent; // フォント名を取得する
-              const fontFamilyLabels = listInput.querySelectorAll('.dropdown__label'); //<label>要素を選択する
+              const fontFamilyLabels = listInput.querySelectorAll('.create-style__dropdown-label'); //<label>要素を選択する
               fontFamilyLabels.forEach((label) => {
                 label.textContent = fontName; // フォント名を更新する
               }) 
@@ -1110,7 +1003,7 @@ input::placeholder {
         fontWeightSelect.addEventListener('click', function() {
           if (fontWeightListContainer.classList.contains('hidden')) {
             // 現在のフォントファミリーラベルからフォント名を取得
-            const currentFontFamily = document.querySelector('.dropdown__button.font-family .dropdown__label').textContent;
+            const currentFontFamily = document.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
             // 表示されるべきフォントウェイト一覧を表示する
             makeFontWeightLists(currentFontFamily, fontWeightListContainer);
             fontWeightListContainer.classList.remove('hidden');
@@ -1174,7 +1067,7 @@ input::placeholder {
 
       // 項目がクリックされた時の処理を追加
       item.addEventListener('click', () => {
-        const fontWeightLabel = document.querySelector('.dropdown__button.font-weight .dropdown__label');
+        const fontWeightLabel = document.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add('hidden'); // フォントウェイトリストを閉じる
 
@@ -1196,7 +1089,7 @@ input::placeholder {
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
     if (defaultFontWeight) {
-      const defaultLabel = document.querySelector('.dropdown__button.font-weight .dropdown__label');
+      const defaultLabel = document.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
       defaultLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
       updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
     }
