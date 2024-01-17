@@ -1036,22 +1036,24 @@
 
           // 各コンテナに同じフォントリストを追加する
           availableFonts.forEach((font) => {
-            // フォントファミリー名が既に追加されていなければ操作を行う
-            addedFontFamilies.add(font.fontName.family);  // Setにフォントファミリー名を追加
-
-            // 新しいフォントファミリーのメニュー項目を作成
-            const item = document.createElement('div');
-            item.className = 'font-menu__item';
-            item.setAttribute('role', 'menuitem');
-
-            // フォントファミリー名を表示するためのテキスト部分を作成
-            const text = document.createElement('div');
-            text.className = 'font-menu__text';
-            text.textContent = font.fontName.family;
-            item.appendChild(text);
-
-            // リストにメニュー項目を追加
-            listContainer.appendChild(item);
+            // フォントファミリー名がSetにまだ追加されていない場合のみ項目を作成する
+            if (!addedFontFamilies.has(font.fontName.family)) {
+              addedFontFamilies.add(font.fontName.family);
+  
+              // 新しいフォントファミリーのメニュー項目を作成
+              const item = document.createElement('div');
+              item.className = 'font-menu__item';
+              item.setAttribute('role', 'menuitem');
+  
+              // フォントファミリー名を表示するためのテキスト部分を作成
+              const text = document.createElement('div');
+              text.className = 'font-menu__text';
+              text.textContent = font.fontName.family;
+              item.appendChild(text);
+  
+              // リストにメニュー項目を追加
+              listContainer.appendChild(item);
+            }
           });
           listContainer.childNodes.forEach((item) => {
             item.addEventListener('click', (event) => {
