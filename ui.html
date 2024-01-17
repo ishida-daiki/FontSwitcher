@@ -799,7 +799,7 @@
             </div>
           </div>
           <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
               <span class="create-style__dropdown-label">Regular</span>
               <div class="create-style__dropdown-icon-container">
                 <span class="create-style__svg-container">
@@ -809,7 +809,7 @@
                 </span>
               </div>
             </div>
-            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
               <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
@@ -830,7 +830,7 @@
             </div>
           </div>
           <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
               <span class="create-style__dropdown-label">Regular</span>
               <div class="create-style__dropdown-icon-container">
                 <span class="create-style__svg-container">
@@ -840,7 +840,7 @@
                 </span>
               </div>
             </div>
-            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
               <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
@@ -861,7 +861,7 @@
             </div>
           </div>
           <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" id="fontWeightSelect" style="width: 100%;">
+            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
               <span class="create-style__dropdown-label">Regular</span>
               <div class="create-style__dropdown-icon-container">
                 <span class="create-style__svg-container">
@@ -871,7 +871,7 @@
                 </span>
               </div>
             </div>
-            <div class="create-style__font-menu hidden" role="menu" id="fontWeightListContainer">
+            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
               <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
@@ -1011,14 +1011,13 @@
 
       // figma内のfont.familyとstyleをselectボックス内に追加
       case 'load-fonts':
-        const fontFamilyListContainers = document.querySelectorAll('.font-family-list-container')
-        
         // メッセージからフォント情報を取得する
-        availableFonts = message.fonts;  
+        availableFonts = message.fonts;
+        let fontFamilyListContainers;
 
-        const dropDownToggles = document.querySelectorAll('.create-style__dropdown-toggle.font-family');
-
+        fontFamilyListContainers = document.querySelectorAll('.font-family-list-container');
         // listContainer領域外のクリックを検知するための関数
+
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
@@ -1032,24 +1031,19 @@
 
         document.addEventListener('click', handleDocumentClick);
         
-        dropDownToggles.forEach((toggle) => {
-          toggle.addEventListener('click', (event) => {
-            fontFamilyListContainers.forEach((listContainer) => {
-              listContainer.classList.add('hidden');
-            });
+        const createStyleContents = document.querySelectorAll('.create-style__content');
+        createStyleContents.forEach((content) => {
+          const fontFamilyListContainer = content.querySelector('.font-family-list-container')
+          const fontWeightListContainer = content.querySelector('.font-weight-list-container')
+          const fontWeightSelectBtn = content.querySelector('.create-style__dropdown-group.font-weight')
+          const dropDownToggle = content.querySelector('.create-style__dropdown-toggle.font-family');
+          const fontWeightLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
+          const defaultLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
 
-            // ボタンに関連づけられたリストコンテナを取得する
-            const listContainer = toggle.nextElementSibling; // この例ではリストコンテナはボタンの次の要素という仮定です
-            if (listContainer) {
-              listContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
-              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
-            }
-          });
-        });
-        
-        fontFamilyListContainers.forEach((listContainer) => {
+
+
           // 既存のリスト内容を一度クリアする
-          listContainer.innerHTML = '';
+          fontFamilyListContainer.innerHTML = '';
 
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
@@ -1072,47 +1066,56 @@
               item.appendChild(text);
               
               // リストにメニュー項目を追加
-              listContainer.appendChild(item);
+              fontFamilyListContainer.appendChild(item);
             }
           });
-          listContainer.childNodes.forEach((item) => {
+
+          dropDownToggle.addEventListener('click', () => {
+            fontFamilyListContainer.classList.add('hidden');
+
+            // ボタンに関連づけられたリストコンテナを取得する
+            if (fontFamilyListContainer) {
+              fontFamilyListContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
+            }
+          });
+
+          fontFamilyListContainer.childNodes.forEach((item) => {
             item.addEventListener('click', (event) => {
               const fontName = item.textContent;
               // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
-              const dropDown = listContainer.closest('.create-style__dropdown');
+              const dropDown = fontFamilyListContainer.closest('.create-style__dropdown');
               const label = dropDown.querySelector('.create-style__dropdown-label');
               if (label) {
                 label.textContent = fontName;
               }
 
-              listContainer.classList.add('hidden'); // 項目を選択した後、リストを閉じる
-              makeFontWeightLists(fontName, fontWeightListContainer);
+              fontFamilyListContainer.classList.add('hidden'); // 項目を選択した後、リストを閉じる
+              makeFontWeightLists(fontName, fontWeightListContainer, fontWeightLabel, defaultLabel);
 
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
             });
           });
+          fontWeightSelectBtn.addEventListener('click', function() {
+            if (fontWeightListContainer.classList.contains('hidden')) {
+              // 現在のフォントファミリーラベルからフォント名を取得
+              const currentFontFamily = document.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
+              // 表示されるべきフォントウェイト一覧を表示する
+              // makeFontWeightLists(currentFontFamily, fontWeightListContainer, fontWeightLabel, defaultLabel);
+              fontWeightListContainer.classList.remove('hidden');
+            } else {
+              fontWeightListContainer.classList.add('hidden'); // リストを閉じる
+            }
+          });
         })
-        const fontWeightSelect = document.getElementById('fontWeightSelect');
-        fontWeightSelect.addEventListener('click', function() {
-          if (fontWeightListContainer.classList.contains('hidden')) {
-            // 現在のフォントファミリーラベルからフォント名を取得
-            const currentFontFamily = document.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
-            // 表示されるべきフォントウェイト一覧を表示する
-            makeFontWeightLists(currentFontFamily, fontWeightListContainer);
-            fontWeightListContainer.classList.remove('hidden');
-          } else {
-            fontWeightListContainer.classList.add('hidden'); // リストを閉じる
-          }
-        });
         break;
       }
     };
-
   // フォントウェイトを表示する関数
-  function makeFontWeightLists(fontFamilyName, fontWeightListContainer) {
+  function makeFontWeightLists(fontFamilyName, fontWeightListContainer, fontWeightLabel, defaultLabel) {
     fontWeightListContainer.innerHTML = ''; // コンテナをクリア
-
+    
     const fontWeights = availableFonts.filter(font => font.fontName.family === fontFamilyName);
 
     function createCheckIcon() {
@@ -1136,19 +1139,19 @@
     let defaultFontWeight;
     // 'Regular' があるかどうか確認し、設定する
     const regularFontWeight = fontWeights.find(font => font.fontName.style === 'Regular');
-
+    
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
       const item = document.createElement('div');
       item.className = 'font-menu__item';
       item.setAttribute('role', 'menuitem');
-
+      
       // フォントウェイト名を表示するためのテキスト部分を作成
       const text = document.createElement('div');
       text.className = 'font-menu__text';
       text.textContent = font.fontName.style;
       item.appendChild(text);
-
+      
       // チェックアイコンを追加
       const checkIcon = createCheckIcon();
       item.appendChild(checkIcon);
@@ -1161,7 +1164,6 @@
 
       // 項目がクリックされた時の処理を追加
       item.addEventListener('click', () => {
-        const fontWeightLabel = document.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add('hidden'); // フォントウェイトリストを閉じる
 
@@ -1174,6 +1176,7 @@
 
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
         checkIcon.classList.remove('hidden');
+        event.stopPropagation();
       });
 
       // デフォルトフォントウェイトを特定する
@@ -1183,7 +1186,6 @@
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
     if (defaultFontWeight) {
-      const defaultLabel = document.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
       defaultLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
       updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
     }
@@ -1197,6 +1199,7 @@
     });
     selectedCheckIcon.classList.remove('hidden');
   }
+
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
