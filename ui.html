@@ -1015,24 +1015,44 @@
         
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;  
-        
-        // 重複せずにフォントファミリー名を記録するためのSetを作成
-        const addedFontFamilies = new Set();
 
         const dropDownToggles = document.querySelectorAll('.create-style__dropdown-toggle.font-family');
+
+        // listContainer領域外のクリックを検知するための関数
+        function handleDocumentClick(event) {
+          fontFamilyListContainers.forEach((listContainer) => {
+            // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
+            if (listContainer.contains(event.target) || listContainer.previousElementSibling.contains(event.target)) {
+              // クリックしたのがlistContainer内、もしくはlistContainerに隣接する要素（toggleボタン）の場合は何もしない
+            } else {
+              listContainer.classList.add('hidden');
+            }
+          });
+        }
+
+        document.addEventListener('click', handleDocumentClick);
+        
         dropDownToggles.forEach((toggle) => {
-          toggle.addEventListener('click', () => {
+          toggle.addEventListener('click', (event) => {
+            fontFamilyListContainers.forEach((listContainer) => {
+              listContainer.classList.add('hidden');
+            });
+
             // ボタンに関連づけられたリストコンテナを取得する
             const listContainer = toggle.nextElementSibling; // この例ではリストコンテナはボタンの次の要素という仮定です
             if (listContainer) {
               listContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
         });
         
         fontFamilyListContainers.forEach((listContainer) => {
           // 既存のリスト内容を一度クリアする
-          fontFamilyListContainers.innerHTML = '';
+          listContainer.innerHTML = '';
+
+          // 重複せずにフォントファミリー名を記録するためのSetを作成
+          const addedFontFamilies = new Set();
 
           // 各コンテナに同じフォントリストを追加する
           availableFonts.forEach((font) => {
@@ -1050,7 +1070,7 @@
               text.className = 'font-menu__text';
               text.textContent = font.fontName.family;
               item.appendChild(text);
-  
+              
               // リストにメニュー項目を追加
               listContainer.appendChild(item);
             }
