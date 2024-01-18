@@ -1040,16 +1040,16 @@
           const fontWeightLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
           const defaultLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
 
-
-
           // 既存のリスト内容を一度クリアする
           fontFamilyListContainer.innerHTML = '';
 
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
-
           // 各コンテナに同じフォントリストを追加する
           availableFonts.forEach((font) => {
+            if (font.fontName.family.localeCompare("ABeeZee") < 0) {  // 👈 ここでABeeZeeよりも前にあるかどうかを比較
+              return; // ABeeZeeより辞書順で前に来る場合はskip（このループのイテレーションをスキップする）
+            }
             // フォントファミリー名がSetにまだ追加されていない場合のみ項目を作成する
             if (!addedFontFamilies.has(font.fontName.family)) {
               addedFontFamilies.add(font.fontName.family);
