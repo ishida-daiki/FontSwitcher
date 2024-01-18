@@ -1037,8 +1037,7 @@
           const fontWeightListContainer = content.querySelector('.font-weight-list-container')
           const fontWeightSelectBtn = content.querySelector('.create-style__dropdown-group.font-weight')
           const dropDownToggle = content.querySelector('.create-style__dropdown-toggle.font-family');
-          const fontWeightLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
-          const defaultLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
+          let fontWeightLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
 
           // 既存のリスト内容を一度クリアする
           fontFamilyListContainer.innerHTML = '';
@@ -1079,6 +1078,15 @@
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
+          fontWeightSelectBtn.addEventListener('click', () => {
+            fontWeightListContainer.classList.add('hidden');
+
+            // ボタンに関連づけられたリストコンテナを取得する
+            if (fontFamilyListContainer) {
+              fontFamilyListContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
+            }
+          });
 
           fontFamilyListContainer.childNodes.forEach((item) => {
             item.addEventListener('click', (event) => {
@@ -1091,7 +1099,7 @@
               }
 
               fontFamilyListContainer.classList.add('hidden'); // 項目を選択した後、リストを閉じる
-              makeFontWeightLists(fontName, fontWeightListContainer, fontWeightLabel, defaultLabel);
+              makeFontWeightLists(fontName, fontWeightListContainer, fontWeightLabel);
 
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
@@ -1100,9 +1108,9 @@
           fontWeightSelectBtn.addEventListener('click', function() {
             if (fontWeightListContainer.classList.contains('hidden')) {
               // 現在のフォントファミリーラベルからフォント名を取得
-              const currentFontFamily = document.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
+              const currentFontFamily = content.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
               // 表示されるべきフォントウェイト一覧を表示する
-              // makeFontWeightLists(currentFontFamily, fontWeightListContainer, fontWeightLabel, defaultLabel);
+              makeFontWeightLists(currentFontFamily, fontWeightListContainer, fontWeightLabel);
               fontWeightListContainer.classList.remove('hidden');
             } else {
               fontWeightListContainer.classList.add('hidden'); // リストを閉じる
@@ -1113,7 +1121,7 @@
       }
     };
   // フォントウェイトを表示する関数
-  function makeFontWeightLists(fontFamilyName, fontWeightListContainer, fontWeightLabel, defaultLabel) {
+  function makeFontWeightLists(fontFamilyName, fontWeightListContainer, fontWeightLabel) {
     fontWeightListContainer.innerHTML = ''; // コンテナをクリア
     
     const fontWeights = availableFonts.filter(font => font.fontName.family === fontFamilyName);
@@ -1186,7 +1194,7 @@
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
     if (defaultFontWeight) {
-      defaultLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
+      fontWeightLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
       updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
     }
   }
