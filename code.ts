@@ -1,4 +1,4 @@
-figma.showUI(__html__, {themeColors: true, height: 400, width: 300});
+figma.showUI(__html__, {themeColors: true, height: 400, width: 324});
 
 
 // 選択した要素を変更したときに発生するイベント
