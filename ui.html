@@ -719,7 +719,6 @@
               </svg>
             </span>
           </button>
-
           
           <div class="apply-style__popup">
             <div class="apply-style__popup-arrow-container">
@@ -824,37 +823,6 @@
           <div class="create-style__dropdown-group font-family">
             <button class="create-style__dropdown-toggle font-family">
               <span class="create-style__dropdown-label">SF Pro</span>
-            </button>
-            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
-              <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
-            </div>
-          </div>
-          <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
-              <span class="create-style__dropdown-label">Regular</span>
-              <div class="create-style__dropdown-icon-container">
-                <span class="create-style__svg-container">
-                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
-              <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="create-style__content">
-        <div class="create-style__styles" id="mainView">
-          <h2 class="create-style__tab-title">Number</h2>
-        </div>
-        <div class="create-style__dropdown">
-          <div class="create-style__dropdown-group font-family">
-            <button class="create-style__dropdown-toggle font-family">
-              <span class="create-style__dropdown-label">Helvetica</span>
             </button>
             <div class="create-style__font-menu hidden font-family-list-container" role="menu">
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
@@ -1198,7 +1166,6 @@
       updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
     }
   }
-
   // チェック状態の更新を行う関数を追加
   function updateCheckState(selectedItem, allItems, selectedCheckIcon) {
     allItems.forEach(cItem => {
