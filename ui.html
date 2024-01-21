@@ -130,7 +130,7 @@
     display: flex;
     justify-content: space-between;
     cursor: default;
-    padding: 0 16px;
+    padding: 0 8px;
     border-radius: 2px;
     align-items: center;
     height: 30px;
@@ -139,10 +139,40 @@
   .apply-style__list {
     display: flex;
     flex-direction: column;
-    color: var(--figma-color-text-secondary);
-    transition: .1s color ease-out;
+  }
+  .apply-style__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    height: 40px;
+    padding: 0 8px;
+  }
+  .apply-style__item:hover {
+    outline: 1px solid var(--figma-color-bg-component, #7b61ff);
+    opacity:1;
+  }
+  .apply-style__item:focus-visible {
+    background: var(--figma-color-bg-selected);
+    color: var(--figma-color-text);
+  }
+  .apply-style__item.active {
+    background: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
+    outline: 1px solid transparent;
+  }
+  .apply-style__item.active .apply-style__options-button:hover {
+    background: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, .06));
+  }
+  .apply-style__item-title {
+    color: var(--figma-color-text);
+    font-weight: 400;
+    letter-spacing: 0.055px;
   }
   .apply-style__options-button {
+    right: 8;
     border: 1px solid transparent;
     outline: none;
     display: flex;
@@ -151,42 +181,24 @@
     height: 32px;
     width: 32px;
     flex: 0 0 32px;
-    line-height: 32px;
     cursor: default;
-    fill: var(--figma-color-icon, #333333);
-    color: var(--figma-color-icon, #333333);
     border-radius: 3px;
     background-clip: padding-box;
     background-color: transparent;
     transition: .1s fill ease-out,.1s color ease-out;
   }
-  .apply-style__options-button.delete {
-    position: absolute;
-    right: 8;
-    top: 4;
-    bottom: 4;
-  }
-  .apply-style__options-button.edit {
-    position: absolute;
-    right: 40;
-    top: 4;
-    bottom: 4;
-  }
   .apply-style__options-button:hover {
-    background-color: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
+    background: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
     border-radius: 3px;
+  }
+  .apply-style__options-button.active {
+    background: var(--figma-color-icon-pressed);
   }
   /* ボタンがホバーされた時にポップアップを表示する */
   .apply-style__options-button:hover + .apply-style__popup {
     display: block;
   }
-  .apply-style__options-button:active {
-    background: var(--figma-color-bg-brand);
-  }
-  .apply-style__item-title {
-    font-weight: 400;
-    letter-spacing: 0.055px;
-  }
+  
   
 
   .apply-style__message {
@@ -210,8 +222,7 @@
     background: var(--figma-color-border);
   }
   .apply-style__options-svg {
-    /* fill: var(--figma-color-icon); */
-    fill: var(--figma-color-icon-secondary);
+    fill: var(--figma-color-icon);
     width: 32;
     height: 32;
   }
@@ -603,32 +614,6 @@
     outline: 1px solid var(--figma-color-border-selected, #0d99ff);
     outline-offset: -2px;
   }
-  .apply-style__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    box-sizing: border-box;
-    outline: 1px solid transparent;
-    outline-offset: -1px;
-    height: 40px;
-  }
-  .apply-style__item:hover {
-    outline: 1px solid var(--figma-color-bg-component, #7b61ff);
-    color: var(--figma-color-text);
-  }
-  .apply-style__item.active {
-    background-color: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
-    color: var(--figma-color-text);
-    outline: 1px solid transparent;
-  }
-  .apply-style__item.active .apply-style__options-button:hover {
-    background-color: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, .06));
-  }
-  .apply-style__item:focus-visible {
-    background: var(--figma-color-bg-selected);
-    color: var(--figma-color-text);
-  }
   .create-style__submit-button {
     color: var(--figma-color-text-onbrand, #fff);
     background-color: var(--figma-color-bg-brand);
@@ -712,14 +697,13 @@
           <div class="apply-style__item-content">
             <h3 class="apply-style__item-title">Mac 環境確認用</h3>
           </div>
-          <button class="apply-style__options-button edit" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="apply-style__options-svg-container">
-              <svg class="apply-style__options-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z" fill-opacity="0.8"/>
+              <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z" fill-opacity="0.8"/>
               </svg>
             </span>
           </button>
-
           
           <div class="apply-style__popup">
             <div class="apply-style__popup-arrow-container">
@@ -731,11 +715,15 @@
               </div>
             </div>
           </div>
-
-          <button class="apply-style__options-button delete" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+        </li>
+        <li class="apply-style__item" data-env="Windows">
+          <div class="apply-style__item-content">
+            <h3 class="apply-style__item-title">Windows 環境確認用</h3>
+          </div>
+          <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
             <span class="apply-style__options-svg-container">
               <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 9C14.4477 9 14 9.44772 14 10H18C18 9.44772 17.5523 9 17 9H15ZM19 10C19 8.89543 18.1046 8 17 8H15C13.8954 8 13 8.89543 13 10H11.5H10V11H11V21C11 22.1046 11.8954 23 13 23H19C20.1046 23 21 22.1046 21 21V11H22V10H20.5H19ZM20 11H18.5H13.5H12V21C12 21.5523 12.4477 22 13 22H19C19.5523 22 20 21.5523 20 21V11ZM14 18V14H15V18H14ZM17 18V14H18V18H17Z" fill-opacity="0.8"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z" fill-opacity="0.8"/>
               </svg>
             </span>
           </button>
@@ -890,7 +878,7 @@
   const tabs = document.querySelectorAll('.tab-list__item');
   const tabContentsApplyStyle = document.querySelectorAll('.apply-style');
   const tabContentsCreateStyle = document.querySelectorAll('.create-style');
-  const textStyles = document.querySelectorAll('.apply-style__item')
+  const applyStyleItems = document.querySelectorAll('.apply-style__item');
   const indicator = document.querySelector('.tab-list-active-indicator');
   const loader = document.querySelectorAll('.loading-indicator');
 
@@ -905,7 +893,8 @@
   // 利用可能なフォントをロードするためにメインスクリプトに要求する
   parent.postMessage({ pluginMessage: { type: 'load-fonts-request' } }, '*');
 
-  // タブアイテムにイベントリスナーを追加する部分を修正
+
+  // タブ切り替え設定
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
       activateTab(tab);
@@ -913,7 +902,7 @@
       toggleTabContents(index);
     });
   });
-  // タブをアクティブ化する関数に加えて、コンテンツの表示切り替えを行う関数を追加
+  // タブコンテンツの表示切り替えを行う関数
   function toggleTabContents(index) {
     // Apply Stylesタブが選択された場合（index 0）
     if (index === 0) {
@@ -926,11 +915,9 @@
       tabContentsCreateStyle.forEach(content => content.classList.remove('hidden'));
     }
   }
-
   // 最初のタブをアクティブ化する際に、合わせてコンテンツも切り替える
   activateTab(tabs[0]);
   toggleTabContents(0);
-
   // タブが選択された際の関数を定義します。
   function activateTab(tab) {
     // すべてのタブからアクティブクラスを取り除きます。
@@ -953,8 +940,7 @@
   // 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
   activateTab(tabs[0]); // 最初のタブをアクティブとする
 
-  // progress-ring__circleと同じ値をセットし、
-  // SVGの円周の長さを計算する式: 2 * Math.PI * r (半径)
+  // ローディング設定
   const circumference = 2 * Math.PI * 52;
 
   // 最初に円をリングとして表示するために、
@@ -994,10 +980,6 @@
         hasSelection = true;
         updateButtonState();
         break;
-      
-      // ローディング表示関連メッセージ
-      // case 'show-loading':
-      //   loadingIndicator.classList.remove('hidden');
       case 'update-progress':
         loadingIndicator.classList.remove('hidden');
         // 進捗状況のパーセンテージを受け取る
@@ -1008,8 +990,6 @@
       case 'hide-loading':
         loadingIndicator.classList.add('hidden');
         break;
-
-      // figma内のfont.familyとstyleをselectボックス内に追加
       case 'load-fonts':
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;
@@ -1204,14 +1184,66 @@
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("analyzeBtn"); 
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
-  // スタイル選択時のイベントハンドラ
-  textStyles.forEach(textStyle => {
-    textStyle.addEventListener('click', () => {
-      selectedEnv = textStyle.getAttribute('data-env');
-      // 他のスタイル名の選択を解除
-      textStyles.forEach(ts => ts.classList.remove('active'));
-      textStyle.classList.add('active');
+
+  // すべてのボタンのアクティブ状態を解除する関数
+  function removeAllActiveButtons() {
+    document.querySelectorAll('.apply-style__options-button.active').forEach(activeButton => {
+      activeButton.classList.remove('active');
+    });
+  }
+
+  // すべてのアイテムのアクティブ状態を解除する関数
+  function removeAllActiveItems() {
+    document.querySelectorAll('.apply-style__item.active').forEach(activeItem => {
+      activeItem.classList.remove('active');
+    });
+  }
+
+  // ドキュメント全体のクリックイベントリスナーを追加
+  document.addEventListener('click', (e) => {
+    // クリックが.apply-style__item or .apply-style__options-button要素の内部でなければアクティブクラスを削除
+    if (!e.target.closest('.apply-style__item') || !e.target.closest('.apply-style__options-button')) {
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+      selectedEnv = null;
+      // ボタンの状態を更新
       updateButtonState();
+    }
+  }, false);
+
+  // アイテムのクリックイベントを設定
+  applyStyleItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      // クリックイベントのバブリングを止める
+      e.stopPropagation();
+
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+
+      // クリックされたアイテムにアクティブクラスを切り替え
+      item.classList.toggle('active');
+      selectedEnv = item.getAttribute('data-env'); // 環境を取得
+
+      // ボタンの状態を更新
+      updateButtonState();
+    });
+  });
+  // ボタンのクリックイベントを設定
+  document.querySelectorAll('.apply-style__options-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+      // イベントのバブリングを阻止
+      e.stopPropagation();
+
+      // 他のボタンのアクティブ状態を解除
+      removeAllActiveButtons();
+
+      // このボタンのアクティブ状態を切り替え
+      button.classList.toggle('active');
+
+      // アイテムのアクティブ状態を解除する
+      e.target.closest('.apply-style__item').classList.remove('active');
     });
   });
 
