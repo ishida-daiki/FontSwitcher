@@ -130,7 +130,7 @@
     display: flex;
     justify-content: space-between;
     cursor: default;
-    padding: 0 16px;
+    padding: 0 8px;
     border-radius: 2px;
     align-items: center;
     height: 30px;
@@ -149,6 +149,7 @@
     outline: 1px solid transparent;
     outline-offset: -1px;
     height: 40px;
+    padding: 0 8px;
   }
   .apply-style__item:hover {
     outline: 1px solid var(--figma-color-bg-component, #7b61ff);
@@ -171,10 +172,7 @@
     letter-spacing: 0.055px;
   }
   .apply-style__options-button {
-    position: absolute;
     right: 8;
-    top: 4;
-    bottom: 4;
     border: 1px solid transparent;
     outline: none;
     display: flex;
@@ -183,10 +181,7 @@
     height: 32px;
     width: 32px;
     flex: 0 0 32px;
-    line-height: 32px;
     cursor: default;
-    fill: var(--figma-color-icon, #333333);
-    color: var(--figma-color-icon, #333333);
     border-radius: 3px;
     background-clip: padding-box;
     background-color: transparent;
@@ -1190,35 +1185,20 @@
   const applyBtn = document.getElementById("analyzeBtn"); 
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
 
-  
-  // // スタイル選択時のイベントハンドラ
-  // applyStyleItems.forEach(item => {
-  //   let optionButton = item.querySelector('.apply-style__options-button')
-  //   item.addEventListener('click', (e) => {
-  //     item.classList.add('active')
-  //     optionButton.classList.remove('active')
-  //     console.log('テスト');
+  // すべてのボタンのアクティブ状態を解除する関数
+  function removeAllActiveButtons() {
+    document.querySelectorAll('.apply-style__options-button.active').forEach(activeButton => {
+      activeButton.classList.remove('active');
+    });
+  }
 
-  //     selectedEnv = item.getAttribute('data-env');
-  //     // 他のスタイル名の選択を解除
-  //     applyStyleItems.forEach(ts => ts.classList.remove('active'));
-  //     item.classList.add('active');
-  //     updateButtonState();
-  //   });
-  //   optionButton.addEventListener('click', (e) => {
-  //     optionButton.classList.add('active')
-  //     item.classList.remove('active')
-  //     console.log('aaa');
-  //   });
-  // });
-  // // 外部をクリックしたときにactiveを削除するイベントリスナー
-  // document.addEventListener('click', (e) => {
-  //   if (!e.target.closest('.apply-style__item')) {
-  //     applyStyleItems.forEach(item => {
-  //       item.classList.remove('apply-style__item--selected');
-  //     });
-  //   }
-  // });
+  // すべてのアイテムのアクティブ状態を解除する関数
+  function removeAllActiveItems() {
+    document.querySelectorAll('.apply-style__item.active').forEach(activeItem => {
+      activeItem.classList.remove('active');
+    });
+  }
+
   // ボタンのクリックイベントを設定
   document.querySelectorAll('.apply-style__options-button').forEach(button => {
     button.addEventListener('click', (e) => {
@@ -1226,34 +1206,28 @@
       e.stopPropagation();
 
       // 他のボタンのアクティブ状態を解除
-      document.querySelectorAll('.apply-style__options-button.active').forEach(activeButton => {
-        activeButton.classList.remove('active');
-      });
+      removeAllActiveButtons();
 
       // このボタンのアクティブ状態を切り替え
       button.classList.toggle('active');
 
       // アイテムのアクティブ状態を解除する
-      button.closest('.apply-style__item').classList.remove('active');
+      e.target.closest('.apply-style__item').classList.remove('active');
     });
   });
 
   // アイテムのクリックイベントを設定
   applyStyleItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // 他のアイテムのアクティブ状態を解除
-      document.querySelectorAll('.apply-style__item.active').forEach(activeItem => {
-        activeItem.classList.remove('active');
-      });
-      item.querySelector('.apply-style__options-button').classList.remove('active');
-
-      // このアイテムのアクティブ状態を切り替え
-      // item.classList.toggle('active');
+    item.addEventListener('click', (e) => {
+      // 他のアイテムとボタンのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
       
+      // 環境を取得して適切な状態を設定
       selectedEnv = item.getAttribute('data-env');
-      // 他のスタイル名の選択を解除
-      applyStyleItems.forEach(ts => ts.classList.remove('active'));
-      item.classList.toggle('active');
+      item.classList.add('active');
+
+      // ステートの更新
       updateButtonState();
     });
   });
