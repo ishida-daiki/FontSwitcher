@@ -1199,6 +1199,37 @@
     });
   }
 
+  // ドキュメント全体のクリックイベントリスナーを追加
+  document.addEventListener('click', (e) => {
+    // クリックが.apply-style__item or .apply-style__options-button要素の内部でなければアクティブクラスを削除
+    if (!e.target.closest('.apply-style__item') || !e.target.closest('.apply-style__options-button')) {
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+      selectedEnv = null;
+      // ボタンの状態を更新
+      updateButtonState();
+    }
+  }, false);
+
+  // アイテムのクリックイベントを設定
+  applyStyleItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      // クリックイベントのバブリングを止める
+      e.stopPropagation();
+
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+
+      // クリックされたアイテムにアクティブクラスを切り替え
+      item.classList.toggle('active');
+      selectedEnv = item.getAttribute('data-env'); // 環境を取得
+
+      // ボタンの状態を更新
+      updateButtonState();
+    });
+  });
   // ボタンのクリックイベントを設定
   document.querySelectorAll('.apply-style__options-button').forEach(button => {
     button.addEventListener('click', (e) => {
@@ -1213,22 +1244,6 @@
 
       // アイテムのアクティブ状態を解除する
       e.target.closest('.apply-style__item').classList.remove('active');
-    });
-  });
-
-  // アイテムのクリックイベントを設定
-  applyStyleItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-      // 他のアイテムとボタンのアクティブ状態を解除
-      removeAllActiveItems();
-      removeAllActiveButtons();
-      
-      // 環境を取得して適切な状態を設定
-      selectedEnv = item.getAttribute('data-env');
-      item.classList.add('active');
-
-      // ステートの更新
-      updateButtonState();
     });
   });
 
