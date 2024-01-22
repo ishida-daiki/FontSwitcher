@@ -1,20 +1,88 @@
-<Style>
+<style>
   /* Reset CSS */
-  html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
+  html,
+  body,
+  div,
+  span,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  abbr,
+  address,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  samp,
+  small,
+  strong,
+  sub,
+  sup,
+  var,
+  b,
+  i,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
     list-style: none;
   }
   body {
     margin: 0;
     background-color: var(--figma-color-bg);
     color: var(--figma-color-text);
-    font-family: 'Inter';
+    font-family: "Inter";
     font-size: 11px;
     font-weight: 400;
     width: 100%;
@@ -31,7 +99,7 @@
   }
   .tab-list__items {
     display: flex;
-    gap: 4px;
+    gap: 8px;
     color: var(--figma-color-text-onselected);
     height: 100%;
   }
@@ -58,11 +126,12 @@
   }
   /* 選択インジケーターのスタイル */
   .tab-list-active-indicator {
-    height: 2px; /* インジケーターの高さ */
-    background-color: var(--figma-color-bg-component); /* インジケーターの色 */
-    width: 100%; /* インジケーターの幅をタブの幅に合わせる */
-    position: absolute; /* インジケーターの位置を絶対指定 */
-    bottom: -1px; /* インジケーターをタブの下端に位置するように */
+    height: 2px;
+    background: var(--figma-color-border-onselected-strong);
+    width: 100%;
+    border-radius: 6px;
+    position: absolute;
+    bottom: -1px;
     left: 0;
   }
   /* 非アクティブなタブを隠す */
@@ -76,27 +145,27 @@
     bottom: 0;
     padding: 0.8rem 1.5rem;
     margin: 16px;
-    border-radius: 30px;
+    border-radius: 6px;
     font-weight: 600;
   }
   .create-style__apply-button.disabled {
     border: var(--figma-color-border-disabled);
     color: var(--figma-color-text-disabled);
-    background: var(--figma-color-bg-disabled);;
+    background: var(--figma-color-bg-disabled);
   }
   .create-style__apply-button.active {
-    border: var(--figma-color-border-component);
+    border: var(--figma-color-border-selected);
     color: var(--figma-color-text-onbrand);
-    background: var(--figma-color-bg-component);
+    background: var(--figma-color-bg-brand);
   }
   .create-style__apply-button.active:hover {
-    cursor: pointer;
-    color: var(--figma-color-text-onbrand);
-    background: var(--figma-color-bg-component-hover);
+    cursor: default;
+    border: var(--figma-color-border-selected);
+    background: var(--figma-color-bg-brand-hover);
   }
   .create-style__apply-button.active:active {
     color: var(--figma-color-text-onbrand);
-    background: var(--figma-color-bg-component-pressed);
+    background: var(--figma-color-bg-brand-pressed);
   }
   .apply-style {
     display: flex;
@@ -156,19 +225,19 @@
     padding: 0 8px;
   }
   .apply-style__item:hover {
-    outline: 1px solid var(--figma-color-bg-component, #7b61ff);
-    opacity:1;
+    outline: 1px solid var(--figma-color-border-selected, #0c8ce9);
+    opacity: 1;
   }
   .apply-style__item:focus-visible {
     background: var(--figma-color-bg-selected);
     color: var(--figma-color-text);
   }
   .apply-style__item.active {
-    background: var(--figma-color-bg-selected, rgba(0, 0, 0, .06));
+    background: var(--figma-color-bg-selected, rgba(0, 0, 0, 0.06));
     outline: 1px solid transparent;
   }
   .apply-style__item.active .apply-style__options-button:hover {
-    background: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, .06));
+    background: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, 0.06));
   }
   .apply-style__item-title {
     color: var(--figma-color-text);
@@ -186,24 +255,24 @@
     width: 32px;
     flex: 0 0 32px;
     cursor: default;
-    border-radius: 3px;
+    border-radius: 2px;
     background-clip: padding-box;
     background-color: transparent;
-    transition: .1s fill ease-out,.1s color ease-out;
+    transition: 0.1s fill ease-out, 0.1s color ease-out;
   }
   .apply-style__options-button:hover {
-    background: var(--figma-color-bg-hover, rgba(0, 0, 0, .06));
-    border-radius: 3px;
+    background: var(--figma-color-bg-hover, rgba(0, 0, 0, 0.06));
   }
   .apply-style__options-button.active {
-    background: var(--figma-color-icon-pressed);
+    background: var(--figma-color-bg-brand, #0d99ff);
+  }
+  .apply-style__options-button.active .apply-style__options-svg {
+    fill: var(--figma-color-icon-onbrand);
   }
   /* ボタンがホバーされた時にポップアップを表示する */
   .apply-style__options-button:hover + .apply-style__popup {
     display: block;
   }
-  
-  
 
   .apply-style__message {
     display: grid;
@@ -227,12 +296,9 @@
   }
   .apply-style__options-svg {
     fill: var(--figma-color-icon);
-    width: 32;
-    height: 32;
   }
   /* ローディングインジケーターのスタイル */
   .loading-indicator {
-    /* 必要に応じて他のスタイルを追加 */
     position: fixed;
     top: 0;
     left: 0;
@@ -261,7 +327,7 @@
     display: flex;
   }
 
-    /* Additional styles for 'select' dropdown */
+  /* Additional styles for 'select' dropdown */
   .select-container {
     position: relative;
     margin-bottom: 10px;
@@ -273,9 +339,9 @@
     background-color: var(--figma-color-bg);
     border-radius: 4px;
     width: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 11px;
-    cursor: pointer;
+    cursor: default;
     appearance: none; /* Disables the native drop-down arrow */
   }
 
@@ -339,17 +405,15 @@
     padding-top: 8px;
     padding-bottom: 8px;
     background: #222222;
-    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.20);
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
-    border: 0.50px solid rgba(0, 0, 0, 0.10);
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
     position: absolute;
     right: 8px;
     z-index: 100;
     max-height: 164px;
     overflow-y: auto;
   }
-
-
 
   .font-menu__item {
     width: 100%;
@@ -359,7 +423,7 @@
     align-items: center;
   }
   .font-menu__item:hover {
-    background: #18A0FB;
+    background: #18a0fb;
   }
   .menuitem__item__icon {
     position: absolute;
@@ -377,7 +441,7 @@
   }
   .font-menu__divider_item {
     width: 100%;
-    border: 1px rgba(255, 255, 255, 0.20) solid;
+    border: 1px rgba(255, 255, 255, 0.2) solid;
   }
 
   .font-menu__text {
@@ -413,12 +477,12 @@
     position: absolute;
   }
 
-    /* 非表示にするためのクラス */
-    .hidden {
-      display: none;
-    }
+  /* 非表示にするためのクラス */
+  .hidden {
+    display: none;
+  }
 
-    /* ルート要素 (Block) */
+  /* ルート要素 (Block) */
   .apply-style__styles {
     height: 32px;
     display: flex;
@@ -427,7 +491,7 @@
     position: relative;
     padding: 0 8 0 16px;
   }
-    /* ルート要素 (Block) */
+  /* ルート要素 (Block) */
   .create-style__tab-header {
     height: 32px;
     display: flex;
@@ -436,7 +500,7 @@
     position: relative;
     padding: 0 8 0 16px;
   }
-    /* ルート要素 (Block) */
+  /* ルート要素 (Block) */
   .create-style__styles {
     height: 32px;
     display: flex;
@@ -452,9 +516,10 @@
   .apply-style__popup {
     position: absolute;
     bottom: -34px;
-    right: 0;
+    right: 8px;
     display: none;
     z-index: 100;
+    border-radius: 2px;
   }
 
   /* ポップアップコンテナ (Element Modifier) */
@@ -470,9 +535,8 @@
   /* ポップアップの内容 (Element) */
   .apply-style__popup-content {
     height: 28px;
-    border-radius: 2px;
     background: #222222;
-    color: #FFFFFF;
+    color: #ffffff;
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
     padding: 0 8px;
     display: flex;
@@ -529,7 +593,7 @@
   }
   .create-style__dropdown-toggle.font-weight:hover,
   .create-style__dropdown-toggle.font-weight:active {
-    border: 1px solid var(--figma-color-border, rgba(0, 0, 0, .1));
+    border: 1px solid var(--figma-color-border, rgba(0, 0, 0, 0.1));
     justify-content: space-between;
   }
 
@@ -656,10 +720,13 @@
     flex-direction: column;
   }
   input::placeholder {
-    color: var(--figma-color-text-tertiary, #0000004d); /* 好きな薄い色に変更してください */
+    color: var(
+      --figma-color-text-tertiary,
+      #0000004d
+    ); /* 好きな薄い色に変更してください */
     opacity: 1; /* 不透明度を設定することもできます（必須ではありません） */
   }
-</Style>
+</style>
 
 <body>
   <!-- tab-list -->
@@ -679,7 +746,10 @@
   <div class="apply-style">
     <!-- 要素選択 -->
     <div class="apply-style__message">
-      <p class="apply-style__text">Select the element whose <br> text you want to change</p>
+      <p class="apply-style__text">
+        Select the element whose <br />
+        text you want to change
+      </p>
     </div>
     <!-- 区切り線 -->
     <div class="apply-style__divider"></div>
@@ -687,13 +757,13 @@
     <div class="apply-style__content">
       <div class="apply-style__styles">
         <h2 class="apply-style__title">Style list</h2>
-        <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+        <!-- <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
           <span class="apply-style__options-svg-container">
-            <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 15.5V10.5H16.5V15.5H21.5V16.5H16.5V21.5H15.5V16.5H10.5V15.5H15.5Z" fill-opacity="0.8"/>
+            <svg class="apply-style__options-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="nonzero" stroke="none" d="M5 5V0h1v5h5v1H6v5H5V6H0V5h5z" fill-opacity="1"/>
             </svg>  
           </span>
-        </button>
+        </button> -->
       </div>
 
       <ul class="apply-style__list">
@@ -701,20 +771,44 @@
           <div class="apply-style__item-content">
             <h3 class="apply-style__item-title">Mac 環境確認用</h3>
           </div>
-          <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <button
+            class="apply-style__options-button"
+            tabindex="0"
+            aria-label="その他のオプション"
+            data-tooltip-type="text"
+            data-tooltip="その他のオプション"
+          >
             <span class="apply-style__options-svg-container">
-              <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z" fill-opacity="0.8"/>
+              <svg
+                class="apply-style__options-svg"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
+                  fill-opacity="0.8"
+                />
               </svg>
             </span>
           </button>
-          
+
           <div class="apply-style__popup">
             <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">スタイル設定を開く</div>
+              <div class="apply-style__popup-content">Manage style</div>
               <div class="apply-style__popup-arrow">
-                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
+                <svg
+                  width="13"
+                  height="7"
+                  viewBox="0 0 13 7"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
                 </svg>
               </div>
             </div>
@@ -724,17 +818,35 @@
           <div class="apply-style__item-content">
             <h3 class="apply-style__item-title">Windows 環境確認用</h3>
           </div>
-          <button class="apply-style__options-button" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+          <button
+            class="apply-style__options-button"
+            tabindex="0"
+            aria-label="その他のオプション"
+            data-tooltip-type="text"
+            data-tooltip="その他のオプション"
+          >
             <span class="apply-style__options-svg-container">
-              <svg class="apply-style__options-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z" fill-opacity="0.8"/>
+              <svg
+                class="apply-style__options-svg"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
+                  fill-opacity="0.8"
+                />
               </svg>
             </span>
           </button>
-          
+
           <div class="apply-style__popup">
             <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">スタイル設定を開く</div>
+              <div class="apply-style__popup-content">Manage style</div>
               <div class="apply-style__popup-arrow">
                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"/>
@@ -746,9 +858,11 @@
       </ul>
     </div>
     <!-- 反映ボタン -->
-    <button id="analyzeBtn" class="create-style__apply-button disabled">Apply</button>
+    <button id="analyzeBtn" class="create-style__apply-button disabled">
+      Apply
+    </button>
   </div>
-  
+
   <!-- ローディングインジケーター -->
   <div id="loadingIndicator" class="loading-indicator hidden">
     <svg class="progress-ring" viewBox="0 0 240 240">
@@ -757,12 +871,12 @@
         stroke="var(--figma-color-bg-component)"
         stroke-width="10"
         fill="transparent"
-        r="52"  
+        r="52"
         cx="120"
         cy="120"
       />
     </svg>
-    <span class="progress-text">Applying fonts...</span> 
+    <span class="progress-text">Applying fonts...</span>
   </div>
 
   <!-- Create style  -->
@@ -770,7 +884,17 @@
     <!-- スタイル名 作成 -->
     <div class="create-style__input-group">
       <label class="create-style__label" for="styleNameInput">Style name</label>
-      <input type="text" id="styleNameInput" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value>
+      <input
+        type="text"
+        id="styleNameInput"
+        spellcheck="false"
+        class="create-style__input"
+        name="styleName"
+        placeholder="New style"
+        autocomplete="off"
+        dir="auto"
+        value
+      />
     </div>
 
     <div class="create-style__tabs">
@@ -781,27 +905,50 @@
         <div class="create-style__styles" id="mainView">
           <h2 class="create-style__tab-title">Japanese</h2>
         </div>
-        <div class="create-style__dropdown">
+        <div class="create-style__dropdown" data-lang="Japanese">
           <div class="create-style__dropdown-group font-family">
-            <button class="create-style__dropdown-toggle font-family">
+            <button
+              class="create-style__dropdown-toggle font-family"
+              data-label-type="font-family"
+            >
               <span class="create-style__dropdown-label">Noto Sans JP</span>
             </button>
-            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
+            <div
+              class="create-style__font-menu hidden font-family-list-container"
+              role="menu"
+            >
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
           <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
+            <div
+              class="create-style__dropdown-toggle font-weight"
+              style="width: 100%"
+              data-label-type="font-weight"
+            >
               <span class="create-style__dropdown-label">Regular</span>
               <div class="create-style__dropdown-icon-container">
                 <span class="create-style__svg-container">
-                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  <svg
+                    class="create-style__dropdown-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="7"
+                    viewBox="0 0 8 7"
+                  >
+                    <path
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
+                    ></path>
                   </svg>
                 </span>
               </div>
             </div>
-            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
+            <div
+              class="create-style__font-menu hidden font-weight-list-container"
+              role="menu"
+            >
               <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
@@ -812,27 +959,50 @@
         <div class="create-style__styles" id="mainView">
           <h2 class="create-style__tab-title">English</h2>
         </div>
-        <div class="create-style__dropdown">
+        <div class="create-style__dropdown" data-lang="English">
           <div class="create-style__dropdown-group font-family">
-            <button class="create-style__dropdown-toggle font-family">
+            <button
+              class="create-style__dropdown-toggle font-family"
+              data-label-type="font-family"
+            >
               <span class="create-style__dropdown-label">SF Pro</span>
             </button>
-            <div class="create-style__font-menu hidden font-family-list-container" role="menu">
+            <div
+              class="create-style__font-menu hidden font-family-list-container"
+              role="menu"
+            >
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
           <div class="create-style__dropdown-group font-weight">
-            <div class="create-style__dropdown-toggle font-weight" style="width: 100%;">
+            <div
+              class="create-style__dropdown-toggle font-weight"
+              style="width: 100%"
+              data-label-type="font-weight"
+            >
               <span class="create-style__dropdown-label">Regular</span>
               <div class="create-style__dropdown-icon-container">
                 <span class="create-style__svg-container">
-                  <svg class="create-style__dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="7" viewBox="0 0 8 7">
-                    <path fill-opacity="1" fill-rule="evenodd" d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"></path>
+                  <svg
+                    class="create-style__dropdown-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="7"
+                    viewBox="0 0 8 7"
+                  >
+                    <path
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
+                    ></path>
                   </svg>
                 </span>
               </div>
             </div>
-            <div class="create-style__font-menu hidden font-weight-list-container" role="menu">
+            <div
+              class="create-style__font-menu hidden font-weight-list-container"
+              role="menu"
+            >
               <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
             </div>
           </div>
@@ -841,19 +1011,21 @@
     </div>
 
     <div class="create-style__form-action">
-      <button tabindex="0" class="create-style__submit-button">Create style</button>
+      <button tabindex="0" class="create-style__submit-button">
+        Create style
+      </button>
     </div>
   </div>
 </body>
 
 <script>
   // 要素を取得します。
-  const tabs = document.querySelectorAll('.tab-list__item');
-  const tabContentsApplyStyle = document.querySelectorAll('.apply-style');
-  const tabContentsCreateStyle = document.querySelectorAll('.create-style');
-  const applyStyleItems = document.querySelectorAll('.apply-style__item');
-  const indicator = document.querySelector('.tab-list-active-indicator');
-  const loader = document.querySelectorAll('.loading-indicator');
+  const tabs = document.querySelectorAll(".tab-list__item");
+  const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
+  const tabContentsCreateStyle = document.querySelectorAll(".create-style");
+  const applyStyleItems = document.querySelectorAll(".apply-style__item");
+  const indicator = document.querySelector(".tab-list-active-indicator");
+  const loader = document.querySelectorAll(".loading-indicator");
 
   // 選択された要素とstyleの状態を表示
   let selectedEnv = null;
@@ -864,12 +1036,11 @@
   let availableFonts = []; // Figma APIから取得するデータ
 
   // 利用可能なフォントをロードするためにメインスクリプトに要求する
-  parent.postMessage({ pluginMessage: { type: 'load-fonts-request' } }, '*');
-
+  parent.postMessage({ pluginMessage: { type: "load-fonts-request" } }, "*");
 
   // タブ切り替え設定
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener("click", () => {
       activateTab(tab);
       // タブの内容を切り替える
       toggleTabContents(index);
@@ -879,13 +1050,21 @@
   function toggleTabContents(index) {
     // Apply Stylesタブが選択された場合（index 0）
     if (index === 0) {
-      tabContentsApplyStyle.forEach(content => content.classList.remove('hidden'));
-      tabContentsCreateStyle.forEach(content => content.classList.add('hidden'));
+      tabContentsApplyStyle.forEach((content) =>
+        content.classList.remove("hidden")
+      );
+      tabContentsCreateStyle.forEach((content) =>
+        content.classList.add("hidden")
+      );
     }
     // Create Styleタブが選択された場合（index 1）
     else if (index === 1) {
-      tabContentsApplyStyle.forEach(content => content.classList.add('hidden'));
-      tabContentsCreateStyle.forEach(content => content.classList.remove('hidden'));
+      tabContentsApplyStyle.forEach((content) =>
+        content.classList.add("hidden")
+      );
+      tabContentsCreateStyle.forEach((content) =>
+        content.classList.remove("hidden")
+      );
     }
   }
   // 最初のタブをアクティブ化する際に、合わせてコンテンツも切り替える
@@ -894,21 +1073,21 @@
   // タブが選択された際の関数を定義します。
   function activateTab(tab) {
     // すべてのタブからアクティブクラスを取り除きます。
-    tabs.forEach(t => {
-      t.classList.remove('tab-list__item--active');
+    tabs.forEach((t) => {
+      t.classList.remove("tab-list__item--active");
     });
-    
+
     // 選択されたタブにアクティブクラスを追加します。
-    tab.classList.add('tab-list__item--active');
-    
+    tab.classList.add("tab-list__item--active");
+
     // インジケーターを活性状態にして、選択されたタブの位置に合わせます。
-    indicator.style.display = 'block';
-    indicator.style.width = '67px';
+    indicator.style.display = "block";
+    indicator.style.width = "67px";
     indicator.style.left = `${tab.offsetLeft}px`;
   }
   // タブをクリックした際のイベントリスナーを追加します。
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => activateTab(tab));
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => activateTab(tab));
   });
   // 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
   activateTab(tabs[0]); // 最初のタブをアクティブとする
@@ -918,13 +1097,13 @@
 
   // 最初に円をリングとして表示するために、
   // stroke-dasharrayとstroke-dashoffsetを円周の長さにセットします
-  const circle = document.querySelector('.progress-ring__circle');
+  const circle = document.querySelector(".progress-ring__circle");
   circle.style.strokeDasharray = `${circumference} ${circumference}`;
   circle.style.strokeDashoffset = circumference;
 
   function setProgress(percent) {
     // パーセントに応じたオフセットを計算します
-    const offset = circumference - (percent / 100 * circumference);
+    const offset = circumference - (percent / 100) * circumference;
     // オフセットを設定することでリングを描画します
     circle.style.strokeDashoffset = offset;
   }
@@ -934,163 +1113,207 @@
     const message = event.data.pluginMessage;
 
     // 共通のエレメントを取得
-    const textElement = document.querySelector('.apply-style__message .apply-style__text'); // textElementをここで定義
-    const loadingIndicator = document.getElementById('loadingIndicator');
+    const textElement = document.querySelector(
+      ".apply-style__message .apply-style__text"
+    ); // textElementをここで定義
+    const loadingIndicator = document.getElementById("loadingIndicator");
 
     switch (message.type) {
       // 選択した要素関連メッセージ
-      case 'selection-cleared':
-        textElement.innerHTML = 'Select the element whose <br> text you want to change'
-        textElement.style.color = 'var(--figma-color-text-disabled)';
-        textElement.style.fontWeight = '400';
+      case "selection-cleared":
+        textElement.innerHTML =
+          "Select the element whose <br> text you want to change";
+        textElement.style.color = "var(--figma-color-text-disabled)";
+        textElement.style.fontWeight = "400";
         hasSelection = false;
         updateButtonState();
         break;
-      case 'update-name':
+      case "update-name":
         textElement.textContent = message.name;
-        textElement.style.color = 'var(--figma-color-text)';
-        textElement.style.fontWeight = '600';
+        textElement.style.color = "var(--figma-color-text)";
+        textElement.style.fontWeight = "600";
         hasSelection = true;
         updateButtonState();
         break;
-      case 'update-progress':
-        loadingIndicator.classList.remove('hidden');
+      case "update-progress":
+        loadingIndicator.classList.remove("hidden");
         // 進捗状況のパーセンテージを受け取る
         const progressPercent = event.data.pluginMessage.progress;
         // 進捗インジケータを更新する
         setProgress(progressPercent);
         break;
-      case 'hide-loading':
-        loadingIndicator.classList.add('hidden');
+      case "hide-loading":
+        loadingIndicator.classList.add("hidden");
         break;
-      case 'load-fonts':
+      case "load-fonts":
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;
         let fontFamilyListContainers;
 
-        fontFamilyListContainers = document.querySelectorAll('.font-family-list-container');
+        fontFamilyListContainers = document.querySelectorAll(
+          ".font-family-list-container"
+        );
         // listContainer領域外のクリックを検知するための関数
 
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
-            if (listContainer.contains(event.target) || listContainer.previousElementSibling.contains(event.target)) {
+            if (
+              listContainer.contains(event.target) ||
+              listContainer.previousElementSibling.contains(event.target)
+            ) {
               // クリックしたのがlistContainer内、もしくはlistContainerに隣接する要素（toggleボタン）の場合は何もしない
             } else {
-              listContainer.classList.add('hidden');
+              listContainer.classList.add("hidden");
             }
           });
         }
 
-        document.addEventListener('click', handleDocumentClick);
-        
-        const createStyleContents = document.querySelectorAll('.create-style__content');
+        document.addEventListener("click", handleDocumentClick);
+
+        const createStyleContents = document.querySelectorAll(
+          ".create-style__content"
+        );
         createStyleContents.forEach((content) => {
-          const fontFamilyListContainer = content.querySelector('.font-family-list-container')
-          const fontWeightListContainer = content.querySelector('.font-weight-list-container')
-          const fontWeightSelectBtn = content.querySelector('.create-style__dropdown-group.font-weight')
-          const dropDownToggle = content.querySelector('.create-style__dropdown-toggle.font-family');
-          let fontWeightLabel = content.querySelector('.create-style__dropdown-toggle.font-weight .create-style__dropdown-label');
+          const fontFamilyListContainer = content.querySelector(
+            ".font-family-list-container"
+          );
+          const fontWeightListContainer = content.querySelector(
+            ".font-weight-list-container"
+          );
+          const fontWeightSelectBtn = content.querySelector(
+            ".create-style__dropdown-group.font-weight"
+          );
+          const dropDownToggle = content.querySelector(
+            ".create-style__dropdown-toggle.font-family"
+          );
+          let fontWeightLabel = content.querySelector(
+            ".create-style__dropdown-toggle.font-weight .create-style__dropdown-label"
+          );
 
           // 既存のリスト内容を一度クリアする
-          fontFamilyListContainer.innerHTML = '';
+          fontFamilyListContainer.innerHTML = "";
 
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
           // 各コンテナに同じフォントリストを追加する
           availableFonts.forEach((font) => {
-            if (font.fontName.family.localeCompare("ABeeZee") < 0) {  // 👈 ここでABeeZeeよりも前にあるかどうかを比較
+            if (font.fontName.family.localeCompare("ABeeZee") < 0) {
+              // 👈 ここでABeeZeeよりも前にあるかどうかを比較
               return; // ABeeZeeより辞書順で前に来る場合はskip（このループのイテレーションをスキップする）
             }
             // フォントファミリー名がSetにまだ追加されていない場合のみ項目を作成する
             if (!addedFontFamilies.has(font.fontName.family)) {
               addedFontFamilies.add(font.fontName.family);
-  
+
               // 新しいフォントファミリーのメニュー項目を作成
-              const item = document.createElement('div');
-              item.className = 'font-menu__item';
-              item.setAttribute('role', 'menuitem');
-  
+              const item = document.createElement("div");
+              item.className = "font-menu__item";
+              item.setAttribute("role", "menuitem");
+
               // フォントファミリー名を表示するためのテキスト部分を作成
-              const text = document.createElement('div');
-              text.className = 'font-menu__text';
+              const text = document.createElement("div");
+              text.className = "font-menu__text";
               text.textContent = font.fontName.family;
               item.appendChild(text);
-              
+
               // リストにメニュー項目を追加
               fontFamilyListContainer.appendChild(item);
             }
           });
 
-          dropDownToggle.addEventListener('click', () => {
-            fontFamilyListContainer.classList.add('hidden');
+          dropDownToggle.addEventListener("click", () => {
+            fontFamilyListContainer.classList.add("hidden");
 
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
-              fontFamilyListContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+              fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
-          fontWeightSelectBtn.addEventListener('click', () => {
-            fontWeightListContainer.classList.add('hidden');
+          fontWeightSelectBtn.addEventListener("click", () => {
+            fontWeightListContainer.classList.add("hidden");
 
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
-              fontFamilyListContainer.classList.toggle('hidden'); // クリックごとにリストの表示・非表示を切り替える
+              fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
 
           fontFamilyListContainer.childNodes.forEach((item) => {
-            item.addEventListener('click', (event) => {
+            item.addEventListener("click", (event) => {
               const fontName = item.textContent;
               // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
-              const dropDown = fontFamilyListContainer.closest('.create-style__dropdown');
-              const label = dropDown.querySelector('.create-style__dropdown-label');
+              const dropDown = fontFamilyListContainer.closest(
+                ".create-style__dropdown"
+              );
+              const label = dropDown.querySelector(
+                ".create-style__dropdown-label"
+              );
               if (label) {
                 label.textContent = fontName;
               }
 
-              fontFamilyListContainer.classList.add('hidden'); // 項目を選択した後、リストを閉じる
-              makeFontWeightLists(fontName, fontWeightListContainer, fontWeightLabel);
+              fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
+              makeFontWeightLists(
+                fontName,
+                fontWeightListContainer,
+                fontWeightLabel
+              );
 
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
             });
           });
-          fontWeightSelectBtn.addEventListener('click', function() {
-            if (fontWeightListContainer.classList.contains('hidden')) {
+          fontWeightSelectBtn.addEventListener("click", function () {
+            if (fontWeightListContainer.classList.contains("hidden")) {
               // 現在のフォントファミリーラベルからフォント名を取得
-              const currentFontFamily = content.querySelector('.create-style__dropdown-toggle.font-family .create-style__dropdown-label').textContent;
+              const currentFontFamily = content.querySelector(
+                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
+              ).textContent;
               // 表示されるべきフォントウェイト一覧を表示する
-              makeFontWeightLists(currentFontFamily, fontWeightListContainer, fontWeightLabel);
-              fontWeightListContainer.classList.remove('hidden');
+              makeFontWeightLists(
+                currentFontFamily,
+                fontWeightListContainer,
+                fontWeightLabel
+              );
+              fontWeightListContainer.classList.remove("hidden");
             } else {
-              fontWeightListContainer.classList.add('hidden'); // リストを閉じる
+              fontWeightListContainer.classList.add("hidden"); // リストを閉じる
             }
           });
-        })
+        });
         break;
-      }
-    };
+    }
+  };
   // フォントウェイトを表示する関数
-  function makeFontWeightLists(fontFamilyName, fontWeightListContainer, fontWeightLabel) {
-    fontWeightListContainer.innerHTML = ''; // コンテナをクリア
-    
-    const fontWeights = availableFonts.filter(font => font.fontName.family === fontFamilyName);
+  function makeFontWeightLists(
+    fontFamilyName,
+    fontWeightListContainer,
+    fontWeightLabel
+  ) {
+    fontWeightListContainer.innerHTML = ""; // コンテナをクリア
+
+    const fontWeights = availableFonts.filter(
+      (font) => font.fontName.family === fontFamilyName
+    );
 
     function createCheckIcon() {
       const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
-      const checkIcon = document.createElementNS(namespace, 'svg');
-      checkIcon.setAttribute('class', 'menuitem__item__icon hidden');
-      checkIcon.setAttribute('viewBox', '0 0 16 16');
-      checkIcon.setAttribute('fill', 'none');
+      const checkIcon = document.createElementNS(namespace, "svg");
+      checkIcon.setAttribute("class", "menuitem__item__icon hidden");
+      checkIcon.setAttribute("viewBox", "0 0 16 16");
+      checkIcon.setAttribute("fill", "none");
 
-      const path = document.createElementNS(namespace, 'path');
-      path.setAttribute('fill-rule', 'evenodd');
-      path.setAttribute('clip-rule', 'evenodd');
-      path.setAttribute('d', 'M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z');
-      path.setAttribute('fill', 'white');
+      const path = document.createElementNS(namespace, "path");
+      path.setAttribute("fill-rule", "evenodd");
+      path.setAttribute("clip-rule", "evenodd");
+      path.setAttribute(
+        "d",
+        "M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z"
+      );
+      path.setAttribute("fill", "white");
 
       checkIcon.appendChild(path);
       return checkIcon;
@@ -1099,20 +1322,22 @@
     let allFontWeightItems = [];
     let defaultFontWeight;
     // 'Regular' があるかどうか確認し、設定する
-    const regularFontWeight = fontWeights.find(font => font.fontName.style === 'Regular');
-    
+    const regularFontWeight = fontWeights.find(
+      (font) => font.fontName.style === "Regular"
+    );
+
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
-      const item = document.createElement('div');
-      item.className = 'font-menu__item';
-      item.setAttribute('role', 'menuitem');
-      
+      const item = document.createElement("div");
+      item.className = "font-menu__item";
+      item.setAttribute("role", "menuitem");
+
       // フォントウェイト名を表示するためのテキスト部分を作成
-      const text = document.createElement('div');
-      text.className = 'font-menu__text';
+      const text = document.createElement("div");
+      text.className = "font-menu__text";
       text.textContent = font.fontName.style;
       item.appendChild(text);
-      
+
       // チェックアイコンを追加
       const checkIcon = createCheckIcon();
       item.appendChild(checkIcon);
@@ -1124,77 +1349,142 @@
       allFontWeightItems.push(item);
 
       // 項目がクリックされた時の処理を追加
-      item.addEventListener('click', () => {
+      item.addEventListener("click", () => {
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
-        fontWeightListContainer.classList.add('hidden'); // フォントウェイトリストを閉じる
+        fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
 
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
-        allFontWeightItems.forEach(cItem => {
-          const icon = cItem.querySelector('.menuitem__item__icon');
-          if (icon) icon.classList.add('hidden');
+        allFontWeightItems.forEach((cItem) => {
+          const icon = cItem.querySelector(".menuitem__item__icon");
+          if (icon) icon.classList.add("hidden");
         });
         updateCheckState(item, allFontWeightItems, checkIcon);
 
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
-        checkIcon.classList.remove('hidden');
+        checkIcon.classList.remove("hidden");
         event.stopPropagation();
       });
 
       // デフォルトフォントウェイトを特定する
-      if (!defaultFontWeight || font.fontName.style === 'Regular') {
+      if (!defaultFontWeight || font.fontName.style === "Regular") {
         defaultFontWeight = item;
       }
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
     if (defaultFontWeight) {
-      fontWeightLabel.textContent = regularFontWeight ? 'Regular' : fontWeights[0].fontName.style;
-      updateCheckState(defaultFontWeight, allFontWeightItems, defaultFontWeight.querySelector('.menuitem__item__icon'));
+      fontWeightLabel.textContent = regularFontWeight
+        ? "Regular"
+        : fontWeights[0].fontName.style;
+      updateCheckState(
+        defaultFontWeight,
+        allFontWeightItems,
+        defaultFontWeight.querySelector(".menuitem__item__icon")
+      );
     }
   }
   // チェック状態の更新を行う関数を追加
   function updateCheckState(selectedItem, allItems, selectedCheckIcon) {
-    allItems.forEach(cItem => {
-      const icon = cItem.querySelector('.menuitem__item__icon');
-      if (icon) icon.classList.add('hidden');
+    allItems.forEach((cItem) => {
+      const icon = cItem.querySelector(".menuitem__item__icon");
+      if (icon) icon.classList.add("hidden");
     });
-    selectedCheckIcon.classList.remove('hidden');
+    selectedCheckIcon.classList.remove("hidden");
   }
 
+  // CreateStyleボタン押下時の処理
+  const createStyleButton = document.querySelector(
+    ".create-style__submit-button"
+  );
+  createStyleButton.addEventListener("click", function () {
+    // スタイル名のインプット要素から値を取得します
+    const styleNameInput = document.getElementById("styleNameInput");
+    const styleName = styleNameInput.value.trim();
+    // styleName が空でないことを確認します
+    if (!styleName) {
+      alert("Please enter a style name.");
+      return;
+    }
+    // 各言語のフォント設定を格納するオブジェクトを作成します
+    const fontSettings = {
+      Japanese: {},
+      English: {},
+    };
+    // 各言語のフォントファミリーとフォントウェイトを取得してfontSettingsに格納します
+    document.querySelectorAll(".create-style__dropdown").forEach((dropdown) => {
+      const lang = dropdown.dataset.lang; // "Japanese", "English"のいずれか
+      const fontFamily = dropdown
+        .querySelector('[data-label-type="font-family"]')
+        .textContent.trim();
+      const fontWeight = dropdown
+        .querySelector('[data-label-type="font-weight"]')
+        .textContent.trim();
+      if (lang && ["Japanese", "English"].includes(lang)) {
+        fontSettings[lang] = { fontFamily, fontWeight };
+      }
+    });
+    // ユニークな値を生成します（現在のタイムスタンプ）
+    const uniqueEnv = Date.now();
+    // ApplyStyles の Stylelist にスタイル情報を追加します
+    // addStyleToApplyList(styleName, uniqueEnv);
+    // 生成したstyle設定とenvをfigmaに送るメッセージを送信します
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "create-style",
+          styleName: styleName,
+          fontSettings: fontSettings,
+          env: uniqueEnv, // 送信する際の識別子として利用 }
+        },
+      },
+      "*"
+    );
+  });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
-  const applyBtn = document.getElementById("analyzeBtn"); 
+  const applyBtn = document.getElementById("analyzeBtn");
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
 
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
-    document.querySelectorAll('.apply-style__options-button.active').forEach(activeButton => {
-      activeButton.classList.remove('active');
-    });
+    document
+      .querySelectorAll(".apply-style__options-button.active")
+      .forEach((activeButton) => {
+        activeButton.classList.remove("active");
+      });
   }
 
   // すべてのアイテムのアクティブ状態を解除する関数
   function removeAllActiveItems() {
-    document.querySelectorAll('.apply-style__item.active').forEach(activeItem => {
-      activeItem.classList.remove('active');
-    });
+    document
+      .querySelectorAll(".apply-style__item.active")
+      .forEach((activeItem) => {
+        activeItem.classList.remove("active");
+      });
   }
 
   // ドキュメント全体のクリックイベントリスナーを追加
-  document.addEventListener('click', (e) => {
-    // クリックが.apply-style__item or .apply-style__options-button要素の内部でなければアクティブクラスを削除
-    if (!e.target.closest('.apply-style__item') || !e.target.closest('.apply-style__options-button')) {
-      // 他のアイテムのアクティブ状態を解除
-      removeAllActiveItems();
-      removeAllActiveButtons();
-      selectedEnv = null;
-      // ボタンの状態を更新
-      updateButtonState();
-    }
-  }, false);
+  document.addEventListener(
+    "click",
+    (e) => {
+      // クリックが.apply-style__item or .apply-style__options-button要素の内部でなければアクティブクラスを削除
+      if (
+        !e.target.closest(".apply-style__item") ||
+        !e.target.closest(".apply-style__options-button")
+      ) {
+        // 他のアイテムのアクティブ状態を解除
+        removeAllActiveItems();
+        removeAllActiveButtons();
+        selectedEnv = null;
+        // ボタンの状態を更新
+        updateButtonState();
+      }
+    },
+    false
+  );
 
   // アイテムのクリックイベントを設定
-  applyStyleItems.forEach(item => {
-    item.addEventListener('click', (e) => {
+  applyStyleItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
       // クリックイベントのバブリングを止める
       e.stopPropagation();
 
@@ -1203,29 +1493,31 @@
       removeAllActiveButtons();
 
       // クリックされたアイテムにアクティブクラスを切り替え
-      item.classList.toggle('active');
-      selectedEnv = item.getAttribute('data-env'); // 環境を取得
+      item.classList.toggle("active");
+      selectedEnv = item.getAttribute("data-env"); // 環境を取得
 
       // ボタンの状態を更新
       updateButtonState();
     });
   });
   // ボタンのクリックイベントを設定
-  document.querySelectorAll('.apply-style__options-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-      // イベントのバブリングを阻止
-      e.stopPropagation();
+  document
+    .querySelectorAll(".apply-style__options-button")
+    .forEach((button) => {
+      button.addEventListener("click", (e) => {
+        // イベントのバブリングを阻止
+        e.stopPropagation();
 
-      // 他のボタンのアクティブ状態を解除
-      removeAllActiveButtons();
+        // 他のボタンのアクティブ状態を解除
+        removeAllActiveButtons();
 
-      // このボタンのアクティブ状態を切り替え
-      button.classList.toggle('active');
+        // このボタンのアクティブ状態を切り替え
+        button.classList.toggle("active");
 
-      // アイテムのアクティブ状態を解除する
-      e.target.closest('.apply-style__item').classList.remove('active');
+        // アイテムのアクティブ状態を解除する
+        e.target.closest(".apply-style__item").classList.remove("active");
+      });
     });
-  });
 
   // Applyボタンの初期状態を定義
   applyBtn.disabled = true; // 最初は非活性化しておく
@@ -1238,11 +1530,11 @@
     applyBtn.disabled = !(isEnvSelected && hasSelection);
 
     if (isEnvSelected && hasSelection) {
-      applyBtn.classList.remove('disabled');
-      applyBtn.classList.add('active');
+      applyBtn.classList.remove("disabled");
+      applyBtn.classList.add("active");
     } else {
-      applyBtn.classList.remove('active');
-      applyBtn.classList.add('disabled');
+      applyBtn.classList.remove("active");
+      applyBtn.classList.add("disabled");
     }
   }
 
@@ -1250,13 +1542,16 @@
   // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
   // When the button is clicked, the plugin will start the text analysis and update
   applyBtn.addEventListener("click", () => {
-    parent.postMessage({
-        pluginMessage: { 
-          type: 'analyzeAndUpdateText',
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "analyzeAndUpdateText",
           fontSettings: {
-            env: selectedEnv
-          }
-        } 
-      }, '*');
+            env: selectedEnv,
+          },
+        },
+      },
+      "*"
+    );
   });
 </script>
