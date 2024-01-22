@@ -93,6 +93,20 @@
     outline: none;
     background: none;
   }
+  /* Webkitベースのブラウザ用 */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* スクロールバーを非表示 */
+  }
+
+  /* Firefox用 */
+  .scrollbar-hidden {
+    scrollbar-width: none;  /* Firefoxではこれでスクロールバーを非表示にできる */
+  }
+
+  /* IEおよびEdgeレガシーブラウザ用 */
+  .scrollbar-hidden {
+    -ms-overflow-style: none; /* 古いIEとEdge用 */
+  }
   svg {
     display: block;
   }
@@ -785,7 +799,7 @@
   }
 </style>
 
-<body>
+<body class="scrollbar-hidden">
   <div id="overlay" class="overlay hidden"></div>
   <!-- tab-list -->
   <div class="tab-list">
