@@ -1,4 +1,4 @@
-figma.showUI(__html__, {themeColors: true, height: 400, width: 300});
+figma.showUI(__html__, {themeColors: true, height: 400, width: 324});
 
 
 // 選択した要素を変更したときに発生するイベント
@@ -16,7 +16,6 @@ figma.on('selectionchange', () => {
     }
   }
 });
-
 
 // Applyボタンを押下したときに発生するイベント
 figma.ui.onmessage = async (msg) => {
@@ -41,7 +40,6 @@ figma.ui.onmessage = async (msg) => {
       // Mac用のフォント設定
       const fontsToLoadMac = [
         { family: "Noto Sans", style: "Regular" },
-        { family: "Helvetica", style: "Regular" },
         { family: "SF Pro", style: "Semibold" }
       ];
 
@@ -49,7 +47,6 @@ figma.ui.onmessage = async (msg) => {
       const fontsToLoadWindows = [
         // Windows用のフォント設定
         { family: "Meiryo", style: "Regular" },
-        { family: "Arial", style: "Regular" },
         { family: "Yu Gothic", style: "Bold" }
       ];
 
@@ -108,30 +105,22 @@ async function processTextNodes(textNode: TextNode, env: string) {
     const { start, end } = segment;
     const textSegment = characters.slice(start, end);
     console.log(textSegment);
-    
+
     let fontName: FontName;
 
     // 日本語文字判定
     if (/[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u4E00-\u9FAF\u3400-\u4DBF]/.test(textSegment)) {
-      fontName = env === 'mac' ? { family: "Noto Sans", style: "Regular" } : fontName = { family: "Meiryo", style: "Regular" };
+      fontName = env === 'mac' ? { family: "Noto Sans", style: "Regular" } : { family: "Meiryo", style: "Regular" };
     }
-    // 英語文字判定
-    else if (/[a-zA-Z]/.test(textSegment)) {
-      fontName = env === 'mac' ? { family: "SF Pro Text", style: "Semibold" } : { family: "Arial", style: "Regular" };
-    }
-    // 数字判定
-    else if (/\d/.test(textSegment)) {
-      fontName = env === 'mac' ? { family: "Helvetica", style: "Regular" } : { family: "Yu Gothic", style: "Bold" };
-    }
+    // 英数字（および記号）判定 - 日本語以外をデフォルトでここで処理する
     else {
-      // それ以外の文文字の場合は変更を適用させない
-      continue;
+      fontName = env === 'mac' ? { family: "SF Pro Text", style: "Semibold" } : { family: "Arial", style: "Regular" };
     }
     
     for (let i = start; i < end; i++) {
       await figma.loadFontAsync(fontName);
       textNode.setRangeFontName(i, i + 1, fontName);
     }
-  }
+}
 }
 // figma.closePlugin();
