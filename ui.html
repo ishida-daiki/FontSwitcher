@@ -87,8 +87,22 @@
     font-weight: 400;
     width: 100%;
   }
+  /* メニューが開いている間はhoverスタイルを無効にする */
+  body.menu-open .apply-style__item:hover,
+  body.menu-open .apply-style__options-button:hover {
+    outline: none;
+    background: none;
+  }
   svg {
     display: block;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
   }
   .tab-list {
     position: relative;
@@ -442,6 +456,7 @@
     overflow-y: auto;
     display: none;
     z-index: 10;
+    top: 40px;
   }
 
   .menu__item {
@@ -519,12 +534,10 @@
     top: 3.79px;
     position: absolute;
   }
-
   /* 非表示にするためのクラス */
   .hidden {
     display: none;
   }
-
   /* ルート要素 (Block) */
   .apply-style__styles {
     height: 32px;
@@ -773,6 +786,7 @@
 </style>
 
 <body>
+  <div id="overlay" class="overlay hidden"></div>
   <!-- tab-list -->
   <div class="tab-list">
     <ul class="tab-list__items">
@@ -934,6 +948,20 @@
                   <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
                 </svg>
               </div>
+            </div>
+          </div>
+          <div class="menu" role="menu">
+            <div class="menu__item">
+              <div class="menu__text">Edit style</div>
+            </div>
+            <div class="menu__item">
+              <div class="menu__text">Duplicate style</div>
+            </div>
+            <div class="menu__item__divider">
+              <div class="menu__divider"></div>
+            </div>
+            <div class="menu__item">
+              <div class="menu__text">Delete style</div>
             </div>
           </div>
         </li>
@@ -1102,11 +1130,14 @@
 
 <script>
   // 要素を取得します。
+  const overlay = document.getElementById("overlay");
   const tabs = document.querySelectorAll(".tab-list__item");
   const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
   const applyStyleItems = document.querySelectorAll(".apply-style__item");
-  const applyStyleOptionButtons = document.querySelectorAll(".apply-style__options-button");
+  const applyStyleOptionButtons = document.querySelectorAll(
+    ".apply-style__options-button"
+  );
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
 
@@ -1555,6 +1586,7 @@
         !e.target.closest(".apply-style__options-button")
       ) {
         // 他のアイテムのアクティブ状態を解除
+        // removeShowMenu();
         removeAllActiveItems();
         removeAllActiveButtons();
         selectedEnv = null;
@@ -1565,6 +1597,29 @@
     false
   );
 
+  // メニューを非表示にするための関数
+  function hideMenu() {
+    // 全ての開いているメニューを探して非表示にする
+    document.querySelectorAll(".menu").forEach((menu) => {
+      menu.style.display = 'none';
+    });
+    
+    // オーバーレイを非表示にする
+    overlay.classList.add("hidden");
+
+    // メニューが開いている状態クラスをbodyから削除
+    document.body.classList.remove("menu-open");
+
+    // すべてのアクティブなメニューボタンの状態をリセット
+    const activeButtons = document.querySelectorAll(".apply-style__options-button.active");
+    activeButtons.forEach((button) => {
+      button.classList.remove('active');
+    });
+  }
+
+  // オーバーレイがクリックされた時にメニューを非表示にするイベントリスナーを追加
+  overlay.addEventListener("click", hideMenu);
+  
   // アイテムのクリックイベントを設定
   applyStyleItems.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -1583,17 +1638,20 @@
       updateButtonState();
     });
   });
+
   applyStyleOptionButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       // イベントのバブリングを阻止
       e.stopPropagation();
 
       // すべてのポップアップとメニューを初期化
-      document.querySelectorAll('.apply-style__popup').forEach((popupElement) => {
-        popupElement.style.display = 'none';
-      });
-      document.querySelectorAll('.menu').forEach((menuElement) => {
-        menuElement.style.display = 'none';
+      document
+        .querySelectorAll(".apply-style__popup")
+        .forEach((popupElement) => {
+          popupElement.style.display = "none";
+        });
+      document.querySelectorAll(".menu").forEach((menuElement) => {
+        menuElement.style.display = "none";
       });
       removeAllActiveButtons();
 
@@ -1605,23 +1663,27 @@
       const menu = buttonElement.nextElementSibling.nextElementSibling; // 正しい要素を指すようにnextElementSiblingを2回使用
 
       // ボタンのアクティブ状態をトグルする
-      const isActive = buttonElement.classList.toggle('active');
+      const isActive = buttonElement.classList.toggle("active");
       if (isActive) {
+        overlay.classList.remove("hidden");
+        document.body.classList.add("menu-open");
         // アクティブになったとき
         if (popup) {
-          popup.style.display = 'none';
+          popup.style.display = "none";
         }
         if (menu) {
-          menu.style.display = 'block';
+          menu.style.display = "block";
         }
       } else {
         // アクティブでないとき（別の処理が必要な場合のみ）
+        overlay.classList.add("hidden");
+        document.body.classList.remove("menu-open");
       }
 
       // 他のアクティブな項目を非アクティブにする
       removeAllActiveItems();
     });
-});
+  });
 
   // Applyボタンの初期状態を定義
   applyBtn.disabled = true; // 最初は非活性化しておく
