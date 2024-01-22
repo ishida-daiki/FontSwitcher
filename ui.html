@@ -1347,6 +1347,8 @@
           });
           fontWeightSelectBtn.addEventListener("click", () => {
             fontWeightListContainer.classList.add("hidden");
+            overlay.classList.remove("hidden");
+            document.body.classList.add("menu-open");
 
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
@@ -1599,9 +1601,13 @@
 
   // メニューを非表示にするための関数
   function hideMenu() {
-    // 全ての開いているメニューを探して非表示にする
+    // Apply styles の menu を非表示にする
     document.querySelectorAll(".menu").forEach((menu) => {
       menu.style.display = 'none';
+    });
+    // Create styles の font-style / font-weight menu を非表示にする
+    document.querySelectorAll(".create-style__font-menu").forEach((menu) => {
+      menu.classList.add("hidden")
     });
     
     // オーバーレイを非表示にする
