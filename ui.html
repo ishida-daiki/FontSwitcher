@@ -1523,6 +1523,10 @@
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
+
+  const applyStyleList = document.querySelector(
+    ".apply-style__list"
+  );
   // ボタンにクリックイベントリスナーを追加
   createStyleButton.addEventListener('click', function() {
     // スタイル名のインプット要素から値を取得
@@ -1616,6 +1620,69 @@
 
     // apply-style__listの要素に新しいリストアイテムを追加
     applyStyleList.appendChild(newItem);
+    
+    // 新しいリストアイテムに関するイベントをここで追加しています
+    newItem.addEventListener('click', function(e) {
+      // クリックイベントのバブリングを止める
+      e.stopPropagation();
+
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+
+      // クリックされたアイテムにアクティブクラスを切り替え
+      newItem.classList.toggle("active");
+      selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
+
+      // ボタンの状態を更新
+      updateButtonState();
+    });
+
+    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
+    const optionsButton = newItem.querySelector(".apply-style__options-button");
+    optionsButton.addEventListener('click', function(e) {
+      // イベントのバブリングを阻止
+      e.stopPropagation();
+
+      // すべてのポップアップとメニューを初期化
+      document
+        .querySelectorAll(".apply-style__popup")
+        .forEach((popupElement) => {
+          popupElement.style.display = "none";
+        });
+      document.querySelectorAll(".menu").forEach((menuElement) => {
+        menuElement.style.display = "none";
+      });
+      removeAllActiveButtons();
+
+      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+      const buttonElement = e.target.closest(".apply-style__options-button");
+
+      // ボタンに関連するポップアップとメニューを取得
+      const popup = buttonElement.nextElementSibling;
+      const menu = buttonElement.nextElementSibling.nextElementSibling; // 正しい要素を指すようにnextElementSiblingを2回使用
+
+      // ボタンのアクティブ状態をトグルする
+      const isActive = buttonElement.classList.toggle("active");
+      if (isActive) {
+        overlay.classList.remove("hidden");
+        document.body.classList.add("menu-open");
+        // アクティブになったとき
+        if (popup) {
+          popup.style.display = "none";
+        }
+        if (menu) {
+          menu.style.display = "block";
+        }
+      } else {
+        // アクティブでないとき（別の処理が必要な場合のみ）
+        overlay.classList.add("hidden");
+        document.body.classList.remove("menu-open");
+      }
+
+      // 他のアクティブな項目を非アクティブにする
+      removeAllActiveItems();
+    });
   });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
