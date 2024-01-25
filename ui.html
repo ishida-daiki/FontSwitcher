@@ -1532,28 +1532,17 @@
     // スタイル名のインプット要素から値を取得
     const styleNameInput = document.getElementById('styleNameInput');
     const styleName = styleNameInput.value.trim();
-    const env = new Date();
+    const timestamp = new Date().toISOString().replace(/[^\d]/g, '');
+    console.log(timestamp);
     // styleName が空でないことを確認します
     if (!styleName) {
       alert("Please enter a style name.");
       return;
     }
-    // 各言語のフォント設定を格納するオブジェクトを作成します
-    const fontSettings = {
-      Japanese: {},
-      English: {},
-    };    // フォントスタイル情報をそれぞれのドロップダウンから取得
-    const japaneseFontFamily = document.querySelector('[data-lang="Japanese"] [data-label-type="font-family"]').textContent.trim();
-    const japaneseFontWeight = document.querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]').textContent.trim();
-    const englishFontFamily = document.querySelector('[data-lang="English"] [data-label-type="font-family"]').textContent.trim();
-    const englishFontWeight = document.querySelector('[data-lang="English"] [data-label-type="font-weight"]').textContent.trim();
-
-    // apply-style__list要素を取得
-
     // 新しいリストアイテムを作成
     const newItem = document.createElement('li');
     newItem.classList.add('apply-style__item');
-    newItem.setAttribute('data-env', env);
+    newItem.setAttribute('data-env', timestamp);
     
     // リストアイテムに追加するHTMLコンテンツを設定
     newItem.innerHTML = `
@@ -1620,6 +1609,33 @@
 
     // apply-style__listの要素に新しいリストアイテムを追加
     applyStyleList.appendChild(newItem);
+
+    // フォントスタイル情報をそれぞれのドロップダウンから取得
+    const japaneseFontFamily = document.querySelector('[data-lang="Japanese"] [data-label-type="font-family"]').textContent.trim();
+    const japaneseFontWeight = document.querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]').textContent.trim();
+    const englishFontFamily = document.querySelector('[data-lang="English"] [data-label-type="font-family"]').textContent.trim();
+    const englishFontWeight = document.querySelector('[data-lang="English"] [data-label-type="font-weight"]').textContent.trim();
+
+    // 各言語のフォント設定を格納するオブジェクトを作成します
+    const fontSettings = {
+      Japanese: {
+        fontFamily: japaneseFontFamily,
+        fontWeight: japaneseFontWeight
+      },
+      English: {
+        fontFamily: englishFontFamily,
+        fontWeight: englishFontWeight
+      }
+    };
+    // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
+    parent.postMessage({
+      pluginMessage: {
+        type: 'save-style',
+        styleName: styleName,
+        fontSettings: fontSettings,
+        key: timestamp // この部分はユーザーのIDや一意の識別子を使用
+      }
+    }, '*');
     
     // 新しいリストアイテムに関するイベントをここで追加しています
     newItem.addEventListener('click', function(e) {
