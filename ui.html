@@ -93,6 +93,20 @@
     outline: none;
     background: none;
   }
+  /* Webkitベースのブラウザ用 */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* スクロールバーを非表示 */
+  }
+
+  /* Firefox用 */
+  .scrollbar-hidden {
+    scrollbar-width: none;  /* Firefoxではこれでスクロールバーを非表示にできる */
+  }
+
+  /* IEおよびEdgeレガシーブラウザ用 */
+  .scrollbar-hidden {
+    -ms-overflow-style: none; /* 古いIEとEdge用 */
+  }
   svg {
     display: block;
   }
@@ -785,7 +799,7 @@
   }
 </style>
 
-<body>
+<body class="scrollbar-hidden">
   <div id="overlay" class="overlay hidden"></div>
   <!-- tab-list -->
   <div class="tab-list">
@@ -1135,11 +1149,16 @@
   const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
   const applyStyleItems = document.querySelectorAll(".apply-style__item");
-  const applyStyleOptionButtons = document.querySelectorAll(
-    ".apply-style__options-button"
-  );
+  const applyStyleOptionButtons = document.querySelectorAll(".apply-style__options-button");
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
+  // CreateStyleボタン押下時の処理
+  const createStyleButton = document.querySelector(
+    ".create-style__submit-button"
+  );
+  const applyStyleList = document.querySelector(
+    ".apply-style__list"
+  );
 
   // 選択された要素とstyleの状態を表示
   let selectedEnv = null;
@@ -1401,6 +1420,143 @@
           });
         });
         break;
+      case "add-style-to-list":
+        // 新しいリストアイテムを作成
+        const styleName = message.styleName;
+        const env = message.env;
+        const newItem = document.createElement('li');
+        newItem.classList.add('apply-style__item');
+        newItem.setAttribute('data-env', env);
+        
+        // リストアイテムに追加するHTMLコンテンツを設定
+        newItem.innerHTML = `
+          <div class="apply-style__item-content">
+            <h3 class="apply-style__item-title">${styleName}</h3>
+          </div>
+          <button
+            class="apply-style__options-button"
+            tabindex="0"
+            aria-label="その他のオプション"
+            data-tooltip-type="text"
+            data-tooltip="その他のオプション"
+          >
+            <span class="apply-style__options-svg-container">
+              <svg
+                class="apply-style__options-svg"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
+                  fill-opacity="0.8"
+                />
+              </svg>
+            </span>
+          </button>
+          <div class="apply-style__popup">
+            <div class="apply-style__popup-arrow-container">
+              <div class="apply-style__popup-content">Manage style</div>
+              <div class="apply-style__popup-arrow">
+                <svg
+                  width="13"
+                  height="7"
+                  viewBox="0 0 13 7"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="menu" role="menu">
+            <div class="menu__item">
+              <div class="menu__text">Edit style</div>
+            </div>
+            <div class="menu__item">
+              <div class="menu__text">Duplicate style</div>
+            </div>
+            <div class="menu__item__divider">
+              <div class="menu__divider"></div>
+            </div>
+            <div class="menu__item">
+              <div class="menu__text">Delete style</div>
+            </div>
+          </div>
+          <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
+        `;
+
+        // apply-style__listの要素に新しいリストアイテムを追加
+        applyStyleList.appendChild(newItem);
+
+        // 新しいリストアイテムに関するイベントをここで追加しています
+        newItem.addEventListener('click', function(e) {
+          // クリックイベントのバブリングを止める
+          e.stopPropagation();
+
+          // 他のアイテムのアクティブ状態を解除
+          removeAllActiveItems();
+          removeAllActiveButtons();
+
+          // クリックされたアイテムにアクティブクラスを切り替え
+          newItem.classList.toggle("active");
+          selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
+
+          // ボタンの状態を更新
+          updateButtonState();
+        });
+
+        // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
+        const optionsButton = newItem.querySelector(".apply-style__options-button");
+        optionsButton.addEventListener('click', function(e) {
+          // イベントのバブリングを阻止
+          e.stopPropagation();
+
+          // すべてのポップアップとメニューを初期化
+          document
+            .querySelectorAll(".apply-style__popup")
+            .forEach((popupElement) => {
+              popupElement.style.display = "none";
+            });
+          document.querySelectorAll(".menu").forEach((menuElement) => {
+            menuElement.style.display = "none";
+          });
+          removeAllActiveButtons();
+
+          // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+          const buttonElement = e.target.closest(".apply-style__options-button");
+
+          // ボタンに関連するポップアップとメニューを取得
+          const popup = buttonElement.nextElementSibling;
+          const menu = buttonElement.nextElementSibling.nextElementSibling; // 正しい要素を指すようにnextElementSiblingを2回使用
+
+          // ボタンのアクティブ状態をトグルする
+          const isActive = buttonElement.classList.toggle("active");
+          if (isActive) {
+            overlay.classList.remove("hidden");
+            document.body.classList.add("menu-open");
+            // アクティブになったとき
+            if (popup) {
+              popup.style.display = "none";
+            }
+            if (menu) {
+              menu.style.display = "block";
+            }
+          } else {
+            // アクティブでないとき（別の処理が必要な場合のみ）
+            overlay.classList.add("hidden");
+            document.body.classList.remove("menu-open");
+          }
+
+          // 他のアクティブな項目を非アクティブにする
+          removeAllActiveItems();
+        });
+        break;
     }
   };
   // フォントウェイトを表示する関数
@@ -1507,53 +1663,44 @@
     selectedCheckIcon.classList.remove("hidden");
   }
 
-  // CreateStyleボタン押下時の処理
-  const createStyleButton = document.querySelector(
-    ".create-style__submit-button"
-  );
-  createStyleButton.addEventListener("click", function () {
-    // スタイル名のインプット要素から値を取得します
-    const styleNameInput = document.getElementById("styleNameInput");
+  // ボタンにクリックイベントリスナーを追加
+  createStyleButton.addEventListener('click', function() {
+    // スタイル名のインプット要素から値を取得
+    const styleNameInput = document.getElementById('styleNameInput');
     const styleName = styleNameInput.value.trim();
+    const timestamp = new Date().toISOString().replace(/[^\d]/g, '');
     // styleName が空でないことを確認します
     if (!styleName) {
       alert("Please enter a style name.");
       return;
     }
+
+    // フォントスタイル情報をそれぞれのドロップダウンから取得
+    const japaneseFontFamily = document.querySelector('[data-lang="Japanese"] [data-label-type="font-family"]').textContent.trim();
+    const japaneseFontWeight = document.querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]').textContent.trim();
+    const englishFontFamily = document.querySelector('[data-lang="English"] [data-label-type="font-family"]').textContent.trim();
+    const englishFontWeight = document.querySelector('[data-lang="English"] [data-label-type="font-weight"]').textContent.trim();
+
     // 各言語のフォント設定を格納するオブジェクトを作成します
     const fontSettings = {
-      Japanese: {},
-      English: {},
-    };
-    // 各言語のフォントファミリーとフォントウェイトを取得してfontSettingsに格納します
-    document.querySelectorAll(".create-style__dropdown").forEach((dropdown) => {
-      const lang = dropdown.dataset.lang; // "Japanese", "English"のいずれか
-      const fontFamily = dropdown
-        .querySelector('[data-label-type="font-family"]')
-        .textContent.trim();
-      const fontWeight = dropdown
-        .querySelector('[data-label-type="font-weight"]')
-        .textContent.trim();
-      if (lang && ["Japanese", "English"].includes(lang)) {
-        fontSettings[lang] = { fontFamily, fontWeight };
-      }
-    });
-    // ユニークな値を生成します（現在のタイムスタンプ）
-    const uniqueEnv = Date.now();
-    // ApplyStyles の Stylelist にスタイル情報を追加します
-    // addStyleToApplyList(styleName, uniqueEnv);
-    // 生成したstyle設定とenvをfigmaに送るメッセージを送信します
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "create-style",
-          styleName: styleName,
-          fontSettings: fontSettings,
-          env: uniqueEnv, // 送信する際の識別子として利用 }
-        },
+      Japanese: {
+        fontFamily: japaneseFontFamily,
+        fontWeight: japaneseFontWeight
       },
-      "*"
-    );
+      English: {
+        fontFamily: englishFontFamily,
+        fontWeight: englishFontWeight
+      }
+    };
+    // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
+    parent.postMessage({
+      pluginMessage: {
+        type: 'save-style',
+        styleName: styleName,
+        fontSettings: fontSettings,
+        key: timestamp // この部分はユーザーのIDや一意の識別子を使用
+      }
+    }, '*');
   });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
