@@ -1,5 +1,27 @@
+// プラグイン起動時にすでに保存されているスタイルを UI に送る関数です。
+async function loadAndSendStyles() {
+  const savedStyleKeys = await figma.clientStorage.getAsync('savedStyleKeys') || [];
+  for (const key of savedStyleKeys) {
+    const styleKeyForVerification = `style-${key}`;
+    const savedStyle = await figma.clientStorage.getAsync(styleKeyForVerification);
+    if (savedStyle) {
+      for (const styleName in savedStyle) {
+        figma.ui.postMessage({
+          type: 'add-style-to-list',
+          styleName: styleName,
+          env: styleKeyForVerification,
+        });
+      }
+    }
+  }
+}
+
+
 figma.showUI(__html__, {themeColors: true, height: 400, width: 324});
 
+
+// プラグイン起動時にスタイルを読み込み、UIに送信
+loadAndSendStyles();
 
 // 選択した要素を変更したときに発生するイベント
 figma.on('selectionchange', () => {
@@ -114,22 +136,14 @@ figma.ui.onmessage = async (msg) => {
     
     // スタイルを保存して完了を待ちます
     await saveStyleForUser(styleName, fontSettings, key);
-  
-    // 保存したスタイルがどのようになっているか確認するために、
-    // 保存後に clientStorage のデータをログで確認したいときは、
-    // 下記のようなコードを記述すると良いです。
-
     // `style-${env}` 形式のキーを使用して、clientStorage から全てのスタイル情報を取得します。
     const styleKeyForVerification = `style-${key}`;
-    try {
-        // 特定のキーに紐づくデータを非同期で取得します。
-        const savedStylesForVerification = await figma.clientStorage.getAsync(styleKeyForVerification);
-        // 取得したデータをコンソールに表示します。
-        console.log(`Saved Styles for '${styleKeyForVerification}':`, savedStylesForVerification);
-    } catch (err) {
-        // データの取得に失敗した場合のエラーハンドリング
-        console.error(`Error fetching saved styles from clientStorage using key '${styleKeyForVerification}':`, err);
-    }
+
+    figma.ui.postMessage({
+      type: 'add-style-to-list',
+      styleName: styleName,
+      env: styleKeyForVerification
+    });
   }
 }
 
@@ -145,6 +159,13 @@ async function saveStyleForUser(styleName: string, fontSettings:{ Japanese: Font
   let savedStyles = await figma.clientStorage.getAsync(styleKey) || {};
   savedStyles[styleName] = fontSettings; // 新しいスタイルを追加
   await figma.clientStorage.setAsync(styleKey, savedStyles);
+
+  // 保存されているスタイルキーのリストを更新
+  const savedStyleKeys = await figma.clientStorage.getAsync('savedStyleKeys') || [];
+  if (!savedStyleKeys.includes(env)) {
+    savedStyleKeys.push(env);
+    await figma.clientStorage.setAsync('savedStyleKeys', savedStyleKeys);
+  }
 }
 
 // テキストノード処理ロジックを関数化
