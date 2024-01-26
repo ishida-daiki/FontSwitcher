@@ -17,7 +17,7 @@ async function loadAndSendStyles() {
 }
 
 
-figma.showUI(__html__, {themeColors: true, height: 400, width: 324});
+figma.showUI(__html__, {themeColors: true, height: 490, width: 324});
 
 
 // プラグイン起動時にスタイルを読み込み、UIに送信
