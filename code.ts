@@ -17,7 +17,7 @@ async function loadAndSendStyles() {
 }
 
 
-figma.showUI(__html__, {themeColors: true, height: 490, width: 324});
+figma.showUI(__html__, {themeColors: true, height: 460, width: 324});
 
 
 // プラグイン起動時にスタイルを読み込み、UIに送信
@@ -74,21 +74,21 @@ figma.ui.onmessage = async (msg) => {
         style.English   // 保存されている英語のフォント設定
       ]);
       
-      // Mac用のフォント設定
-      const fontsToLoadMac = [
-        { family: "Noto Sans", style: "Regular" },
-        { family: "SF Pro", style: "Semibold" }
-      ];
+      // // Mac用のフォント設定
+      // const fontsToLoadMac = [
+      //   { family: "Noto Sans", style: "Regular" },
+      //   { family: "SF Pro", style: "Semibold" }
+      // ];
   
-      // Windows用のフォント設定
-      const fontsToLoadWindows = [
-        // Windows用のフォント設定
-        { family: "Meiryo", style: "Regular" },
-        { family: "Yu Gothic", style: "Bold" }
-      ];
+      // // Windows用のフォント設定
+      // const fontsToLoadWindows = [
+      //   // Windows用のフォント設定
+      //   { family: "Meiryo", style: "Regular" },
+      //   { family: "Yu Gothic", style: "Bold" }
+      // ];
   
       // マージされたフォント設定に基づいてフォントをロードします
-      const fontsToLoad = [...fontsToLoadMac, ...fontsToLoadWindows, ...customFontsToLoad];
+      const fontsToLoad = [...customFontsToLoad];
       
       for (const font of fontsToLoad) {
         // フォントのオブジェクトが正しくフォーマットされているか確認します
@@ -145,6 +145,9 @@ figma.ui.onmessage = async (msg) => {
       env: styleKeyForVerification
     });
   }
+  else if (msg.type === 'delete-style') {
+    deleteStyleForUser(msg.styleName, msg.env);
+  }
 }
 
 // 具体的なフォント設定の型を定義する
@@ -196,6 +199,20 @@ async function processTextNodes(textNode: TextNode, fontSettings: {Japanese: Fon
       await figma.loadFontAsync(fontName);
       textNode.setRangeFontName(i, i + 1, fontName);
     }
+  }
+}
+
+async function deleteStyleForUser(styleName: string, env: string) {
+  const styleKey = `style-${env}`;
+  
+  let savedStyles = await figma.clientStorage.getAsync(styleKey) || {};
+  if (savedStyles.hasOwnProperty(styleName)) {
+    // スタイルを削除
+    delete savedStyles[styleName];
+    await figma.clientStorage.setAsync(styleKey, savedStyles);
+
+    // 更新されたスタイルをUIに再送信（オプション）
+    loadAndSendStyles();
   }
 }
 // figma.closePlugin();
