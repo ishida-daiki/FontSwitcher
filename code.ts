@@ -1,6 +1,7 @@
 // プラグイン起動時にすでに保存されているスタイルを UI に送る関数です。
 async function loadAndSendStyles() {
   const savedStyleKeys = await figma.clientStorage.getAsync('savedStyleKeys') || [];
+
   for (const key of savedStyleKeys) {
     const styleKeyForVerification = `style-${key}`;
     const savedStyle = await figma.clientStorage.getAsync(styleKeyForVerification);
@@ -15,7 +16,6 @@ async function loadAndSendStyles() {
     }
   }
 }
-
 
 figma.showUI(__html__, {themeColors: true, height: 460, width: 324});
 
@@ -133,20 +133,20 @@ figma.ui.onmessage = async (msg) => {
   }
   else if (msg.type === 'save-style') {
     const { styleName, fontSettings, key } = msg;
-    
+
     // スタイルを保存して完了を待ちます
     await saveStyleForUser(styleName, fontSettings, key);
-    // `style-${env}` 形式のキーを使用して、clientStorage から全てのスタイル情報を取得します。
+    
+    // UIに直接新しいスタイルを送信
     const styleKeyForVerification = `style-${key}`;
-
     figma.ui.postMessage({
       type: 'add-style-to-list',
       styleName: styleName,
-      env: styleKeyForVerification
+      env: styleKeyForVerification,
     });
   }
   else if (msg.type === 'delete-style') {
-    deleteStyleForUser(msg.styleName, msg.env);
+    deleteDataFromClientStorage(msg.env);
   }
 }
 
@@ -164,7 +164,7 @@ async function saveStyleForUser(styleName: string, fontSettings:{ Japanese: Font
   await figma.clientStorage.setAsync(styleKey, savedStyles);
 
   // 保存されているスタイルキーのリストを更新
-  const savedStyleKeys = await figma.clientStorage.getAsync('savedStyleKeys') || [];
+  let savedStyleKeys = await figma.clientStorage.getAsync('savedStyleKeys') || [];
   if (!savedStyleKeys.includes(env)) {
     savedStyleKeys.push(env);
     await figma.clientStorage.setAsync('savedStyleKeys', savedStyleKeys);
@@ -201,18 +201,11 @@ async function processTextNodes(textNode: TextNode, fontSettings: {Japanese: Fon
     }
   }
 }
-
-async function deleteStyleForUser(styleName: string, env: string) {
-  const styleKey = `style-${env}`;
-  
-  let savedStyles = await figma.clientStorage.getAsync(styleKey) || {};
-  if (savedStyles.hasOwnProperty(styleName)) {
-    // スタイルを削除
-    delete savedStyles[styleName];
-    await figma.clientStorage.setAsync(styleKey, savedStyles);
-
-    // 更新されたスタイルをUIに再送信（オプション）
-    loadAndSendStyles();
+async function deleteDataFromClientStorage(key: string) {
+  try {
+    await figma.clientStorage.deleteAsync(key);
+  } catch (error) {
+    console.error('データの削除中にエラーが発生しました: ', error);
   }
 }
 // figma.closePlugin();
