@@ -100,7 +100,7 @@
 
   /* Firefox用 */
   .scrollbar-hidden {
-    scrollbar-width: none;  /* Firefoxではこれでスクロールバーを非表示にできる */
+    scrollbar-width: none; /* Firefoxではこれでスクロールバーを非表示にできる */
   }
 
   /* IEおよびEdgeレガシーブラウザ用 */
@@ -331,7 +331,7 @@
     inset: 2px 0;
     width: 100%;
     border-radius: 6px;
-    background: rgba(179, 179, 179, .5);
+    background: rgba(179, 179, 179, 0.5);
   }
 
   .apply-style__message {
@@ -887,12 +887,16 @@
 
       <ul class="apply-style__list">
         <div class="scroll_container--track--HEzfy" role="none">
-          <div class="scroll_container--scrollBar--YLWIi" role="none" style="transform: translate3d(0px, 0px, 0px); height: 186.397px;"></div>
+          <div
+            class="scroll_container--scrollBar--YLWIi"
+            role="none"
+            style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
+          ></div>
         </div>
       </ul>
     </div>
     <!-- 反映ボタン -->
-    <button id="analyzeBtn" class="create-style__apply-button disabled">
+    <button id="applyBtn" class="create-style__apply-button disabled">
       Apply
     </button>
   </div>
@@ -1068,78 +1072,88 @@
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
-  const applyStyleList = document.querySelector(
-    ".apply-style__list"
-  );
+  const applyStyleList = document.querySelector(".apply-style__list");
 
   // スクロールバーの表示と動作を制御するJavaScriptコード
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const scrollContainer = document.querySelector('.apply-style__list');
-  const scrollBar = document.querySelector('.scroll_container--scrollBar--YLWIi');
-  let isDragging = false;
+  document.addEventListener("DOMContentLoaded", (event) => {
+    const scrollContainer = document.querySelector(".apply-style__list");
+    const scrollBar = document.querySelector(
+      ".scroll_container--scrollBar--YLWIi"
+    );
+    let isDragging = false;
 
-  // スクロールバーの高さを計算する関数
-  const setScrollBarHeight = () => {
-    const visibleRatio = scrollContainer.clientHeight / scrollContainer.scrollHeight;
-    const scrollBarHeight = Math.max(visibleRatio * scrollContainer.clientHeight, 10); // 最小高さが10pxであることを保証
-    scrollBar.style.height = scrollBarHeight + 'px';
-    scrollBar.style.display = 'block'; // スクロールバーを表示
-  };
+    // スクロールバーの高さを計算する関数
+    const setScrollBarHeight = () => {
+      const visibleRatio =
+        scrollContainer.clientHeight / scrollContainer.scrollHeight;
+      const scrollBarHeight = Math.max(
+        visibleRatio * scrollContainer.clientHeight,
+        10
+      ); // 最小高さが10pxであることを保証
+      scrollBar.style.height = scrollBarHeight + "px";
+      scrollBar.style.display = "block"; // スクロールバーを表示
+    };
 
-  // スクロールバーとスクロールコンテナの関連付け
-  const updateScrollBarPosition = () => {
-    const scrollFraction = scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight);
-    const topPosition = scrollFraction * (scrollContainer.clientHeight - scrollBar.offsetHeight);
-    scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
-  };
+    // スクロールバーとスクロールコンテナの関連付け
+    const updateScrollBarPosition = () => {
+      const scrollFraction =
+        scrollContainer.scrollTop /
+        (scrollContainer.scrollHeight - scrollContainer.clientHeight);
+      const topPosition =
+        scrollFraction *
+        (scrollContainer.clientHeight - scrollBar.offsetHeight);
+      scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
+    };
 
-  // イベントリスナー: マウスホイールでのスクロール操作
-  scrollContainer.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const deltaY = e.deltaY * 0.5;
-    scrollContent(deltaY);
-  });
+    // イベントリスナー: マウスホイールでのスクロール操作
+    scrollContainer.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const deltaY = e.deltaY * 0.5;
+      scrollContent(deltaY);
+    });
 
-  // スクロールイベントにより、カスタムスクロールバーを更新
-  scrollContainer.addEventListener('scroll', () => {
+    // スクロールイベントにより、カスタムスクロールバーを更新
+    scrollContainer.addEventListener("scroll", () => {
+      updateScrollBarPosition();
+    });
+
+    // スクロール関数
+    const scrollContent = (deltaY) => {
+      scrollContainer.scrollTop += deltaY;
+    };
+
+    // ドラッグイベント用のヘルパー関数
+    const startDrag = (e) => {
+      isDragging = true;
+      scrollBar.classList.add("dragging");
+      document.body.classList.add("scrollbar-dragging");
+    };
+
+    const endDrag = (e) => {
+      isDragging = false;
+      scrollBar.classList.remove("dragging");
+      document.body.classList.remove("scrollbar-dragging");
+    };
+
+    const doDrag = (e) => {
+      if (isDragging) {
+        const deltaY =
+          e.movementY *
+          (scrollContainer.scrollHeight / scrollContainer.clientHeight);
+        scrollContent(deltaY);
+      }
+    };
+
+    // ドラッグイベントリスナー
+    scrollBar.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", doDrag);
+    document.addEventListener("mouseup", endDrag);
+
+    // スクロールバーの高さの初期設定
+    setScrollBarHeight();
     updateScrollBarPosition();
   });
-
-  // スクロール関数
-  const scrollContent = (deltaY) => {
-    scrollContainer.scrollTop += deltaY;
-  };
-
-  // ドラッグイベント用のヘルパー関数
-  const startDrag = (e) => {
-    isDragging = true;
-    scrollBar.classList.add('dragging');
-    document.body.classList.add('scrollbar-dragging');
-  };
-
-  const endDrag = (e) => {
-    isDragging = false;
-    scrollBar.classList.remove('dragging');
-    document.body.classList.remove('scrollbar-dragging');
-  };
-
-  const doDrag = (e) => {
-    if (isDragging) {
-      const deltaY = e.movementY * (scrollContainer.scrollHeight / scrollContainer.clientHeight);
-      scrollContent(deltaY);
-    }
-  };
-
-  // ドラッグイベントリスナー
-  scrollBar.addEventListener('mousedown', startDrag);
-  document.addEventListener('mousemove', doDrag);
-  document.addEventListener('mouseup', endDrag);
-
-  // スクロールバーの高さの初期設定
-  setScrollBarHeight();
-  updateScrollBarPosition();
-});
 
   // 選択された要素とstyleの状態を表示
   let selectedEnv = null;
@@ -1410,7 +1424,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         let isEnvExists = false;
         applyStyleItems.forEach((item) => {
-          if (item.getAttribute('data-env') === env) {
+          if (item.getAttribute("data-env") === env) {
             isEnvExists = true;
           }
         });
@@ -1420,11 +1434,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
           break;
         }
 
+        const newItem = document.createElement("li");
+        newItem.classList.add("apply-style__item");
+        newItem.setAttribute("data-env", env);
 
-        const newItem = document.createElement('li');
-        newItem.classList.add('apply-style__item');
-        newItem.setAttribute('data-env', env);
-        
         // リストアイテムに追加するHTMLコンテンツを設定
         newItem.innerHTML = `
           <div class="apply-style__item-content">
@@ -1518,7 +1531,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         applyStyleList.appendChild(newItem);
 
         // 新しいリストアイテムに関するイベントをここで追加しています
-        newItem.addEventListener('click', function(e) {
+        newItem.addEventListener("click", function (e) {
           // クリックイベントのバブリングを止める
           e.stopPropagation();
 
@@ -1535,16 +1548,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
 
         // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-        const applyStyleEditButton = newItem.querySelector(".apply-style__options-button.edit");
-        const applyStyleDeleteButton = newItem.querySelector(".apply-style__options-button.delete");
-        applyStyleEditButton.addEventListener('click', function(e) {
+        const applyStyleEditButton = newItem.querySelector(
+          ".apply-style__options-button.edit"
+        );
+        const applyStyleDeleteButton = newItem.querySelector(
+          ".apply-style__options-button.delete"
+        );
+        applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
           e.stopPropagation();
-          
+
           removeAllActiveButtons();
 
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(".apply-style__options-button");
+          const buttonElement = e.target.closest(
+            ".apply-style__options-button"
+          );
 
           // ボタンのアクティブ状態をトグルする
           const isActive = buttonElement.classList.toggle("active");
@@ -1567,10 +1586,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
         });
-        applyStyleDeleteButton.addEventListener('click', function(e) {
+        applyStyleDeleteButton.addEventListener("click", function (e) {
           e.stopPropagation(); // イベントバブリングを防ぐ
-          const envValue = newItem.getAttribute('data-env');
-          let itemToDelete = document.querySelector(`.apply-style__item[data-env="${envValue}"]`); // DOM 要素を取得
+          const envValue = newItem.getAttribute("data-env");
+          let itemToDelete = document.querySelector(
+            `.apply-style__item[data-env="${envValue}"]`
+          ); // DOM 要素を取得
           if (itemToDelete) {
             itemToDelete.remove(); // DOM 要素を削除
           }
@@ -1578,7 +1599,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             {
               pluginMessage: {
                 type: "delete-style",
-                env: newItem.getAttribute('data-env'),
+                env: newItem.getAttribute("data-env"),
               },
             },
             "*"
@@ -1692,20 +1713,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   // ボタンにクリックイベントリスナーを追加
-  createStyleButton.addEventListener('click', function() {
+  createStyleButton.addEventListener("click", function () {
     // スタイル名のインプット要素から値を取得
-    const styleNameInput = document.getElementById('styleNameInput');
+    const styleNameInput = document.getElementById("styleNameInput");
     const styleName = styleNameInput.value.trim();
-    const timestamp = new Date().toISOString().replace(/[^\d]/g, '');
+    const timestamp = new Date().toISOString().replace(/[^\d]/g, "");
     // styleName が空でないことを確認します
     if (!styleName) {
       alert("Please enter a style name.");
       return;
     }
-    const newItem = document.createElement('li');
-    newItem.classList.add('apply-style__item');
-    newItem.setAttribute('data-env', `style-${timestamp}`);
-    
+    const newItem = document.createElement("li");
+    newItem.classList.add("apply-style__item");
+    newItem.setAttribute("data-env", `style-${timestamp}`);
+
     // リストアイテムに追加するHTMLコンテンツを設定
     newItem.innerHTML = `
       <div class="apply-style__item-content">
@@ -1799,7 +1820,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     applyStyleList.appendChild(newItem);
 
     // 新しいリストアイテムに関するイベントをここで追加しています
-    newItem.addEventListener('click', function(e) {
+    newItem.addEventListener("click", function (e) {
       // クリックイベントのバブリングを止める
       e.stopPropagation();
 
@@ -1816,12 +1837,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-    const applyStyleEditButton = newItem.querySelector(".apply-style__options-button.edit");
-    const applyStyleDeleteButton = newItem.querySelector(".apply-style__options-button.delete");
-    applyStyleEditButton.addEventListener('click', function(e) {
+    const applyStyleEditButton = newItem.querySelector(
+      ".apply-style__options-button.edit"
+    );
+    const applyStyleDeleteButton = newItem.querySelector(
+      ".apply-style__options-button.delete"
+    );
+    applyStyleEditButton.addEventListener("click", function (e) {
       // イベントのバブリングを阻止
       e.stopPropagation();
-      
+
       removeAllActiveButtons();
 
       // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
@@ -1848,10 +1873,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // 他のアクティブな項目を非アクティブにする
       removeAllActiveItems();
     });
-    applyStyleDeleteButton.addEventListener('click', function(e) {
+    applyStyleDeleteButton.addEventListener("click", function (e) {
       e.stopPropagation(); // イベントバブリングを防ぐ
-      const envValue = newItem.getAttribute('data-env');
-      let itemToDelete = document.querySelector(`.apply-style__item[data-env="${envValue}"]`); // DOM 要素を取得
+      const envValue = newItem.getAttribute("data-env");
+      let itemToDelete = document.querySelector(
+        `.apply-style__item[data-env="${envValue}"]`
+      ); // DOM 要素を取得
       if (itemToDelete) {
         itemToDelete.remove(); // DOM 要素を削除
       }
@@ -1859,7 +1886,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {
           pluginMessage: {
             type: "delete-style",
-            env: newItem.getAttribute('data-env'),
+            env: newItem.getAttribute("data-env"),
           },
         },
         "*"
@@ -1867,37 +1894,65 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     // フォントスタイル情報をそれぞれのドロップダウンから取得
-    const japaneseFontFamily = document.querySelector('[data-lang="Japanese"] [data-label-type="font-family"]').textContent.trim();
-    const japaneseFontWeight = document.querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]').textContent.trim();
-    const englishFontFamily = document.querySelector('[data-lang="English"] [data-label-type="font-family"]').textContent.trim();
-    const englishFontWeight = document.querySelector('[data-lang="English"] [data-label-type="font-weight"]').textContent.trim();
+    const japaneseFontFamily = document
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const japaneseFontWeight = document
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]')
+      .textContent.trim();
+    const englishFontFamily = document
+      .querySelector('[data-lang="English"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const englishFontWeight = document
+      .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
+      .textContent.trim();
 
     // 各言語のフォント設定を格納するオブジェクトを作成します
     const fontSettings = {
       Japanese: {
         fontFamily: japaneseFontFamily,
-        fontWeight: japaneseFontWeight
+        fontWeight: japaneseFontWeight,
       },
       English: {
         fontFamily: englishFontFamily,
-        fontWeight: englishFontWeight
-      }
+        fontWeight: englishFontWeight,
+      },
     };
     // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
-    parent.postMessage({
-      pluginMessage: {
-        type: 'save-style',
-        styleName: styleName,
-        fontSettings: fontSettings,
-        key: timestamp // この部分はユーザーのIDや一意の識別子を使用
-      }
-    }, '*');
-    styleNameInput.value = '';
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "save-style",
+          styleName: styleName,
+          fontSettings: fontSettings,
+          key: timestamp, // この部分はユーザーのIDや一意の識別子を使用
+        },
+      },
+      "*"
+    );
+    styleNameInput.value = "";
   });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
-  const applyBtn = document.getElementById("analyzeBtn");
+  const applyBtn = document.getElementById("applyBtn");
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
+  // UIのHTML中のスクリプトは以下のようになります。
+  // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
+  // When the button is clicked, the plugin will start the text analysis and update
+  applyBtn.addEventListener("click", () => {
+    console.log("aaaaa");
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "analyzeAndUpdateText",
+          fontSettings: {
+            env: selectedEnv,
+          },
+        },
+      },
+      "*"
+    );
+  });
 
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
@@ -1942,13 +1997,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
   function hideMenu() {
     // Apply styles の menu を非表示にする
     document.querySelectorAll(".menu").forEach((menu) => {
-      menu.style.display = 'none';
+      menu.style.display = "none";
     });
     // Create styles の font-style / font-weight menu を非表示にする
     document.querySelectorAll(".create-style__font-menu").forEach((menu) => {
-      menu.classList.add("hidden")
+      menu.classList.add("hidden");
     });
-    
+
     // オーバーレイを非表示にする
     overlay.classList.add("hidden");
 
@@ -1956,15 +2011,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.body.classList.remove("menu-open");
 
     // すべてのアクティブなメニューボタンの状態をリセット
-    const activeButtons = document.querySelectorAll(".apply-style__options-button.active");
+    const activeButtons = document.querySelectorAll(
+      ".apply-style__options-button.active"
+    );
     activeButtons.forEach((button) => {
-      button.classList.remove('active');
+      button.classList.remove("active");
     });
   }
 
   // オーバーレイがクリックされた時にメニューを非表示にするイベントリスナーを追加
   overlay.addEventListener("click", hideMenu);
-  
+
   // アイテムのクリックイベントを設定
   applyStyleItems.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -1984,9 +2041,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 
-  // Applyボタンの初期状態を定義
-  applyBtn.disabled = true; // 最初は非活性化しておく
-
   // Applyボタンの有効/無効ステータスを更新する関数
   function updateButtonState() {
     // selectedEnvがnullでないかをチェックして、isEnvSelectedを更新する
@@ -2002,21 +2056,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
       applyBtn.classList.add("disabled");
     }
   }
-
-  // UIのHTML中のスクリプトは以下のようになります。
-  // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
-  // When the button is clicked, the plugin will start the text analysis and update
-  applyBtn.addEventListener("click", () => {
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "analyzeAndUpdateText",
-          fontSettings: {
-            env: selectedEnv,
-          },
-        },
-      },
-      "*"
-    );
-  });
 </script>
