@@ -206,12 +206,10 @@
     color: var(--figma-color-text-disabled);
     font-weight: 400;
   }
-
   .apply-style__content {
     display: flex;
     flex-direction: column;
     padding: 8 0px;
-    height: 240px;
   }
   .create-style__content {
     display: flex;
@@ -241,6 +239,9 @@
   .apply-style__list {
     display: flex;
     flex-direction: column;
+    position: relative;
+    height: 200px;
+    overflow-y: hidden;
   }
   .apply-style__item {
     display: flex;
@@ -250,7 +251,7 @@
     box-sizing: border-box;
     outline: 1px solid transparent;
     outline-offset: -1px;
-    height: 40px;
+    min-height: 40px;
     padding: 0 8px;
   }
   .apply-style__item:hover {
@@ -305,6 +306,32 @@
 
   .apply-style__options-button.active ~ .menu {
     display: block; /* アクティブな状態のボタンの兄弟要素であるmenuを表示 */
+  }
+
+  .scroll_container--track--HEzfy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    padding: 2px;
+    cursor: default;
+    z-index: 7;
+  }
+  .scroll_container--scrollBar--YLWIi {
+    display: none;
+    position: absolute;
+    width: 6px;
+    right: 2px;
+    top: 0;
+  }
+  .scroll_container--scrollBar--YLWIi:after {
+    content: "";
+    position: absolute;
+    inset: 2px 0;
+    width: 100%;
+    border-radius: 6px;
+    background: rgba(179, 179, 179, .5);
   }
 
   .apply-style__message {
@@ -859,6 +886,9 @@
       </div>
 
       <ul class="apply-style__list">
+        <div class="scroll_container--track--HEzfy" role="none">
+          <div class="scroll_container--scrollBar--YLWIi" role="none" style="transform: translate3d(0px, 0px, 0px); height: 186.397px;"></div>
+        </div>
       </ul>
     </div>
     <!-- 反映ボタン -->
@@ -1041,6 +1071,75 @@
   const applyStyleList = document.querySelector(
     ".apply-style__list"
   );
+
+  // スクロールバーの表示と動作を制御するJavaScriptコード
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const scrollContainer = document.querySelector('.apply-style__list');
+  const scrollBar = document.querySelector('.scroll_container--scrollBar--YLWIi');
+  let isDragging = false;
+
+  // スクロールバーの高さを計算する関数
+  const setScrollBarHeight = () => {
+    const visibleRatio = scrollContainer.clientHeight / scrollContainer.scrollHeight;
+    const scrollBarHeight = Math.max(visibleRatio * scrollContainer.clientHeight, 10); // 最小高さが10pxであることを保証
+    scrollBar.style.height = scrollBarHeight + 'px';
+    scrollBar.style.display = 'block'; // スクロールバーを表示
+  };
+
+  // スクロールバーとスクロールコンテナの関連付け
+  const updateScrollBarPosition = () => {
+    const scrollFraction = scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight);
+    const topPosition = scrollFraction * (scrollContainer.clientHeight - scrollBar.offsetHeight);
+    scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
+  };
+
+  // イベントリスナー: マウスホイールでのスクロール操作
+  scrollContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const deltaY = e.deltaY * 0.5;
+    scrollContent(deltaY);
+  });
+
+  // スクロールイベントにより、カスタムスクロールバーを更新
+  scrollContainer.addEventListener('scroll', () => {
+    updateScrollBarPosition();
+  });
+
+  // スクロール関数
+  const scrollContent = (deltaY) => {
+    scrollContainer.scrollTop += deltaY;
+  };
+
+  // ドラッグイベント用のヘルパー関数
+  const startDrag = (e) => {
+    isDragging = true;
+    scrollBar.classList.add('dragging');
+    document.body.classList.add('scrollbar-dragging');
+  };
+
+  const endDrag = (e) => {
+    isDragging = false;
+    scrollBar.classList.remove('dragging');
+    document.body.classList.remove('scrollbar-dragging');
+  };
+
+  const doDrag = (e) => {
+    if (isDragging) {
+      const deltaY = e.movementY * (scrollContainer.scrollHeight / scrollContainer.clientHeight);
+      scrollContent(deltaY);
+    }
+  };
+
+  // ドラッグイベントリスナー
+  scrollBar.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', doDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  // スクロールバーの高さの初期設定
+  setScrollBarHeight();
+  updateScrollBarPosition();
+});
 
   // 選択された要素とstyleの状態を表示
   let selectedEnv = null;
