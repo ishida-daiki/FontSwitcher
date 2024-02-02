@@ -100,7 +100,7 @@
 
   /* Firefox用 */
   .scrollbar-hidden {
-    scrollbar-width: none;  /* Firefoxではこれでスクロールバーを非表示にできる */
+    scrollbar-width: none; /* Firefoxではこれでスクロールバーを非表示にできる */
   }
 
   /* IEおよびEdgeレガシーブラウザ用 */
@@ -167,12 +167,8 @@
     display: none;
   }
   .create-style__apply-button {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     padding: 0.8rem 1.5rem;
-    margin: 16px;
+    margin: 8 16 16 16px;
     border-radius: 6px;
     font-weight: 600;
   }
@@ -210,8 +206,11 @@
     color: var(--figma-color-text-disabled);
     font-weight: 400;
   }
-
-  .apply-style__content,
+  .apply-style__content {
+    display: flex;
+    flex-direction: column;
+    padding: 8 0px;
+  }
   .create-style__content {
     display: flex;
     flex-direction: column;
@@ -240,6 +239,9 @@
   .apply-style__list {
     display: flex;
     flex-direction: column;
+    position: relative;
+    height: 200px;
+    overflow-y: hidden;
   }
   .apply-style__item {
     display: flex;
@@ -249,7 +251,7 @@
     box-sizing: border-box;
     outline: 1px solid transparent;
     outline-offset: -1px;
-    height: 40px;
+    min-height: 40px;
     padding: 0 8px;
   }
   .apply-style__item:hover {
@@ -306,6 +308,32 @@
     display: block; /* アクティブな状態のボタンの兄弟要素であるmenuを表示 */
   }
 
+  .scroll_container--track--HEzfy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    padding: 2px;
+    cursor: default;
+    z-index: 7;
+  }
+  .scroll_container--scrollBar--YLWIi {
+    display: none;
+    position: absolute;
+    width: 6px;
+    right: 2px;
+    top: 0;
+  }
+  .scroll_container--scrollBar--YLWIi:after {
+    content: "";
+    position: absolute;
+    inset: 2px 0;
+    width: 100%;
+    border-radius: 6px;
+    background: rgba(179, 179, 179, 0.5);
+  }
+
   .apply-style__message {
     display: grid;
     place-content: center;
@@ -313,6 +341,7 @@
     background-color: var(--figma-color-bg-secondary);
     padding: 0 16px;
     line-height: 1.5;
+    border-bottom: 1px var(--figma-color-border) solid;
   }
   .center {
     text-align: center;
@@ -321,10 +350,6 @@
     padding-top: 1px;
     color: var(--figma-color-text-disabled);
     pointer-events: none;
-  }
-  .apply-style__divider {
-    height: 1px;
-    background: var(--figma-color-border);
   }
   .apply-style__options-svg {
     fill: var(--figma-color-icon);
@@ -592,6 +617,12 @@
     border-radius: 2px;
     z-index: 10;
   }
+  .apply-style__popup.edit {
+    right: 40px;
+  }
+  .apply-style__popup.delete {
+    right: 8px;
+  }
 
   /* ポップアップコンテナ (Element Modifier) */
   .apply-style__popup:hover {
@@ -823,8 +854,6 @@
         text you want to change
       </p>
     </div>
-    <!-- 区切り線 -->
-    <div class="apply-style__divider"></div>
     <!-- 登録したテキストスタイル一覧 -->
     <div class="apply-style__content">
       <div class="apply-style__styles">
@@ -857,132 +886,17 @@
       </div>
 
       <ul class="apply-style__list">
-        <li class="apply-style__item" data-env="mac">
-          <div class="apply-style__item-content">
-            <h3 class="apply-style__item-title">Mac 環境確認用</h3>
-          </div>
-          <button
-            class="apply-style__options-button"
-            tabindex="0"
-            aria-label="その他のオプション"
-            data-tooltip-type="text"
-            data-tooltip="その他のオプション"
-          >
-            <span class="apply-style__options-svg-container">
-              <svg
-                class="apply-style__options-svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
-                  fill-opacity="0.8"
-                />
-              </svg>
-            </span>
-          </button>
-
-          <div class="apply-style__popup">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Manage style</div>
-              <div class="apply-style__popup-arrow">
-                <svg
-                  width="13"
-                  height="7"
-                  viewBox="0 0 13 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="menu" role="menu">
-            <div class="menu__item">
-              <div class="menu__text">Edit style</div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Duplicate style</div>
-            </div>
-            <div class="menu__item__divider">
-              <div class="menu__divider"></div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Delete style</div>
-            </div>
-          </div>
-        </li>
-        <li class="apply-style__item" data-env="Windows">
-          <div class="apply-style__item-content">
-            <h3 class="apply-style__item-title">Windows 環境確認用</h3>
-          </div>
-          <button
-            class="apply-style__options-button"
-            tabindex="0"
-            aria-label="その他のオプション"
-            data-tooltip-type="text"
-            data-tooltip="その他のオプション"
-          >
-            <span class="apply-style__options-svg-container">
-              <svg
-                class="apply-style__options-svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
-                  fill-opacity="0.8"
-                />
-              </svg>
-            </span>
-          </button>
-
-          <div class="apply-style__popup">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Manage style</div>
-              <div class="apply-style__popup-arrow">
-                <svg
-                  width="13"
-                  height="7"
-                  viewBox="0 0 13 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="menu" role="menu">
-            <div class="menu__item">
-              <div class="menu__text">Edit style</div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Duplicate style</div>
-            </div>
-            <div class="menu__item__divider">
-              <div class="menu__divider"></div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Delete style</div>
-            </div>
-          </div>
-        </li>
+        <div class="scroll_container--track--HEzfy" role="none">
+          <div
+            class="scroll_container--scrollBar--YLWIi"
+            role="none"
+            style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
+          ></div>
+        </div>
       </ul>
     </div>
     <!-- 反映ボタン -->
-    <button id="analyzeBtn" class="create-style__apply-button disabled">
+    <button id="applyBtn" class="create-style__apply-button disabled">
       Apply
     </button>
   </div>
@@ -1148,19 +1062,101 @@
   const tabs = document.querySelectorAll(".tab-list__item");
   const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
-  const applyStyleItems = document.querySelectorAll(".apply-style__item");
-  const applyStyleOptionButtons = document.querySelectorAll(".apply-style__options-button");
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
+  let applyStyleItems;
+  let applyStyleEditButtons;
+  let applyStyleDeleteButtons;
+
   // CreateStyleボタン押下時の処理
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
-  const applyStyleList = document.querySelector(
-    ".apply-style__list"
-  );
+  const applyStyleList = document.querySelector(".apply-style__list");
+
+  // スクロールバーの表示と動作を制御するJavaScriptコード
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    const scrollContainer = document.querySelector(".apply-style__list");
+    const scrollBar = document.querySelector(
+      ".scroll_container--scrollBar--YLWIi"
+    );
+    let isDragging = false;
+
+    // スクロールバーの高さを計算する関数
+    const setScrollBarHeight = () => {
+      const visibleRatio =
+        scrollContainer.clientHeight / scrollContainer.scrollHeight;
+      const scrollBarHeight = Math.max(
+        visibleRatio * scrollContainer.clientHeight,
+        10
+      ); // 最小高さが10pxであることを保証
+      scrollBar.style.height = scrollBarHeight + "px";
+      scrollBar.style.display = "block"; // スクロールバーを表示
+    };
+
+    // スクロールバーとスクロールコンテナの関連付け
+    const updateScrollBarPosition = () => {
+      const scrollFraction =
+        scrollContainer.scrollTop /
+        (scrollContainer.scrollHeight - scrollContainer.clientHeight);
+      const topPosition =
+        scrollFraction *
+        (scrollContainer.clientHeight - scrollBar.offsetHeight);
+      scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
+    };
+
+    // イベントリスナー: マウスホイールでのスクロール操作
+    scrollContainer.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const deltaY = e.deltaY * 0.5;
+      scrollContent(deltaY);
+    });
+
+    // スクロールイベントにより、カスタムスクロールバーを更新
+    scrollContainer.addEventListener("scroll", () => {
+      updateScrollBarPosition();
+    });
+
+    // スクロール関数
+    const scrollContent = (deltaY) => {
+      scrollContainer.scrollTop += deltaY;
+    };
+
+    // ドラッグイベント用のヘルパー関数
+    const startDrag = (e) => {
+      isDragging = true;
+      scrollBar.classList.add("dragging");
+      document.body.classList.add("scrollbar-dragging");
+    };
+
+    const endDrag = (e) => {
+      isDragging = false;
+      scrollBar.classList.remove("dragging");
+      document.body.classList.remove("scrollbar-dragging");
+    };
+
+    const doDrag = (e) => {
+      if (isDragging) {
+        const deltaY =
+          e.movementY *
+          (scrollContainer.scrollHeight / scrollContainer.clientHeight);
+        scrollContent(deltaY);
+      }
+    };
+
+    // ドラッグイベントリスナー
+    scrollBar.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", doDrag);
+    document.addEventListener("mouseup", endDrag);
+
+    // スクロールバーの高さの初期設定
+    setScrollBarHeight();
+    updateScrollBarPosition();
+  });
 
   // 選択された要素とstyleの状態を表示
+  let selectedName = null;
   let selectedEnv = null;
   let hasSelection = false;
   let isEnvSelected = false;
@@ -1421,13 +1417,15 @@
         });
         break;
       case "add-style-to-list":
+        applyStyleItems = document.querySelectorAll(".apply-style__item");
+
         // 新しいリストアイテムを作成
         const styleName = message.styleName;
         const env = message.env;
 
         let isEnvExists = false;
         applyStyleItems.forEach((item) => {
-          if (item.getAttribute('data-env') === env) {
+          if (item.getAttribute("data-env") === env) {
             isEnvExists = true;
           }
         });
@@ -1437,18 +1435,17 @@
           break;
         }
 
+        const newItem = document.createElement("li");
+        newItem.classList.add("apply-style__item");
+        newItem.setAttribute("data-env", env);
 
-        const newItem = document.createElement('li');
-        newItem.classList.add('apply-style__item');
-        newItem.setAttribute('data-env', env);
-        
         // リストアイテムに追加するHTMLコンテンツを設定
         newItem.innerHTML = `
           <div class="apply-style__item-content">
             <h3 class="apply-style__item-title">${styleName}</h3>
           </div>
           <button
-            class="apply-style__options-button"
+            class="apply-style__options-button edit"
             tabindex="0"
             aria-label="その他のオプション"
             data-tooltip-type="text"
@@ -1466,15 +1463,14 @@
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                  d="M11.5 16C11.5 16.8284 10.8284 17.5 10 17.5C9.17157 17.5 8.5 16.8284 8.5 16C8.5 15.1716 9.17157 14.5 10 14.5C10.8284 14.5 11.5 15.1716 11.5 16ZM17.5 16C17.5 16.8284 16.8284 17.5 16 17.5C15.1716 17.5 14.5 16.8284 14.5 16C14.5 15.1716 15.1716 14.5 16 14.5C16.8284 14.5 17.5 15.1716 17.5 16ZM22 17.5C22.8284 17.5 23.5 16.8284 23.5 16C23.5 15.1716 22.8284 14.5 22 14.5C21.1716 14.5 20.5 15.1716 20.5 16C20.5 16.8284 21.1716 17.5 22 17.5Z"
-                  fill-opacity="0.8"
+                  d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"
                 />
               </svg>
             </span>
           </button>
-          <div class="apply-style__popup">
+          <div class="apply-style__popup edit">
             <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Manage style</div>
+              <div class="apply-style__popup-content">Edit style</div>
               <div class="apply-style__popup-arrow">
                 <svg
                   width="13"
@@ -1488,18 +1484,45 @@
               </div>
             </div>
           </div>
-          <div class="menu" role="menu">
-            <div class="menu__item">
-              <div class="menu__text">Edit style</div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Duplicate style</div>
-            </div>
-            <div class="menu__item__divider">
-              <div class="menu__divider"></div>
-            </div>
-            <div class="menu__item">
-              <div class="menu__text">Delete style</div>
+          <button
+            class="apply-style__options-button delete"
+            tabindex="0"
+            aria-label="その他のオプション"
+            data-tooltip-type="text"
+            data-tooltip="その他のオプション"
+          >
+            <span class="apply-style__options-svg-container">
+              <svg
+                class="apply-style__options-svg"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 9.5C14.4477 9.5 14 9.94772 14 10.5H18C18 9.94772 17.5523 9.5 17 9.5H15ZM19 10.5C19 9.39543 18.1046 8.5 17 8.5H15C13.8954 8.5 13 9.39543 13 10.5H11.5H10V11.5H11V21.5C11 22.6046 11.8954 23.5 13 23.5H19C20.1046 23.5 21 22.6046 21 21.5V11.5H22V10.5H20.5H19ZM20 11.5H18.5H13.5H12V21.5C12 22.0523 12.4477 22.5 13 22.5H19C19.5523 22.5 20 22.0523 20 21.5V11.5ZM14 18.5V14.5H15V18.5H14ZM17 18.5V14.5H18V18.5H17Z"
+                />
+              </svg>
+            </span>
+          </button>
+
+          <div class="apply-style__popup delete">
+            <div class="apply-style__popup-arrow-container">
+              <div class="apply-style__popup-content">Delete style</div>
+              <div class="apply-style__popup-arrow">
+                <svg
+                  width="13"
+                  height="7"
+                  viewBox="0 0 13 7"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+                </svg>
+              </div>
             </div>
           </div>
           <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
@@ -1509,7 +1532,7 @@
         applyStyleList.appendChild(newItem);
 
         // 新しいリストアイテムに関するイベントをここで追加しています
-        newItem.addEventListener('click', function(e) {
+        newItem.addEventListener("click", function (e) {
           // クリックイベントのバブリングを止める
           e.stopPropagation();
 
@@ -1519,6 +1542,9 @@
 
           // クリックされたアイテムにアクティブクラスを切り替え
           newItem.classList.toggle("active");
+          selectedName = newItem.querySelector(
+            ".apply-style__item-title"
+          ).textContent; // スタイル名を取得
           selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
 
           // ボタンの状態を更新
@@ -1526,28 +1552,22 @@
         });
 
         // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-        const optionsButton = newItem.querySelector(".apply-style__options-button");
-        optionsButton.addEventListener('click', function(e) {
+        const applyStyleEditButton = newItem.querySelector(
+          ".apply-style__options-button.edit"
+        );
+        const applyStyleDeleteButton = newItem.querySelector(
+          ".apply-style__options-button.delete"
+        );
+        applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
           e.stopPropagation();
 
-          // すべてのポップアップとメニューを初期化
-          document
-            .querySelectorAll(".apply-style__popup")
-            .forEach((popupElement) => {
-              popupElement.style.display = "none";
-            });
-          document.querySelectorAll(".menu").forEach((menuElement) => {
-            menuElement.style.display = "none";
-          });
           removeAllActiveButtons();
 
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(".apply-style__options-button");
-
-          // ボタンに関連するポップアップとメニューを取得
-          const popup = buttonElement.nextElementSibling;
-          const menu = buttonElement.nextElementSibling.nextElementSibling; // 正しい要素を指すようにnextElementSiblingを2回使用
+          const buttonElement = e.target.closest(
+            ".apply-style__options-button"
+          );
 
           // ボタンのアクティブ状態をトグルする
           const isActive = buttonElement.classList.toggle("active");
@@ -1555,12 +1575,12 @@
             overlay.classList.remove("hidden");
             document.body.classList.add("menu-open");
             // アクティブになったとき
-            if (popup) {
-              popup.style.display = "none";
-            }
-            if (menu) {
-              menu.style.display = "block";
-            }
+            // if (popup) {
+            //   popup.style.display = "none";
+            // }
+            // if (menu) {
+            //   menu.style.display = "block";
+            // }
           } else {
             // アクティブでないとき（別の処理が必要な場合のみ）
             overlay.classList.add("hidden");
@@ -1569,6 +1589,25 @@
 
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
+        });
+        applyStyleDeleteButton.addEventListener("click", function (e) {
+          e.stopPropagation(); // イベントバブリングを防ぐ
+          const envValue = newItem.getAttribute("data-env");
+          let itemToDelete = document.querySelector(
+            `.apply-style__item[data-env="${envValue}"]`
+          ); // DOM 要素を取得
+          if (itemToDelete) {
+            itemToDelete.remove(); // DOM 要素を削除
+          }
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: "delete-style",
+                env: newItem.getAttribute("data-env"),
+              },
+            },
+            "*"
+          );
         });
         break;
     }
@@ -1678,20 +1717,20 @@
   }
 
   // ボタンにクリックイベントリスナーを追加
-  createStyleButton.addEventListener('click', function() {
+  createStyleButton.addEventListener("click", function () {
     // スタイル名のインプット要素から値を取得
-    const styleNameInput = document.getElementById('styleNameInput');
+    const styleNameInput = document.getElementById("styleNameInput");
     const styleName = styleNameInput.value.trim();
-    const timestamp = new Date().toISOString().replace(/[^\d]/g, '');
+    const timestamp = new Date().toISOString().replace(/[^\d]/g, "");
     // styleName が空でないことを確認します
     if (!styleName) {
       alert("Please enter a style name.");
       return;
     }
-    const newItem = document.createElement('li');
-    newItem.classList.add('apply-style__item');
-    newItem.setAttribute('data-env', `style-${timestamp}`);
-    
+    const newItem = document.createElement("li");
+    newItem.classList.add("apply-style__item");
+    newItem.setAttribute("data-env", `style-${timestamp}`);
+
     // リストアイテムに追加するHTMLコンテンツを設定
     newItem.innerHTML = `
       <div class="apply-style__item-content">
@@ -1785,7 +1824,7 @@
     applyStyleList.appendChild(newItem);
 
     // 新しいリストアイテムに関するイベントをここで追加しています
-    newItem.addEventListener('click', function(e) {
+    newItem.addEventListener("click", function (e) {
       // クリックイベントのバブリングを止める
       e.stopPropagation();
 
@@ -1795,6 +1834,9 @@
 
       // クリックされたアイテムにアクティブクラスを切り替え
       newItem.classList.toggle("active");
+      selectedName = newItem.querySelector(
+        ".apply-style__item-title"
+      ).textContent; // スタイル名を取得
       selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
 
       // ボタンの状態を更新
@@ -1802,12 +1844,16 @@
     });
 
     // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-    const applyStyleEditButton = newItem.querySelector(".apply-style__options-button.edit");
-    const applyStyleDeleteButton = newItem.querySelector(".apply-style__options-button.delete");
-    applyStyleEditButton.addEventListener('click', function(e) {
+    const applyStyleEditButton = newItem.querySelector(
+      ".apply-style__options-button.edit"
+    );
+    const applyStyleDeleteButton = newItem.querySelector(
+      ".apply-style__options-button.delete"
+    );
+    applyStyleEditButton.addEventListener("click", function (e) {
       // イベントのバブリングを阻止
       e.stopPropagation();
-      
+
       removeAllActiveButtons();
 
       // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
@@ -1834,10 +1880,12 @@
       // 他のアクティブな項目を非アクティブにする
       removeAllActiveItems();
     });
-    applyStyleDeleteButton.addEventListener('click', function(e) {
+    applyStyleDeleteButton.addEventListener("click", function (e) {
       e.stopPropagation(); // イベントバブリングを防ぐ
-      const envValue = newItem.getAttribute('data-env');
-      let itemToDelete = document.querySelector(`.apply-style__item[data-env="${envValue}"]`); // DOM 要素を取得
+      const envValue = newItem.getAttribute("data-env");
+      let itemToDelete = document.querySelector(
+        `.apply-style__item[data-env="${envValue}"]`
+      ); // DOM 要素を取得
       if (itemToDelete) {
         itemToDelete.remove(); // DOM 要素を削除
       }
@@ -1845,7 +1893,7 @@
         {
           pluginMessage: {
             type: "delete-style",
-            env: newItem.getAttribute('data-env'),
+            env: newItem.getAttribute("data-env"),
           },
         },
         "*"
@@ -1853,37 +1901,63 @@
     });
 
     // フォントスタイル情報をそれぞれのドロップダウンから取得
-    const japaneseFontFamily = document.querySelector('[data-lang="Japanese"] [data-label-type="font-family"]').textContent.trim();
-    const japaneseFontWeight = document.querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]').textContent.trim();
-    const englishFontFamily = document.querySelector('[data-lang="English"] [data-label-type="font-family"]').textContent.trim();
-    const englishFontWeight = document.querySelector('[data-lang="English"] [data-label-type="font-weight"]').textContent.trim();
+    const japaneseFontFamily = document
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const japaneseFontWeight = document
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]')
+      .textContent.trim();
+    const englishFontFamily = document
+      .querySelector('[data-lang="English"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const englishFontWeight = document
+      .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
+      .textContent.trim();
 
     // 各言語のフォント設定を格納するオブジェクトを作成します
     const fontSettings = {
       Japanese: {
         fontFamily: japaneseFontFamily,
-        fontWeight: japaneseFontWeight
+        fontWeight: japaneseFontWeight,
       },
       English: {
         fontFamily: englishFontFamily,
-        fontWeight: englishFontWeight
-      }
+        fontWeight: englishFontWeight,
+      },
     };
     // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
-    parent.postMessage({
-      pluginMessage: {
-        type: 'save-style',
-        styleName: styleName,
-        fontSettings: fontSettings,
-        key: timestamp // この部分はユーザーのIDや一意の識別子を使用
-      }
-    }, '*');
-    styleNameInput.value = '';
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "save-style",
+          styleName: styleName,
+          fontSettings: fontSettings,
+          key: timestamp, // この部分はユーザーのIDや一意の識別子を使用
+        },
+      },
+      "*"
+    );
+    styleNameInput.value = "";
   });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
-  const applyBtn = document.getElementById("analyzeBtn");
+  const applyBtn = document.getElementById("applyBtn");
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
+  // UIのHTML中のスクリプトは以下のようになります。
+  // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
+  // When the button is clicked, the plugin will start the text analysis and update
+  applyBtn.addEventListener("click", () => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "analyzeAndUpdateText",
+          Name: selectedName,
+          key: selectedEnv,
+        },
+      },
+      "*"
+    );
+  });
 
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
@@ -1928,13 +2002,13 @@
   function hideMenu() {
     // Apply styles の menu を非表示にする
     document.querySelectorAll(".menu").forEach((menu) => {
-      menu.style.display = 'none';
+      menu.style.display = "none";
     });
     // Create styles の font-style / font-weight menu を非表示にする
     document.querySelectorAll(".create-style__font-menu").forEach((menu) => {
-      menu.classList.add("hidden")
+      menu.classList.add("hidden");
     });
-    
+
     // オーバーレイを非表示にする
     overlay.classList.add("hidden");
 
@@ -1942,15 +2016,17 @@
     document.body.classList.remove("menu-open");
 
     // すべてのアクティブなメニューボタンの状態をリセット
-    const activeButtons = document.querySelectorAll(".apply-style__options-button.active");
+    const activeButtons = document.querySelectorAll(
+      ".apply-style__options-button.active"
+    );
     activeButtons.forEach((button) => {
-      button.classList.remove('active');
+      button.classList.remove("active");
     });
   }
 
   // オーバーレイがクリックされた時にメニューを非表示にするイベントリスナーを追加
   overlay.addEventListener("click", hideMenu);
-  
+
   // アイテムのクリックイベントを設定
   applyStyleItems.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -1970,55 +2046,6 @@
     });
   });
 
-  applyStyleOptionButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      // イベントのバブリングを阻止
-      e.stopPropagation();
-
-      // すべてのポップアップとメニューを初期化
-      document
-        .querySelectorAll(".apply-style__popup")
-        .forEach((popupElement) => {
-          popupElement.style.display = "none";
-        });
-      document.querySelectorAll(".menu").forEach((menuElement) => {
-        menuElement.style.display = "none";
-      });
-      removeAllActiveButtons();
-
-      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-      const buttonElement = e.target.closest(".apply-style__options-button");
-
-      // ボタンに関連するポップアップとメニューを取得
-      const popup = buttonElement.nextElementSibling;
-      const menu = buttonElement.nextElementSibling.nextElementSibling; // 正しい要素を指すようにnextElementSiblingを2回使用
-
-      // ボタンのアクティブ状態をトグルする
-      const isActive = buttonElement.classList.toggle("active");
-      if (isActive) {
-        overlay.classList.remove("hidden");
-        document.body.classList.add("menu-open");
-        // アクティブになったとき
-        if (popup) {
-          popup.style.display = "none";
-        }
-        if (menu) {
-          menu.style.display = "block";
-        }
-      } else {
-        // アクティブでないとき（別の処理が必要な場合のみ）
-        overlay.classList.add("hidden");
-        document.body.classList.remove("menu-open");
-      }
-
-      // 他のアクティブな項目を非アクティブにする
-      removeAllActiveItems();
-    });
-  });
-
-  // Applyボタンの初期状態を定義
-  applyBtn.disabled = true; // 最初は非活性化しておく
-
   // Applyボタンの有効/無効ステータスを更新する関数
   function updateButtonState() {
     // selectedEnvがnullでないかをチェックして、isEnvSelectedを更新する
@@ -2034,21 +2061,4 @@
       applyBtn.classList.add("disabled");
     }
   }
-
-  // UIのHTML中のスクリプトは以下のようになります。
-  // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
-  // When the button is clicked, the plugin will start the text analysis and update
-  applyBtn.addEventListener("click", () => {
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "analyzeAndUpdateText",
-          fontSettings: {
-            env: selectedEnv,
-          },
-        },
-      },
-      "*"
-    );
-  });
 </script>
