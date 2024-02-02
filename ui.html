@@ -1156,6 +1156,7 @@
   });
 
   // 選択された要素とstyleの状態を表示
+  let selectedName = null;
   let selectedEnv = null;
   let hasSelection = false;
   let isEnvSelected = false;
@@ -1541,6 +1542,9 @@
 
           // クリックされたアイテムにアクティブクラスを切り替え
           newItem.classList.toggle("active");
+          selectedName = newItem.querySelector(
+            ".apply-style__item-title"
+          ).textContent; // スタイル名を取得
           selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
 
           // ボタンの状態を更新
@@ -1830,6 +1834,9 @@
 
       // クリックされたアイテムにアクティブクラスを切り替え
       newItem.classList.toggle("active");
+      selectedName = newItem.querySelector(
+        ".apply-style__item-title"
+      ).textContent; // スタイル名を取得
       selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
 
       // ボタンの状態を更新
@@ -1940,14 +1947,12 @@
   // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
   // When the button is clicked, the plugin will start the text analysis and update
   applyBtn.addEventListener("click", () => {
-    console.log("aaaaa");
     parent.postMessage(
       {
         pluginMessage: {
           type: "analyzeAndUpdateText",
-          fontSettings: {
-            env: selectedEnv,
-          },
+          Name: selectedName,
+          key: selectedEnv,
         },
       },
       "*"
