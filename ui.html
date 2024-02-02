@@ -1843,7 +1843,7 @@
       updateButtonState();
     });
 
-    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
+    // 設定/編集ボタンに関するイベントリスナーをここで追加できます
     const applyStyleEditButton = newItem.querySelector(
       ".apply-style__options-button.edit"
     );
@@ -1853,7 +1853,6 @@
     applyStyleEditButton.addEventListener("click", function (e) {
       // イベントのバブリングを阻止
       e.stopPropagation();
-
       removeAllActiveButtons();
 
       // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
