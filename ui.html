@@ -458,22 +458,48 @@
   }
 
   .create-style__font-menu {
+    background: var(--figma-color-bg);
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    z-index: 100;
+    overflow-y: auto;
+  }
+  .create-style__font-menu.font-family-list-container {
+    position: absolute;
+    right: 24px;
+    left: 24px;
+    top: 24px;
+    bottom: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .create-style__font-menu.font-family-list-container.hidden {
+    display: none;
+  }
+  .create-style__font-menu.font-weight-list-container {
+    position: absolute;
+    right: 8px;
     width: 178px;
     padding-top: 8px;
     padding-bottom: 8px;
-    background: #222222;
-    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
-    position: absolute;
-    right: 8px;
-    z-index: 100;
     max-height: 164px;
-    overflow-y: auto;
   }
 
+  .scroll_container > .font-menu__item {
+    width: 100%;
+    min-height: 28px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .scroll_container > .font-menu__item:hover {
+    background: var(--figma-color-bg-hover);
+  }
   .font-menu__item {
     width: 100%;
-    height: 24px;
+    min-height: 24px;
     position: relative;
     display: flex;
     align-items: center;
@@ -545,11 +571,11 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 24px;
+    height: 100%;
     left: 32px;
     top: 0px;
     position: absolute;
-    color: white;
+    color: var(--color-text);
     font-size: 12px;
     font-family: Inter;
     font-weight: 400;
@@ -828,6 +854,43 @@
     ); /* 好きな薄い色に変更してください */
     opacity: 1; /* 不透明度を設定することもできます（必須ではありません） */
   }
+
+  .font_picker--fontPickerSearchRow--PBwi7 {
+    color: var(--figma-color-icon);
+    padding-left: 16px;
+    padding-right: 12px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--figma-color-border);
+  }
+  .font_picker--searchIcon--ADEyj {
+    padding-right: 2px;
+    fill: var(--figma-color-icon);
+  }
+  .font_picker--fontPickerSearchBar--XigbT {
+    margin-left: 8px;
+    margin-right: 5px;
+    width: 100%;
+  }
+  .font_picker--fontPickerSearchBarInput--qOPld {
+    font-weight: 400;
+    width: 100%;
+    background-color: var(--figma-color-bg);
+    color: var(--figma-color-text);
+    height: 15px;
+    border: none;
+    padding: 0px;
+  }
+  .font_picker--fontPickerSearchBarInput--qOPld:focus {
+    outline: 0px;
+  }
+  .scroll_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
 </style>
 
 <body class="scrollbar-hidden">
@@ -955,6 +1018,35 @@
               class="create-style__font-menu hidden font-family-list-container"
               role="menu"
             >
+              <div class="font_picker--fontPickerSearchRow--PBwi7">
+                <span class="svg-container font_picker--searchIcon--ADEyj"
+                  ><svg
+                    class="svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 11 11"
+                  >
+                    <path
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      stroke="none"
+                      d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
+                    ></path></svg
+                ></span>
+                <div class="font_picker--fontPickerSearchBar--XigbT">
+                  <input
+                    placeholder="Search fonts"
+                    spellcheck="false"
+                    class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
+                    type="text"
+                    data-testid="font-picker-search-input"
+                    dir="auto"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="scroll_container"></div>
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
@@ -1009,6 +1101,35 @@
               class="create-style__font-menu hidden font-family-list-container"
               role="menu"
             >
+              <div class="font_picker--fontPickerSearchRow--PBwi7">
+                <span class="svg-container font_picker--searchIcon--ADEyj"
+                  ><svg
+                    class="svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 11 11"
+                  >
+                    <path
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      stroke="none"
+                      d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
+                    ></path></svg
+                ></span>
+                <div class="font_picker--fontPickerSearchBar--XigbT">
+                  <input
+                    placeholder="Search fonts"
+                    spellcheck="false"
+                    class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
+                    type="text"
+                    data-testid="font-picker-search-input"
+                    dir="auto"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="scroll_container"></div>
               <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
             </div>
           </div>
@@ -1307,6 +1428,9 @@
           const fontFamilyListContainer = content.querySelector(
             ".font-family-list-container"
           );
+          const searchInputContainer = content.querySelector(".font-search");
+          const scrollContainer = content.querySelector(".scroll_container");
+          setupSearchFunctionality(searchInputContainer, scrollContainer);
           const fontWeightListContainer = content.querySelector(
             ".font-weight-list-container"
           );
@@ -1321,7 +1445,7 @@
           );
 
           // 既存のリスト内容を一度クリアする
-          fontFamilyListContainer.innerHTML = "";
+          scrollContainer.innerHTML = "";
 
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
@@ -1337,7 +1461,7 @@
 
               // 新しいフォントファミリーのメニュー項目を作成
               const item = document.createElement("div");
-              item.className = "font-menu__item";
+              item.className = "font-menu__item font-item";
               item.setAttribute("role", "menuitem");
 
               // フォントファミリー名を表示するためのテキスト部分を作成
@@ -1347,13 +1471,12 @@
               item.appendChild(text);
 
               // リストにメニュー項目を追加
-              fontFamilyListContainer.appendChild(item);
+              scrollContainer.appendChild(item);
             }
           });
 
           dropDownToggle.addEventListener("click", () => {
             fontFamilyListContainer.classList.add("hidden");
-
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
               fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
@@ -1372,7 +1495,7 @@
             }
           });
 
-          fontFamilyListContainer.childNodes.forEach((item) => {
+          scrollContainer.childNodes.forEach((item) => {
             item.addEventListener("click", (event) => {
               const fontName = item.textContent;
               // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
@@ -1612,6 +1735,34 @@
         break;
     }
   };
+  // 検索機能を設定する関数
+  function setupSearchFunctionality(searchInputContainer, scrollContainer) {
+    // 検索イベントリスナーを追加
+    searchInputContainer.addEventListener("input", function () {
+      let searchText = searchInputContainer.value.toLowerCase();
+
+      if (searchInputContainer) {
+        // 検索イベントリスナーを追加
+        searchInputContainer.addEventListener("input", function () {
+          let searchText = searchInputContainer.value.toLowerCase();
+
+          // この時点でのfont-itemsを再取得する
+          let fontItems = scrollContainer.querySelectorAll(".font-item");
+
+          fontItems.forEach(function (item) {
+            let fontName = item
+              .querySelector(".font-menu__text")
+              .textContent.toLowerCase();
+            if (fontName.includes(searchText)) {
+              item.style.display = "";
+            } else {
+              item.style.display = "none";
+            }
+          });
+        });
+      }
+    });
+  }
   // フォントウェイトを表示する関数
   function makeFontWeightLists(
     fontFamilyName,
