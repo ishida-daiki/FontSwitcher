@@ -1294,8 +1294,13 @@
       activateTab(tab);
       // タブの内容を切り替える
       toggleTabContents(index);
+      toggleTabContentAndResize(index);
     });
   });
+  activateTab(tabs[0]);
+  toggleTabContents(0);
+  toggleTabContentAndResize(0);
+
   // タブコンテンツの表示切り替えを行う関数
   function toggleTabContents(index) {
     // Apply Stylesタブが選択された場合（index 0）
@@ -1317,9 +1322,6 @@
       );
     }
   }
-  // 最初のタブをアクティブ化する際に、合わせてコンテンツも切り替える
-  activateTab(tabs[0]);
-  toggleTabContents(0);
   // タブが選択された際の関数を定義します。
   function activateTab(tab) {
     // すべてのタブからアクティブクラスを取り除きます。
@@ -1335,12 +1337,29 @@
     indicator.style.width = "67px";
     indicator.style.left = `${tab.offsetLeft}px`;
   }
-  // タブをクリックした際のイベントリスナーを追加します。
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => activateTab(tab));
-  });
-  // 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
-  activateTab(tabs[0]); // 最初のタブをアクティブとする
+
+  // UI側のスクリプト内で、タブの切り替えイベントを扱う
+  function toggleTabContentAndResize(index) {
+    // 新しい高さを計算する処理...
+    let newHeight;
+    let newWidth;
+    // Apply Stylesタブが選択された場合（index 0）
+    if (index === 0) {
+      newHeight = 463;
+      newWidth = 324;
+    }
+    // Create Styleタブが選択された場合（index 1）
+    else if (index === 1) {
+      newHeight = 373;
+      newWidth = 324;
+    }
+
+    // メインスクリプトに新しい高さを通知
+    parent.postMessage(
+      { pluginMessage: { type: "resize-ui", width: newWidth, height: newHeight } },
+      "*"
+    );
+  }
 
   // ローディング設定
   const circumference = 2 * Math.PI * 52;
