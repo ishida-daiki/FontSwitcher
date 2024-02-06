@@ -895,14 +895,20 @@
   .sample-style__message {
     display: grid;
     place-content: center;
-    height: 110px;
     background-color: var(--figma-color-bg-secondary);
     padding: 0 16px;
     line-height: 1.5;
     border-bottom: 1px var(--figma-color-border) solid;
+    font-weight: 400;
+    color: var(--figma-color-text-disabled);
+    overflow: auto;
+    flex: 1;
   }
   .sample-text-container {
     width: 324px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .sample-text__input-group {
     box-sizing: border-box;
@@ -917,6 +923,7 @@
     justify-content: space-between;
     align-items: flex-start;
     border-bottom: 1px solid var(--figma-color-border);
+    flex: 1;
   }
   .sample-style__input {
     grid-column-start: 1;
@@ -930,13 +937,13 @@
     cursor: default;
     box-sizing: border-box;
     background-clip: padding-box;
-    height: 72px;
     font-family: Inter;
     font-size: 11px;
     line-height: 175%;
     border-radius: 2px;
     width: -webkit-fill-available;
     resize: none;
+    flex: 1;
   }
   .sample-style__input:focus-visible {
     margin-top: 0;
@@ -959,6 +966,26 @@
   .sample-style__content {
     display: flex;
     flex-direction: column;
+  }
+  .sample-style__tabs {
+    padding: 8 0px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+  }
+  .sample-language-menu {
+    position: absolute;
+    right: 8px;
+    width: 178px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    max-height: 164px;
+    background: var(--figma-color-bg);
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    z-index: 100;
+    overflow-y: auto;
   }
 </style>
 
@@ -1246,10 +1273,54 @@
         </button>
       </div>
     </div>
-    <div class="sample-text-container">
+    <div class="sample-text-container" id="sampleView">
       <!-- プレビュー -->
-      <div class="sample-style__message">
-        <p class="apply-style__text">Preview Sample Text</p>
+      <div class="sample-style__tabs">
+        <div class="create-style__tab-header">
+          <h2 class="create-style__tab-title">Sample Preview</h2>
+          <button
+            class="apply-style__options-button"
+            tabindex="0"
+            aria-label="その他のオプション"
+            data-tooltip-type="text"
+            data-tooltip="その他のオプション"
+          >
+            <span class="apply-style__options-svg-container">
+              <svg
+                class="apply-style__options-svg"
+                width="14"
+                height="12"
+                viewBox="0 0 14 12
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-opacity="1"
+                  fill-rule="evenodd"
+                  stroke="none"
+                  d="m5 1.381-4 2.31v4.618l4 2.31 4-2.31V3.691L5 1.38zm5 1.732L5 .227 0 3.113v5.774l5 2.887 5-2.887V3.113zm3 5.196-5 2.887 1 .578 5-2.887V3.113L9 .227 8 .804l5 2.887v4.618zM6 6c0 .552-.448 1-1 1-.552 0-1-.448-1-1 0-.552.448-1 1-1 .552 0 1 .448 1 1z"
+                ></path>
+              </svg>
+            </span>
+          </button>
+          <div class="sample-language-menu hidden" role="menu">
+            <div class="font-menu__item" role="menuitem">
+              <div class="font-menu__text">English</div>
+              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
+              </svg>
+            </div>
+            <div class="font-menu__item" role="menuitem">
+              <div class="font-menu__text">Japanese</div>
+              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="sample-style__message">
+          <p class="sample-style__text">Preview Sample Text</p>
+        </div>
       </div>
       <div class="sample-text__input-group">
         <div class="create-style__tab-header">
@@ -1257,7 +1328,7 @@
         </div>
         <textarea
           type="text"
-          id="styleNameInput"
+          id="sampleTextContent"
           spellcheck="false"
           class="sample-style__input"
           name="styleName"
@@ -1266,58 +1337,6 @@
           dir="auto"
           value=""
         ></textarea>
-      </div>
-      <div class="create-style__tabs">
-        <div class="create-style__tab-header">
-          <h2 class="create-style__tab-title">Text</h2>
-        </div>
-        <div class="sample-style__content">
-          <div class="create-style__dropdown" data-lang="English">
-            <div class="create-style__dropdown-group font-family">
-              <button
-                class="create-style__dropdown-toggle font-family"
-                data-label-type="font-family"
-              >
-                <span class="create-style__dropdown-label">SF Pro</span>
-              </button>
-              <div
-                class="create-style__font-menu hidden font-family-list-container"
-                role="menu"
-              >
-                <div class="font_picker--fontPickerSearchRow--PBwi7">
-                  <span class="svg-container font_picker--searchIcon--ADEyj"
-                    ><svg
-                      class="svg"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                    >
-                      <path
-                        fill-opacity="1"
-                        fill-rule="evenodd"
-                        stroke="none"
-                        d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
-                      ></path></svg
-                  ></span>
-                  <div class="font_picker--fontPickerSearchBar--XigbT">
-                    <input
-                      placeholder="Search fonts"
-                      spellcheck="false"
-                      class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
-                      type="text"
-                      data-testid="font-picker-search-input"
-                      dir="auto"
-                      value=""
-                    />
-                  </div>
-                </div>
-                <div class="scroll_container"></div>
-                <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1906,6 +1925,23 @@
         break;
     }
   };
+  document.addEventListener("DOMContentLoaded", function () {
+    let textarea = document.getElementById("sampleTextContent");
+    let textDisplay = document.querySelector(".sample-style__text");
+    let defaultText = "Preview Sample Text";
+
+    textarea.addEventListener("input", function () {
+      if (textDisplay !== null) {
+        if (this.value) {
+          textDisplay.textContent = this.value;
+          textDisplay.style.color = "var(--figma-color-text)";
+        } else {
+          textDisplay.textContent = defaultText;
+          textDisplay.style.color = "var(--figma-color-text-disabled)";
+        }
+      }
+    });
+  });
   // 検索機能を設定する関数
   function setupSearchFunctionality(searchInputContainer, scrollContainer) {
     // 検索イベントリスナーを追加
