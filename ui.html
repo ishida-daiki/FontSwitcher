@@ -1350,25 +1350,26 @@
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
+  let textDisplay = document.querySelector(".sample-style__text");
   let applyStyleItems;
   let applyStyleEditButtons;
   let applyStyleDeleteButtons;
-
+  
   // CreateStyleボタン押下時の処理
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
   const applyStyleList = document.querySelector(".apply-style__list");
-
+  
   // スクロールバーの表示と動作を制御するJavaScriptコード
-
+  
   document.addEventListener("DOMContentLoaded", (event) => {
     const scrollContainer = document.querySelector(".apply-style__list");
     const scrollBar = document.querySelector(
       ".scroll_container--scrollBar--YLWIi"
     );
     let isDragging = false;
-
+  
     // スクロールバーの高さを計算する関数
     const setScrollBarHeight = () => {
       const visibleRatio =
@@ -1380,7 +1381,7 @@
       scrollBar.style.height = scrollBarHeight + "px";
       scrollBar.style.display = "block"; // スクロールバーを表示
     };
-
+  
     // スクロールバーとスクロールコンテナの関連付け
     const updateScrollBarPosition = () => {
       const scrollFraction =
@@ -1391,37 +1392,37 @@
         (scrollContainer.clientHeight - scrollBar.offsetHeight);
       scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
     };
-
+  
     // イベントリスナー: マウスホイールでのスクロール操作
     scrollContainer.addEventListener("wheel", (e) => {
       e.preventDefault();
       const deltaY = e.deltaY * 0.5;
       scrollContent(deltaY);
     });
-
+  
     // スクロールイベントにより、カスタムスクロールバーを更新
     scrollContainer.addEventListener("scroll", () => {
       updateScrollBarPosition();
     });
-
+  
     // スクロール関数
     const scrollContent = (deltaY) => {
       scrollContainer.scrollTop += deltaY;
     };
-
+  
     // ドラッグイベント用のヘルパー関数
     const startDrag = (e) => {
       isDragging = true;
       scrollBar.classList.add("dragging");
       document.body.classList.add("scrollbar-dragging");
     };
-
+  
     const endDrag = (e) => {
       isDragging = false;
       scrollBar.classList.remove("dragging");
       document.body.classList.remove("scrollbar-dragging");
     };
-
+  
     const doDrag = (e) => {
       if (isDragging) {
         const deltaY =
@@ -1430,29 +1431,29 @@
         scrollContent(deltaY);
       }
     };
-
+  
     // ドラッグイベントリスナー
     scrollBar.addEventListener("mousedown", startDrag);
     document.addEventListener("mousemove", doDrag);
     document.addEventListener("mouseup", endDrag);
-
+  
     // スクロールバーの高さの初期設定
     setScrollBarHeight();
     updateScrollBarPosition();
   });
-
+  
   // 選択された要素とstyleの状態を表示
   let selectedName = null;
   let selectedEnv = null;
   let hasSelection = false;
   let isEnvSelected = false;
-
+  
   // 利用可能な全フォント情報を格納する変数
   let availableFonts = []; // Figma APIから取得するデータ
-
+  
   // 利用可能なフォントをロードするためにメインスクリプトに要求する
   parent.postMessage({ pluginMessage: { type: "load-fonts-request" } }, "*");
-
+  
   // タブ切り替え設定
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
@@ -1465,7 +1466,7 @@
   activateTab(tabs[0]);
   toggleTabContents(0);
   toggleTabContentAndResize(0);
-
+  
   // タブコンテンツの表示切り替えを行う関数
   function toggleTabContents(index) {
     // Apply Stylesタブが選択された場合（index 0）
@@ -1493,16 +1494,16 @@
     tabs.forEach((t) => {
       t.classList.remove("tab-list__item--active");
     });
-
+  
     // 選択されたタブにアクティブクラスを追加します。
     tab.classList.add("tab-list__item--active");
-
+  
     // インジケーターを活性状態にして、選択されたタブの位置に合わせます。
     indicator.style.display = "block";
     indicator.style.width = "67px";
     indicator.style.left = `${tab.offsetLeft}px`;
   }
-
+  
   // UI側のスクリプト内で、タブの切り替えイベントを扱う
   function toggleTabContentAndResize(index) {
     // 新しい高さを計算する処理...
@@ -1518,7 +1519,7 @@
       newHeight = 373;
       newWidth = 648;
     }
-
+  
     // メインスクリプトに新しい高さを通知
     parent.postMessage(
       {
@@ -1531,33 +1532,33 @@
       "*"
     );
   }
-
+  
   // ローディング設定
   const circumference = 2 * Math.PI * 52;
-
+  
   // 最初に円をリングとして表示するために、
   // stroke-dasharrayとstroke-dashoffsetを円周の長さにセットします
   const circle = document.querySelector(".progress-ring__circle");
   circle.style.strokeDasharray = `${circumference} ${circumference}`;
   circle.style.strokeDashoffset = circumference;
-
+  
   function setProgress(percent) {
     // パーセントに応じたオフセットを計算します
     const offset = circumference - (percent / 100) * circumference;
     // オフセットを設定することでリングを描画します
     circle.style.strokeDashoffset = offset;
   }
-
+  
   // メッセージがプラグインから送信されたときにイベントを発火させる
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
-
+  
     // 共通のエレメントを取得
     const textElement = document.querySelector(
       ".apply-style__message .apply-style__text"
     ); // textElementをここで定義
     const loadingIndicator = document.getElementById("loadingIndicator");
-
+  
     switch (message.type) {
       // 選択した要素関連メッセージ
       case "selection-cleared":
@@ -1589,12 +1590,12 @@
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;
         let fontFamilyListContainers;
-
+  
         fontFamilyListContainers = document.querySelectorAll(
           ".font-family-list-container"
         );
         // listContainer領域外のクリックを検知するための関数
-
+  
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
@@ -1608,9 +1609,9 @@
             }
           });
         }
-
+  
         document.addEventListener("click", handleDocumentClick);
-
+  
         const createStyleContents = document.querySelectorAll(
           ".create-style__content"
         );
@@ -1633,10 +1634,10 @@
           let fontWeightLabel = content.querySelector(
             ".create-style__dropdown-toggle.font-weight .create-style__dropdown-label"
           );
-
+  
           // 既存のリスト内容を一度クリアする
           scrollContainer.innerHTML = "";
-
+  
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
           // 各コンテナに同じフォントリストを追加する
@@ -1648,23 +1649,23 @@
             // フォントファミリー名がSetにまだ追加されていない場合のみ項目を作成する
             if (!addedFontFamilies.has(font.fontName.family)) {
               addedFontFamilies.add(font.fontName.family);
-
+  
               // 新しいフォントファミリーのメニュー項目を作成
               const item = document.createElement("div");
               item.className = "font-menu__item font-item";
               item.setAttribute("role", "menuitem");
-
+  
               // フォントファミリー名を表示するためのテキスト部分を作成
               const text = document.createElement("div");
               text.className = "font-menu__text";
               text.textContent = font.fontName.family;
               item.appendChild(text);
-
+  
               // リストにメニュー項目を追加
               scrollContainer.appendChild(item);
             }
           });
-
+  
           dropDownToggle.addEventListener("click", () => {
             fontFamilyListContainer.classList.add("hidden");
             // ボタンに関連づけられたリストコンテナを取得する
@@ -1677,35 +1678,36 @@
             fontWeightListContainer.classList.add("hidden");
             overlay.classList.remove("hidden");
             document.body.classList.add("menu-open");
-
+  
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
               fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
-
+  
           scrollContainer.childNodes.forEach((item) => {
             item.addEventListener("click", (event) => {
               const fontName = item.textContent;
               // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
               const dropDown = fontFamilyListContainer.closest(
                 ".create-style__dropdown"
-              );
-              const label = dropDown.querySelector(
-                ".create-style__dropdown-label"
-              );
-              if (label) {
-                label.textContent = fontName;
+                );
+                const label = dropDown.querySelector(
+                  ".create-style__dropdown-label"
+                  );
+                if (label) {
+                  label.textContent = fontName;
+                  textDisplay.style.fontFamily = label.textContent;
               }
-
+  
               fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
               makeFontWeightLists(
                 fontName,
                 fontWeightListContainer,
                 fontWeightLabel
               );
-
+  
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
             });
@@ -1731,27 +1733,27 @@
         break;
       case "add-style-to-list":
         applyStyleItems = document.querySelectorAll(".apply-style__item");
-
+  
         // 新しいリストアイテムを作成
         const styleName = message.styleName;
         const env = message.env;
-
+  
         let isEnvExists = false;
         applyStyleItems.forEach((item) => {
           if (item.getAttribute("data-env") === env) {
             isEnvExists = true;
           }
         });
-
+  
         // 既に存在する場合は、新しいリストアイテムの追加をスキップする
         if (isEnvExists) {
           break;
         }
-
+  
         const newItem = document.createElement("li");
         newItem.classList.add("apply-style__item");
         newItem.setAttribute("data-env", env);
-
+  
         // リストアイテムに追加するHTMLコンテンツを設定
         newItem.innerHTML = `
           <div class="apply-style__item-content">
@@ -1821,7 +1823,7 @@
               </svg>
             </span>
           </button>
-
+  
           <div class="apply-style__popup delete">
             <div class="apply-style__popup-arrow-container">
               <div class="apply-style__popup-content">Delete style</div>
@@ -1840,30 +1842,30 @@
           </div>
           <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
         `;
-
+  
         // apply-style__listの要素に新しいリストアイテムを追加
         applyStyleList.appendChild(newItem);
-
+  
         // 新しいリストアイテムに関するイベントをここで追加しています
         newItem.addEventListener("click", function (e) {
           // クリックイベントのバブリングを止める
           e.stopPropagation();
-
+  
           // 他のアイテムのアクティブ状態を解除
           removeAllActiveItems();
           removeAllActiveButtons();
-
+  
           // クリックされたアイテムにアクティブクラスを切り替え
           newItem.classList.toggle("active");
           selectedName = newItem.querySelector(
             ".apply-style__item-title"
           ).textContent; // スタイル名を取得
           selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-
+  
           // ボタンの状態を更新
           updateButtonState();
         });
-
+  
         // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
         const applyStyleEditButton = newItem.querySelector(
           ".apply-style__options-button.edit"
@@ -1874,14 +1876,14 @@
         applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
           e.stopPropagation();
-
+  
           removeAllActiveButtons();
-
+  
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
           const buttonElement = e.target.closest(
             ".apply-style__options-button"
           );
-
+  
           // ボタンのアクティブ状態をトグルする
           const isActive = buttonElement.classList.toggle("active");
           if (isActive) {
@@ -1899,7 +1901,7 @@
             overlay.classList.add("hidden");
             document.body.classList.remove("menu-open");
           }
-
+  
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
         });
@@ -1927,9 +1929,8 @@
   };
   document.addEventListener("DOMContentLoaded", function () {
     let textarea = document.getElementById("sampleTextContent");
-    let textDisplay = document.querySelector(".sample-style__text");
     let defaultText = "Preview Sample Text";
-
+  
     textarea.addEventListener("input", function () {
       if (textDisplay !== null) {
         if (this.value) {
@@ -1947,15 +1948,15 @@
     // 検索イベントリスナーを追加
     searchInputContainer.addEventListener("input", function () {
       let searchText = searchInputContainer.value.toLowerCase();
-
+  
       if (searchInputContainer) {
         // 検索イベントリスナーを追加
         searchInputContainer.addEventListener("input", function () {
           let searchText = searchInputContainer.value.toLowerCase();
-
+  
           // この時点でのfont-itemsを再取得する
           let fontItems = scrollContainer.querySelectorAll(".font-item");
-
+  
           fontItems.forEach(function (item) {
             let fontName = item
               .querySelector(".font-menu__text")
@@ -1977,18 +1978,18 @@
     fontWeightLabel
   ) {
     fontWeightListContainer.innerHTML = ""; // コンテナをクリア
-
+  
     const fontWeights = availableFonts.filter(
       (font) => font.fontName.family === fontFamilyName
     );
-
+  
     function createCheckIcon() {
       const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
       const checkIcon = document.createElementNS(namespace, "svg");
       checkIcon.setAttribute("class", "font-menu__icon hidden");
       checkIcon.setAttribute("viewBox", "0 0 16 16");
       checkIcon.setAttribute("fill", "none");
-
+  
       const path = document.createElementNS(namespace, "path");
       path.setAttribute("fill-rule", "evenodd");
       path.setAttribute("clip-rule", "evenodd");
@@ -1997,57 +1998,57 @@
         "M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z"
       );
       path.setAttribute("fill", "white");
-
+  
       checkIcon.appendChild(path);
       return checkIcon;
     }
-
+  
     let allFontWeightItems = [];
     let defaultFontWeight;
     // 'Regular' があるかどうか確認し、設定する
     const regularFontWeight = fontWeights.find(
       (font) => font.fontName.style === "Regular"
     );
-
+  
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
       const item = document.createElement("div");
       item.className = "font-menu__item";
       item.setAttribute("role", "menuitem");
-
+  
       // フォントウェイト名を表示するためのテキスト部分を作成
       const text = document.createElement("div");
       text.className = "font-menu__text";
       text.textContent = font.fontName.style;
       item.appendChild(text);
-
+  
       // チェックアイコンを追加
       const checkIcon = createCheckIcon();
       item.appendChild(checkIcon);
-
+  
       // リストにメニュー項目を追加
       fontWeightListContainer.appendChild(item);
-
+  
       // 作成したメニュー項目を配列に追加
       allFontWeightItems.push(item);
-
+  
       // 項目がクリックされた時の処理を追加
       item.addEventListener("click", () => {
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
-
+  
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
         allFontWeightItems.forEach((cItem) => {
           const icon = cItem.querySelector(".font-menu__icon");
           if (icon) icon.classList.add("hidden");
         });
         updateCheckState(item, allFontWeightItems, checkIcon);
-
+  
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
         checkIcon.classList.remove("hidden");
         event.stopPropagation();
       });
-
+  
       // デフォルトフォントウェイトを特定する
       if (!defaultFontWeight || font.fontName.style === "Regular") {
         defaultFontWeight = item;
@@ -2073,7 +2074,7 @@
     });
     selectedCheckIcon.classList.remove("hidden");
   }
-
+  
   // ボタンにクリックイベントリスナーを追加
   createStyleButton.addEventListener("click", function () {
     // スタイル名のインプット要素から値を取得
@@ -2088,7 +2089,7 @@
     const newItem = document.createElement("li");
     newItem.classList.add("apply-style__item");
     newItem.setAttribute("data-env", `style-${timestamp}`);
-
+  
     // リストアイテムに追加するHTMLコンテンツを設定
     newItem.innerHTML = `
       <div class="apply-style__item-content">
@@ -2158,7 +2159,7 @@
           </svg>
         </span>
       </button>
-
+  
       <div class="apply-style__popup delete">
         <div class="apply-style__popup-arrow-container">
           <div class="apply-style__popup-content">Delete style</div>
@@ -2177,30 +2178,30 @@
       </div>
       <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
     `;
-
+  
     // apply-style__listの要素に新しいリストアイテムを追加
     applyStyleList.appendChild(newItem);
-
+  
     // 新しいリストアイテムに関するイベントをここで追加しています
     newItem.addEventListener("click", function (e) {
       // クリックイベントのバブリングを止める
       e.stopPropagation();
-
+  
       // 他のアイテムのアクティブ状態を解除
       removeAllActiveItems();
       removeAllActiveButtons();
-
+  
       // クリックされたアイテムにアクティブクラスを切り替え
       newItem.classList.toggle("active");
       selectedName = newItem.querySelector(
         ".apply-style__item-title"
       ).textContent; // スタイル名を取得
       selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-
+  
       // ボタンの状態を更新
       updateButtonState();
     });
-
+  
     // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
     const applyStyleEditButton = newItem.querySelector(
       ".apply-style__options-button.edit"
@@ -2211,12 +2212,12 @@
     applyStyleEditButton.addEventListener("click", function (e) {
       // イベントのバブリングを阻止
       e.stopPropagation();
-
+  
       removeAllActiveButtons();
-
+  
       // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
       const buttonElement = e.target.closest(".apply-style__options-button");
-
+  
       // ボタンのアクティブ状態をトグルする
       const isActive = buttonElement.classList.toggle("active");
       if (isActive) {
@@ -2234,7 +2235,7 @@
         overlay.classList.add("hidden");
         document.body.classList.remove("menu-open");
       }
-
+  
       // 他のアクティブな項目を非アクティブにする
       removeAllActiveItems();
     });
@@ -2257,7 +2258,7 @@
         "*"
       );
     });
-
+  
     // フォントスタイル情報をそれぞれのドロップダウンから取得
     const japaneseFontFamily = document
       .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
@@ -2271,7 +2272,7 @@
     const englishFontWeight = document
       .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
       .textContent.trim();
-
+  
     // 各言語のフォント設定を格納するオブジェクトを作成します
     const fontSettings = {
       Japanese: {
@@ -2297,7 +2298,7 @@
     );
     styleNameInput.value = "";
   });
-
+  
   // Applyボタンの要素を取得し、デフォルトでは無効化する
   const applyBtn = document.getElementById("applyBtn");
   applyBtn.disabled = true; // 初期状態としてボタンを無効化
@@ -2316,7 +2317,7 @@
       "*"
     );
   });
-
+  
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
     document
@@ -2325,7 +2326,7 @@
         activeButton.classList.remove("active");
       });
   }
-
+  
   // すべてのアイテムのアクティブ状態を解除する関数
   function removeAllActiveItems() {
     document
@@ -2334,7 +2335,7 @@
         activeItem.classList.remove("active");
       });
   }
-
+  
   // ドキュメント全体のクリックイベントリスナーを追加
   document.addEventListener(
     "click",
@@ -2355,7 +2356,7 @@
     },
     false
   );
-
+  
   // メニューを非表示にするための関数
   function hideMenu() {
     // Apply styles の menu を非表示にする
@@ -2366,13 +2367,13 @@
     document.querySelectorAll(".create-style__font-menu").forEach((menu) => {
       menu.classList.add("hidden");
     });
-
+  
     // オーバーレイを非表示にする
     overlay.classList.add("hidden");
-
+  
     // メニューが開いている状態クラスをbodyから削除
     document.body.classList.remove("menu-open");
-
+  
     // すべてのアクティブなメニューボタンの状態をリセット
     const activeButtons = document.querySelectorAll(
       ".apply-style__options-button.active"
@@ -2381,36 +2382,36 @@
       button.classList.remove("active");
     });
   }
-
+  
   // オーバーレイがクリックされた時にメニューを非表示にするイベントリスナーを追加
   overlay.addEventListener("click", hideMenu);
-
+  
   // アイテムのクリックイベントを設定
   applyStyleItems.forEach((item) => {
     item.addEventListener("click", (e) => {
       // クリックイベントのバブリングを止める
       e.stopPropagation();
-
+  
       // 他のアイテムのアクティブ状態を解除
       removeAllActiveItems();
       removeAllActiveButtons();
-
+  
       // クリックされたアイテムにアクティブクラスを切り替え
       item.classList.toggle("active");
       selectedEnv = item.getAttribute("data-env"); // 環境を取得
-
+  
       // ボタンの状態を更新
       updateButtonState();
     });
   });
-
+  
   // Applyボタンの有効/無効ステータスを更新する関数
   function updateButtonState() {
     // selectedEnvがnullでないかをチェックして、isEnvSelectedを更新する
     isEnvSelected = selectedEnv !== null;
     // Applyボタンは環境が選択され、何かが選択されている場合のみ活性化する
     applyBtn.disabled = !(isEnvSelected && hasSelection);
-
+  
     if (isEnvSelected && hasSelection) {
       applyBtn.classList.remove("disabled");
       applyBtn.classList.add("active");

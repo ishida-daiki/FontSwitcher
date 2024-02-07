@@ -5,6 +5,7 @@ const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
 const tabContentsCreateStyle = document.querySelectorAll(".create-style");
 const indicator = document.querySelector(".tab-list-active-indicator");
 const loader = document.querySelectorAll(".loading-indicator");
+let textDisplay = document.querySelector(".sample-style__text");
 let applyStyleItems;
 let applyStyleEditButtons;
 let applyStyleDeleteButtons;
@@ -171,12 +172,18 @@ function toggleTabContentAndResize(index) {
   // Create Styleタブが選択された場合（index 1）
   else if (index === 1) {
     newHeight = 373;
-    newWidth = 324;
+    newWidth = 648;
   }
 
   // メインスクリプトに新しい高さを通知
   parent.postMessage(
-    { pluginMessage: { type: "resize-ui", width: newWidth, height: newHeight } },
+    {
+      pluginMessage: {
+        type: "resize-ui",
+        width: newWidth,
+        height: newHeight,
+      },
+    },
     "*"
   );
 }
@@ -340,12 +347,13 @@ window.onmessage = (event) => {
             // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
             const dropDown = fontFamilyListContainer.closest(
               ".create-style__dropdown"
-            );
-            const label = dropDown.querySelector(
-              ".create-style__dropdown-label"
-            );
-            if (label) {
-              label.textContent = fontName;
+              );
+              const label = dropDown.querySelector(
+                ".create-style__dropdown-label"
+                );
+              if (label) {
+                label.textContent = fontName;
+                textDisplay.style.fontFamily = label.textContent;
             }
 
             fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
@@ -574,6 +582,22 @@ window.onmessage = (event) => {
       break;
   }
 };
+document.addEventListener("DOMContentLoaded", function () {
+  let textarea = document.getElementById("sampleTextContent");
+  let defaultText = "Preview Sample Text";
+
+  textarea.addEventListener("input", function () {
+    if (textDisplay !== null) {
+      if (this.value) {
+        textDisplay.textContent = this.value;
+        textDisplay.style.color = "var(--figma-color-text)";
+      } else {
+        textDisplay.textContent = defaultText;
+        textDisplay.style.color = "var(--figma-color-text-disabled)";
+      }
+    }
+  });
+});
 // 検索機能を設定する関数
 function setupSearchFunctionality(searchInputContainer, scrollContainer) {
   // 検索イベントリスナーを追加
