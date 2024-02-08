@@ -1075,3 +1075,33 @@ function updateButtonState() {
     applyBtn.classList.add("disabled");
   }
 }
+
+// タブコンテンツの表示切り替えを行う関数
+function toggleTabContents(index) {
+  // Apply Stylesタブが選択された場合（index 0）
+  if (index === 0) {
+    tabContentsApplyStyle.forEach((content) =>
+      content.classList.remove("hidden")
+    );
+    tabContentsCreateStyle.forEach((content) =>
+      content.classList.add("hidden")
+    );
+    sampleContents.forEach((content) =>
+      content.classList.add("hidden"),
+      console.log(content)
+    );
+  }
+  // Create Styleタブが選択された場合（index 1）
+  else if (index === 1) {
+    tabContentsApplyStyle.forEach((content) =>
+      content.classList.add("hidden")
+    );
+    tabContentsCreateStyle.forEach((content) =>
+      content.classList.remove("hidden")
+    );
+    sampleContents.forEach((content) =>
+      content.classList.add("hidden"),
+      console.log(content)
+    );
+  }
+}
