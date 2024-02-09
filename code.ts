@@ -56,10 +56,21 @@ figma.ui.onmessage = async (msg) => {
       // ローディングを表示する
       figma.ui.postMessage({ type: "show-loading" });
 
-      const selectedNodes = figma.currentPage.selection;
-
+      const selectedNodes = figma.currentPage.selection;      
+      const cloneSelectedNodes = selectedNodes.map(node => {
+        // 各ノードに対して clone() を呼び出して複製する
+        const clonedNode = node.clone();
+        if (node.parent) {
+          node.parent.appendChild(clonedNode); // 複製したノードを親要素に追加
+        }
+        
+        // 複製した後にスタイルを変更するロジックをここに追加
+        
+        return clonedNode; // 新しく複製されたノードを返す
+      });
+      
       // 選択中のすべてのノードを探索してテキストノードを収集
-      const textNodes = selectedNodes.reduce<TextNode[]>(
+      const textNodes = cloneSelectedNodes.reduce<TextNode[]>(
         (collection, currentNode) => {
           if ("children" in currentNode) {
             const frameTextNodes = currentNode.findAll(
