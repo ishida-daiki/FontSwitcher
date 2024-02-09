@@ -5,6 +5,7 @@ const tabContentsApplyStyle = document.querySelectorAll(".apply-style");
 const tabContentsCreateStyle = document.querySelectorAll(".create-style");
 const indicator = document.querySelector(".tab-list-active-indicator");
 const loader = document.querySelectorAll(".loading-indicator");
+let textDisplay = document.querySelector(".sample-style__text");
 let applyStyleItems;
 let applyStyleEditButtons;
 let applyStyleDeleteButtons;
@@ -42,7 +43,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       scrollContainer.scrollTop /
       (scrollContainer.scrollHeight - scrollContainer.clientHeight);
     const topPosition =
-      scrollFraction * (scrollContainer.clientHeight - scrollBar.offsetHeight);
+      scrollFraction *
+      (scrollContainer.clientHeight - scrollBar.offsetHeight);
     scrollBar.style.transform = `translate3d(0px, ${topPosition}px, 0px)`;
   };
 
@@ -113,8 +115,13 @@ tabs.forEach((tab, index) => {
     activateTab(tab);
     // タブの内容を切り替える
     toggleTabContents(index);
+    toggleTabContentAndResize(index);
   });
 });
+activateTab(tabs[0]);
+toggleTabContents(0);
+toggleTabContentAndResize(0);
+
 // タブコンテンツの表示切り替えを行う関数
 function toggleTabContents(index) {
   // Apply Stylesタブが選択された場合（index 0）
@@ -128,15 +135,14 @@ function toggleTabContents(index) {
   }
   // Create Styleタブが選択された場合（index 1）
   else if (index === 1) {
-    tabContentsApplyStyle.forEach((content) => content.classList.add("hidden"));
+    tabContentsApplyStyle.forEach((content) =>
+      content.classList.add("hidden")
+    );
     tabContentsCreateStyle.forEach((content) =>
       content.classList.remove("hidden")
     );
   }
 }
-// 最初のタブをアクティブ化する際に、合わせてコンテンツも切り替える
-activateTab(tabs[0]);
-toggleTabContents(0);
 // タブが選択された際の関数を定義します。
 function activateTab(tab) {
   // すべてのタブからアクティブクラスを取り除きます。
@@ -152,12 +158,35 @@ function activateTab(tab) {
   indicator.style.width = "67px";
   indicator.style.left = `${tab.offsetLeft}px`;
 }
-// タブをクリックした際のイベントリスナーを追加します。
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => activateTab(tab));
-});
-// 初期状態（ページ読み込み時）で「Apply Styles」タブをアクティブにします。
-activateTab(tabs[0]); // 最初のタブをアクティブとする
+
+// UI側のスクリプト内で、タブの切り替えイベントを扱う
+function toggleTabContentAndResize(index) {
+  // 新しい高さを計算する処理...
+  let newHeight;
+  let newWidth;
+  // Apply Stylesタブが選択された場合（index 0）
+  if (index === 0) {
+    newHeight = 463;
+    newWidth = 324;
+  }
+  // Create Styleタブが選択された場合（index 1）
+  else if (index === 1) {
+    newHeight = 373;
+    newWidth = 648;
+  }
+
+  // メインスクリプトに新しい高さを通知
+  parent.postMessage(
+    {
+      pluginMessage: {
+        type: "resize-ui",
+        width: newWidth,
+        height: newHeight,
+      },
+    },
+    "*"
+  );
+}
 
 // ローディング設定
 const circumference = 2 * Math.PI * 52;
@@ -318,12 +347,13 @@ window.onmessage = (event) => {
             // 親の '.create-style__dropdown' を取得して、関連するラベルを更新する
             const dropDown = fontFamilyListContainer.closest(
               ".create-style__dropdown"
-            );
-            const label = dropDown.querySelector(
-              ".create-style__dropdown-label"
-            );
-            if (label) {
-              label.textContent = fontName;
+              );
+              const label = dropDown.querySelector(
+                ".create-style__dropdown-label"
+                );
+              if (label) {
+                label.textContent = fontName;
+                textDisplay.style.fontFamily = label.textContent;
             }
 
             fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
@@ -381,92 +411,92 @@ window.onmessage = (event) => {
 
       // リストアイテムに追加するHTMLコンテンツを設定
       newItem.innerHTML = `
-          <div class="apply-style__item-content">
-            <h3 class="apply-style__item-title">${styleName}</h3>
-          </div>
-          <button
-            class="apply-style__options-button edit"
-            tabindex="0"
-            aria-label="その他のオプション"
-            data-tooltip-type="text"
-            data-tooltip="その他のオプション"
-          >
-            <span class="apply-style__options-svg-container">
+        <div class="apply-style__item-content">
+          <h3 class="apply-style__item-title">${styleName}</h3>
+        </div>
+        <button
+          class="apply-style__options-button edit"
+          tabindex="0"
+          aria-label="その他のオプション"
+          data-tooltip-type="text"
+          data-tooltip="その他のオプション"
+        >
+          <span class="apply-style__options-svg-container">
+            <svg
+              class="apply-style__options-svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"
+              />
+            </svg>
+          </span>
+        </button>
+        <div class="apply-style__popup edit">
+          <div class="apply-style__popup-arrow-container">
+            <div class="apply-style__popup-content">Edit style</div>
+            <div class="apply-style__popup-arrow">
               <svg
-                class="apply-style__options-svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
+                width="13"
+                height="7"
+                viewBox="0 0 13 7"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"
-                />
+                <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
               </svg>
-            </span>
-          </button>
-          <div class="apply-style__popup edit">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Edit style</div>
-              <div class="apply-style__popup-arrow">
-                <svg
-                  width="13"
-                  height="7"
-                  viewBox="0 0 13 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-                </svg>
-              </div>
             </div>
           </div>
-          <button
-            class="apply-style__options-button delete"
-            tabindex="0"
-            aria-label="その他のオプション"
-            data-tooltip-type="text"
-            data-tooltip="その他のオプション"
-          >
-            <span class="apply-style__options-svg-container">
-              <svg
-                class="apply-style__options-svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M15 9.5C14.4477 9.5 14 9.94772 14 10.5H18C18 9.94772 17.5523 9.5 17 9.5H15ZM19 10.5C19 9.39543 18.1046 8.5 17 8.5H15C13.8954 8.5 13 9.39543 13 10.5H11.5H10V11.5H11V21.5C11 22.6046 11.8954 23.5 13 23.5H19C20.1046 23.5 21 22.6046 21 21.5V11.5H22V10.5H20.5H19ZM20 11.5H18.5H13.5H12V21.5C12 22.0523 12.4477 22.5 13 22.5H19C19.5523 22.5 20 22.0523 20 21.5V11.5ZM14 18.5V14.5H15V18.5H14ZM17 18.5V14.5H18V18.5H17Z"
-                />
-              </svg>
-            </span>
-          </button>
+        </div>
+        <button
+          class="apply-style__options-button delete"
+          tabindex="0"
+          aria-label="その他のオプション"
+          data-tooltip-type="text"
+          data-tooltip="その他のオプション"
+        >
+          <span class="apply-style__options-svg-container">
+            <svg
+              class="apply-style__options-svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M15 9.5C14.4477 9.5 14 9.94772 14 10.5H18C18 9.94772 17.5523 9.5 17 9.5H15ZM19 10.5C19 9.39543 18.1046 8.5 17 8.5H15C13.8954 8.5 13 9.39543 13 10.5H11.5H10V11.5H11V21.5C11 22.6046 11.8954 23.5 13 23.5H19C20.1046 23.5 21 22.6046 21 21.5V11.5H22V10.5H20.5H19ZM20 11.5H18.5H13.5H12V21.5C12 22.0523 12.4477 22.5 13 22.5H19C19.5523 22.5 20 22.0523 20 21.5V11.5ZM14 18.5V14.5H15V18.5H14ZM17 18.5V14.5H18V18.5H17Z"
+              />
+            </svg>
+          </span>
+        </button>
 
-          <div class="apply-style__popup delete">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Delete style</div>
-              <div class="apply-style__popup-arrow">
-                <svg
-                  width="13"
-                  height="7"
-                  viewBox="0 0 13 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-                </svg>
-              </div>
+        <div class="apply-style__popup delete">
+          <div class="apply-style__popup-arrow-container">
+            <div class="apply-style__popup-content">Delete style</div>
+            <div class="apply-style__popup-arrow">
+              <svg
+                width="13"
+                height="7"
+                viewBox="0 0 13 7"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+              </svg>
             </div>
           </div>
-          <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
-        `;
+        </div>
+        <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
+      `;
 
       // apply-style__listの要素に新しいリストアイテムを追加
       applyStyleList.appendChild(newItem);
@@ -505,7 +535,9 @@ window.onmessage = (event) => {
         removeAllActiveButtons();
 
         // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-        const buttonElement = e.target.closest(".apply-style__options-button");
+        const buttonElement = e.target.closest(
+          ".apply-style__options-button"
+        );
 
         // ボタンのアクティブ状態をトグルする
         const isActive = buttonElement.classList.toggle("active");
@@ -550,6 +582,22 @@ window.onmessage = (event) => {
       break;
   }
 };
+document.addEventListener("DOMContentLoaded", function () {
+  let textarea = document.getElementById("sampleTextContent");
+  let defaultText = "Preview Sample Text";
+
+  textarea.addEventListener("input", function () {
+    if (textDisplay !== null) {
+      if (this.value) {
+        textDisplay.textContent = this.value;
+        textDisplay.style.color = "var(--figma-color-text)";
+      } else {
+        textDisplay.textContent = defaultText;
+        textDisplay.style.color = "var(--figma-color-text-disabled)";
+      }
+    }
+  });
+});
 // 検索機能を設定する関数
 function setupSearchFunctionality(searchInputContainer, scrollContainer) {
   // 検索イベントリスナーを追加
@@ -699,92 +747,92 @@ createStyleButton.addEventListener("click", function () {
 
   // リストアイテムに追加するHTMLコンテンツを設定
   newItem.innerHTML = `
-      <div class="apply-style__item-content">
-        <h3 class="apply-style__item-title">${styleName}</h3>
-      </div>
-      <button
-        class="apply-style__options-button edit"
-        tabindex="0"
-        aria-label="その他のオプション"
-        data-tooltip-type="text"
-        data-tooltip="その他のオプション"
-      >
-        <span class="apply-style__options-svg-container">
+    <div class="apply-style__item-content">
+      <h3 class="apply-style__item-title">${styleName}</h3>
+    </div>
+    <button
+      class="apply-style__options-button edit"
+      tabindex="0"
+      aria-label="その他のオプション"
+      data-tooltip-type="text"
+      data-tooltip="その他のオプション"
+    >
+      <span class="apply-style__options-svg-container">
+        <svg
+          class="apply-style__options-svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"
+          />
+        </svg>
+      </span>
+    </button>
+    <div class="apply-style__popup edit">
+      <div class="apply-style__popup-arrow-container">
+        <div class="apply-style__popup-content">Edit style</div>
+        <div class="apply-style__popup-arrow">
           <svg
-            class="apply-style__options-svg"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
+            width="13"
+            height="7"
+            viewBox="0 0 13 7"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M12 16.05V9H13V16.05C14.1411 16.2816 15 17.2905 15 18.5C15 19.7095 14.1411 20.7184 13 20.95V23H12V20.95C10.8589 20.7184 10 19.7095 10 18.5C10 17.2905 10.8589 16.2816 12 16.05ZM14 18.5C14 19.3284 13.3284 20 12.5 20C11.6716 20 11 19.3284 11 18.5C11 17.6716 11.6716 17 12.5 17C13.3284 17 14 17.6716 14 18.5ZM19 23H20V15.95C21.1411 15.7184 22 14.7095 22 13.5C22 12.2905 21.1411 11.2816 20 11.05V9H19V11.05C17.8589 11.2816 17 12.2905 17 13.5C17 14.7095 17.8589 15.7184 19 15.95V23ZM21 13.5C21 12.6716 20.3284 12 19.5 12C18.6716 12 18 12.6716 18 13.5C18 14.3284 18.6716 15 19.5 15C20.3284 15 21 14.3284 21 13.5Z"
-            />
+            <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
           </svg>
-        </span>
-      </button>
-      <div class="apply-style__popup edit">
-        <div class="apply-style__popup-arrow-container">
-          <div class="apply-style__popup-content">Edit style</div>
-          <div class="apply-style__popup-arrow">
-            <svg
-              width="13"
-              height="7"
-              viewBox="0 0 13 7"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-            </svg>
-          </div>
         </div>
       </div>
-      <button
-        class="apply-style__options-button delete"
-        tabindex="0"
-        aria-label="その他のオプション"
-        data-tooltip-type="text"
-        data-tooltip="その他のオプション"
-      >
-        <span class="apply-style__options-svg-container">
-          <svg
-            class="apply-style__options-svg"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M15 9.5C14.4477 9.5 14 9.94772 14 10.5H18C18 9.94772 17.5523 9.5 17 9.5H15ZM19 10.5C19 9.39543 18.1046 8.5 17 8.5H15C13.8954 8.5 13 9.39543 13 10.5H11.5H10V11.5H11V21.5C11 22.6046 11.8954 23.5 13 23.5H19C20.1046 23.5 21 22.6046 21 21.5V11.5H22V10.5H20.5H19ZM20 11.5H18.5H13.5H12V21.5C12 22.0523 12.4477 22.5 13 22.5H19C19.5523 22.5 20 22.0523 20 21.5V11.5ZM14 18.5V14.5H15V18.5H14ZM17 18.5V14.5H18V18.5H17Z"
-            />
-          </svg>
-        </span>
-      </button>
+    </div>
+    <button
+      class="apply-style__options-button delete"
+      tabindex="0"
+      aria-label="その他のオプション"
+      data-tooltip-type="text"
+      data-tooltip="その他のオプション"
+    >
+      <span class="apply-style__options-svg-container">
+        <svg
+          class="apply-style__options-svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M15 9.5C14.4477 9.5 14 9.94772 14 10.5H18C18 9.94772 17.5523 9.5 17 9.5H15ZM19 10.5C19 9.39543 18.1046 8.5 17 8.5H15C13.8954 8.5 13 9.39543 13 10.5H11.5H10V11.5H11V21.5C11 22.6046 11.8954 23.5 13 23.5H19C20.1046 23.5 21 22.6046 21 21.5V11.5H22V10.5H20.5H19ZM20 11.5H18.5H13.5H12V21.5C12 22.0523 12.4477 22.5 13 22.5H19C19.5523 22.5 20 22.0523 20 21.5V11.5ZM14 18.5V14.5H15V18.5H14ZM17 18.5V14.5H18V18.5H17Z"
+          />
+        </svg>
+      </span>
+    </button>
 
-      <div class="apply-style__popup delete">
-        <div class="apply-style__popup-arrow-container">
-          <div class="apply-style__popup-content">Delete style</div>
-          <div class="apply-style__popup-arrow">
-            <svg
-              width="13"
-              height="7"
-              viewBox="0 0 13 7"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
-            </svg>
-          </div>
+    <div class="apply-style__popup delete">
+      <div class="apply-style__popup-arrow-container">
+        <div class="apply-style__popup-content">Delete style</div>
+        <div class="apply-style__popup-arrow">
+          <svg
+            width="13"
+            height="7"
+            viewBox="0 0 13 7"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+          </svg>
         </div>
       </div>
-      <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
-    `;
+    </div>
+    <!-- その他のオプションボタンとポップアップ、メニューなどを含むHTMLをここに追加 -->
+  `;
 
   // apply-style__listの要素に新しいリストアイテムを追加
   applyStyleList.appendChild(newItem);
@@ -1025,5 +1073,35 @@ function updateButtonState() {
   } else {
     applyBtn.classList.remove("active");
     applyBtn.classList.add("disabled");
+  }
+}
+
+// タブコンテンツの表示切り替えを行う関数
+function toggleTabContents(index) {
+  // Apply Stylesタブが選択された場合（index 0）
+  if (index === 0) {
+    tabContentsApplyStyle.forEach((content) =>
+      content.classList.remove("hidden")
+    );
+    tabContentsCreateStyle.forEach((content) =>
+      content.classList.add("hidden")
+    );
+    sampleContents.forEach((content) =>
+      content.classList.add("hidden"),
+      console.log(content)
+    );
+  }
+  // Create Styleタブが選択された場合（index 1）
+  else if (index === 1) {
+    tabContentsApplyStyle.forEach((content) =>
+      content.classList.add("hidden")
+    );
+    tabContentsCreateStyle.forEach((content) =>
+      content.classList.remove("hidden")
+    );
+    sampleContents.forEach((content) =>
+      content.classList.add("hidden"),
+      console.log(content)
+    );
   }
 }
