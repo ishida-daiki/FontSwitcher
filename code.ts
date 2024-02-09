@@ -56,15 +56,16 @@ figma.ui.onmessage = async (msg) => {
       // ローディングを表示する
       figma.ui.postMessage({ type: "show-loading" });
 
-      const selectedNodes = figma.currentPage.selection;      
+      const selectedNodes = figma.currentPage.selection;
+      const xOffset = 40; // 横軸方向のオフセット
       const cloneSelectedNodes = selectedNodes.map(node => {
         // 各ノードに対して clone() を呼び出して複製する
         const clonedNode = node.clone();
+        clonedNode.x = node.x + node.width + xOffset; // 元のノードの右側に40px離れた位置に設定
+        clonedNode.y = node.y; // 縦軸方向の位置は変わらない
         if (node.parent) {
           node.parent.appendChild(clonedNode); // 複製したノードを親要素に追加
         }
-        
-        // 複製した後にスタイルを変更するロジックをここに追加
         
         return clonedNode; // 新しく複製されたノードを返す
       });
