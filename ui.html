@@ -931,7 +931,6 @@
     height: max-content;
     background-color: transparent;
     display: flex;
-    gap: 8px;
     flex-direction: column;
     -webkit-box-pack: justify;
     justify-content: space-between;
@@ -1369,6 +1368,7 @@
   let applyStyleItems;
   let applyStyleEditButtons;
   let applyStyleDeleteButtons;
+  let layerName = null; // グローバルスコープに layerName 変数を追加
   
   // CreateStyleボタン押下時の処理
   const createStyleButton = document.querySelector(
@@ -1588,6 +1588,7 @@
         break;
       case "update-name":
         textElement.textContent = message.name;
+        layerName = message.name; // updatedName変数にmessage.nameを代入
         textElement.style.color = "var(--figma-color-text)";
         textElement.style.fontWeight = "600";
         hasSelection = true;
@@ -2323,12 +2324,15 @@
   // UIから送られるメッセージは、上記 figma.ui.onmessage でリッスンされます。
   // When the button is clicked, the plugin will start the text analysis and update
   applyBtn.addEventListener("click", () => {
+    const cloneLayerName = `${layerName}_${selectedName}`;
+    console.log(cloneLayerName);
     parent.postMessage(
       {
         pluginMessage: {
           type: "analyzeAndUpdateText",
-          Name: selectedName,
+          selectedStyleName: selectedName,
           key: selectedEnv,
+          layerName: cloneLayerName,
         },
       },
       "*"

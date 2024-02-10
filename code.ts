@@ -57,9 +57,30 @@ figma.ui.onmessage = async (msg) => {
       figma.ui.postMessage({ type: "show-loading" });
 
       const selectedNodes = figma.currentPage.selection;
+      const xOffset = 40; // 横軸方向のオフセット
+      const cloneSelectedNodes = selectedNodes.map((node) => {
+        // 各ノードに対して clone() を呼び出して複製する
+        const clonedNode = node.clone();
+        clonedNode.x = node.x + node.width + xOffset; // 元のノードの右側に40px離れた位置に設定
+        clonedNode.y = node.y; // 縦軸方向の位置は変わらない
+        if (node.parent) {
+          node.parent.appendChild(clonedNode); // 複製したノードを親要素に追加
+        }
+
+        return clonedNode; // 新しく複製されたノードを返す
+      });
+
+      // 複製した最上位のノードの名前を最新のレイヤー名（提供されたもの）で更新する
+      cloneSelectedNodes.forEach((clonedNode) => {
+        // 最上位の親を探す
+        const topParent = findTopParent(clonedNode);
+        console.log(topParent);
+        
+        topParent.name = msg.layerName; // 最上位の親ノードの名前を更新
+      });
 
       // 選択中のすべてのノードを探索してテキストノードを収集
-      const textNodes = selectedNodes.reduce<TextNode[]>(
+      const textNodes = cloneSelectedNodes.reduce<TextNode[]>(
         (collection, currentNode) => {
           if ("children" in currentNode) {
             const frameTextNodes = currentNode.findAll(
@@ -80,7 +101,7 @@ figma.ui.onmessage = async (msg) => {
 
       // フォント設定を"key"に基づいて取得
       let styleKey = msg.key; // clientStorageから取得するためのキー
-      let styleName = msg.Name; // clientStorageから取得するためのキー
+      let styleName = msg.selectedStyleName; // clientStorageから取得するためのキー
 
       let savedStyles = (await figma.clientStorage.getAsync(styleKey)) || {};
 
@@ -146,9 +167,17 @@ figma.ui.onmessage = async (msg) => {
   } else if (msg.type === "delete-style") {
     deleteDataFromClientStorage(msg.env);
   } else if (msg.type === "resize-ui") {
-    figma.ui.resize(msg.width, msg.height);    
+    figma.ui.resize(msg.width, msg.height);
   }
 };
+
+// 最上位の親を探す処理
+function findTopParent(node: SceneNode): SceneNode {
+  while (node.parent && node.parent.type !== "PAGE") {
+    node = node.parent as SceneNode;
+  }
+  return node;
+}
 
 interface CustomFontName {
   fontFamily: string;
@@ -189,7 +218,7 @@ async function saveStyleForUser(
 // テキストノード処理ロジックを関数化
 async function processTextNodes(
   textNode: TextNode,
-  fontSettings: CustomFontSettings,
+  fontSettings: CustomFontSettings
 ) {
   // テキストノードに既に設定されているフォントをロード
   if (textNode.fontName !== figma.mixed) {
@@ -215,14 +244,14 @@ async function processTextNodes(
     ) {
       fontName = {
         family: fontSettings.Japanese.fontFamily, // fontFamily から family に
-        style: fontSettings.Japanese.fontWeight   // fontWeight から style に
+        style: fontSettings.Japanese.fontWeight, // fontWeight から style に
       };
     }
     // 英数字（および記号）判定 - 日本語以外をデフォルトでここで処理する
     else {
       fontName = {
         family: fontSettings.English.fontFamily, // fontFamily から family に
-        style: fontSettings.English.fontWeight   // fontWeight から style に
+        style: fontSettings.English.fontWeight, // fontWeight から style に
       };
     }
 
