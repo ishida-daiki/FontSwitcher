@@ -20,7 +20,7 @@ async function loadAndSendStyles() {
   }
 }
 
-figma.showUI(__html__, { themeColors: true, height: 460, width: 324 });
+figma.showUI(__html__, { themeColors: true, height: 450, width: 324 });
 
 // プラグイン起動時にスタイルを読み込み、UIに送信
 loadAndSendStyles();
@@ -75,7 +75,7 @@ figma.ui.onmessage = async (msg) => {
         // 最上位の親を探す
         const topParent = findTopParent(clonedNode);
         console.log(topParent);
-        
+
         topParent.name = msg.layerName; // 最上位の親ノードの名前を更新
       });
 
