@@ -242,6 +242,12 @@
     height: 30px;
     flex-grow: 2;
   }
+  .apply-style__list__container {
+    position: relative;
+  }
+  .apply-style__list__container:hover .scroll_container--scrollBar--YLWIi {
+    display: block;
+  }
   .apply-style__list {
     display: flex;
     flex-direction: column;
@@ -323,6 +329,10 @@
     padding: 2px;
     cursor: default;
     z-index: 7;
+  }
+  .scroll_container--track--HEzfy:hover {
+    border-left: 1px solid var(--figma-color-border, #efefef);
+    background: var(--figma-color-scrollbartrackhover, rgba(245, 245, 245, .5));
   }
   .scroll_container--scrollBar--YLWIi {
     display: none;
@@ -1056,7 +1066,9 @@
           </button>
         </div>
   
-        <ul class="apply-style__list">
+        <div class="apply-style__list__container">
+          <ul class="apply-style__list">
+          </ul>
           <div class="scroll_container--track--HEzfy" role="none">
             <div
               class="scroll_container--scrollBar--YLWIi"
@@ -1064,7 +1076,7 @@
               style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
             ></div>
           </div>
-        </ul>
+        </div>
       </div>
       <!-- 反映ボタン -->
       <button id="applyBtn" class="create-style__apply-button disabled">
@@ -1375,26 +1387,22 @@
     ".create-style__submit-button"
   );
   const applyStyleList = document.querySelector(".apply-style__list");
-  
+  let applyStyleNumber;
   // スクロールバーの表示と動作を制御するJavaScriptコード
   
   document.addEventListener("DOMContentLoaded", (event) => {
-    const scrollContainer = document.querySelector(".apply-style__list");
+    <!-- const scrollContainer = document.querySelector(".apply-style__list"); -->
+    const scrollContainer = applyStyleList;
     const scrollBar = document.querySelector(
       ".scroll_container--scrollBar--YLWIi"
-    );
+      );
+
     let isDragging = false;
   
     // スクロールバーの高さを計算する関数
     const setScrollBarHeight = () => {
-      const visibleRatio =
-        scrollContainer.clientHeight / scrollContainer.scrollHeight;
-      const scrollBarHeight = Math.max(
-        visibleRatio * scrollContainer.clientHeight,
-        10
-      ); // 最小高さが10pxであることを保証
+      const scrollBarHeight = 42; // 高さを42pxに固定
       scrollBar.style.height = scrollBarHeight + "px";
-      scrollBar.style.display = "block"; // スクロールバーを表示
     };
   
     // スクロールバーとスクロールコンテナの関連付け
@@ -2107,6 +2115,7 @@
     const newItem = document.createElement("li");
     newItem.classList.add("apply-style__item");
     newItem.setAttribute("data-env", `style-${timestamp}`);
+    applyStyleNumber++; // applyStyleNumberをインクリメント
   
     // リストアイテムに追加するHTMLコンテンツを設定
     newItem.innerHTML = `
@@ -2259,7 +2268,7 @@
     });
     applyStyleDeleteButton.addEventListener("click", function (e) {
       e.stopPropagation(); // イベントバブリングを防ぐ
-      const envValue = newItem.getAttribute("data-env");
+      applyStyleNumber--; // スタイルの数を減らす      const envValue = newItem.getAttribute("data-env");
       let itemToDelete = document.querySelector(
         `.apply-style__item[data-env="${envValue}"]`
       ); // DOM 要素を取得
