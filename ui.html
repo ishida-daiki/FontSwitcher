@@ -91,7 +91,7 @@
   }
   /* メニューが開いている間はhoverスタイルを無効にする */
   body.menu-open .apply-style__item:hover,
-  body.menu-open .apply-style__options-button:hover {
+  body.menu-open .options-button:hover {
     outline: none;
     background: none;
   }
@@ -278,7 +278,7 @@
     background: var(--figma-color-bg-selected, rgba(0, 0, 0, 0.06));
     outline: 1px solid transparent;
   }
-  .apply-style__item.active .apply-style__options-button:hover {
+  .apply-style__item.active .options-button:hover {
     background: var(--figma-color-bg-selected-hover, rgba(0, 0, 0, 0.06));
   }
   .apply-style__item-title {
@@ -286,7 +286,7 @@
     font-weight: 400;
     letter-spacing: 0.055px;
   }
-  .apply-style__options-button {
+  .options-button {
     right: 8;
     border: 1px solid transparent;
     outline: none;
@@ -302,22 +302,70 @@
     background-color: transparent;
     transition: 0.1s fill ease-out, 0.1s color ease-out;
   }
-  .apply-style__options-button:hover {
+  .options-button:hover {
     background: var(--figma-color-bg-hover, rgba(0, 0, 0, 0.06));
   }
-  .apply-style__options-button.active {
+  .options-button.active {
     background: var(--figma-color-bg-brand, #0d99ff);
   }
-  .apply-style__options-button.active .apply-style__options-svg {
+  .options-button.active .apply-style__options-svg {
     fill: var(--figma-color-icon-onbrand);
   }
   /* ボタンがホバーされた時にポップアップを表示する */
-  .apply-style__options-button:hover + .apply-style__popup {
+  .options-button:hover + .popup {
     display: block;
   }
 
-  .apply-style__options-button.active ~ .menu {
+  .options-button.active ~ .menu {
     display: block; /* アクティブな状態のボタンの兄弟要素であるmenuを表示 */
+  }
+  .options-button.active .popup {
+    background: var(--figma-color-bg-brand, #0d99ff);
+  }
+  .options-button.active .sample-style__options-svg {
+    fill: var(--figma-color-icon-onbrand);
+  }
+  /* ポップアップコンテナ (Element) */
+  .popup {
+    position: absolute;
+    bottom: -34px;
+    right: 8px;
+    display: none;
+    z-index: 100;
+    border-radius: 2px;
+    z-index: 10;
+  }
+  .popup.edit {
+    right: 40px;
+  }
+  .popup.delete {
+    right: 8px;
+  }
+
+  /* ポップアップコンテナ (Element Modifier) */
+  .popup:hover {
+    display: block;
+  }
+
+  /* ポップアップアローのコンテナ (Element) */
+  .popup-arrow-container {
+    position: relative;
+  }
+  /* ポップアップの内容 (Element) */
+  .popup-content {
+    height: 28px;
+    background: #222222;
+    color: #ffffff;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+  }
+  /* ポップアップアロー (Element) */
+  .popup-arrow {
+    position: absolute;
+    top: -6px;
+    right: 10;
   }
 
   .scroll_container--track--HEzfy {
@@ -648,51 +696,6 @@
     color: var(--figma-color-text-secondary);
     font-weight: 500;
   }
-
-  /* ポップアップコンテナ (Element) */
-  .apply-style__popup {
-    position: absolute;
-    bottom: -34px;
-    right: 8px;
-    display: none;
-    z-index: 100;
-    border-radius: 2px;
-    z-index: 10;
-  }
-  .apply-style__popup.edit {
-    right: 40px;
-  }
-  .apply-style__popup.delete {
-    right: 8px;
-  }
-
-  /* ポップアップコンテナ (Element Modifier) */
-  .apply-style__popup:hover {
-    display: block;
-  }
-
-  /* ポップアップアローのコンテナ (Element) */
-  .apply-style__popup-arrow-container {
-    position: relative;
-  }
-
-  /* ポップアップの内容 (Element) */
-  .apply-style__popup-content {
-    height: 28px;
-    background: #222222;
-    color: #ffffff;
-    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
-    padding: 0 8px;
-    display: flex;
-    align-items: center;
-  }
-
-  /* ポップアップアロー (Element) */
-  .apply-style__popup-arrow {
-    position: absolute;
-    top: -6px;
-    right: 10;
-  }
   /* Dropdown Component Styles */
   .create-style__dropdown {
     /* スタイルシートのリセットや追加のスタイリングが必要な場合はここに記述 */
@@ -925,7 +928,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 0 8 0 16px;
+    padding: 0 8 0 8px;
     border-bottom: 1px solid var(--figma-color-border);
   }
   .sample-text-container {
@@ -1040,7 +1043,7 @@
         <div class="apply-style__styles">
           <h2 class="apply-style__title">Style list</h2>
           <button
-            class="apply-style__options-button"
+            class="options-button"
             tabindex="0"
             aria-label="その他のオプション"
             data-tooltip-type="text"
@@ -1305,7 +1308,7 @@
       <div class="sample-style__tab-header">
         <h2 class="create-style__tab-title">Sample Preview</h2>
         <button
-          class="apply-style__options-button"
+          class="options-button"
           tabindex="0"
           aria-label="その他のオプション"
           data-tooltip-type="text"
@@ -1329,7 +1332,17 @@
             </svg>
           </span>
         </button>
-        <div class="sample-language-menu hidden" role="menu">
+        <div class="popup">
+          <div class="popup-arrow-container">
+            <div class="popup-content">Sample style</div>
+            <div class="popup-arrow">
+              <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="sample-language-menu hidden" role="menu">
           <div class="font-menu__item" role="menuitem">
             <div class="font-menu__text">English</div>
             <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
@@ -1342,7 +1355,7 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
             </svg>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="sample-style__message">
         <p class="sample-style__text">Preview Sample Text</p>
@@ -1358,7 +1371,7 @@
         spellcheck="false"
         class="sample-style__input"
         name="styleName"
-        placeholder="New style"
+        placeholder="Preview Sample Text"
         autocomplete="off"
         dir="auto"
         value=""
@@ -1786,7 +1799,7 @@
             <h3 class="apply-style__item-title">${styleName}</h3>
           </div>
           <button
-            class="apply-style__options-button edit"
+            class="options-button edit"
             tabindex="0"
             aria-label="その他のオプション"
             data-tooltip-type="text"
@@ -1809,10 +1822,10 @@
               </svg>
             </span>
           </button>
-          <div class="apply-style__popup edit">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Edit style</div>
-              <div class="apply-style__popup-arrow">
+          <div class="popup edit">
+            <div class="popup-arrow-container">
+              <div class="popup-content">Edit style</div>
+              <div class="popup-arrow">
                 <svg
                   width="13"
                   height="7"
@@ -1826,7 +1839,7 @@
             </div>
           </div>
           <button
-            class="apply-style__options-button delete"
+            class="options-button delete"
             tabindex="0"
             aria-label="その他のオプション"
             data-tooltip-type="text"
@@ -1850,10 +1863,10 @@
             </span>
           </button>
   
-          <div class="apply-style__popup delete">
-            <div class="apply-style__popup-arrow-container">
-              <div class="apply-style__popup-content">Delete style</div>
-              <div class="apply-style__popup-arrow">
+          <div class="popup delete">
+            <div class="popup-arrow-container">
+              <div class="popup-content">Delete style</div>
+              <div class="popup-arrow">
                 <svg
                   width="13"
                   height="7"
@@ -1894,10 +1907,13 @@
   
         // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
         const applyStyleEditButton = newItem.querySelector(
-          ".apply-style__options-button.edit"
+          ".options-button.edit"
         );
         const applyStyleDeleteButton = newItem.querySelector(
-          ".apply-style__options-button.delete"
+          ".options-button.delete"
+        );
+        const sampleStyleButton = newItem.querySelector(
+          ".options-button"
         );
         applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
@@ -1907,7 +1923,7 @@
   
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
           const buttonElement = e.target.closest(
-            ".apply-style__options-button"
+            ".options-button"
           );
   
           // ボタンのアクティブ状態をトグルする
@@ -1949,6 +1965,38 @@
             },
             "*"
           );
+        });
+        sampleStyleButton.addEventListener("click", function (e) {
+          // イベントのバブリングを阻止
+          e.stopPropagation();
+  
+          removeAllActiveButtons();
+  
+          // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+          const buttonElement = e.target.closest(
+            ".options-button"
+          );
+  
+          // ボタンのアクティブ状態をトグルする
+          const isActive = buttonElement.classList.toggle("active");
+          if (isActive) {
+            overlay.classList.remove("hidden");
+            document.body.classList.add("menu-open");
+            // アクティブになったとき
+            // if (popup) {
+            //   popup.style.display = "none";
+            // }
+            // if (menu) {
+            //   menu.style.display = "block";
+            // }
+          } else {
+            // アクティブでないとき（別の処理が必要な場合のみ）
+            overlay.classList.add("hidden");
+            document.body.classList.remove("menu-open");
+          }
+  
+          // 他のアクティブな項目を非アクティブにする
+          removeAllActiveItems();
         });
         break;
     }
@@ -2123,7 +2171,7 @@
         <h3 class="apply-style__item-title">${styleName}</h3>
       </div>
       <button
-        class="apply-style__options-button edit"
+        class="options-button edit"
         tabindex="0"
         aria-label="その他のオプション"
         data-tooltip-type="text"
@@ -2146,10 +2194,10 @@
           </svg>
         </span>
       </button>
-      <div class="apply-style__popup edit">
-        <div class="apply-style__popup-arrow-container">
-          <div class="apply-style__popup-content">Edit style</div>
-          <div class="apply-style__popup-arrow">
+      <div class="popup edit">
+        <div class="popup-arrow-container">
+          <div class="popup-content">Edit style</div>
+          <div class="popup-arrow">
             <svg
               width="13"
               height="7"
@@ -2163,7 +2211,7 @@
         </div>
       </div>
       <button
-        class="apply-style__options-button delete"
+        class="options-button delete"
         tabindex="0"
         aria-label="その他のオプション"
         data-tooltip-type="text"
@@ -2187,10 +2235,10 @@
         </span>
       </button>
   
-      <div class="apply-style__popup delete">
-        <div class="apply-style__popup-arrow-container">
-          <div class="apply-style__popup-content">Delete style</div>
-          <div class="apply-style__popup-arrow">
+      <div class="popup delete">
+        <div class="popup-arrow-container">
+          <div class="popup-content">Delete style</div>
+          <div class="popup-arrow">
             <svg
               width="13"
               height="7"
@@ -2227,63 +2275,6 @@
   
       // ボタンの状態を更新
       updateButtonState();
-    });
-  
-    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-    const applyStyleEditButton = newItem.querySelector(
-      ".apply-style__options-button.edit"
-    );
-    const applyStyleDeleteButton = newItem.querySelector(
-      ".apply-style__options-button.delete"
-    );
-    applyStyleEditButton.addEventListener("click", function (e) {
-      // イベントのバブリングを阻止
-      e.stopPropagation();
-  
-      removeAllActiveButtons();
-  
-      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-      const buttonElement = e.target.closest(".apply-style__options-button");
-  
-      // ボタンのアクティブ状態をトグルする
-      const isActive = buttonElement.classList.toggle("active");
-      if (isActive) {
-        overlay.classList.remove("hidden");
-        document.body.classList.add("menu-open");
-        // アクティブになったとき
-        // if (popup) {
-        //   popup.style.display = "none";
-        // }
-        // if (menu) {
-        //   menu.style.display = "block";
-        // }
-      } else {
-        // アクティブでないとき（別の処理が必要な場合のみ）
-        overlay.classList.add("hidden");
-        document.body.classList.remove("menu-open");
-      }
-  
-      // 他のアクティブな項目を非アクティブにする
-      removeAllActiveItems();
-    });
-    applyStyleDeleteButton.addEventListener("click", function (e) {
-      e.stopPropagation(); // イベントバブリングを防ぐ
-      applyStyleNumber--; // スタイルの数を減らす      const envValue = newItem.getAttribute("data-env");
-      let itemToDelete = document.querySelector(
-        `.apply-style__item[data-env="${envValue}"]`
-      ); // DOM 要素を取得
-      if (itemToDelete) {
-        itemToDelete.remove(); // DOM 要素を削除
-      }
-      parent.postMessage(
-        {
-          pluginMessage: {
-            type: "delete-style",
-            env: newItem.getAttribute("data-env"),
-          },
-        },
-        "*"
-      );
     });
   
     // フォントスタイル情報をそれぞれのドロップダウンから取得
@@ -2351,7 +2342,7 @@
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
     document
-      .querySelectorAll(".apply-style__options-button.active")
+      .querySelectorAll(".options-button.active")
       .forEach((activeButton) => {
         activeButton.classList.remove("active");
       });
@@ -2373,7 +2364,7 @@
       // クリックが.apply-style__item or .apply-style__options-button要素の内部でなければアクティブクラスを削除
       if (
         !e.target.closest(".apply-style__item") ||
-        !e.target.closest(".apply-style__options-button")
+        !e.target.closest(".options-button")
       ) {
         // 他のアイテムのアクティブ状態を解除
         // removeShowMenu();
@@ -2406,7 +2397,7 @@
   
     // すべてのアクティブなメニューボタンの状態をリセット
     const activeButtons = document.querySelectorAll(
-      ".apply-style__options-button.active"
+      ".options-button.active"
     );
     activeButtons.forEach((button) => {
       button.classList.remove("active");
