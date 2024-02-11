@@ -639,7 +639,7 @@
     left: 32px;
     top: 0px;
     position: absolute;
-    color: var(--color-text);
+    color: var(--figma-color-text);
     font-size: 12px;
     font-family: Inter;
     font-weight: 400;
@@ -647,7 +647,9 @@
     letter-spacing: 0.06px;
     word-wrap: break-word;
   }
-
+  .font-menu__text.sample {
+    color: #ffffff;
+  }
   .font-menu__icon {
     width: 16px;
     height: 16px;
@@ -1000,16 +1002,16 @@
   }
   .sample-language-menu {
     position: absolute;
+    top: 46px;
     right: 8px;
     width: 178px;
     padding-top: 8px;
     padding-bottom: 8px;
     max-height: 164px;
-    background: var(--figma-color-bg);
-    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+    background: rgb(34, 34, 34);
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     z-index: 100;
-    overflow-y: auto;
   }
 </style>
 
@@ -1342,20 +1344,25 @@
             </div>
           </div>
         </div>
-        <!-- <div class="sample-language-menu hidden" role="menu">
+        <div class="sample-language-menu hidden" role="menu">
           <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text">English</div>
+            <div class="font-menu__text sample">English</div>
             <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
             </svg>
           </div>
           <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text">Japanese</div>
+            <div class="font-menu__text sample">Japanese</div>
             <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
             </svg>
           </div>
-        </div> -->
+          <div class="popup-arrow">
+            <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
+            </svg>
+          </div>
+        </div>
       </div>
       <div class="sample-style__message">
         <p class="sample-style__text">Preview Sample Text</p>
@@ -1912,9 +1919,6 @@
         const applyStyleDeleteButton = newItem.querySelector(
           ".options-button.delete"
         );
-        const sampleStyleButton = document.querySelector(
-          ".options-button.sample"
-        );
         applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
           e.stopPropagation();
@@ -1966,38 +1970,46 @@
             "*"
           );
         });
+
+        const sampleStyleButton = document.querySelector(
+          ".options-button.sample"
+        );
+        const sampleLaguageMenu = document.querySelector(
+          ".sample-language-menu"
+        );
         sampleStyleButton.addEventListener("click", function (e) {
-          console.log("aaa");
           // イベントのバブリングを阻止
-          e.stopPropagation();
-  
+          
           removeAllActiveButtons();
-  
+          
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(
-            ".options-button"
-          );
-  
+          const buttonElement = e.target.closest(".options-button");
+          
           // ボタンのアクティブ状態をトグルする
-          const isActive = buttonElement.classList.toggle("active");
+          let isActive = buttonElement.classList.toggle("active");
           if (isActive) {
+            e.stopPropagation();
+            sampleLaguageMenu.classList.remove("hidden");
             overlay.classList.remove("hidden");
             document.body.classList.add("menu-open");
-            // アクティブになったとき
-            // if (popup) {
-            //   popup.style.display = "none";
-            // }
-            // if (menu) {
-            //   menu.style.display = "block";
-            // }
           } else {
-            // アクティブでないとき（別の処理が必要な場合のみ）
+            sampleLaguageMenu.classList.add("hidden");
             overlay.classList.add("hidden");
             document.body.classList.remove("menu-open");
           }
-  
+
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
+        });
+        sampleLaguageMenu.addEventListener("click", function (e) {
+          sampleLaguageMenu.classList.add("hidden");
+          overlay.classList.add("hidden");
+          document.body.classList.remove("menu-open");
+        });
+        document.addEventListener("click", function (e) {
+          sampleLaguageMenu.classList.add("hidden");
+          overlay.classList.add("hidden");
+          document.body.classList.remove("menu-open");
         });
         break;
     }
