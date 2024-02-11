@@ -922,7 +922,7 @@
     font-weight: 400;
     color: var(--figma-color-text-disabled);
     overflow: auto;
-    flex: 1;
+    height: 150px;
   }
   .sample-style__tab-header {
     height: 40px;
@@ -930,7 +930,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 0 8 0 8px;
+    padding: 0 8 0 16px;
     border-bottom: 1px solid var(--figma-color-border);
   }
   .sample-text-container {
@@ -1013,6 +1013,75 @@
     border-radius: 2px;
     z-index: 100;
   }
+  .component-row {
+  display: grid;
+  grid-template-columns: repeat(28, 1fr);
+  grid-template-rows: 32px;
+  padding: 4 16px;
+  position: relative;
+  box-sizing: border-box; /* baseとの統合 */
+  color: var(--figma-color-text, #333333); /* baseとの統合 */
+  fill: var(--figma-color-icon, #333333); /* baseとの統合 */
+  border-radius: 2px; /* baseとの統合 */
+  cursor: default; /* baseとの統合 */
+  background-clip: padding-box; /* baseとの統合 */
+  border-bottom: 1px solid var(--figma-color-border);
+}
+.component-row__label {
+  display: flex;
+  align-items: center;
+}
+
+.component-row__slider {
+  grid-column-start: 14;
+  grid-column-end: span 28;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.slider {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.slider__clip-container {
+  position: relative;
+  height: 100%;
+}
+
+.slider__track {
+  position: absolute;
+  top: calc(var(--slider-thumb-size, 9px) * 1 + 5.5px); /* 引数を簡素化 */
+  height: 1px;
+  width: 100%;
+  cursor: default;
+  background: #b3b3b3; /* 色指定の重複を排除 */
+}
+
+.slider__tick {
+  position: absolute;
+  height: var(--slider-thumb-size, 9px);
+  pointer-events: none;
+  top: calc(6px + var(--slider-thumb-size, 9px) / 2);
+  left: -1px;
+  width: 1px;
+  background: var(--bg-slider-track);
+}
+
+.slider__thumb {
+  background: #fff;
+  display: block;
+  position: absolute;
+  border: 1px solid #000;
+  height: 9px;
+  width: 9px;
+  top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
+  border-radius: 50%;
+  box-sizing: border-box;
+  left: -calc(var(--slider-thumb-size, 9px) * 0.5);
+}
 </style>
 
 <body class="scrollbar-hidden">
@@ -1366,6 +1435,19 @@
       </div>
       <div class="sample-style__message">
         <p class="sample-style__text">Preview Sample Text</p>
+      </div>
+    </div>
+    <!-- Scale Controller -->
+    <div class="component-row">
+      <div class="component-row__label">Scale</div>
+      <div class="component-row__slider">
+        <div class="slider" tabindex="0">
+          <div class="slider__clip-container">
+            <div class="slider__track slider__track--light"></div>
+            <div class="slider__tick slider__tick--light"></div>
+            <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="sample-text__input-group">
