@@ -74,7 +74,6 @@ figma.ui.onmessage = async (msg) => {
       cloneSelectedNodes.forEach((clonedNode) => {
         // 最上位の親を探す
         const topParent = findTopParent(clonedNode);
-        console.log(topParent);
 
         topParent.name = msg.layerName; // 最上位の親ノードの名前を更新
       });
@@ -156,7 +155,6 @@ figma.ui.onmessage = async (msg) => {
 
     // スタイルを保存して完了を待ちます
     await saveStyleForUser(styleName, fontSettings, key);
-
     // UIに直接新しいスタイルを送信
     const styleKeyForVerification = `style-${key}`;
     figma.ui.postMessage({
