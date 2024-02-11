@@ -534,8 +534,6 @@
     left: 24px;
     top: 24px;
     bottom: 24px;
-    padding-top: 8px;
-    padding-bottom: 8px;
     display: flex;
     flex-direction: column;
   }
@@ -639,7 +637,7 @@
     left: 32px;
     top: 0px;
     position: absolute;
-    color: var(--color-text);
+    color: var(--figma-color-text);
     font-size: 12px;
     font-family: Inter;
     font-weight: 400;
@@ -647,7 +645,9 @@
     letter-spacing: 0.06px;
     word-wrap: break-word;
   }
-
+  .font-menu__text.sample {
+    color: #ffffff;
+  }
   .font-menu__icon {
     width: 16px;
     height: 16px;
@@ -909,6 +909,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   .sample-style__message {
     display: grid;
@@ -920,7 +921,7 @@
     font-weight: 400;
     color: var(--figma-color-text-disabled);
     overflow: auto;
-    flex: 1;
+    height: 150px;
   }
   .sample-style__tab-header {
     height: 40px;
@@ -928,7 +929,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 0 8 0 8px;
+    padding: 0 8 0 16px;
     border-bottom: 1px solid var(--figma-color-border);
   }
   .sample-text-container {
@@ -1000,16 +1001,85 @@
   }
   .sample-language-menu {
     position: absolute;
+    top: 46px;
     right: 8px;
     width: 178px;
     padding-top: 8px;
     padding-bottom: 8px;
     max-height: 164px;
-    background: var(--figma-color-bg);
-    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+    background: rgb(34, 34, 34);
+    box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     z-index: 100;
-    overflow-y: auto;
+  }
+  .component-row {
+    display: grid;
+    grid-template-columns: repeat(28, 1fr);
+    grid-template-rows: 32px;
+    padding: 4 16px;
+    position: relative;
+    box-sizing: border-box; /* baseとの統合 */
+    color: var(--figma-color-text, #333333); /* baseとの統合 */
+    fill: var(--figma-color-icon, #333333); /* baseとの統合 */
+    border-radius: 2px; /* baseとの統合 */
+    cursor: default; /* baseとの統合 */
+    background-clip: padding-box; /* baseとの統合 */
+    border-bottom: 1px solid var(--figma-color-border);
+  }
+  .component-row__label {
+    display: flex;
+    align-items: center;
+  }
+
+  .component-row__slider {
+    grid-column-start: 14;
+    grid-column-end: span 28;
+    display: flex;
+    align-items: center;
+    height: 30px;
+  }
+
+  .slider {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slider__clip-container {
+    position: relative;
+    height: 100%;
+  }
+
+  .slider__track {
+    position: absolute;
+    top: calc(var(--slider-thumb-size, 9px) * 1 + 5.5px); /* 引数を簡素化 */
+    height: 1px;
+    width: 100%;
+    cursor: default;
+    background: #b3b3b3; /* 色指定の重複を排除 */
+  }
+
+  .slider__tick {
+    position: absolute;
+    height: var(--slider-thumb-size, 9px);
+    pointer-events: none;
+    top: calc(6px + var(--slider-thumb-size, 9px) / 2);
+    left: -1px;
+    width: 1px;
+    background: var(--bg-slider-track);
+  }
+
+  .slider__thumb {
+    background: #fff;
+    display: block;
+    position: absolute;
+    border: 1px solid #000;
+    height: 9px;
+    width: 9px;
+    top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
+    border-radius: 50%;
+    box-sizing: border-box;
+    left: -calc(var(--slider-thumb-size, 9px) * 0.5);
   }
 </style>
 
@@ -1342,23 +1412,41 @@
             </div>
           </div>
         </div>
-        <!-- <div class="sample-language-menu hidden" role="menu">
+        <div class="sample-language-menu hidden" role="menu">
           <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text">English</div>
+            <div class="font-menu__text sample">English</div>
             <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
             </svg>
           </div>
           <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text">Japanese</div>
+            <div class="font-menu__text sample">Japanese</div>
             <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
             </svg>
           </div>
-        </div> -->
+          <div class="popup-arrow">
+            <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
+            </svg>
+          </div>
+        </div>
       </div>
       <div class="sample-style__message">
         <p class="sample-style__text">Preview Sample Text</p>
+      </div>
+    </div>
+    <!-- Scale Controller -->
+    <div class="component-row">
+      <div class="component-row__label">Scale</div>
+      <div class="component-row__slider">
+        <div class="slider" tabindex="0">
+          <div class="slider__clip-container">
+            <div class="slider__track slider__track--light"></div>
+            <div class="slider__tick slider__tick--light"></div>
+            <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="sample-text__input-group">
@@ -1912,9 +2000,6 @@
         const applyStyleDeleteButton = newItem.querySelector(
           ".options-button.delete"
         );
-        const sampleStyleButton = document.querySelector(
-          ".options-button.sample"
-        );
         applyStyleEditButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
           e.stopPropagation();
@@ -1966,38 +2051,46 @@
             "*"
           );
         });
+
+        const sampleStyleButton = document.querySelector(
+          ".options-button.sample"
+        );
+        const sampleLaguageMenu = document.querySelector(
+          ".sample-language-menu"
+        );
         sampleStyleButton.addEventListener("click", function (e) {
-          console.log("aaa");
           // イベントのバブリングを阻止
-          e.stopPropagation();
-  
+          
           removeAllActiveButtons();
-  
+          
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(
-            ".options-button"
-          );
-  
+          const buttonElement = e.target.closest(".options-button");
+          
           // ボタンのアクティブ状態をトグルする
-          const isActive = buttonElement.classList.toggle("active");
+          let isActive = buttonElement.classList.toggle("active");
           if (isActive) {
+            e.stopPropagation();
+            sampleLaguageMenu.classList.remove("hidden");
             overlay.classList.remove("hidden");
             document.body.classList.add("menu-open");
-            // アクティブになったとき
-            // if (popup) {
-            //   popup.style.display = "none";
-            // }
-            // if (menu) {
-            //   menu.style.display = "block";
-            // }
           } else {
-            // アクティブでないとき（別の処理が必要な場合のみ）
+            sampleLaguageMenu.classList.add("hidden");
             overlay.classList.add("hidden");
             document.body.classList.remove("menu-open");
           }
-  
+
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
+        });
+        sampleLaguageMenu.addEventListener("click", function (e) {
+          sampleLaguageMenu.classList.add("hidden");
+          overlay.classList.add("hidden");
+          document.body.classList.remove("menu-open");
+        });
+        document.addEventListener("click", function (e) {
+          sampleLaguageMenu.classList.add("hidden");
+          overlay.classList.add("hidden");
+          document.body.classList.remove("menu-open");
         });
         break;
     }
