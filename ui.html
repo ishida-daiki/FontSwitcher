@@ -534,8 +534,6 @@
     left: 24px;
     top: 24px;
     bottom: 24px;
-    padding-top: 8px;
-    padding-bottom: 8px;
     display: flex;
     flex-direction: column;
   }
@@ -911,6 +909,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   .sample-style__message {
     display: grid;
@@ -1014,74 +1013,74 @@
     z-index: 100;
   }
   .component-row {
-  display: grid;
-  grid-template-columns: repeat(28, 1fr);
-  grid-template-rows: 32px;
-  padding: 4 16px;
-  position: relative;
-  box-sizing: border-box; /* baseとの統合 */
-  color: var(--figma-color-text, #333333); /* baseとの統合 */
-  fill: var(--figma-color-icon, #333333); /* baseとの統合 */
-  border-radius: 2px; /* baseとの統合 */
-  cursor: default; /* baseとの統合 */
-  background-clip: padding-box; /* baseとの統合 */
-  border-bottom: 1px solid var(--figma-color-border);
-}
-.component-row__label {
-  display: flex;
-  align-items: center;
-}
+    display: grid;
+    grid-template-columns: repeat(28, 1fr);
+    grid-template-rows: 32px;
+    padding: 4 16px;
+    position: relative;
+    box-sizing: border-box; /* baseとの統合 */
+    color: var(--figma-color-text, #333333); /* baseとの統合 */
+    fill: var(--figma-color-icon, #333333); /* baseとの統合 */
+    border-radius: 2px; /* baseとの統合 */
+    cursor: default; /* baseとの統合 */
+    background-clip: padding-box; /* baseとの統合 */
+    border-bottom: 1px solid var(--figma-color-border);
+  }
+  .component-row__label {
+    display: flex;
+    align-items: center;
+  }
 
-.component-row__slider {
-  grid-column-start: 14;
-  grid-column-end: span 28;
-  display: flex;
-  align-items: center;
-  height: 30px;
-}
+  .component-row__slider {
+    grid-column-start: 14;
+    grid-column-end: span 28;
+    display: flex;
+    align-items: center;
+    height: 30px;
+  }
 
-.slider {
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
+  .slider {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
 
-.slider__clip-container {
-  position: relative;
-  height: 100%;
-}
+  .slider__clip-container {
+    position: relative;
+    height: 100%;
+  }
 
-.slider__track {
-  position: absolute;
-  top: calc(var(--slider-thumb-size, 9px) * 1 + 5.5px); /* 引数を簡素化 */
-  height: 1px;
-  width: 100%;
-  cursor: default;
-  background: #b3b3b3; /* 色指定の重複を排除 */
-}
+  .slider__track {
+    position: absolute;
+    top: calc(var(--slider-thumb-size, 9px) * 1 + 5.5px); /* 引数を簡素化 */
+    height: 1px;
+    width: 100%;
+    cursor: default;
+    background: #b3b3b3; /* 色指定の重複を排除 */
+  }
 
-.slider__tick {
-  position: absolute;
-  height: var(--slider-thumb-size, 9px);
-  pointer-events: none;
-  top: calc(6px + var(--slider-thumb-size, 9px) / 2);
-  left: -1px;
-  width: 1px;
-  background: var(--bg-slider-track);
-}
+  .slider__tick {
+    position: absolute;
+    height: var(--slider-thumb-size, 9px);
+    pointer-events: none;
+    top: calc(6px + var(--slider-thumb-size, 9px) / 2);
+    left: -1px;
+    width: 1px;
+    background: var(--bg-slider-track);
+  }
 
-.slider__thumb {
-  background: #fff;
-  display: block;
-  position: absolute;
-  border: 1px solid #000;
-  height: 9px;
-  width: 9px;
-  top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
-  border-radius: 50%;
-  box-sizing: border-box;
-  left: -calc(var(--slider-thumb-size, 9px) * 0.5);
-}
+  .slider__thumb {
+    background: #fff;
+    display: block;
+    position: absolute;
+    border: 1px solid #000;
+    height: 9px;
+    width: 9px;
+    top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
+    border-radius: 50%;
+    box-sizing: border-box;
+    left: -calc(var(--slider-thumb-size, 9px) * 0.5);
+  }
 </style>
 
 <body class="scrollbar-hidden">
