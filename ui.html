@@ -992,6 +992,10 @@
     resize: none;
     flex: 1;
   }
+  .sample-style__input.scale {
+    width: 46px;
+    height: auto;
+  }
   .sample-style__input::placeholder {
     color: var(--figma-color-text-disabled, #0000004d);
   }
@@ -1046,15 +1050,16 @@
     flex-direction: row;
     /* grid-template-columns: repeat(28, 1fr);
     grid-template-rows: 32px; */
-    padding: 4 16px;
+    padding: 4 8 4 16px;
     position: relative;
-    box-sizing: border-box; /* baseとの統合 */
-    color: var(--figma-color-text, #333333); /* baseとの統合 */
-    fill: var(--figma-color-icon, #333333); /* baseとの統合 */
-    border-radius: 2px; /* baseとの統合 */
-    cursor: default; /* baseとの統合 */
-    background-clip: padding-box; /* baseとの統合 */
-    gap: 40px;
+    box-sizing: border-box;
+    color: var(--figma-color-text, #333333);
+    fill: var(--figma-color-icon, #333333);
+    border-radius: 2px;
+    cursor: default;
+    background-clip: padding-box;
+    gap: 12px;
+    align-items: center;
   }
   .component-row__label {
     display: flex;
@@ -1093,9 +1098,9 @@
 
   .slider__tick {
     position: absolute;
-    height: var(--slider-thumb-size, 9px);
+    height: 9px;
     pointer-events: none;
-    top: calc(6px + var(--slider-thumb-size, 9px) / 2);
+    top: calc(6px + 9px / 2);
     left: -1px;
     width: 1px;
     background: var(--bg-slider-track);
@@ -1111,7 +1116,7 @@
     top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
     border-radius: 50%;
     box-sizing: border-box;
-    left: -calc(var(--slider-thumb-size, 9px) * 0.5);
+    left: -5px;
   }
 </style>
 
@@ -1489,10 +1494,23 @@
             <div class="slider" tabindex="0">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
-                <div class="slider__tick slider__tick--light"></div>
-                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
               </div>
             </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="scaleInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="50%"
+            />
           </div>
         </div>
         <div class="component-row">
@@ -1501,10 +1519,23 @@
             <div class="slider" tabindex="0">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
-                <div class="slider__tick slider__tick--light"></div>
-                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
               </div>
             </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="scaleInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="50%"
+            />
           </div>
         </div>
         <div class="component-row">
@@ -1513,10 +1544,23 @@
             <div class="slider" tabindex="0">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
-                <div class="slider__tick slider__tick--light"></div>
-                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
               </div>
             </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="scaleInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="50%"
+            />
           </div>
         </div>
       </div>
