@@ -937,7 +937,8 @@
     color: var(--figma-color-text-disabled);
     overflow: auto;
     flex: 1;
-    height: 150px;
+    max-height: 212px;
+    height: 214px;
   }
   .sample-style__text {
     line-height: 180%;
@@ -1491,7 +1492,7 @@
         <div class="component-row">
           <div class="component-row__label">Scale</div>
           <div class="component-row__slider">
-            <div class="slider" tabindex="0">
+            <div class="slider" tabindex="0" data-input="scaleInput">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
                 <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
@@ -1510,13 +1511,15 @@
               autocomplete="off"
               dir="auto"
               value="1"
+              min="0.5" 
+              max="2"
             />
           </div>
         </div>
         <div class="component-row">
           <div class="component-row__label">X</div>
           <div class="component-row__slider">
-            <div class="slider" tabindex="0">
+            <div class="slider" tabindex="0" data-input="xInput">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
                 <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
@@ -1535,13 +1538,15 @@
               autocomplete="off"
               dir="auto"
               value="0"
+              min="-100"
+              max="100"
             />
           </div>
         </div>
         <div class="component-row">
           <div class="component-row__label">Y</div>
           <div class="component-row__slider">
-            <div class="slider" tabindex="0">
+            <div class="slider" tabindex="0" data-input="yInput">
               <div class="slider__clip-container">
                 <div class="slider__track slider__track--light"></div>
                 <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
@@ -1560,6 +1565,8 @@
               autocomplete="off"
               dir="auto"
               value="0"
+              min="-100"
+              max="100"
             />
           </div>
         </div>
@@ -1597,7 +1604,7 @@
   // スクロールバーの表示と動作を制御するJavaScriptコード
   
   document.addEventListener("DOMContentLoaded", (event) => {
-    <!-- const scrollContainer = document.querySelector(".apply-style__list"); -->
+    setupSliders();
     const scrollContainer = applyStyleList;
     const scrollBar = document.querySelector(
       ".scroll_container--scrollBar--YLWIi"
@@ -2650,5 +2657,62 @@
       applyBtn.classList.remove("active");
       applyBtn.classList.add("disabled");
     }
+  }
+
+  function setupSliders() {
+    // すべてのスライダーを取得
+    const sliders = document.querySelectorAll('.slider');
+    const sampleText = document.querySelector('.sample-style__text'); // スタイルを変更するテキスト要素を取得
+  
+    sliders.forEach((slider) => {
+      const thumb = slider.querySelector('.slider__thumb');
+      const track = slider.querySelector('.slider__track');
+      const tick = slider.querySelector('.slider__tick');
+      const input = document.getElementById(slider.dataset.input); // データ属性を使用して関連するinput要素を取得
+  
+      // スライダーのthumbをドラッグ可能にする
+      thumb.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        const rect = track.getBoundingClientRect();
+  
+        // ドラッグイベントを処理する関数
+        const onMouseMove = (e) => {
+          let newValue = (e.clientX - rect.left) / rect.width;
+          newValue = Math.min(Math.max(newValue, 0), 1); // 0から1の範囲に制限する
+          thumb.style.marginLeft = `${newValue * 100}%`;
+          tick.style.marginLeft = `${newValue * 100}%`;
+  
+          // 対応するinput要素の値を更新
+          if(input) {
+            const value = (newValue * (input.max - input.min) + parseFloat(input.min)).toFixed(2);
+            input.value = value;
+  
+            // inputに基づいてsample-style__textのスタイルを更新
+            switch(input.id) {
+              case 'scaleInput':
+                sampleText.style.transform = `scale(${value})`;
+                break;
+              case 'xInput':
+                sampleText.style.transform = `translateX(${value}px)`;
+                break;
+              case 'yInput':
+                sampleText.style.transform = `translateY(${value}px)`;
+                break;
+            }
+          }
+        };
+  
+        // ドラッグ終了イベントを処理する関数
+        const onMouseUp = () => {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          thumb.classList.add('slider__thumb--inactive'); // ドラッグ終了時にクラスを反映
+        };
+  
+        thumb.classList.remove('slider__thumb--inactive'); // ドラッグ開始時にクラスを削除
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+    });
   }
 </script>
