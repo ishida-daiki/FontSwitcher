@@ -534,8 +534,6 @@
     left: 24px;
     top: 24px;
     bottom: 24px;
-    padding-top: 8px;
-    padding-bottom: 8px;
     display: flex;
     flex-direction: column;
   }
@@ -1774,6 +1772,20 @@
   
           // 重複せずにフォントファミリー名を記録するためのSetを作成
           const addedFontFamilies = new Set();
+          
+          availableFonts.sort((a, b) => {
+            const nameA = a.fontName.family;
+            const nameB = b.fontName.family;
+            // "?????" をリストの最後に配置
+            if (nameA === '?????' && nameB !== '?????') return 1;
+            if (nameA !== '?????' && nameB === '?????') return -1;
+            // "."で始まるフォント名称はリストの後ろ（ただし、"?????"の前）に移動
+            if (nameA.startsWith('.') && !nameB.startsWith('.') && nameB !== '?????') return 1;
+            if (!nameA.startsWith('.') && nameB.startsWith('.') && nameA !== '?????') return -1;
+            // それ以外の場合はアルファベット順にソート
+            // 上記でなければ、通常の文字列比較でソート
+            return nameA.localeCompare(nameB);
+          });
           // 各コンテナに同じフォントリストを追加する
           availableFonts.forEach((font) => {
             // フォントファミリー名がSetにまだ追加されていない場合のみ項目を作成する
@@ -1789,6 +1801,7 @@
               const text = document.createElement("div");
               text.className = "font-menu__text";
               text.textContent = font.fontName.family;
+              text.style.fontFamily = `"${font.fontName.family}"`;
               item.appendChild(text);
   
               // リストにメニュー項目を追加
