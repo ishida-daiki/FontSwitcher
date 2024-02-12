@@ -898,7 +898,7 @@
   .font_picker--fontPickerSearchRow--PBwi7 {
     color: var(--figma-color-icon);
     padding-left: 16px;
-    padding-right: 12px;
+    padding-right: 8px;
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -1320,6 +1320,13 @@
                           value=""
                         />
                       </div>
+                      <button class="options-button close" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+                        <span class="apply-style__options-svg-container">
+                          <svg class="apply-style__options-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="nonzero" stroke="none" d="m6 5.293 4.789-4.79.707.708-4.79 4.79 4.79 4.789-.707.707-4.79-4.79-4.789 4.79-.707-.707L5.293 6 .502 1.211 1.21.504 6 5.294z" fill-opacity="1"></path>
+                          </svg>
+                        </span>
+                      </button>
                     </div>
                     <div class="scroll_container"></div>
                     <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
@@ -1402,6 +1409,13 @@
                           value=""
                         />
                       </div>
+                      <button class="options-button close" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+                        <span class="apply-style__options-svg-container">
+                          <svg class="apply-style__options-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="nonzero" stroke="none" d="m6 5.293 4.789-4.79.707.708-4.79 4.79 4.79 4.789-.707.707-4.79-4.79-4.789 4.79-.707-.707L5.293 6 .502 1.211 1.21.504 6 5.294z" fill-opacity="1"></path>
+                          </svg>
+                        </span>
+                      </button>
                     </div>
                     <div class="scroll_container"></div>
                     <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
@@ -1612,6 +1626,7 @@
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
   const applyCreateStyleButton = document.querySelector(".options-button.create");
+  const searchMenuCloseStyleButtons = document.querySelectorAll(".options-button.close");
   let textDisplay = document.querySelector(".sample-style__text");
   let applyStyleItems;
   let applyStyleEditButtons;
@@ -1862,6 +1877,13 @@
         );
         // listContainer領域外のクリックを検知するための関数
   
+        searchMenuCloseStyleButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            fontFamilyListContainers.forEach((listContainer) => {
+              listContainer.classList.add("hidden");
+            });
+          })
+        });
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
