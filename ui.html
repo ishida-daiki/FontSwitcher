@@ -343,6 +343,9 @@
   .popup.delete {
     right: 8px;
   }
+  .popup.create {
+    right: 8px;
+  }
 
   /* ポップアップコンテナ (Element Modifier) */
   .popup:hover {
@@ -1152,7 +1155,7 @@
           <div class="apply-style__styles">
             <h2 class="apply-style__title">Style list</h2>
             <button
-              class="options-button edit"
+              class="options-button create"
               tabindex="0"
               aria-label="その他のオプション"
               data-tooltip-type="text"
@@ -1176,6 +1179,22 @@
                 </svg>
               </span>
             </button>
+            <div class="popup create">
+              <div class="popup-arrow-container">
+                <div class="popup-content">Create style</div>
+                <div class="popup-arrow">
+                  <svg
+                    width="13"
+                    height="7"
+                    viewBox="0 0 13 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
     
           <div class="apply-style__list__container">
@@ -1589,6 +1608,7 @@
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
+  const applyCreateStyleButton = document.querySelector(".options-button.create");
   let textDisplay = document.querySelector(".sample-style__text");
   let applyStyleItems;
   let applyStyleEditButtons;
@@ -2365,6 +2385,13 @@
     selectedCheckIcon.classList.remove("hidden");
   }
   
+  // Create style のクリックイベントリスナーを追加
+  applyCreateStyleButton.addEventListener("click", function () {
+    activateTab(tabs[1]);
+    toggleTabContents(1);
+    toggleTabContentAndResize(1);
+  });
+
   // ボタンにクリックイベントリスナーを追加
   createStyleButton.addEventListener("click", function () {
     // スタイル名のインプット要素から値を取得
