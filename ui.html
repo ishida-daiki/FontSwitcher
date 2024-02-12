@@ -117,6 +117,7 @@
     width: 324px;
     border-right: 1px solid var(--figma-color-border);
     flex: 1;
+    position: relative;
   }
   .overlay {
     position: fixed;
@@ -553,6 +554,8 @@
     padding-bottom: 8px;
     max-height: 164px;
     overflow-x: hidden;
+    background: rgb(34, 34, 34);
+    top: 50%;
   }
 
   .scroll_container > .font-menu__item {
@@ -1849,14 +1852,29 @@
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;
         let fontFamilyListContainers;
+        let fontWeightListContainers;
   
         fontFamilyListContainers = document.querySelectorAll(
           ".font-family-list-container"
+        );
+        fontWeightListContainers = document.querySelectorAll(
+          ".font-weight-list-container"
         );
         // listContainer領域外のクリックを検知するための関数
   
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
+            // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
+            if (
+              listContainer.contains(event.target) ||
+              listContainer.previousElementSibling.contains(event.target)
+            ) {
+              // クリックしたのがlistContainer内、もしくはlistContainerに隣接する要素（toggleボタン）の場合は何もしない
+            } else {
+              listContainer.classList.add("hidden");
+            }
+          });
+          fontWeightListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
             if (
               listContainer.contains(event.target) ||
@@ -1885,7 +1903,7 @@
             ".font-weight-list-container"
           );
           const fontWeightSelectBtn = content.querySelector(
-            ".create-style__dropdown-group.font-weight"
+            ".create-style__dropdown-toggle.font-weight"
           );
           const dropDownToggle = content.querySelector(
             ".create-style__dropdown-toggle.font-family"
@@ -1945,14 +1963,24 @@
             }
           });
           fontWeightSelectBtn.addEventListener("click", () => {
-            fontWeightListContainer.classList.add("hidden");
-            overlay.classList.remove("hidden");
-            document.body.classList.add("menu-open");
-  
-            // ボタンに関連づけられたリストコンテナを取得する
-            if (fontFamilyListContainer) {
-              fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
-              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
+            if (fontWeightListContainer) {
+              fontWeightListContainer.classList.remove("hidden");
+              overlay.classList.remove("hidden");
+              document.body.classList.add("menu-open");
+              // 現在のフォントファミリーラベルからフォント名を取得
+              const currentFontFamily = content.querySelector(
+                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
+              ).textContent;
+              // 表示されるべきフォントウェイト一覧を表示する
+              makeFontWeightLists(
+                currentFontFamily,
+                fontWeightListContainer,
+                fontWeightLabel
+              );
+            } else {
+              fontWeightListContainer.classList.add("hidden");
+              overlay.classList.add("hidden");
+              document.body.classList.remove("menu-open");
             }
           });
   
@@ -1981,23 +2009,6 @@
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
             });
-          });
-          fontWeightSelectBtn.addEventListener("click", function () {
-            if (fontWeightListContainer.classList.contains("hidden")) {
-              // 現在のフォントファミリーラベルからフォント名を取得
-              const currentFontFamily = content.querySelector(
-                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
-              ).textContent;
-              // 表示されるべきフォントウェイト一覧を表示する
-              makeFontWeightLists(
-                currentFontFamily,
-                fontWeightListContainer,
-                fontWeightLabel
-              );
-              fontWeightListContainer.classList.remove("hidden");
-            } else {
-              fontWeightListContainer.classList.add("hidden"); // リストを閉じる
-            }
           });
         });
         break;
