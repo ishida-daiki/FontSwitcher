@@ -657,6 +657,9 @@
   .font-menu__text.sample {
     color: #ffffff;
   }
+  .font-menu__text.font-weight {
+    color: #ffffff;
+  }
 
   .font-menu__icon {
     width: 16px;
@@ -943,11 +946,12 @@
     color: var(--figma-color-text-disabled);
     overflow: auto;
     flex: 1;
-    max-height: 212px;
+    max-height: 234px;
     height: 214px;
   }
   .sample-style__text {
     line-height: 180%;
+    font-size: 1rem;
   }
   .sample-style__tab-header {
     height: 40px;
@@ -2013,12 +2017,12 @@
               const dropDown = fontFamilyListContainer.closest(
                 ".create-style__dropdown"
                 );
-                const label = dropDown.querySelector(
-                  ".create-style__dropdown-label"
-                  );
-                if (label) {
-                  label.textContent = fontName;
-                  textDisplay.style.fontFamily = label.textContent;
+              const label = dropDown.querySelector(
+                ".create-style__dropdown-label"
+                );
+              if (label) {
+                label.textContent = fontName;
+                textDisplay.style.fontFamily = label.textContent;
               }
   
               fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
@@ -2321,11 +2325,11 @@
     fontWeightLabel
   ) {
     fontWeightListContainer.innerHTML = ""; // コンテナをクリア
-  
+    
     const fontWeights = availableFonts.filter(
       (font) => font.fontName.family === fontFamilyName
     );
-  
+
     function createCheckIcon() {
       const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
       const checkIcon = document.createElementNS(namespace, "svg");
@@ -2361,7 +2365,7 @@
   
       // フォントウェイト名を表示するためのテキスト部分を作成
       const text = document.createElement("div");
-      text.className = "font-menu__text";
+      text.className = "font-menu__text font-weight";
       text.textContent = font.fontName.style;
       item.appendChild(text);
   
@@ -2379,7 +2383,7 @@
       item.addEventListener("click", () => {
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
-  
+
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
         allFontWeightItems.forEach((cItem) => {
           const icon = cItem.querySelector(".font-menu__icon");
@@ -2601,7 +2605,6 @@
   // When the button is clicked, the plugin will start the text analysis and update
   applyBtn.addEventListener("click", () => {
     const cloneLayerName = `${layerName}_${selectedName}`;
-    console.log(cloneLayerName);
     parent.postMessage(
       {
         pluginMessage: {
