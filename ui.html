@@ -88,6 +88,7 @@
     width: 100%;
     overflow-y: hidden;
     display: flex;
+    flex-direction: column;
   }
   /* メニューが開いている間はhoverスタイルを無効にする */
   body.menu-open .apply-style__item:hover,
@@ -115,6 +116,8 @@
   .main {
     width: 324px;
     border-right: 1px solid var(--figma-color-border);
+    flex: 1;
+    position: relative;
   }
   .overlay {
     position: fixed;
@@ -341,6 +344,9 @@
   .popup.delete {
     right: 8px;
   }
+  .popup.create {
+    right: 8px;
+  }
 
   /* ポップアップコンテナ (Element Modifier) */
   .popup:hover {
@@ -530,10 +536,10 @@
   }
   .create-style__font-menu.font-family-list-container {
     position: absolute;
-    right: 24px;
-    left: 24px;
-    top: 24px;
-    bottom: 24px;
+    right: 16px;
+    left: 16px;
+    top: 16px;
+    bottom: 16px;
     display: flex;
     flex-direction: column;
   }
@@ -543,11 +549,13 @@
   .create-style__font-menu.font-weight-list-container {
     position: absolute;
     right: 8px;
-    width: 178px;
+    width: 200px;
     padding-top: 8px;
     padding-bottom: 8px;
-    max-height: 164px;
+    max-height: 350px;
     overflow-x: hidden;
+    background: rgb(34, 34, 34);
+    bottom: 16;
   }
 
   .scroll_container > .font-menu__item {
@@ -647,6 +655,9 @@
     word-wrap: break-word;
   }
   .font-menu__text.sample {
+    color: #ffffff;
+  }
+  .font-menu__text.font-weight {
     color: #ffffff;
   }
 
@@ -781,9 +792,15 @@
     flex-grow: 1;
     width: 120px;
   }
+  .create-style__input-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid var(--figma-color-border);
+    padding: 16px 0px;
+  }
   .create-style__input-group {
     box-sizing: border-box;
-    padding: 16px;
     width: 100%;
     height: max-content;
     background-color: transparent;
@@ -791,8 +808,9 @@
     flex-direction: row;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--figma-color-border);
+    align-items: flex-start;
+    padding: 0px 16px;
+    gap: 16px;
   }
   .create-style__label {
     -webkit-user-select: none;
@@ -804,6 +822,10 @@
     cursor: default;
     box-sizing: border-box;
     background-clip: padding-box;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    width: 84px;
   }
   .create-style__input {
     grid-column-start: 1;
@@ -879,7 +901,7 @@
   .font_picker--fontPickerSearchRow--PBwi7 {
     color: var(--figma-color-icon);
     padding-left: 16px;
-    padding-right: 12px;
+    padding-right: 8px;
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -924,7 +946,12 @@
     color: var(--figma-color-text-disabled);
     overflow: auto;
     flex: 1;
-    height: 150px;
+    max-height: 234px;
+    height: 214px;
+  }
+  .sample-style__text {
+    line-height: 180%;
+    font-size: 1rem;
   }
   .sample-style__tab-header {
     height: 40px;
@@ -940,6 +967,7 @@
     display: none;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
   }
   .sample-text__input-group {
     box-sizing: border-box;
@@ -957,8 +985,7 @@
   }
   .sample-style__input {
     grid-column-start: 1;
-    padding: 8px;
-    margin: 0 16px;
+    padding: 4 8px;
     border: 1px solid var(--figma-color-border);
     background-color: var(--color-bg);
     grid-column-end: span 28;
@@ -972,9 +999,18 @@
     line-height: 175%;
     border-radius: 2px;
     width: -webkit-fill-available;
+    height: 82px;
     resize: none;
     flex: 1;
   }
+  .sample-style__input.scale {
+    width: 46px;
+    height: auto;
+  }
+  .sample-style__input::placeholder {
+    color: var(--figma-color-text-disabled, #0000004d);
+  }
+
   .sample-style__input:focus-visible {
     margin-top: 0;
     margin-bottom: 0;
@@ -1015,23 +1051,31 @@
     border-radius: 2px;
     z-index: 100;
   }
+  .component-rows {
+    display: flex;
+    flex-direction: column;
+    padding: 4 0px;
+  }
   .component-row {
-    display: grid;
-    grid-template-columns: repeat(28, 1fr);
-    grid-template-rows: 32px;
-    padding: 4 16px;
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: repeat(28, 1fr);
+    grid-template-rows: 32px; */
+    padding: 4 8 4 16px;
     position: relative;
-    box-sizing: border-box; /* baseとの統合 */
-    color: var(--figma-color-text, #333333); /* baseとの統合 */
-    fill: var(--figma-color-icon, #333333); /* baseとの統合 */
-    border-radius: 2px; /* baseとの統合 */
-    cursor: default; /* baseとの統合 */
-    background-clip: padding-box; /* baseとの統合 */
-    border-bottom: 1px solid var(--figma-color-border);
+    box-sizing: border-box;
+    color: var(--figma-color-text, #333333);
+    fill: var(--figma-color-icon, #333333);
+    border-radius: 2px;
+    cursor: default;
+    background-clip: padding-box;
+    gap: 12px;
+    align-items: center;
   }
   .component-row__label {
     display: flex;
     align-items: center;
+    width: 30px;
   }
 
   .component-row__slider {
@@ -1040,6 +1084,7 @@
     display: flex;
     align-items: center;
     height: 30px;
+    flex: 1;
   }
 
   .slider {
@@ -1064,9 +1109,9 @@
 
   .slider__tick {
     position: absolute;
-    height: var(--slider-thumb-size, 9px);
+    height: 9px;
     pointer-events: none;
-    top: calc(6px + var(--slider-thumb-size, 9px) / 2);
+    top: calc(6px + 9px / 2);
     left: -1px;
     width: 1px;
     background: var(--bg-slider-track);
@@ -1082,41 +1127,349 @@
     top: calc(var(--slider-thumb-size, 9px) / 2 + 6px);
     border-radius: 50%;
     box-sizing: border-box;
-    left: -calc(var(--slider-thumb-size, 9px) * 0.5);
+    left: -5px;
   }
 </style>
 
 <body class="scrollbar-hidden">
   <div id="overlay" class="overlay hidden"></div>
-  <div class="main">
-    <!-- tab-list -->
-    <div class="tab-list">
-      <ul class="tab-list__items">
-        <li class="tab-list__item">
-          <span class="tab-list__text">Apply styles</span>
-        </li>
-        <li class="tab-list__item">
-          <span class="tab-list__text">Create style</span>
-        </li>
-      </ul>
-      <div class="tab-list-active-indicator"></div>
-    </div>
-  
-    <!-- Apply style  -->
-    <div class="apply-style">
-      <!-- 要素選択 -->
-      <div class="apply-style__message">
-        <p class="apply-style__text">
-          Select the element whose <br />
-          text you want to change
-        </p>
+  <div style="display: flex; flex-direction: row;">
+    <div class="main">
+      <!-- tab-list -->
+      <div class="tab-list">
+        <ul class="tab-list__items">
+          <li class="tab-list__item">
+            <span class="tab-list__text">Apply styles</span>
+          </li>
+          <li class="tab-list__item">
+            <span class="tab-list__text">Create style</span>
+          </li>
+        </ul>
+        <div class="tab-list-active-indicator"></div>
       </div>
-      <!-- 登録したテキストスタイル一覧 -->
-      <div class="apply-style__content">
-        <div class="apply-style__styles">
-          <h2 class="apply-style__title">Style list</h2>
+    
+      <!-- Apply style  -->
+      <div class="apply-style">
+        <!-- 要素選択 -->
+        <div class="apply-style__message">
+          <p class="apply-style__text">
+            Select the element whose <br />
+            text you want to change
+          </p>
+        </div>
+        <!-- 登録したテキストスタイル一覧 -->
+        <div class="apply-style__content">
+          <div class="apply-style__styles">
+            <h2 class="apply-style__title">Style list</h2>
+            <button
+              class="options-button create"
+              tabindex="0"
+              aria-label="その他のオプション"
+              data-tooltip-type="text"
+              data-tooltip="その他のオプション"
+            >
+              <span class="apply-style__options-svg-container">
+                <svg
+                  class="apply-style__options-svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="nonzero"
+                    stroke="none"
+                    d="M5 5V0h1v5h5v1H6v5H5V6H0V5h5z"
+                    fill-opacity="1"
+                  />
+                </svg>
+              </span>
+            </button>
+            <div class="popup create">
+              <div class="popup-arrow-container">
+                <div class="popup-content">Create style</div>
+                <div class="popup-arrow">
+                  <svg
+                    width="13"
+                    height="7"
+                    viewBox="0 0 13 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="apply-style__list__container">
+            <ul class="apply-style__list">
+            </ul>
+            <div class="scroll_container--track--HEzfy" role="none">
+              <div
+                class="scroll_container--scrollBar--YLWIi"
+                role="none"
+                style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <!-- 反映ボタン -->
+        <button id="applyBtn" class="create-style__apply-button disabled">
+          Apply
+        </button>
+      </div>
+    
+      <!-- ローディングインジケーター -->
+      <div id="loadingIndicator" class="loading-indicator hidden">
+        <svg class="progress-ring" viewBox="0 0 240 240">
+          <circle
+            class="progress-ring__circle"
+            stroke="var(--figma-color-bg-component)"
+            stroke-width="10"
+            fill="transparent"
+            r="52"
+            cx="120"
+            cy="120"
+          />
+        </svg>
+        <span class="progress-text">Applying fonts...</span>
+      </div>
+    
+      <div>
+        <!-- Create style  -->
+        <div class="create-style hidden">
+          <!-- スタイル名 作成 -->
+          <div class="create-style__input-groups">
+            <div class="create-style__input-group">
+              <label class="create-style__label" for="styleNameInput"
+                >Style name</label
+              >
+              <input
+                type="text"
+                id="styleNameInput"
+                spellcheck="false"
+                class="create-style__input"
+                name="styleName"
+                placeholder="New style"
+                autocomplete="off"
+                dir="auto"
+                value
+              />
+            </div>
+            <div class="create-style__input-group">
+              <label class="create-style__label" for="styleNameInput"
+                >Sample Content</label
+              >
+              <textarea
+                type="text"
+                id="sampleTextContent"
+                spellcheck="false"
+                class="sample-style__input"
+                name="styleName"
+                placeholder="Preview Sample Text"
+                autocomplete="off"
+                dir="auto"
+                value=""
+              ></textarea>
+            </div>
+          </div>
+    
+          <div class="create-style__tabs">
+            <div class="create-style__tab-header">
+              <h2 class="create-style__tab-title">Settings</h2>
+            </div>
+            <div class="create-style__content">
+              <div class="create-style__styles" id="mainView">
+                <h2 class="create-style__tab-title">English</h2>
+              </div>
+              <div class="create-style__dropdown" data-lang="English">
+                <div class="create-style__dropdown-group font-family">
+                  <button
+                    class="create-style__dropdown-toggle font-family"
+                    data-label-type="font-family"
+                  >
+                    <span class="create-style__dropdown-label">SF Pro</span>
+                  </button>
+                  <div
+                    class="create-style__font-menu hidden font-family-list-container"
+                    role="menu"
+                  >
+                    <div class="font_picker--fontPickerSearchRow--PBwi7">
+                      <span class="svg-container font_picker--searchIcon--ADEyj"
+                        ><svg
+                          class="svg"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="11"
+                          height="11"
+                          viewBox="0 0 11 11"
+                        >
+                          <path
+                            fill-opacity="1"
+                            fill-rule="evenodd"
+                            stroke="none"
+                            d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
+                          ></path></svg
+                      ></span>
+                      <div class="font_picker--fontPickerSearchBar--XigbT">
+                        <input
+                          placeholder="Search fonts"
+                          spellcheck="false"
+                          class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
+                          type="text"
+                          data-testid="font-picker-search-input"
+                          dir="auto"
+                          value=""
+                        />
+                      </div>
+                      <button class="options-button close" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+                        <span class="apply-style__options-svg-container">
+                          <svg class="apply-style__options-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="nonzero" stroke="none" d="m6 5.293 4.789-4.79.707.708-4.79 4.79 4.79 4.789-.707.707-4.79-4.79-4.789 4.79-.707-.707L5.293 6 .502 1.211 1.21.504 6 5.294z" fill-opacity="1"></path>
+                          </svg>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="scroll_container"></div>
+                    <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
+                  </div>
+                </div>
+                <div class="create-style__dropdown-group font-weight">
+                  <div
+                    class="create-style__dropdown-toggle font-weight"
+                    style="width: 100%"
+                    data-label-type="font-weight"
+                  >
+                    <span class="create-style__dropdown-label">Regular</span>
+                    <div class="create-style__dropdown-icon-container">
+                      <span class="create-style__svg-container">
+                        <svg
+                          class="create-style__dropdown-icon"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="8"
+                          height="7"
+                          viewBox="0 0 8 7"
+                        >
+                          <path
+                            fill-opacity="1"
+                            fill-rule="evenodd"
+                            d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
+                          ></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="create-style__font-menu hidden font-weight-list-container"
+                    role="menu"
+                  >
+                    <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="create-style__content">
+              <div class="create-style__styles" id="mainView">
+                <h2 class="create-style__tab-title">Japanese</h2>
+              </div>
+              <div class="create-style__dropdown" data-lang="Japanese">
+                <div class="create-style__dropdown-group font-family">
+                  <button
+                    class="create-style__dropdown-toggle font-family"
+                    data-label-type="font-family"
+                  >
+                    <span class="create-style__dropdown-label">Noto Sans JP</span>
+                  </button>
+                  <div
+                    class="create-style__font-menu hidden font-family-list-container"
+                    role="menu"
+                  >
+                    <div class="font_picker--fontPickerSearchRow--PBwi7">
+                      <span class="svg-container font_picker--searchIcon--ADEyj"
+                        ><svg
+                          class="svg"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="11"
+                          height="11"
+                          viewBox="0 0 11 11"
+                        >
+                          <path
+                            fill-opacity="1"
+                            fill-rule="evenodd"
+                            stroke="none"
+                            d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
+                          ></path></svg
+                      ></span>
+                      <div class="font_picker--fontPickerSearchBar--XigbT">
+                        <input
+                          placeholder="Search fonts"
+                          spellcheck="false"
+                          class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
+                          type="text"
+                          data-testid="font-picker-search-input"
+                          dir="auto"
+                          value=""
+                        />
+                      </div>
+                      <button class="options-button close" tabindex="0" aria-label="その他のオプション" data-tooltip-type="text" data-tooltip="その他のオプション">
+                        <span class="apply-style__options-svg-container">
+                          <svg class="apply-style__options-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="nonzero" stroke="none" d="m6 5.293 4.789-4.79.707.708-4.79 4.79 4.79 4.789-.707.707-4.79-4.79-4.789 4.79-.707-.707L5.293 6 .502 1.211 1.21.504 6 5.294z" fill-opacity="1"></path>
+                          </svg>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="scroll_container"></div>
+                    <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
+                  </div>
+                </div>
+                <div class="create-style__dropdown-group font-weight">
+                  <div
+                    class="create-style__dropdown-toggle font-weight"
+                    style="width: 100%"
+                    data-label-type="font-weight"
+                  >
+                    <span class="create-style__dropdown-label">Regular</span>
+                    <div class="create-style__dropdown-icon-container">
+                      <span class="create-style__svg-container">
+                        <svg
+                          class="create-style__dropdown-icon"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="8"
+                          height="7"
+                          viewBox="0 0 8 7"
+                        >
+                          <path
+                            fill-opacity="1"
+                            fill-rule="evenodd"
+                            d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
+                          ></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="create-style__font-menu hidden font-weight-list-container"
+                    role="menu"
+                  >
+                    <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sample-text-container" id="sampleView">
+      <!-- プレビュー -->
+      <div class="sample-style__tabs">
+        <div class="sample-style__tab-header">
+          <h2 class="create-style__tab-title">Sample Preview</h2>
           <button
-            class="options-button edit"
+            class="options-button sample"
             tabindex="0"
             aria-label="その他のオプション"
             data-tooltip-type="text"
@@ -1125,289 +1478,44 @@
             <span class="apply-style__options-svg-container">
               <svg
                 class="apply-style__options-svg"
-                width="12"
+                width="14"
                 height="12"
-                viewBox="0 0 12 12"
+                viewBox="0 0 14 12
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="nonzero"
-                  stroke="none"
-                  d="M5 5V0h1v5h5v1H6v5H5V6H0V5h5z"
                   fill-opacity="1"
-                />
+                  fill-rule="evenodd"
+                  stroke="none"
+                  d="m5 1.381-4 2.31v4.618l4 2.31 4-2.31V3.691L5 1.38zm5 1.732L5 .227 0 3.113v5.774l5 2.887 5-2.887V3.113zm3 5.196-5 2.887 1 .578 5-2.887V3.113L9 .227 8 .804l5 2.887v4.618zM6 6c0 .552-.448 1-1 1-.552 0-1-.448-1-1 0-.552.448-1 1-1 .552 0 1 .448 1 1z"
+                ></path>
               </svg>
             </span>
           </button>
-        </div>
-  
-        <div class="apply-style__list__container">
-          <ul class="apply-style__list">
-          </ul>
-          <div class="scroll_container--track--HEzfy" role="none">
-            <div
-              class="scroll_container--scrollBar--YLWIi"
-              role="none"
-              style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
-            ></div>
-          </div>
-        </div>
-      </div>
-      <!-- 反映ボタン -->
-      <button id="applyBtn" class="create-style__apply-button disabled">
-        Apply
-      </button>
-    </div>
-  
-    <!-- ローディングインジケーター -->
-    <div id="loadingIndicator" class="loading-indicator hidden">
-      <svg class="progress-ring" viewBox="0 0 240 240">
-        <circle
-          class="progress-ring__circle"
-          stroke="var(--figma-color-bg-component)"
-          stroke-width="10"
-          fill="transparent"
-          r="52"
-          cx="120"
-          cy="120"
-        />
-      </svg>
-      <span class="progress-text">Applying fonts...</span>
-    </div>
-  
-    <div style="display: flex">
-      <!-- Create style  -->
-      <div class="create-style hidden">
-        <!-- スタイル名 作成 -->
-        <div class="create-style__input-group">
-          <label class="create-style__label" for="styleNameInput"
-            >Style name</label
-          >
-          <input
-            type="text"
-            id="styleNameInput"
-            spellcheck="false"
-            class="create-style__input"
-            name="styleName"
-            placeholder="New style"
-            autocomplete="off"
-            dir="auto"
-            value
-          />
-        </div>
-  
-        <div class="create-style__tabs">
-          <div class="create-style__tab-header">
-            <h2 class="create-style__tab-title">Settings</h2>
-          </div>
-          <div class="create-style__content">
-            <div class="create-style__styles" id="mainView">
-              <h2 class="create-style__tab-title">English</h2>
-            </div>
-            <div class="create-style__dropdown" data-lang="English">
-              <div class="create-style__dropdown-group font-family">
-                <button
-                  class="create-style__dropdown-toggle font-family"
-                  data-label-type="font-family"
-                >
-                  <span class="create-style__dropdown-label">SF Pro</span>
-                </button>
-                <div
-                  class="create-style__font-menu hidden font-family-list-container"
-                  role="menu"
-                >
-                  <div class="font_picker--fontPickerSearchRow--PBwi7">
-                    <span class="svg-container font_picker--searchIcon--ADEyj"
-                      ><svg
-                        class="svg"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="11"
-                        height="11"
-                        viewBox="0 0 11 11"
-                      >
-                        <path
-                          fill-opacity="1"
-                          fill-rule="evenodd"
-                          stroke="none"
-                          d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
-                        ></path></svg
-                    ></span>
-                    <div class="font_picker--fontPickerSearchBar--XigbT">
-                      <input
-                        placeholder="Search fonts"
-                        spellcheck="false"
-                        class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
-                        type="text"
-                        data-testid="font-picker-search-input"
-                        dir="auto"
-                        value=""
-                      />
-                    </div>
-                  </div>
-                  <div class="scroll_container"></div>
-                  <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
-                </div>
-              </div>
-              <div class="create-style__dropdown-group font-weight">
-                <div
-                  class="create-style__dropdown-toggle font-weight"
-                  style="width: 100%"
-                  data-label-type="font-weight"
-                >
-                  <span class="create-style__dropdown-label">Regular</span>
-                  <div class="create-style__dropdown-icon-container">
-                    <span class="create-style__svg-container">
-                      <svg
-                        class="create-style__dropdown-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="8"
-                        height="7"
-                        viewBox="0 0 8 7"
-                      >
-                        <path
-                          fill-opacity="1"
-                          fill-rule="evenodd"
-                          d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
-                        ></path>
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-                <div
-                  class="create-style__font-menu hidden font-weight-list-container"
-                  role="menu"
-                >
-                  <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
-                </div>
+          <div class="popup">
+            <div class="popup-arrow-container">
+              <div class="popup-content">Sample style</div>
+              <div class="popup-arrow">
+                <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
+                </svg>
               </div>
             </div>
           </div>
-          <div class="create-style__content">
-            <div class="create-style__styles" id="mainView">
-              <h2 class="create-style__tab-title">Japanese</h2>
+          <div class="sample-language-menu hidden" role="menu">
+            <div class="font-menu__item" role="menuitem">
+              <div class="font-menu__text sample">English</div>
+              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
+              </svg>
             </div>
-            <div class="create-style__dropdown" data-lang="Japanese">
-              <div class="create-style__dropdown-group font-family">
-                <button
-                  class="create-style__dropdown-toggle font-family"
-                  data-label-type="font-family"
-                >
-                  <span class="create-style__dropdown-label">Noto Sans JP</span>
-                </button>
-                <div
-                  class="create-style__font-menu hidden font-family-list-container"
-                  role="menu"
-                >
-                  <div class="font_picker--fontPickerSearchRow--PBwi7">
-                    <span class="svg-container font_picker--searchIcon--ADEyj"
-                      ><svg
-                        class="svg"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="11"
-                        height="11"
-                        viewBox="0 0 11 11"
-                      >
-                        <path
-                          fill-opacity="1"
-                          fill-rule="evenodd"
-                          stroke="none"
-                          d="M6.453 7.16C5.776 7.687 4.924 8 4 8 1.79 8 0 6.21 0 4c0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 .924-.314 1.776-.84 2.453l3.194 3.193-.708.707L6.453 7.16zM7 4c0 1.657-1.343 3-3 3-1.657 0-3-1.343-3-3 0-1.657 1.343-3 3-3 1.657 0 3 1.343 3 3z"
-                        ></path></svg
-                    ></span>
-                    <div class="font_picker--fontPickerSearchBar--XigbT">
-                      <input
-                        placeholder="Search fonts"
-                        spellcheck="false"
-                        class="font-search font_picker--fontPickerSearchBarInput--qOPld lazy_input--lazyInput--Ltb6r"
-                        type="text"
-                        data-testid="font-picker-search-input"
-                        dir="auto"
-                        value=""
-                      />
-                    </div>
-                  </div>
-                  <div class="scroll_container"></div>
-                  <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
-                </div>
-              </div>
-              <div class="create-style__dropdown-group font-weight">
-                <div
-                  class="create-style__dropdown-toggle font-weight"
-                  style="width: 100%"
-                  data-label-type="font-weight"
-                >
-                  <span class="create-style__dropdown-label">Regular</span>
-                  <div class="create-style__dropdown-icon-container">
-                    <span class="create-style__svg-container">
-                      <svg
-                        class="create-style__dropdown-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="8"
-                        height="7"
-                        viewBox="0 0 8 7"
-                      >
-                        <path
-                          fill-opacity="1"
-                          fill-rule="evenodd"
-                          d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
-                        ></path>
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-                <div
-                  class="create-style__font-menu hidden font-weight-list-container"
-                  role="menu"
-                >
-                  <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
-                </div>
-              </div>
+            <div class="font-menu__item" role="menuitem">
+              <div class="font-menu__text sample">Japanese</div>
+              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
+              </svg>
             </div>
-          </div>
-        </div>
-  
-        <div class="create-style__form-action">
-          <button tabindex="0" class="create-style__submit-button">
-            Create style
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sample-text-container" id="sampleView">
-    <!-- プレビュー -->
-    <div class="sample-style__tabs">
-      <div class="sample-style__tab-header">
-        <h2 class="create-style__tab-title">Sample Preview</h2>
-        <button
-          class="options-button sample"
-          tabindex="0"
-          aria-label="その他のオプション"
-          data-tooltip-type="text"
-          data-tooltip="その他のオプション"
-        >
-          <span class="apply-style__options-svg-container">
-            <svg
-              class="apply-style__options-svg"
-              width="14"
-              height="12"
-              viewBox="0 0 14 12
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-opacity="1"
-                fill-rule="evenodd"
-                stroke="none"
-                d="m5 1.381-4 2.31v4.618l4 2.31 4-2.31V3.691L5 1.38zm5 1.732L5 .227 0 3.113v5.774l5 2.887 5-2.887V3.113zm3 5.196-5 2.887 1 .578 5-2.887V3.113L9 .227 8 .804l5 2.887v4.618zM6 6c0 .552-.448 1-1 1-.552 0-1-.448-1-1 0-.552.448-1 1-1 .552 0 1 .448 1 1z"
-              ></path>
-            </svg>
-          </span>
-        </button>
-        <div class="popup">
-          <div class="popup-arrow-container">
-            <div class="popup-content">Sample style</div>
             <div class="popup-arrow">
               <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
@@ -1415,59 +1523,100 @@
             </div>
           </div>
         </div>
-        <div class="sample-language-menu hidden" role="menu">
-          <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text sample">English</div>
-            <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
-            </svg>
+        <div class="sample-style__message">
+          <p class="sample-style__text">Preview Sample Text</p>
+        </div>
+      </div>
+      <!-- Scale Controller -->
+      <div class="component-rows">
+        <div class="component-row">
+          <div class="component-row__label">Scale</div>
+          <div class="component-row__slider">
+            <div class="slider" tabindex="0" data-input="scaleInput">
+              <div class="slider__clip-container">
+                <div class="slider__track slider__track--light"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
+              </div>
+            </div>
           </div>
-          <div class="font-menu__item" role="menuitem">
-            <div class="font-menu__text sample">Japanese</div>
-            <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
-            </svg>
+          <div>
+            <input
+              type="text"
+              id="scaleInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="1"
+              min="0" 
+              max="2"
+            />
           </div>
-          <div class="popup-arrow">
-            <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.5 0L13 6.5H0L6.5 0Z" fill="#222222"></path>
-            </svg>
+        </div>
+        <div class="component-row">
+          <div class="component-row__label">X</div>
+          <div class="component-row__slider">
+            <div class="slider" tabindex="0" data-input="xInput">
+              <div class="slider__clip-container">
+                <div class="slider__track slider__track--light"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="xInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="0"
+              min="-100"
+              max="100"
+            />
+          </div>
+        </div>
+        <div class="component-row">
+          <div class="component-row__label">Y</div>
+          <div class="component-row__slider">
+            <div class="slider" tabindex="0" data-input="yInput">
+              <div class="slider__clip-container">
+                <div class="slider__track slider__track--light"></div>
+                <div class="slider__tick slider__tick--light" style="margin-left: 50%;"></div>
+                <div class="slider__thumb slider__thumb--inactive" style="margin-left: 50%;"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="yInput"
+              spellcheck="false"
+              class="sample-style__input scale"
+              name="styleName"
+              placeholder="New style"
+              autocomplete="off"
+              dir="auto"
+              value="0"
+              min="-100"
+              max="100"
+            />
           </div>
         </div>
       </div>
-      <div class="sample-style__message">
-        <p class="sample-style__text">Preview Sample Text</p>
-      </div>
     </div>
-    <!-- Scale Controller -->
-    <div class="component-row">
-      <div class="component-row__label">Scale</div>
-      <div class="component-row__slider">
-        <div class="slider" tabindex="0">
-          <div class="slider__clip-container">
-            <div class="slider__track slider__track--light"></div>
-            <div class="slider__tick slider__tick--light"></div>
-            <div class="slider__thumb slider__thumb--inactive" style="margin-left: 47%;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sample-text__input-group">
-      <div class="create-style__tab-header">
-        <h2 class="create-style__tab-title">Sample Content</h2>
-      </div>
-      <textarea
-        type="text"
-        id="sampleTextContent"
-        spellcheck="false"
-        class="sample-style__input"
-        name="styleName"
-        placeholder="Preview Sample Text"
-        autocomplete="off"
-        dir="auto"
-        value=""
-      ></textarea>
-    </div>
+  </div>
+  <div class="create-style__form-action">
+    <button tabindex="0" class="create-style__submit-button">
+      Create style
+    </button>
   </div>
 </body>
 
@@ -1480,6 +1629,8 @@
   const tabContentsCreateStyle = document.querySelectorAll(".create-style");
   const indicator = document.querySelector(".tab-list-active-indicator");
   const loader = document.querySelectorAll(".loading-indicator");
+  const applyCreateStyleButton = document.querySelector(".options-button.create");
+  const searchMenuCloseStyleButtons = document.querySelectorAll(".options-button.close");
   let textDisplay = document.querySelector(".sample-style__text");
   let applyStyleItems;
   let applyStyleEditButtons;
@@ -1495,7 +1646,7 @@
   // スクロールバーの表示と動作を制御するJavaScriptコード
   
   document.addEventListener("DOMContentLoaded", (event) => {
-    <!-- const scrollContainer = document.querySelector(".apply-style__list"); -->
+    setupSliders();
     const scrollContainer = applyStyleList;
     const scrollBar = document.querySelector(
       ".scroll_container--scrollBar--YLWIi"
@@ -1645,8 +1796,8 @@
     }
     // Create Styleタブが選択された場合（index 1）
     else if (index === 1) {
-      newHeight = 373;
-      newWidth = 648;
+      newHeight = 463;
+      newWidth = 700;
     }
   
     // メインスクリプトに新しい高さを通知
@@ -1720,14 +1871,36 @@
         // メッセージからフォント情報を取得する
         availableFonts = message.fonts;
         let fontFamilyListContainers;
+        let fontWeightListContainers;
   
         fontFamilyListContainers = document.querySelectorAll(
           ".font-family-list-container"
         );
+        fontWeightListContainers = document.querySelectorAll(
+          ".font-weight-list-container"
+        );
         // listContainer領域外のクリックを検知するための関数
   
+        searchMenuCloseStyleButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            fontFamilyListContainers.forEach((listContainer) => {
+              listContainer.classList.add("hidden");
+            });
+          })
+        });
         function handleDocumentClick(event) {
           fontFamilyListContainers.forEach((listContainer) => {
+            // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
+            if (
+              listContainer.contains(event.target) ||
+              listContainer.previousElementSibling.contains(event.target)
+            ) {
+              // クリックしたのがlistContainer内、もしくはlistContainerに隣接する要素（toggleボタン）の場合は何もしない
+            } else {
+              listContainer.classList.add("hidden");
+            }
+          });
+          fontWeightListContainers.forEach((listContainer) => {
             // クリックがlistContainerまたはtoggle内のものでない場合、hiddenクラスを追加
             if (
               listContainer.contains(event.target) ||
@@ -1756,7 +1929,7 @@
             ".font-weight-list-container"
           );
           const fontWeightSelectBtn = content.querySelector(
-            ".create-style__dropdown-group.font-weight"
+            ".create-style__dropdown-toggle.font-weight"
           );
           const dropDownToggle = content.querySelector(
             ".create-style__dropdown-toggle.font-family"
@@ -1816,14 +1989,24 @@
             }
           });
           fontWeightSelectBtn.addEventListener("click", () => {
-            fontWeightListContainer.classList.add("hidden");
-            overlay.classList.remove("hidden");
-            document.body.classList.add("menu-open");
-  
-            // ボタンに関連づけられたリストコンテナを取得する
-            if (fontFamilyListContainer) {
-              fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
-              event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
+            if (fontWeightListContainer) {
+              fontWeightListContainer.classList.remove("hidden");
+              overlay.classList.remove("hidden");
+              document.body.classList.add("menu-open");
+              // 現在のフォントファミリーラベルからフォント名を取得
+              const currentFontFamily = content.querySelector(
+                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
+              ).textContent;
+              // 表示されるべきフォントウェイト一覧を表示する
+              makeFontWeightLists(
+                currentFontFamily,
+                fontWeightListContainer,
+                fontWeightLabel
+              );
+            } else {
+              fontWeightListContainer.classList.add("hidden");
+              overlay.classList.add("hidden");
+              document.body.classList.remove("menu-open");
             }
           });
   
@@ -1834,12 +2017,12 @@
               const dropDown = fontFamilyListContainer.closest(
                 ".create-style__dropdown"
                 );
-                const label = dropDown.querySelector(
-                  ".create-style__dropdown-label"
-                  );
-                if (label) {
-                  label.textContent = fontName;
-                  textDisplay.style.fontFamily = label.textContent;
+              const label = dropDown.querySelector(
+                ".create-style__dropdown-label"
+                );
+              if (label) {
+                label.textContent = fontName;
+                textDisplay.style.fontFamily = label.textContent;
               }
   
               fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
@@ -1852,23 +2035,6 @@
               // リストアイテムのイベントが「ボタン」までバブリングしてボタンのクリックイベントが発火するのを防ぐ
               event.stopPropagation();
             });
-          });
-          fontWeightSelectBtn.addEventListener("click", function () {
-            if (fontWeightListContainer.classList.contains("hidden")) {
-              // 現在のフォントファミリーラベルからフォント名を取得
-              const currentFontFamily = content.querySelector(
-                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
-              ).textContent;
-              // 表示されるべきフォントウェイト一覧を表示する
-              makeFontWeightLists(
-                currentFontFamily,
-                fontWeightListContainer,
-                fontWeightLabel
-              );
-              fontWeightListContainer.classList.remove("hidden");
-            } else {
-              fontWeightListContainer.classList.add("hidden"); // リストを閉じる
-            }
           });
         });
         break;
@@ -1986,7 +2152,7 @@
   
         // apply-style__listの要素に新しいリストアイテムを追加
         applyStyleList.appendChild(newItem);
-  
+
         // 新しいリストアイテムに関するイベントをここで追加しています
         newItem.addEventListener("click", function (e) {
           // クリックイベントのバブリングを止める
@@ -2006,7 +2172,6 @@
           // ボタンの状態を更新
           updateButtonState();
         });
-  
         // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
         const applyStyleEditButton = newItem.querySelector(
           ".options-button.edit"
@@ -2160,11 +2325,11 @@
     fontWeightLabel
   ) {
     fontWeightListContainer.innerHTML = ""; // コンテナをクリア
-  
+    
     const fontWeights = availableFonts.filter(
       (font) => font.fontName.family === fontFamilyName
     );
-  
+
     function createCheckIcon() {
       const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
       const checkIcon = document.createElementNS(namespace, "svg");
@@ -2200,7 +2365,7 @@
   
       // フォントウェイト名を表示するためのテキスト部分を作成
       const text = document.createElement("div");
-      text.className = "font-menu__text";
+      text.className = "font-menu__text font-weight";
       text.textContent = font.fontName.style;
       item.appendChild(text);
   
@@ -2218,7 +2383,7 @@
       item.addEventListener("click", () => {
         fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
         fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
-  
+
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
         allFontWeightItems.forEach((cItem) => {
           const icon = cItem.querySelector(".font-menu__icon");
@@ -2257,6 +2422,13 @@
     selectedCheckIcon.classList.remove("hidden");
   }
   
+  // Create style のクリックイベントリスナーを追加
+  applyCreateStyleButton.addEventListener("click", function () {
+    activateTab(tabs[1]);
+    toggleTabContents(1);
+    toggleTabContentAndResize(1);
+  });
+
   // ボタンにクリックイベントリスナーを追加
   createStyleButton.addEventListener("click", function () {
     // スタイル名のインプット要素から値を取得
@@ -2433,7 +2605,6 @@
   // When the button is clicked, the plugin will start the text analysis and update
   applyBtn.addEventListener("click", () => {
     const cloneLayerName = `${layerName}_${selectedName}`;
-    console.log(cloneLayerName);
     parent.postMessage(
       {
         pluginMessage: {
@@ -2548,5 +2719,62 @@
       applyBtn.classList.remove("active");
       applyBtn.classList.add("disabled");
     }
+  }
+
+  function setupSliders() {
+    // すべてのスライダーを取得
+    const sliders = document.querySelectorAll('.slider');
+    const sampleText = document.querySelector('.sample-style__text'); // スタイルを変更するテキスト要素を取得
+  
+    sliders.forEach((slider) => {
+      const thumb = slider.querySelector('.slider__thumb');
+      const track = slider.querySelector('.slider__track');
+      const tick = slider.querySelector('.slider__tick');
+      const input = document.getElementById(slider.dataset.input); // データ属性を使用して関連するinput要素を取得
+  
+      // スライダーのthumbをドラッグ可能にする
+      thumb.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        const rect = track.getBoundingClientRect();
+  
+        // ドラッグイベントを処理する関数
+        const onMouseMove = (e) => {
+          let newValue = (e.clientX - rect.left) / rect.width;
+          newValue = Math.min(Math.max(newValue, 0), 1); // 0から1の範囲に制限する
+          thumb.style.marginLeft = `${newValue * 100}%`;
+          tick.style.marginLeft = `${newValue * 100}%`;
+  
+          // 対応するinput要素の値を更新
+          if(input) {
+            const value = (newValue * (input.max - input.min) + parseFloat(input.min)).toFixed(2);
+            input.value = value;
+  
+            // inputに基づいてsample-style__textのスタイルを更新
+            switch(input.id) {
+              case 'scaleInput':
+                sampleText.style.transform = `scale(${value})`;
+                break;
+              case 'xInput':
+                sampleText.style.transform = `translateX(${value}px)`;
+                break;
+              case 'yInput':
+                sampleText.style.transform = `translateY(${value}px)`;
+                break;
+            }
+          }
+        };
+  
+        // ドラッグ終了イベントを処理する関数
+        const onMouseUp = () => {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          thumb.classList.add('slider__thumb--inactive'); // ドラッグ終了時にクラスを反映
+        };
+  
+        thumb.classList.remove('slider__thumb--inactive'); // ドラッグ開始時にクラスを削除
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+    });
   }
 </script>
