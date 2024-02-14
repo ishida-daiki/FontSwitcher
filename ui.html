@@ -578,6 +578,23 @@
   .font-menu__item:hover {
     background: #18a0fb;
   }
+  .font-menu__divider {
+    width: 100%;
+    height: 17px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .font-menu__divider__item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    left: 0;
+    background: #4E4E4E;
+    height: 1px;
+    top: 50%;
+  }
   .menu {
     width: 178px;
     padding-top: 8px;
@@ -2356,6 +2373,35 @@
     const regularFontWeight = fontWeights.find(
       (font) => font.fontName.style === "Regular"
     );
+
+    // 'Auto' オプションを作成して追加
+    const autoItem = document.createElement("div");
+    autoItem.className = "font-menu__item";
+    autoItem.setAttribute("role", "menuitem");
+    
+    const autoText = document.createElement("div");
+    autoText.className = "font-menu__text font-weight";
+    autoText.textContent = "Auto";
+    autoItem.appendChild(autoText);
+    
+    // チェックアイコンを作成して追加
+    // createCheckIcon() 関数は、このコードの上部で定義してあると仮定します。
+    const checkIconAuto = createCheckIcon();
+    autoItem.appendChild(checkIconAuto);
+    
+    // デフォルトの選択肢として 'Auto' オプションを設定
+    allFontWeightItems.push(autoItem); // オプションを配列に追加
+    fontWeightListContainer.appendChild(autoItem);
+
+
+    // フォントウェイトリストに区切り線を追加
+    const dividerContainer = document.createElement("div");
+    dividerContainer.className = "font-menu__divider";
+    dividerContainer.setAttribute("role", "menudivider");
+    const divider = document.createElement("div");
+    divider.className = "font-menu__divider__item";
+    dividerContainer.appendChild(divider);
+    fontWeightListContainer.appendChild(dividerContainer);
   
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
