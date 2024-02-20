@@ -2531,25 +2531,16 @@
     const japaneseFontFamily = document
       .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
       .textContent.trim();
-    const japaneseFontWeight = document
-      .querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]')
-      .textContent.trim();
     const englishFontFamily = document
       .querySelector('[data-lang="English"] [data-label-type="font-family"]')
       .textContent.trim();
-    const englishFontWeight = document
-      .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
-      .textContent.trim();
-  
     // 各言語のフォント設定を格納するオブジェクトを作成します
     const fontSettings = {
       Japanese: {
         fontFamily: japaneseFontFamily,
-        fontWeight: japaneseFontWeight,
       },
       English: {
         fontFamily: englishFontFamily,
-        fontWeight: englishFontWeight,
       },
     };
     // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
