@@ -221,7 +221,6 @@
   }
   .create-style__content {
     display: flex;
-    flex-direction: column;
     padding: 8 0px;
   }
   .apply-style__title {
@@ -230,6 +229,12 @@
     letter-spacing: 0.06px;
   }
   .create-style__tab-title {
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+    width: 84px;
+  }
+  .sample-style__tab-title {
     font-weight: 600;
     line-height: 16px;
     letter-spacing: 0.06px;
@@ -545,17 +550,6 @@
   .create-style__font-menu.font-family-list-container.hidden {
     display: none;
   }
-  .create-style__font-menu.font-weight-list-container {
-    position: absolute;
-    right: 8px;
-    width: 200px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    max-height: 350px;
-    overflow-x: hidden;
-    background: rgb(34, 34, 34);
-    bottom: 16;
-  }
 
   .scroll_container > .font-menu__item {
     width: 100%;
@@ -731,6 +725,7 @@
     display: flex;
     margin: 0 16 0 8px;
     align-items: flex-start;
+    width: 100%;
   }
 
   .create-style__dropdown-toggle {
@@ -800,13 +795,6 @@
     display: flex;
     flex-direction: column;
     flex-grow: 3;
-    width: 180px;
-  }
-  .create-style__dropdown-group.font-weight {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    width: 120px;
   }
   .create-style__input-groups {
     display: flex;
@@ -1352,38 +1340,6 @@
                     <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
                   </div>
                 </div>
-                <div class="create-style__dropdown-group font-weight">
-                  <div
-                    class="create-style__dropdown-toggle font-weight"
-                    style="width: 100%"
-                    data-label-type="font-weight"
-                  >
-                    <span class="create-style__dropdown-label">Regular</span>
-                    <div class="create-style__dropdown-icon-container">
-                      <span class="create-style__svg-container">
-                        <svg
-                          class="create-style__dropdown-icon"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="8"
-                          height="7"
-                          viewBox="0 0 8 7"
-                        >
-                          <path
-                            fill-opacity="1"
-                            fill-rule="evenodd"
-                            d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
-                          ></path>
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    class="create-style__font-menu hidden font-weight-list-container"
-                    role="menu"
-                  >
-                    <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
-                  </div>
-                </div>
               </div>
             </div>
             <div class="create-style__content">
@@ -1441,38 +1397,6 @@
                     <!-- Figmaにインストールされたフォントファミリーの内容が入る -->
                   </div>
                 </div>
-                <div class="create-style__dropdown-group font-weight">
-                  <div
-                    class="create-style__dropdown-toggle font-weight"
-                    style="width: 100%"
-                    data-label-type="font-weight"
-                  >
-                    <span class="create-style__dropdown-label">Regular</span>
-                    <div class="create-style__dropdown-icon-container">
-                      <span class="create-style__svg-container">
-                        <svg
-                          class="create-style__dropdown-icon"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="8"
-                          height="7"
-                          viewBox="0 0 8 7"
-                        >
-                          <path
-                            fill-opacity="1"
-                            fill-rule="evenodd"
-                            d="m3.646 5.354-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z"
-                          ></path>
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    class="create-style__font-menu hidden font-weight-list-container"
-                    role="menu"
-                  >
-                    <!-- フォントファミリーに対応するフォントフェイトの内容が入る -->
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1483,7 +1407,7 @@
       <!-- プレビュー -->
       <div class="sample-style__tabs">
         <div class="sample-style__tab-header">
-          <h2 class="create-style__tab-title">Sample Preview</h2>
+          <h2 class="sample-style__tab-title">Sample Preview</h2>
           <button
             class="options-button sample"
             tabindex="0"
@@ -1892,9 +1816,6 @@
         fontFamilyListContainers = document.querySelectorAll(
           ".font-family-list-container"
         );
-        fontWeightListContainers = document.querySelectorAll(
-          ".font-weight-list-container"
-        );
         // listContainer領域外のクリックを検知するための関数
   
         searchMenuCloseStyleButtons.forEach((btn) => {
@@ -1941,12 +1862,6 @@
           const searchInputContainer = content.querySelector(".font-search");
           const scrollContainer = content.querySelector(".scroll_container");
           setupSearchFunctionality(searchInputContainer, scrollContainer);
-          const fontWeightListContainer = content.querySelector(
-            ".font-weight-list-container"
-          );
-          const fontWeightSelectBtn = content.querySelector(
-            ".create-style__dropdown-toggle.font-weight"
-          );
           const dropDownToggle = content.querySelector(
             ".create-style__dropdown-toggle.font-family"
           );
@@ -2004,34 +1919,6 @@
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
-          fontWeightSelectBtn.addEventListener("click", () => {
-            if (fontWeightListContainer) {
-              fontWeightListContainer.classList.remove("hidden");
-              overlay.classList.remove("hidden");
-              document.body.classList.add("menu-open");
-              // 現在のフォントファミリーラベルからフォント名を取得
-              const currentFontFamily = content.querySelector(
-                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
-              ).textContent;
-              // 表示されるべきフォントウェイト一覧を表示する
-              makeFontWeightLists(
-                currentFontFamily,
-                fontWeightListContainer,
-                fontWeightLabel
-              );
-              allFontWeightItems = makeFontWeightLists(
-                currentFontFamily,
-                fontWeightListContainer,
-                fontWeightLabel
-              );
-              refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
-            } else {
-              fontWeightListContainer.classList.add("hidden");
-              overlay.classList.add("hidden");
-              document.body.classList.remove("menu-open");
-            }
-          });
-  
           scrollContainer.childNodes.forEach((item) => {
             item.addEventListener("click", (event) => {
               const fontName = item.textContent;
