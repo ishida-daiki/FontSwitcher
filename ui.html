@@ -164,7 +164,6 @@
   /* 選択インジケーターのスタイル */
   .tab-list-active-indicator {
     height: 2px;
-    background: var(--figma-color-border-onselected-strong);
     width: 100%;
     border-radius: 6px;
     position: absolute;
@@ -577,6 +576,23 @@
   }
   .font-menu__item:hover {
     background: #18a0fb;
+  }
+  .font-menu__divider {
+    width: 100%;
+    height: 17px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .font-menu__divider__item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    left: 0;
+    background: #4E4E4E;
+    height: 1px;
+    top: 50%;
   }
   .menu {
     width: 178px;
@@ -2003,6 +2019,12 @@
                 fontWeightListContainer,
                 fontWeightLabel
               );
+              allFontWeightItems = makeFontWeightLists(
+                currentFontFamily,
+                fontWeightListContainer,
+                fontWeightLabel
+              );
+              refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
             } else {
               fontWeightListContainer.classList.add("hidden");
               overlay.classList.add("hidden");
@@ -2318,6 +2340,9 @@
       }
     });
   }
+
+  let allFontWeightItems = [];
+
   // フォントウェイトを表示する関数
   function makeFontWeightLists(
     fontFamilyName,
@@ -2350,13 +2375,40 @@
       return checkIcon;
     }
   
-    let allFontWeightItems = [];
     let defaultFontWeight;
     // 'Regular' があるかどうか確認し、設定する
     const regularFontWeight = fontWeights.find(
       (font) => font.fontName.style === "Regular"
     );
-  
+
+    // 'Auto' オプションを作成して追加
+    const autoItem = document.createElement("div");
+    autoItem.className = "font-menu__item";
+    autoItem.setAttribute("role", "menuitem");
+    
+    const autoText = document.createElement("div");
+    autoText.className = "font-menu__text font-weight";
+    autoText.textContent = "Auto";
+    autoItem.appendChild(autoText);
+    
+    // チェックアイコンを作成して追加
+    // createCheckIcon() 関数は、このコードの上部で定義してあると仮定します。
+    const checkIconAuto = createCheckIcon();
+    autoItem.appendChild(checkIconAuto);
+    
+    // デフォルトの選択肢として 'Auto' オプションを設定
+    allFontWeightItems.push(autoItem); // オプションを配列に追加
+    fontWeightListContainer.appendChild(autoItem);
+
+
+    // フォントウェイトリストに区切り線を追加
+    const dividerContainer = document.createElement("div");
+    dividerContainer.className = "font-menu__divider";
+    dividerContainer.setAttribute("role", "menudivider");
+    const divider = document.createElement("div");
+    divider.className = "font-menu__divider__item";
+    dividerContainer.appendChild(divider);
+    fontWeightListContainer.appendChild(dividerContainer);
     fontWeights.forEach((font) => {
       // 新しいフォントウェイトのメニュー項目を作成
       const item = document.createElement("div");
@@ -2379,25 +2431,40 @@
       // 作成したメニュー項目を配列に追加
       allFontWeightItems.push(item);
   
-      // 項目がクリックされた時の処理を追加
-      item.addEventListener("click", () => {
-        fontWeightLabel.textContent = font.fontName.style; // ラベルを更新
-        fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
+      // デフォルトフォントウェイトを特定する
+      if (!defaultFontWeight || font.fontName.style === "Regular") {
+        defaultFontWeight = item;
+      }
+    });
 
+    refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
+  
+    
+    let useFontWeightLists = allFontWeightItems.map((item) => {
+      return item.querySelector(".font-menu__text.font-weight");
+    });
+
+    let fontMenuItems = fontWeightListContainer.querySelectorAll(".font-menu__item");
+
+    fontMenuItems.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        fontWeightLabel.textContent = item.textContent; // ラベルを更新
+        fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
+        
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
+        let checkdIcon = item.querySelector(".font-menu__icon");
         allFontWeightItems.forEach((cItem) => {
           const icon = cItem.querySelector(".font-menu__icon");
           if (icon) icon.classList.add("hidden");
         });
-        updateCheckState(item, allFontWeightItems, checkIcon);
-  
+
+        updateCheckState(fontMenuItems, checkdIcon);
+
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
-        checkIcon.classList.remove("hidden");
         event.stopPropagation();
       });
-  
       // デフォルトフォントウェイトを特定する
-      if (!defaultFontWeight || font.fontName.style === "Regular") {
+      if (!defaultFontWeight || item.textContent === "Regular") {
         defaultFontWeight = item;
       }
     });
@@ -2412,14 +2479,30 @@
         defaultFontWeight.querySelector(".font-menu__icon")
       );
     }
+    return allFontWeightItems;
   }
   // チェック状態の更新を行う関数を追加
-  function updateCheckState(selectedItem, allItems, selectedCheckIcon) {
+  function updateCheckState(allItems, selectedCheckIcon) {
     allItems.forEach((cItem) => {
       const icon = cItem.querySelector(".font-menu__icon");
       if (icon) icon.classList.add("hidden");
     });
     selectedCheckIcon.classList.remove("hidden");
+  }
+  function refreshCheckIcons(fontWeightLabelText, allFontWeightItems) {
+    // すべてのcheckIconにhiddenクラスを追加
+    allFontWeightItems.forEach((item) => {
+      const icon = item.querySelector('.font-menu__icon');
+      if (icon) icon.classList.add('hidden');
+    });
+  
+    // `fontWeightLabelText`に一致するアイテムを探し、そのチェックアイコンを表示
+    const selectedItem = allFontWeightItems.find((item) =>
+      item.querySelector('.font-menu__text.font-weight').textContent === fontWeightLabelText.textContent);
+    if (selectedItem) {
+      const iconToShow = selectedItem.querySelector('.font-menu__icon');
+      if (iconToShow) iconToShow.classList.remove('hidden');
+    }
   }
   
   // Create style のクリックイベントリスナーを追加
