@@ -247,9 +247,6 @@
   .apply-style__list__container {
     position: relative;
   }
-  .apply-style__list__container:hover .scroll_container--scrollBar--YLWIi {
-    display: block;
-  }
   .apply-style__list {
     display: flex;
     flex-direction: column;
@@ -382,10 +379,6 @@
     padding: 2px;
     cursor: default;
     z-index: 7;
-  }
-  .scroll_container--track--HEzfy:hover {
-    border-left: 1px solid var(--figma-color-border, #efefef);
-    background: var(--figma-color-bg-hover);
   }
   .scroll_container--scrollBar--YLWIi {
     display: none;
@@ -1657,7 +1650,46 @@
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
-  const applyStyleList = document.querySelector(".apply-style__list");
+  const applyStyleListContainer = document.querySelector(".apply-style__list__container");
+  const applyStyleList = applyStyleListContainer.querySelector(".apply-style__list");
+  const scrollContainer = applyStyleListContainer.querySelector(".scroll_container--track--HEzfy");
+
+  const scrollBar = applyStyleListContainer.querySelector(".scroll_container--scrollBar--YLWIi");
+
+  // スクロールバーの表示を制御するコード
+  applyStyleListContainer.addEventListener("mouseover", function () {
+    const applyStyleItem = applyStyleListContainer.querySelectorAll(".apply-style__item");
+    if (applyStyleItem.length > 5) {
+      // スクロールバーが必要な場合にのみ表示する
+      scrollBar.style.display = "block";
+    } else {
+      // スクロールバーが不要な場合に非表示にする
+      scrollBar.style.display = "none";
+    }
+  });
+
+  // scrollContainerに対するmouseoverイベント用のコード
+  scrollContainer.addEventListener("mouseover", function () {
+    const computedStyle = window.getComputedStyle(scrollBar);
+    if (computedStyle.display === "block") {
+      scrollContainer.style.backgroundColor = "var(--figma-color-bg-hover)";
+      scrollContainer.style.borderLeft = "1px solid var(--figma-color-border, #efefef)";
+    }
+  });
+  
+  // scrollContainerに対するmouseleaveイベント用のコード
+  scrollContainer.addEventListener("mouseleave", function () {
+    const computedStyle = window.getComputedStyle(scrollBar);
+    if (computedStyle.display === "block") {
+      scrollContainer.style.backgroundColor = ""; // backgroundColorをクリアする
+      scrollContainer.style.borderLeft = ""; // borderLeftをクリアする
+    }
+  });
+
+  // マウスがapplyStyleListContainerから離れたときにスクロールバーを非表示にする
+  applyStyleListContainer.addEventListener("mouseleave", function () {
+    scrollBar.style.display = "none";
+  });
   let applyStyleNumber;
   // スクロールバーの表示と動作を制御するJavaScriptコード
   
