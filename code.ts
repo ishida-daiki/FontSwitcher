@@ -165,7 +165,7 @@ figma.ui.onmessage = async (msg) => {
   } else if (msg.type === "delete-style") {
     deleteDataFromClientStorage(msg.env);
   } else if (msg.type === "resize-ui") {
-    figma.ui.resize(msg.width, msg.height);
+    figma.ui.resize(msg.height);
   }
 };
 
