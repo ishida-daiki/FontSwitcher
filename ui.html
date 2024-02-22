@@ -1351,7 +1351,7 @@
                     style="width: 100%"
                     data-label-type="font-weight"
                   >
-                    <span class="create-style__dropdown-label">Regular</span>
+                    <span class="create-style__dropdown-label">Auto</span>
                     <div class="create-style__dropdown-icon-container">
                       <span class="create-style__svg-container">
                         <svg
@@ -1440,7 +1440,7 @@
                     style="width: 100%"
                     data-label-type="font-weight"
                   >
-                    <span class="create-style__dropdown-label">Regular</span>
+                    <span class="create-style__dropdown-label">Auto</span>
                     <div class="create-style__dropdown-icon-container">
                       <span class="create-style__svg-container">
                         <svg
@@ -2409,9 +2409,9 @@
   
     let defaultFontWeight;
     // 'Regular' があるかどうか確認し、設定する
-    const regularFontWeight = fontWeights.find(
-      (font) => font.fontName.style === "Regular"
-    );
+    //const regularFontWeight = fontWeights.find(
+    //  (font) => font.fontName.style === "Regular"
+    //);
 
     // 'Auto' オプションを作成して追加
     const autoItem = document.createElement("div");
@@ -2431,7 +2431,6 @@
     // デフォルトの選択肢として 'Auto' オプションを設定
     allFontWeightItems.push(autoItem); // オプションを配列に追加
     fontWeightListContainer.appendChild(autoItem);
-
 
     // フォントウェイトリストに区切り線を追加
     const dividerContainer = document.createElement("div");
@@ -2464,7 +2463,7 @@
       allFontWeightItems.push(item);
   
       // デフォルトフォントウェイトを特定する
-      if (!defaultFontWeight || font.fontName.style === "Regular") {
+      if (!defaultFontWeight || font.fontName.style === "Auto") {
         defaultFontWeight = item;
       }
     });
@@ -2481,6 +2480,7 @@
     fontMenuItems.forEach((item) => {
       item.addEventListener("click", (event) => {
         fontWeightLabel.textContent = item.textContent; // ラベルを更新
+        refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
         fontWeightListContainer.classList.add("hidden"); // フォントウェイトリストを閉じる
         
         // 他のすべてのアイテムのチェックアイコンにhiddenクラスを追加する
@@ -2490,51 +2490,38 @@
           if (icon) icon.classList.add("hidden");
         });
 
-        updateCheckState(fontMenuItems, checkdIcon);
-
         // 現在選択されたアイテムのチェックアイコンのhiddenクラスを削除する
         event.stopPropagation();
       });
       // デフォルトフォントウェイトを特定する
-      if (!defaultFontWeight || item.textContent === "Regular") {
+      if (!defaultFontWeight || item.textContent === "Auto") {
         defaultFontWeight = item;
       }
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
     if (defaultFontWeight) {
       fontWeightLabel.textContent = regularFontWeight
-        ? "Regular"
+        ? "Auto"
         : fontWeights[0].fontName.style;
-      updateCheckState(
-        defaultFontWeight,
-        allFontWeightItems,
-        defaultFontWeight.querySelector(".font-menu__icon")
-      );
+      refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
     }
     return allFontWeightItems;
   }
-  // チェック状態の更新を行う関数を追加
-  function updateCheckState(allItems, selectedCheckIcon) {
-    allItems.forEach((cItem) => {
-      const icon = cItem.querySelector(".font-menu__icon");
-      if (icon) icon.classList.add("hidden");
-    });
-    selectedCheckIcon.classList.remove("hidden");
-  }
-  function refreshCheckIcons(fontWeightLabelText, allFontWeightItems) {
+  function refreshCheckIcons(selectedWeightLabel, allFontWeightItems) {
     // すべてのcheckIconにhiddenクラスを追加
     allFontWeightItems.forEach((item) => {
       const icon = item.querySelector('.font-menu__icon');
       if (icon) icon.classList.add('hidden');
     });
-  
-    // `fontWeightLabelText`に一致するアイテムを探し、そのチェックアイコンを表示
-    const selectedItem = allFontWeightItems.find((item) =>
-      item.querySelector('.font-menu__text.font-weight').textContent === fontWeightLabelText.textContent);
-    if (selectedItem) {
-      const iconToShow = selectedItem.querySelector('.font-menu__icon');
-      if (iconToShow) iconToShow.classList.remove('hidden');
-    }
+
+    // `selectedWeightLabel`に一致するアイテムを探し、そのチェックアイコンを表示
+    allFontWeightItems.forEach((item) => {
+      const textElement = item.querySelector('.font-menu__text.font-weight');
+      if(textElement.textContent === selectedWeightLabel) {
+        const iconToShow = item.querySelector('.font-menu__icon');
+        iconToShow.classList.remove('hidden');
+      }
+    });
   }
   
   // Create style のクリックイベントリスナーを追加
