@@ -217,6 +217,7 @@ figma.ui.onmessage = async (msg) => {
     // UIに保存されたスタイルを送信
     figma.ui.postMessage({
       type: 'set-saved-style',
+      styleKey,
       styleNames,
       englishFontWeight,
       japaneseFontWeight,
