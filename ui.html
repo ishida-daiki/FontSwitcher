@@ -299,6 +299,7 @@
     background-clip: padding-box;
     background-color: transparent;
     transition: 0.1s fill ease-out, 0.1s color ease-out;
+    border-radius: 3px;
   }
   .options-button:hover {
     background: var(--figma-color-bg-hover, rgba(0, 0, 0, 0.06));
@@ -2246,18 +2247,28 @@
   
           // ボタンのアクティブ状態をトグルする
           const isActive = buttonElement.classList.toggle("active");
+          // data-env 属性を持つ最も近い親要素を取得
+          const parentItem = buttonElement.closest("[data-env]");
+          // 親要素から data-env 属性の値を取得
+          const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
+          // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
+          const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
+
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: "get-saved-style",
+                key: dataEnvValue,
+                styleName: styleTitle,
+              },
+            },
+            "*"
+          );
+          
           if (isActive) {
             overlay.classList.remove("hidden");
             document.body.classList.add("menu-open");
-            // アクティブになったとき
-            // if (popup) {
-            //   popup.style.display = "none";
-            // }
-            // if (menu) {
-            //   menu.style.display = "block";
-            // }
           } else {
-            // アクティブでないとき（別の処理が必要な場合のみ）
             overlay.classList.add("hidden");
             document.body.classList.remove("menu-open");
           }
@@ -2325,6 +2336,12 @@
           overlay.classList.add("hidden");
           document.body.classList.remove("menu-open");
         });
+        break;
+      case "set-saved-style":
+        console.log(message.englishFontWeight)
+        console.log(message.japaneseFontWeight)
+        console.log(message.englishFontFamily)
+        console.log(message.japaneseFontFamily)
         break;
     }
   };

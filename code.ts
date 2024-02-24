@@ -204,6 +204,23 @@ figma.ui.onmessage = async (msg) => {
     deleteDataFromClientStorage(msg.env);
   } else if (msg.type === "resize-ui") {
     figma.ui.resize(msg.width, msg.height);
+  } else if (msg.type === 'get-saved-style') {
+    // メッセージからスタイルのキーを取得
+    const styleKey = msg.key;
+    const savedStyle = await figma.clientStorage.getAsync(styleKey);
+    const englishFontWeight = savedStyle[msg.styleName].English.fontWeight;
+    const japaneseFontWeight = savedStyle[msg.styleName].Japanese.fontWeight;
+    const englishFontFamily = savedStyle[msg.styleName].English.fontFamily;
+    const japaneseFontFamily = savedStyle[msg.styleName].Japanese.fontFamily;
+
+    // UIに保存されたスタイルを送信
+    figma.ui.postMessage({
+      type: 'set-saved-style',
+      englishFontWeight,
+      japaneseFontWeight,
+      englishFontFamily,
+      japaneseFontFamily,
+    });
   }
 };
 
