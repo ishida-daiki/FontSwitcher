@@ -277,12 +277,12 @@ async function findClosestFontWeight(
   let minimumDifference = Infinity; // 最小のウェイト差を保持する変数
 
   // デフォルトのウェイトを小文字に変換
-  const defaultWeightLower = defaultWeight.toLowerCase();
+  const defaultWeightLower = defaultWeight.toLowerCase().replace(/\s/g, "");
 
   // 利用可能なフォントウェイトを走査して、完全一致を探します。
   for (const availableFont of familyFonts) {
     // availableFont.fontName.styleも小文字に変換して比較
-    const availableFontWeightLower = availableFont.fontName.style.toLowerCase();
+    const availableFontWeightLower = availableFont.fontName.style.toLowerCase().replace(/\s/g, '');
 
     if (availableFontWeightLower === defaultWeightLower) {
       closestWeight = availableFont.fontName.style; // 完全一致が見つかれば設定
@@ -292,7 +292,8 @@ async function findClosestFontWeight(
     } else if (fontWeightValues.hasOwnProperty(availableFontWeightLower)) {
       // weightDifferenceは常に正の値にして、Infinityで初期化されたminimumDifferenceと比較します
       const weightDifference = Math.abs(
-        fontWeightValues[defaultWeight] - fontWeightValues[availableFont.fontName.style]
+        fontWeightValues[defaultWeight] -
+          fontWeightValues[availableFont.fontName.style]
       );
 
       if (weightDifference < minimumDifference) {
@@ -310,7 +311,10 @@ async function findClosestFontWeight(
   if (exactMatchFound) {
     console.log("Exact match found, no need for further processing.");
   } else {
-    console.log("No exact match found, closest weight selected:", closestWeight);
+    console.log(
+      "No exact match found, closest weight selected:",
+      closestWeight
+    );
   }
 
   return closestWeight;
