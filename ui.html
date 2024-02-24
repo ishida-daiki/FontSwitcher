@@ -2499,12 +2499,12 @@
       }
     });
     // デフォルトフォントウェイトをラベルとチェック状態に設定する
-    if (defaultFontWeight) {
-      fontWeightLabel.textContent = regularFontWeight
-        ? "Auto"
-        : fontWeights[0].fontName.style;
-      refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
-    }
+    //if (defaultFontWeight) {
+    //  fontWeightLabel.textContent = regularFontWeight
+    //    ? "Auto"
+    //    : fontWeights[0].fontName.style;
+    //  refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
+    //}
     return allFontWeightItems;
   }
   function refreshCheckIcons(selectedWeightLabel, allFontWeightItems) {

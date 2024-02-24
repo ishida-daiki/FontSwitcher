@@ -49,6 +49,16 @@ figma.on("selectionchange", () => {
   }
 });
 
+// 利用可能なフォントファミリーの全ウェイトを返す関数
+async function loadAllFontWeights(fontFamily: string) {
+  // 利用可能な全フォントを取得
+  const availableFonts = await figma.listAvailableFontsAsync();
+  // 指定されたフォントファミリーのウェイトのみを抽出
+  return availableFonts
+    .filter((font) => font.fontName.family === fontFamily)
+    .map((font) => font.fontName);
+}
+
 figma.ui.onmessage = async (msg) => {
   // Applyボタンを押下したときに発生するイベント
   if (msg.type === "analyzeAndUpdateText") {
@@ -104,17 +114,45 @@ figma.ui.onmessage = async (msg) => {
 
       let savedStyles = (await figma.clientStorage.getAsync(styleKey)) || {};
 
-      const customFontsToLoad: FontName[] = (
+      const customFontsToLoad: Promise<FontName[]>[] = (
         Object.values(savedStyles) as CustomFontSettings[]
-      ).flatMap((style) => [
-        { family: style.Japanese.fontFamily, style: style.Japanese.fontWeight },
-        { family: style.English.fontFamily, style: style.English.fontWeight },
-      ]);
+      ).map(async (style) => {
+        let fontsToLoad: FontName[] = [];
 
-      for (const font of customFontsToLoad) {
+        if (style.Japanese.fontWeight === "Auto") {
+          fontsToLoad.push(
+            ...(await loadAllFontWeights(style.Japanese.fontFamily))
+          );
+        } else {
+          fontsToLoad.push({
+            family: style.Japanese.fontFamily,
+            style: style.Japanese.fontWeight,
+          });
+        }
+
+        if (style.English.fontWeight === "Auto") {
+          fontsToLoad.push(
+            ...(await loadAllFontWeights(style.English.fontFamily))
+          );
+        } else {
+          fontsToLoad.push({
+            family: style.English.fontFamily,
+            style: style.English.fontWeight,
+          });
+        }
+
+        return fontsToLoad;
+      });
+
+      // Promise.allを使用して非同期処理の結果を待ちます
+      const customFontsToLoadResults = await Promise.all(customFontsToLoad);
+      // 結果の配列をフラット化して、FontName[]型となるようにします
+      const allFontNamesToLoad: FontName[] = customFontsToLoadResults.flat();
+
+      for (const font of allFontNamesToLoad) {
         // フォントのオブジェクトが正しくフォーマットされているか確認します
         if (font && font.family && font.style) {
-          await figma.loadFontAsync(font as FontName);
+          await figma.loadFontAsync(font);
         }
       }
       // fontSettingsの取得
@@ -213,14 +251,92 @@ async function saveStyleForUser(
   }
 }
 
+// ここに各フォントスタイルに対する数値的ウェイトをマッピングするオブジェクトを定義
+const fontWeightValues: { [styleName: string]: number } = {
+  ultralight: 100,
+  thin: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  heavy: 800,
+  extrabold: 800,
+  black: 900,
+};
+// 指定されたフォントファミリーに最も近いフォントウェイトを探す関数
+async function findClosestFontWeight(
+  family: string,
+  defaultWeight: string
+): Promise<string> {
+  const fonts = await figma.listAvailableFontsAsync();
+  const familyFonts = fonts.filter((font) => font.fontName.family === family);
+  let closestWeight = "Regular"; // デフォルト値、見つからない場合に使う
+  let exactMatchFound = false; // 完全一致したかどうかを追跡するためのフラグ
+  let minimumDifference = Infinity; // 最小のウェイト差を保持する変数
+
+  // デフォルトのウェイトを小文字に変換
+  const defaultWeightLower = defaultWeight.toLowerCase().replace(/\s/g, "");
+
+  // 利用可能なフォントウェイトを走査して、完全一致を探します。
+  for (const availableFont of familyFonts) {
+    // availableFont.fontName.styleも小文字に変換して比較
+    const availableFontWeightLower = availableFont.fontName.style
+      .toLowerCase()
+      .replace(/\s/g, "");
+
+    if (availableFontWeightLower === defaultWeightLower) {
+      closestWeight = availableFont.fontName.style; // 完全一致が見つかれば設定
+      exactMatchFound = true;
+      console.log("Exact match found:", closestWeight);
+      break; // ループを抜けます
+    } else if (fontWeightValues.hasOwnProperty(availableFontWeightLower)) {
+      // weightDifferenceは常に正の値にして、Infinityで初期化されたminimumDifferenceと比較します
+      const weightDifference = Math.abs(
+        fontWeightValues[defaultWeight] -
+          fontWeightValues[availableFont.fontName.style]
+      );
+
+      if (weightDifference < minimumDifference) {
+        closestWeight = availableFont.fontName.style; // 最も近いウェイトを更新
+        minimumDifference = weightDifference;
+      }
+    } else {
+      // fontWeightValues に定義されていない場合はスキップ
+      console.error("Undefined weight name:", availableFont.fontName.style);
+      continue; // 次のイテレーションにスキップ
+    }
+  }
+
+  // ここで結果が確定
+  if (exactMatchFound) {
+    console.log("Exact match found, no need for further processing.");
+  } else {
+    console.log(
+      "No exact match found, closest weight selected:",
+      closestWeight
+    );
+  }
+
+  return closestWeight;
+}
 // テキストノード処理ロジックを関数化
 async function processTextNodes(
   textNode: TextNode,
-  fontSettings: CustomFontSettings
+  originalFontSettings: CustomFontSettings
 ) {
+  // 各テキストノードで独立した設定を使用するため、fontSettingsのコピーを作成
+  const fontSettings = JSON.parse(JSON.stringify(originalFontSettings));
+
+  let defaultFontWeight: string | undefined;
+  const japaneseFontWeight = fontSettings.Japanese.fontWeight;
+  const englishFontWeight = fontSettings.English.fontWeight;
   // テキストノードに既に設定されているフォントをロード
   if (textNode.fontName !== figma.mixed) {
     await figma.loadFontAsync(textNode.fontName as FontName);
+    defaultFontWeight = textNode.fontName.style;
+  } else {
+    console.log("fontName is mixed, cannot determine a single style.");
   }
 
   const characters = textNode.characters;
@@ -231,6 +347,24 @@ async function processTextNodes(
   ])) {
     const { start, end } = segment;
     const textSegment = characters.slice(start, end);
+
+    // japanese
+    if (japaneseFontWeight === "Auto") {
+      const closestWeight = await findClosestFontWeight(
+        fontSettings.Japanese.fontFamily,
+        defaultFontWeight as string
+      );
+      fontSettings.Japanese.fontWeight = closestWeight;
+    }
+
+    // english
+    if (englishFontWeight === "Auto") {
+      const closestWeight = await findClosestFontWeight(
+        fontSettings.English.fontFamily,
+        defaultFontWeight as string
+      );
+      fontSettings.English.fontWeight = closestWeight;
+    }
 
     let fontName: FontName;
 
@@ -255,7 +389,7 @@ async function processTextNodes(
 
     for (let i = start; i < end; i++) {
       // figma.loadFontAsyncに渡すのはFontName型である必要があります（修正前の不要なプロパティ削除）
-      await figma.loadFontAsync(fontName);
+      // await figma.loadFontAsync(fontName);
       textNode.setRangeFontName(i, i + 1, fontName);
     }
   }
