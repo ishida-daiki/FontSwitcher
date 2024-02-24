@@ -318,8 +318,11 @@ async function findClosestFontWeight(
 // テキストノード処理ロジックを関数化
 async function processTextNodes(
   textNode: TextNode,
-  fontSettings: CustomFontSettings
+  originalFontSettings: CustomFontSettings
 ) {
+  // 各テキストノードで独立した設定を使用するため、fontSettingsのコピーを作成
+  const fontSettings = JSON.parse(JSON.stringify(originalFontSettings));
+
   let defaultFontWeight: string | undefined;
   const japaneseFontWeight = fontSettings.Japanese.fontWeight;
   const englishFontWeight = fontSettings.English.fontWeight;
