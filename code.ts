@@ -253,17 +253,16 @@ async function saveStyleForUser(
 
 // ここに各フォントスタイルに対する数値的ウェイトをマッピングするオブジェクトを定義
 const fontWeightValues: { [styleName: string]: number } = {
-  Ultralight: 100,
-  Thin: 200,
-  Light: 300,
-  Regular: 400,
-  Medium: 500,
-  Semibold: 600,
-  SemiBold: 600,
-  Bold: 700,
-  Heavy: 800,
-  ExtraBold: 800,
-  Black: 900,
+  ultralight: 100,
+  thin: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  heavy: 800,
+  extrabold: 800,
+  black: 900,
 };
 // 指定されたフォントファミリーに最も近いフォントウェイトを探す関数
 async function findClosestFontWeight(
@@ -282,7 +281,9 @@ async function findClosestFontWeight(
   // 利用可能なフォントウェイトを走査して、完全一致を探します。
   for (const availableFont of familyFonts) {
     // availableFont.fontName.styleも小文字に変換して比較
-    const availableFontWeightLower = availableFont.fontName.style.toLowerCase().replace(/\s/g, '');
+    const availableFontWeightLower = availableFont.fontName.style
+      .toLowerCase()
+      .replace(/\s/g, "");
 
     if (availableFontWeightLower === defaultWeightLower) {
       closestWeight = availableFont.fontName.style; // 完全一致が見つかれば設定
