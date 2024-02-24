@@ -208,6 +208,7 @@ figma.ui.onmessage = async (msg) => {
     // メッセージからスタイルのキーを取得
     const styleKey = msg.key;
     const savedStyle = await figma.clientStorage.getAsync(styleKey);
+    const styleNames = msg.styleName;
     const englishFontWeight = savedStyle[msg.styleName].English.fontWeight;
     const japaneseFontWeight = savedStyle[msg.styleName].Japanese.fontWeight;
     const englishFontFamily = savedStyle[msg.styleName].English.fontFamily;
@@ -216,6 +217,7 @@ figma.ui.onmessage = async (msg) => {
     // UIに保存されたスタイルを送信
     figma.ui.postMessage({
       type: 'set-saved-style',
+      styleNames,
       englishFontWeight,
       japaneseFontWeight,
       englishFontFamily,
