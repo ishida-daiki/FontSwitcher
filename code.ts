@@ -224,6 +224,26 @@ figma.ui.onmessage = async (msg) => {
       englishFontFamily,
       japaneseFontFamily,
     });
+  } else if (msg.type === 'update-style') {
+    const { styleName, fontSettings, key } = msg;
+    
+    // スタイル情報の全削除と新規追加を行う関数
+    const overwriteStyleForUser = async (styleName: string, fontSettings: any, key: string) => {
+      // keyに紐付けられているすべてのデータをクリア
+      await figma.clientStorage.setAsync(key, {});
+
+      // クライアントストレージに新しいスタイル情報を保存
+      await figma.clientStorage.setAsync(key, {[styleName]: fontSettings});
+    };
+    
+    // スタイルを上書きして完了を待ちます
+    await overwriteStyleForUser(styleName, fontSettings, key);
+    // UIに直接新しいスタイルを送信
+    figma.ui.postMessage({
+      type: "style-updated",
+      styleName,
+      key
+    });
   }
 };
 
