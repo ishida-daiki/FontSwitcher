@@ -2406,9 +2406,16 @@
               const label = dropDown.querySelector(
                 ".create-style__dropdown-label"
                 );
+              const fontWeight = dropDown.querySelector(
+                ".font-weight"
+                );
+              const fontWeightLabel = fontWeight.querySelector(
+                ".create-style__dropdown-label"
+                );
               if (label) {
                 label.textContent = fontName;
                 textDisplay.style.fontFamily = label.textContent;
+                fontWeightLabel.textContent = "Auto";
               }
   
               fontFamilyListContainer.classList.add("hidden"); // 項目を選択した後、リストを閉じる
