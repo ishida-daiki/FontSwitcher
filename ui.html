@@ -3132,6 +3132,9 @@
       "*"
     );
     styleNameInput.value = "";
+    activateTab(tabs[0]); //インジケータはないので、なくてもよいが一応残している
+    toggleTabContents(0);
+    toggleTabContentAndResize(0);
   });
 
   // Applyボタンの要素を取得し、デフォルトでは無効化する
