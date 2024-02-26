@@ -1970,6 +1970,10 @@
   const createStyleButton = document.querySelector(
     ".create-style__submit-button"
   );
+  
+  let currentStyleKey;
+  let currentEditStyleNameInput;
+
   const updateButton = document.querySelector(
     ".update-button"
   );
@@ -2675,65 +2679,83 @@
         editStyleContainerJapaneseFontFamily.querySelector('.create-style__dropdown-label').textContent = message.japaneseFontFamily
         const editStyleContainerJapaneseFontWeight = editStyleContainerJapanese.querySelector('.font-weight');
         editStyleContainerJapaneseFontWeight.querySelector('.create-style__dropdown-label').textContent = message.japaneseFontWeight
+        currentStyleKey = message.styleKey;
+        currentEditStyleNameInput = editStyleNameInput;
         
-        const styleKey = message.styleKey;
-
-        // ボタンにクリックイベントリスナーを追加
-        updateButton.addEventListener("click", function () {
-          // スタイル名のインプット要素から値を取得
-          const styleName = editStyleNameInput.value.trim();
-          // styleName が空でないことを確認します
-          if (!styleName) {
-            alert("Please enter a style name.");
-            return;
+        break;
+      case "style-updated":
+        const Items = applyStyleList.querySelectorAll(".apply-style__item")
+        Items.forEach((item) => {
+          if (item.getAttribute("data-env") === message.key) {
+            const titleElement = item.querySelector(".apply-style__item-title");
+            if (titleElement.textContent !== message.styleName) {
+              titleElement.textContent = message.styleName;
+            }
           }
-
-          // フォントスタイル情報をそれぞれのドロップダウンから取得
-          const japaneseFontFamily = editStyleContainer
-            .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
-            .textContent.trim();
-          const japaneseFontWeight = editStyleContainer
-            .querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]')
-            .textContent.trim();
-          const englishFontFamily = editStyleContainer
-            .querySelector('[data-lang="English"] [data-label-type="font-family"]')
-            .textContent.trim();
-          const englishFontWeight = editStyleContainer
-            .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
-            .textContent.trim();
-
-          // 各言語のフォント設定を格納するオブジェクトを作成します
-          const fontSettings = {
-            Japanese: {
-              fontFamily: japaneseFontFamily,
-              fontWeight: japaneseFontWeight,
-            },
-            English: {
-              fontFamily: englishFontFamily,
-              fontWeight: englishFontWeight,
-            },
-          };
-          // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "update-style",
-                styleName: styleName,
-                fontSettings: fontSettings,
-                key: styleKey,
-              },
-            },
-            "*"
-          );
-
-          applyStylesContainer.classList.remove("hidden");
-          editStyleContainer.classList.add("hidden");
-          toggleTabContentAndResize(0);
         });
-        
         break;
     }
   };
+
+  function updateButtonClicked() {
+    // スタイル名のインプット要素から値を取得
+    const styleKey = currentStyleKey; // クロージャにより保存された現在のstyleKeyを取得
+    const styleName = currentEditStyleNameInput.value.trim();
+    // styleName が空でないことを確認します
+    if (!styleName) {
+      alert("Please enter a style name.");
+      return;
+    }
+
+    // フォントスタイル情報をそれぞれのドロップダウンから取得
+    const japaneseFontFamily = editStyleContainer
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const japaneseFontWeight = editStyleContainer
+      .querySelector('[data-lang="Japanese"] [data-label-type="font-weight"]')
+      .textContent.trim();
+    const englishFontFamily = editStyleContainer
+      .querySelector('[data-lang="English"] [data-label-type="font-family"]')
+      .textContent.trim();
+    const englishFontWeight = editStyleContainer
+      .querySelector('[data-lang="English"] [data-label-type="font-weight"]')
+      .textContent.trim();
+
+    // 各言語のフォント設定を格納するオブジェクトを作成します
+    const fontSettings = {
+      Japanese: {
+        fontFamily: japaneseFontFamily,
+        fontWeight: japaneseFontWeight,
+      },
+      English: {
+        fontFamily: englishFontFamily,
+        fontWeight: englishFontWeight,
+      },
+    };
+
+    // スタイル名とフォント設定をFigmaプラグインのメインコードに送信
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "update-style",
+          styleName: styleName,
+          fontSettings: fontSettings,
+          key: styleKey,
+        },
+      },
+      "*"
+    );
+
+    applyStylesContainer.classList.remove("hidden");
+    editStyleContainer.classList.add("hidden");
+    toggleTabContentAndResize(0);
+    updateButton.addEventListener("click", function () {
+    });
+  }
+
+  // ページがロードされたときに一度だけイベントリスナーを登録します
+  updateButton.addEventListener("click", updateButtonClicked);
+  
 
   // edit-style-btnのイベントリスナーを追加
   backStyleButtons.addEventListener("click", function () {

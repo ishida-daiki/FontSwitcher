@@ -229,9 +229,6 @@ figma.ui.onmessage = async (msg) => {
     
     // スタイル情報の全削除と新規追加を行う関数
     const overwriteStyleForUser = async (styleName: string, fontSettings: any, key: string) => {
-      // keyに紐付けられているすべてのデータをクリア
-      await figma.clientStorage.setAsync(key, {});
-
       // クライアントストレージに新しいスタイル情報を保存
       await figma.clientStorage.setAsync(key, {[styleName]: fontSettings});
     };
@@ -242,7 +239,7 @@ figma.ui.onmessage = async (msg) => {
     figma.ui.postMessage({
       type: "style-updated",
       styleName,
-      key
+      key,
     });
   }
 };
@@ -364,7 +361,6 @@ async function findClosestFontWeight(
     if (availableFontWeightLower === defaultWeightLower) {
       closestWeight = availableFont.fontName.style; // 完全一致が見つかれば設定
       exactMatchFound = true;
-      console.log("Exact match found:", closestWeight);
       break; // ループを抜けます
     } else if (fontWeightValues.hasOwnProperty(availableFontWeightLower)) {
       // weightDifferenceは常に正の値にして、Infinityで初期化されたminimumDifferenceと比較します
