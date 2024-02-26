@@ -204,6 +204,43 @@ figma.ui.onmessage = async (msg) => {
     deleteDataFromClientStorage(msg.env);
   } else if (msg.type === "resize-ui") {
     figma.ui.resize(msg.width, msg.height);
+  } else if (msg.type === 'get-saved-style') {
+    // メッセージからスタイルのキーを取得
+    const styleKey = msg.key;
+    const savedStyle = await figma.clientStorage.getAsync(styleKey);
+    const styleNames = msg.styleName;
+    const englishFontWeight = savedStyle[msg.styleName].English.fontWeight;
+    const japaneseFontWeight = savedStyle[msg.styleName].Japanese.fontWeight;
+    const englishFontFamily = savedStyle[msg.styleName].English.fontFamily;
+    const japaneseFontFamily = savedStyle[msg.styleName].Japanese.fontFamily;
+
+    // UIに保存されたスタイルを送信
+    figma.ui.postMessage({
+      type: 'set-saved-style',
+      styleKey,
+      styleNames,
+      englishFontWeight,
+      japaneseFontWeight,
+      englishFontFamily,
+      japaneseFontFamily,
+    });
+  } else if (msg.type === 'update-style') {
+    const { styleName, fontSettings, key } = msg;
+    
+    // スタイル情報の全削除と新規追加を行う関数
+    const overwriteStyleForUser = async (styleName: string, fontSettings: any, key: string) => {
+      // クライアントストレージに新しいスタイル情報を保存
+      await figma.clientStorage.setAsync(key, {[styleName]: fontSettings});
+    };
+    
+    // スタイルを上書きして完了を待ちます
+    await overwriteStyleForUser(styleName, fontSettings, key);
+    // UIに直接新しいスタイルを送信
+    figma.ui.postMessage({
+      type: "style-updated",
+      styleName,
+      key,
+    });
   }
 };
 
@@ -253,6 +290,24 @@ async function saveStyleForUser(
 
 // ここに各フォントスタイルに対する数値的ウェイトをマッピングするオブジェクトを定義
 const fontWeightValues: { [styleName: string]: number } = {
+  compressedultralight: 100,
+  compressedthin: 200,
+  compressedlight: 300,
+  compressedregular: 400,
+  compressedmedium: 500,
+  compressedsemibold: 600,
+  compressedbold: 700,
+  compressedheavy: 800,
+  compressedblack: 900,
+  condensedultralight: 100,
+  condensedthin: 200,
+  condensedlight: 300,
+  condensedregular: 400,
+  condensedmedium: 500,
+  condensedsemibold: 600,
+  condensedbold: 700,
+  condensedheavy: 800,
+  condensedblack: 900,
   ultralight: 100,
   thin: 200,
   light: 300,
@@ -263,6 +318,24 @@ const fontWeightValues: { [styleName: string]: number } = {
   heavy: 800,
   extrabold: 800,
   black: 900,
+  expandedultralight: 100,
+  expandedthin: 200,
+  expandedlight: 300,
+  expandedregular: 400,
+  expandedmedium: 500,
+  expandedsemibold: 600,
+  expandedbold: 700,
+  expandedheavy: 800,
+  expandedblack: 900,
+  ultralightitalic: 100,
+  thinitalic: 200,
+  lightitalic: 300,
+  regularitalic: 400,
+  mediumitalic: 500,
+  semibolditalic: 600,
+  bolditalic: 700,
+  heavyitalic: 800,
+  blackitalic: 900,
 };
 // 指定されたフォントファミリーに最も近いフォントウェイトを探す関数
 async function findClosestFontWeight(
@@ -288,7 +361,6 @@ async function findClosestFontWeight(
     if (availableFontWeightLower === defaultWeightLower) {
       closestWeight = availableFont.fontName.style; // 完全一致が見つかれば設定
       exactMatchFound = true;
-      console.log("Exact match found:", closestWeight);
       break; // ループを抜けます
     } else if (fontWeightValues.hasOwnProperty(availableFontWeightLower)) {
       // weightDifferenceは常に正の値にして、Infinityで初期化されたminimumDifferenceと比較します
