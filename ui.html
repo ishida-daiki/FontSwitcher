@@ -1021,6 +1021,8 @@
   .sample-style__text {
     line-height: 180%;
     font-size: 1rem;
+    overflow-wrap: break-word; /* 長い単語をコンテナ内で折り返す */
+    word-break: break-word; /* 古いブラウザの互換性のため */
   }
   .sample-style__tab-header {
     height: 40px;
@@ -1330,22 +1332,6 @@
                 value
               />
             </div>
-            <div class="create-style__input-group">
-              <label class="create-style__label" for="styleNameInput"
-                >Sample Content</label
-              >
-              <textarea
-                type="text"
-                id="sampleTextContent"
-                spellcheck="false"
-                class="sample-style__input"
-                name="styleName"
-                placeholder="Preview Sample Text"
-                autocomplete="off"
-                dir="auto"
-                value=""
-              ></textarea>
-            </div>
           </div>
     
           <div class="create-style__tabs">
@@ -1541,7 +1527,7 @@
       </div>
       
       <!-- edit-style -->
-      <div class="edit-style-container">
+      <div class="edit-style-container hidden">
         <!-- edit style -->
         <div class="tab-edit">
           <button
@@ -1856,7 +1842,7 @@
           <p class="sample-style__text">Preview Sample Text</p>
         </div>
         <!-- Scale Controller -->
-        <div class="component-rows">
+        <!-- <div class="component-rows">
           <div class="component-row">
             <div class="component-row__label">Scale</div>
             <div class="component-row__slider">
@@ -1938,6 +1924,22 @@
               />
             </div>
           </div>
+        </div> -->
+        <div class="create-style__input-group">
+          <label class="create-style__label" for="styleNameInput"
+            >Sample Content</label
+          >
+          <textarea
+            type="text"
+            id="sampleTextContent"
+            spellcheck="false"
+            class="sample-style__input"
+            name="styleName"
+            placeholder="Preview Sample Text"
+            autocomplete="off"
+            dir="auto"
+            value=""
+          ></textarea>
         </div>
       </div>
     </div>
@@ -2171,7 +2173,7 @@
     }
     // Create Styleタブが選択された場合（index 1）
     else if (index === 1) {
-      newHeight = 463;
+      newHeight = 373;
       newWidth = 700;
     }
     // Create Styleタブが選択された場合（index 1）
