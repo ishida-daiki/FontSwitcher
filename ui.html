@@ -414,6 +414,7 @@
     width: 100%;
     border-radius: 6px;
     background: rgba(179, 179, 179, 0.5);
+    transition: transform 0.2s ease-in-out;
   }
 
   .apply-style__message {
@@ -1004,6 +1005,11 @@
     overflow-y: auto;
     overflow-x: hidden;
   }
+  .sample-style__container {
+    display: flex;
+    flex: 1;
+    position: relative;
+  }
   .sample-style__message {
     display: grid;
     place-content: center;
@@ -1015,8 +1021,7 @@
     color: var(--figma-color-text-disabled);
     overflow: auto;
     flex: 1;
-    max-height: 234px;
-    height: 214px;
+    max-height: 217px;
   }
   .sample-style__text {
     line-height: 180%;
@@ -1838,8 +1843,17 @@
             </div>
           </div>
         </div>
-        <div class="sample-style__message">
-          <p class="sample-style__text">Preview Sample Text</p>
+        <div class="sample-style__container">
+          <div class="sample-style__message">
+            <p class="sample-style__text">Preview Sample Text</p>
+          </div>
+          <div class="scroll_container" role="none">
+            <div
+              class="scroll_container--scrollBar"
+              role="none"
+              style="transform: translate3d(0px, 0px, 0px); height: 186.397px"
+            ></div>
+          </div>
         </div>
         <!-- Scale Controller -->
         <!-- <div class="component-rows">
@@ -1925,21 +1939,27 @@
             </div>
           </div>
         </div> -->
-        <div class="create-style__input-group">
-          <label class="create-style__label" for="styleNameInput"
-            >Sample Content</label
-          >
-          <textarea
-            type="text"
-            id="sampleTextContent"
-            spellcheck="false"
-            class="sample-style__input"
-            name="styleName"
-            placeholder="Preview Sample Text"
-            autocomplete="off"
-            dir="auto"
-            value=""
-          ></textarea>
+        <div class="create-style__input-groups">
+          <!-- <div class="create-style__input-group">
+            <label class="create-style__label" for="styleNameInput">Style name</label>
+            <input type="text" id="styleNameInput" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value="">
+          </div> -->
+          <div class="create-style__input-group">
+            <label class="create-style__label" for="styleNameInput"
+              >Sample Content</label
+            >
+            <textarea
+              type="text"
+              id="sampleTextContent"
+              spellcheck="false"
+              class="sample-style__input"
+              name="styleName"
+              placeholder="Preview Sample Text"
+              autocomplete="off"
+              dir="auto"
+              value=""
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
@@ -2773,6 +2793,61 @@
     toggleTabContentAndResize(0);
   });
   document.addEventListener("DOMContentLoaded", function () {
+    const sampleTextContainer = document.querySelector(".sample-style__message");
+    const sampleText = document.querySelector(".sample-style__text");
+    const scrollBar = document.querySelector(".scroll_container--scrollBar");
+    const container = document.querySelector(".sample-style__container");
+    
+
+    // スクロール内容の更新に応じてスクロールバーの位置を更新する関数
+    const updateScrollBarPosition = () => {
+      const scrollAmount = sampleTextContainer.scrollTop;
+      const topPosition = (scrollAmount / sampleTextContainer.scrollHeight) * sampleTextContainer.clientHeight;
+      scrollBar.style.setProperty('--scroll-top', `${topPosition}px`);
+    };
+
+    // スクロールバーの高さと位置の更新関数
+    const updateScrollBar = () => {
+      const contentHeight = sampleText.scrollHeight;
+      const containerHeight = sampleTextContainer.clientHeight;
+      const isScrollable = contentHeight > containerHeight;
+      const scrollRatio = containerHeight / contentHeight;
+      const scrollBarHeight = scrollRatio * containerHeight;
+
+      scrollBar.style.display = isScrollable ? "block" : "none";
+      scrollBar.style.height = `${scrollBarHeight}px`;
+
+      const handleMouseEnter = () => {
+        if (isScrollable) {
+          scrollBar.style.display = "block";
+        }
+      };
+      const handleMouseLeave = () => {
+        scrollBar.style.display = "none";
+      };
+      
+
+      // テキストの長さに応じた条件処理
+      if (sampleText.textContent.length > 119) {
+        sampleTextContainer.style.placeContent = 'start';
+        container.addEventListener("mouseenter", handleMouseEnter);
+        container.addEventListener("mouseleave", handleMouseLeave);
+      } else {
+        sampleTextContainer.style.placeContent = 'center';
+        container.removeEventListener("mouseenter", handleMouseEnter);
+        container.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+
+    // テキスト内容が変更されたときにupdateScrollBarを呼び出すためのMutationObserverの設定
+    const observer = new MutationObserver(updateScrollBar);
+    observer.observe(sampleText, { childList: true, characterData: true, subtree: true });
+
+    // ロード時とスクロール時にスクロールバーを更新する
+    updateScrollBar();
+    sampleTextContainer.addEventListener("scroll", updateScrollBarPosition);
+    new ResizeObserver(updateScrollBar).observe(sampleTextContainer);
+
     let textarea = document.getElementById("sampleTextContent");
     let defaultText = "Preview Sample Text";
   
