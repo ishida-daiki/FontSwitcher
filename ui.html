@@ -1352,8 +1352,9 @@
                   <button
                     class="create-style__dropdown-toggle font-family"
                     data-label-type="font-family"
+                    data-lang="English"
                   >
-                    <span class="create-style__dropdown-label">SF Pro</span>
+                    <span class="create-style__dropdown-label" data-lang='English'>SF Pro</span>
                   </button>
                   <div
                     class="create-style__font-menu hidden font-family-list-container"
@@ -1441,8 +1442,9 @@
                   <button
                     class="create-style__dropdown-toggle font-family"
                     data-label-type="font-family"
+                    data-lang="Japanese"
                   >
-                    <span class="create-style__dropdown-label">Noto Sans JP</span>
+                    <span class="create-style__dropdown-label" data-lang='Japanese'>Noto Sans JP</span>
                   </button>
                   <div
                     class="create-style__font-menu hidden font-family-list-container"
@@ -1567,7 +1569,7 @@
         </div>
   
         <div>
-          <!-- Create style  -->
+          <!-- Edit style  -->
           <div class="edit-style">
             <!-- スタイル名 作成 -->
             <div class="create-style__input-groups">
@@ -1826,13 +1828,13 @@
           <div class="sample-language-menu hidden" role="menu">
             <div class="font-menu__item" role="menuitem">
               <div class="font-menu__text sample">English</div>
-              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+              <svg class="font-menu__icon hidden" data-lang="English" viewBox="0 0 16 16" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
               </svg>
             </div>
             <div class="font-menu__item" role="menuitem">
               <div class="font-menu__text sample">Japanese</div>
-              <svg class="font-menu__icon hidden" viewBox="0 0 16 16" fill="none">
+              <svg class="font-menu__icon hidden" data-lang="Japanese" viewBox="0 0 16 16" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z" fill="white"></path>
               </svg>
             </div>
@@ -1940,12 +1942,8 @@
           </div>
         </div> -->
         <div class="create-style__input-groups">
-          <!-- <div class="create-style__input-group">
-            <label class="create-style__label" for="styleNameInput">Style name</label>
-            <input type="text" id="styleNameInput" spellcheck="false" class="create-style__input" name="styleName" placeholder="New style" autocomplete="off" dir="auto" value="">
-          </div> -->
           <div class="create-style__input-group">
-            <label class="create-style__label" for="styleNameInput"
+            <label class="create-style__label" for="sampleTextContent"
               >Sample Content</label
             >
             <textarea
@@ -1981,8 +1979,18 @@
   const backStyleButtons = document.querySelector(".options-button.back");
   const applyStylesContainer = document.querySelector(".apply-styles-container");
   const editStyleContainer = document.querySelector(".edit-style-container");
+  const sampleTextContainer = document.querySelector(".sample-style__message");
+  const sampleText = document.querySelector(".sample-style__text");
+  const scrollSampleBar = document.querySelector(".scroll_container--scrollBar");
+  const container = document.querySelector(".sample-style__container");
+  const sampleStyleButton = document.querySelector(
+    ".options-button.sample"
+  );
+  const sampleLaguageMenu = document.querySelector(
+    ".sample-language-menu"
+  );
+  const sampleStyleLaguages = sampleLaguageMenu.querySelectorAll('.font-menu__item');
 
-  let textDisplay = document.querySelector(".sample-style__text");
   let applyStyleItems;
   let applyStyleEditButtons;
   let applyStyleDeleteButtons;
@@ -2005,44 +2013,8 @@
 
   const scrollBar = applyStyleListContainer.querySelector(".scroll_container--scrollBar--YLWIi");
 
-  // スクロールバーの表示を制御するコード
-  applyStyleListContainer.addEventListener("mouseover", function () {
-    const applyStyleItem = applyStyleListContainer.querySelectorAll(".apply-style__item");
-    if (applyStyleItem.length > 5) {
-      // スクロールバーが必要な場合にのみ表示する
-      scrollBar.style.display = "block";
-    } else {
-      // スクロールバーが不要な場合に非表示にする
-      scrollBar.style.display = "none";
-    }
-  });
-
-  // scrollContainerに対するmouseoverイベント用のコード
-  scrollContainer.addEventListener("mouseover", function () {
-    const computedStyle = window.getComputedStyle(scrollBar);
-    if (computedStyle.display === "block") {
-      scrollContainer.style.backgroundColor = "var(--figma-color-bg-hover)";
-      scrollContainer.style.borderLeft = "1px solid var(--figma-color-border, #efefef)";
-    }
-  });
-  
-  // scrollContainerに対するmouseleaveイベント用のコード
-  scrollContainer.addEventListener("mouseleave", function () {
-    const computedStyle = window.getComputedStyle(scrollBar);
-    if (computedStyle.display === "block") {
-      scrollContainer.style.backgroundColor = ""; // backgroundColorをクリアする
-      scrollContainer.style.borderLeft = ""; // borderLeftをクリアする
-    }
-  });
-
-  // マウスがapplyStyleListContainerから離れたときにスクロールバーを非表示にする
-  applyStyleListContainer.addEventListener("mouseleave", function () {
-    scrollBar.style.display = "none";
-  });
-  let applyStyleNumber;
-  // スクロールバーの表示と動作を制御するJavaScriptコード
-  
   document.addEventListener("DOMContentLoaded", (event) => {
+    updateFontStyleAndIcon('English');
     setupSliders();
     const scrollContainer = applyStyleList;
     const scrollBar = document.querySelector(
@@ -2116,6 +2088,43 @@
     setScrollBarHeight();
     updateScrollBarPosition();
   });
+  
+  // スクロールバーの表示を制御するコード
+  applyStyleListContainer.addEventListener("mouseover", function () {
+    const applyStyleItem = applyStyleListContainer.querySelectorAll(".apply-style__item");
+    if (applyStyleItem.length > 5) {
+      // スクロールバーが必要な場合にのみ表示する
+      scrollBar.style.display = "block";
+    } else {
+      // スクロールバーが不要な場合に非表示にする
+      scrollBar.style.display = "none";
+    }
+  });
+
+  // scrollContainerに対するmouseoverイベント用のコード
+  scrollContainer.addEventListener("mouseover", function () {
+    const computedStyle = window.getComputedStyle(scrollBar);
+    if (computedStyle.display === "block") {
+      scrollContainer.style.backgroundColor = "var(--figma-color-bg-hover)";
+      scrollContainer.style.borderLeft = "1px solid var(--figma-color-border, #efefef)";
+    }
+  });
+  
+  // scrollContainerに対するmouseleaveイベント用のコード
+  scrollContainer.addEventListener("mouseleave", function () {
+    const computedStyle = window.getComputedStyle(scrollBar);
+    if (computedStyle.display === "block") {
+      scrollContainer.style.backgroundColor = ""; // backgroundColorをクリアする
+      scrollContainer.style.borderLeft = ""; // borderLeftをクリアする
+    }
+  });
+
+  // マウスがapplyStyleListContainerから離れたときにスクロールバーを非表示にする
+  applyStyleListContainer.addEventListener("mouseleave", function () {
+    scrollBar.style.display = "none";
+  });
+  let applyStyleNumber;
+  // スクロールバーの表示と動作を制御するJavaScriptコード
   
   // 選択された要素とstyleの状態を表示
   let selectedName = null;
@@ -2320,6 +2329,42 @@
         const createStyleContents = document.querySelectorAll(
           ".create-style__content"
         );
+
+        // 対象の要素を取得する
+        const labelEnglish = document.querySelector(".create-style__dropdown-label[data-lang='English']");
+        const labelJapanese = document.querySelector(".create-style__dropdown-label[data-lang='Japanese']");
+        
+        // MutationObserverのコールバック関数を定義
+        const observerCallback = (mutationsList, observer) => {
+          for (let mutation of mutationsList) {
+            if ((mutation.type === 'childList' || mutation.type === 'characterData') && sampleText) {
+              // sampleTextの現在の言語設定を確認する
+              const sampleTextLang = sampleText.getAttribute('data-lang');
+              // 変更が起きた要素の言語設定を取得
+              const targetLang = mutation.target.getAttribute('data-lang');
+              // sampleTextと変更が起きた要素が同じ言語であるか確認
+              if (sampleTextLang === targetLang) {
+                // sampleTextのフォントファミリーを更新
+                sampleText.style.fontFamily = mutation.target.textContent;
+                console.log('sampleTextのフォントファミリーを更新');
+              }
+            }
+          }
+        };
+
+        // MutationObserverインスタンスの作成と監視の開始
+        const observer = new MutationObserver(observerCallback);
+        const config = { childList: true, characterData: true, subtree: true };
+
+        // 監視対象の要素が存在するか確認し、存在する場合は監視を開始する
+        if (labelEnglish) {
+          observer.observe(labelEnglish, config);
+        }
+        if (labelJapanese) {
+          observer.observe(labelJapanese, config);
+        }
+
+
         createStyleContents.forEach((content) => {
           const fontFamilyListContainer = content.querySelector(
             ".font-family-list-container"
@@ -2417,7 +2462,6 @@
               document.body.classList.remove("menu-open");
             }
           });
-  
           scrollContainer.childNodes.forEach((item) => {
             item.addEventListener("click", (event) => {
               const fontName = item.textContent;
@@ -2436,7 +2480,6 @@
                 );
               if (label) {
                 label.textContent = fontName;
-                textDisplay.style.fontFamily = label.textContent;
                 fontWeightLabel.textContent = "Auto";
               }
   
@@ -2651,15 +2694,8 @@
           );
         });
 
-        const sampleStyleButton = document.querySelector(
-          ".options-button.sample"
-        );
-        const sampleLaguageMenu = document.querySelector(
-          ".sample-language-menu"
-        );
         sampleStyleButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
-          
           removeAllActiveButtons();
           
           // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
@@ -2681,10 +2717,22 @@
           // 他のアクティブな項目を非アクティブにする
           removeAllActiveItems();
         });
-        sampleLaguageMenu.addEventListener("click", function (e) {
-          sampleLaguageMenu.classList.add("hidden");
-          overlay.classList.add("hidden");
-          document.body.classList.remove("menu-open");
+        sampleStyleLaguages.forEach((item) => {
+          item.addEventListener("click", function (e) {
+            sampleLaguageMenu.classList.add("hidden");
+            overlay.classList.add("hidden");
+            document.body.classList.remove("menu-open");
+            let textStyle
+            
+            const menuItem = item.querySelector(".font-menu__text.sample");
+            if (menuItem.textContent === "Japanese") {
+              updateFontStyleAndIcon('Japanese');
+            } else if (menuItem.textContent === "English") {
+              updateFontStyleAndIcon('English');
+            }
+            const icon = item.querySelector(".font-menu__icon");
+            icon.classList.remove("hidden");
+          });
         });
         document.addEventListener("click", function (e) {
           sampleLaguageMenu.classList.add("hidden");
@@ -2793,17 +2841,11 @@
     toggleTabContentAndResize(0);
   });
   document.addEventListener("DOMContentLoaded", function () {
-    const sampleTextContainer = document.querySelector(".sample-style__message");
-    const sampleText = document.querySelector(".sample-style__text");
-    const scrollBar = document.querySelector(".scroll_container--scrollBar");
-    const container = document.querySelector(".sample-style__container");
-    
-
     // スクロール内容の更新に応じてスクロールバーの位置を更新する関数
     const updateScrollBarPosition = () => {
       const scrollAmount = sampleTextContainer.scrollTop;
       const topPosition = (scrollAmount / sampleTextContainer.scrollHeight) * sampleTextContainer.clientHeight;
-      scrollBar.style.setProperty('--scroll-top', `${topPosition}px`);
+      scrollSampleBar.style.setProperty('--scroll-top', `${topPosition}px`);
     };
 
     // スクロールバーの高さと位置の更新関数
@@ -2814,16 +2856,16 @@
       const scrollRatio = containerHeight / contentHeight;
       const scrollBarHeight = scrollRatio * containerHeight;
 
-      scrollBar.style.display = isScrollable ? "block" : "none";
-      scrollBar.style.height = `${scrollBarHeight}px`;
+      scrollSampleBar.style.display = isScrollable ? "block" : "none";
+      scrollSampleBar.style.height = `${scrollBarHeight}px`;
 
       const handleMouseEnter = () => {
         if (isScrollable) {
-          scrollBar.style.display = "block";
+          scrollSampleBar.style.display = "block";
         }
       };
       const handleMouseLeave = () => {
-        scrollBar.style.display = "none";
+        scrollSampleBar.style.display = "none";
       };
       
 
@@ -2852,17 +2894,39 @@
     let defaultText = "Preview Sample Text";
   
     textarea.addEventListener("input", function () {
-      if (textDisplay !== null) {
+      if (sampleText !== null) {
         if (this.value) {
-          textDisplay.textContent = this.value;
-          textDisplay.style.color = "var(--figma-color-text)";
+          sampleText.textContent = this.value;
+          sampleText.style.color = "var(--figma-color-text)";
         } else {
-          textDisplay.textContent = defaultText;
-          textDisplay.style.color = "var(--figma-color-text-disabled)";
+          sampleText.textContent = defaultText;
+          sampleText.style.color = "var(--figma-color-text-disabled)";
         }
       }
     });
   });
+  // フォント/icon設定を更新する関数
+  function updateFontStyleAndIcon(language) {
+    const langSuffix = language === 'Japanese' ? 'Japanese' : 'English';
+    const fontFamilySelector = `.create-style__dropdown-label[data-lang="${langSuffix}"]`;
+    const fontFamily = document.querySelector(fontFamilySelector).textContent.trim();
+    sampleText.style.fontFamily = fontFamily;
+
+    // sampleTextにdata-lang属性を設定する
+    sampleText.setAttribute('data-lang', langSuffix);
+
+    // すべてのアイコンを非表示にする
+    sampleLaguageMenu.querySelectorAll(".font-menu__icon").forEach((icon) => {
+      icon.classList.add("hidden");
+    });
+
+    // 選択した言語のアイコンのみ表示する
+    const selectedIconSelector = `.font-menu__icon[data-lang="${langSuffix}"]`;
+    const selectedIcon = sampleLaguageMenu.querySelector(selectedIconSelector);
+    if (selectedIcon) {
+      selectedIcon.classList.remove("hidden");
+    }
+  }
   // 検索機能を設定する関数
   function setupSearchFunctionality(searchInputContainer, scrollContainer) {
     // 検索イベントリスナーを追加
@@ -2960,31 +3024,31 @@
     dividerContainer.appendChild(divider);
     fontWeightListContainer.appendChild(dividerContainer);
     fontWeights.forEach((font) => {
-      // 新しいフォントウェイトのメニュー項目を作成
-      const item = document.createElement("div");
-      item.className = "font-menu__item";
-      item.setAttribute("role", "menuitem");
-  
-      // フォントウェイト名を表示するためのテキスト部分を作成
-      const text = document.createElement("div");
-      text.className = "font-menu__text font-weight";
-      text.textContent = font.fontName.style;
-      item.appendChild(text);
-  
-      // チェックアイコンを追加
-      const checkIcon = createCheckIcon();
-      item.appendChild(checkIcon);
-  
-      // リストにメニュー項目を追加
-      fontWeightListContainer.appendChild(item);
-  
-      // 作成したメニュー項目を配列に追加
-      allFontWeightItems.push(item);
-  
-      // デフォルトフォントウェイトを特定する
-      if (!defaultFontWeight || font.fontName.style === "Auto") {
-        defaultFontWeight = item;
-      }
+    // 新しいフォントウェイトのメニュー項目を作成
+    const item = document.createElement("div");
+    item.className = "font-menu__item";
+    item.setAttribute("role", "menuitem");
+
+    // フォントウェイト名を表示するためのテキスト部分を作成
+    const text = document.createElement("div");
+    text.className = "font-menu__text font-weight";
+    text.textContent = font.fontName.style;
+    item.appendChild(text);
+
+    // チェックアイコンを追加
+    const checkIcon = createCheckIcon();
+    item.appendChild(checkIcon);
+
+    // リストにメニュー項目を追加
+    fontWeightListContainer.appendChild(item);
+
+    // 作成したメニュー項目を配列に追加
+    allFontWeightItems.push(item);
+
+    // デフォルトフォントウェイトを特定する
+    if (!defaultFontWeight || font.fontName.style === "Auto") {
+      defaultFontWeight = item;
+    }
     });
 
     refreshCheckIcons(fontWeightLabel.textContent, allFontWeightItems);
@@ -3348,7 +3412,6 @@
   function setupSliders() {
     // すべてのスライダーを取得
     const sliders = document.querySelectorAll('.slider');
-    const sampleText = document.querySelector('.sample-style__text'); // スタイルを変更するテキスト要素を取得
   
     sliders.forEach((slider) => {
       const thumb = slider.querySelector('.slider__thumb');
