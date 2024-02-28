@@ -1352,8 +1352,9 @@
                   <button
                     class="create-style__dropdown-toggle font-family"
                     data-label-type="font-family"
+                    data-lang="English"
                   >
-                    <span class="create-style__dropdown-label">SF Pro</span>
+                    <span class="create-style__dropdown-label" data-lang='English'>SF Pro</span>
                   </button>
                   <div
                     class="create-style__font-menu hidden font-family-list-container"
@@ -1441,8 +1442,9 @@
                   <button
                     class="create-style__dropdown-toggle font-family"
                     data-label-type="font-family"
+                    data-lang="Japanese"
                   >
-                    <span class="create-style__dropdown-label">Noto Sans JP</span>
+                    <span class="create-style__dropdown-label" data-lang='Japanese'>Noto Sans JP</span>
                   </button>
                   <div
                     class="create-style__font-menu hidden font-family-list-container"
@@ -1567,7 +1569,7 @@
         </div>
   
         <div>
-          <!-- Create style  -->
+          <!-- Edit style  -->
           <div class="edit-style">
             <!-- スタイル名 作成 -->
             <div class="create-style__input-groups">
@@ -2327,6 +2329,42 @@
         const createStyleContents = document.querySelectorAll(
           ".create-style__content"
         );
+
+        // 対象の要素を取得する
+        const labelEnglish = document.querySelector(".create-style__dropdown-label[data-lang='English']");
+        const labelJapanese = document.querySelector(".create-style__dropdown-label[data-lang='Japanese']");
+        
+        // MutationObserverのコールバック関数を定義
+        const observerCallback = (mutationsList, observer) => {
+          for (let mutation of mutationsList) {
+            if ((mutation.type === 'childList' || mutation.type === 'characterData') && sampleText) {
+              // sampleTextの現在の言語設定を確認する
+              const sampleTextLang = sampleText.getAttribute('data-lang');
+              // 変更が起きた要素の言語設定を取得
+              const targetLang = mutation.target.getAttribute('data-lang');
+              // sampleTextと変更が起きた要素が同じ言語であるか確認
+              if (sampleTextLang === targetLang) {
+                // sampleTextのフォントファミリーを更新
+                sampleText.style.fontFamily = mutation.target.textContent;
+                console.log('sampleTextのフォントファミリーを更新');
+              }
+            }
+          }
+        };
+
+        // MutationObserverインスタンスの作成と監視の開始
+        const observer = new MutationObserver(observerCallback);
+        const config = { childList: true, characterData: true, subtree: true };
+
+        // 監視対象の要素が存在するか確認し、存在する場合は監視を開始する
+        if (labelEnglish) {
+          observer.observe(labelEnglish, config);
+        }
+        if (labelJapanese) {
+          observer.observe(labelJapanese, config);
+        }
+
+
         createStyleContents.forEach((content) => {
           const fontFamilyListContainer = content.querySelector(
             ".font-family-list-container"
@@ -2424,7 +2462,6 @@
               document.body.classList.remove("menu-open");
             }
           });
-  
           scrollContainer.childNodes.forEach((item) => {
             item.addEventListener("click", (event) => {
               const fontName = item.textContent;
@@ -2871,9 +2908,12 @@
   // フォント/icon設定を更新する関数
   function updateFontStyleAndIcon(language) {
     const langSuffix = language === 'Japanese' ? 'Japanese' : 'English';
-    const fontFamilySelector = `[data-lang="${langSuffix}"] [data-label-type="font-family"]`;
-    const fontFamily = editStyleContainer.querySelector(fontFamilySelector).textContent.trim();
+    const fontFamilySelector = `.create-style__dropdown-label[data-lang="${langSuffix}"]`;
+    const fontFamily = document.querySelector(fontFamilySelector).textContent.trim();
     sampleText.style.fontFamily = fontFamily;
+
+    // sampleTextにdata-lang属性を設定する
+    sampleText.setAttribute('data-lang', langSuffix);
 
     // すべてのアイコンを非表示にする
     sampleLaguageMenu.querySelectorAll(".font-menu__icon").forEach((icon) => {
