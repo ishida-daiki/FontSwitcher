@@ -701,6 +701,9 @@
     top: 4px;
     position: absolute;
   }
+  .font-menu__icon.font-family {
+    top: 6px;
+  }
 
   .font-menu__icon-img {
     width: 9.91px;
@@ -2384,6 +2387,7 @@
           let fontWeightLabel = content.querySelector(
             ".create-style__dropdown-toggle.font-weight .create-style__dropdown-label"
           );
+          let allFontFamilyItems = [];
   
           // 既存のリスト内容を一度クリアする
           scrollContainer.innerHTML = "";
@@ -2421,17 +2425,29 @@
               text.textContent = font.fontName.family;
               text.style.fontFamily = `"${font.fontName.family}"`;
               item.appendChild(text);
+
+              // チェックアイコンを追加
+              const checkIcon = createCheckIconFontFamily();
+              item.appendChild(checkIcon);
   
               // リストにメニュー項目を追加
               scrollContainer.appendChild(item);
+
+              // font-family メニュー配列に追加
+              allFontFamilyItems.push(item);
             }
           });
-  
+          
+
           dropDownToggle.addEventListener("click", () => {
             fontFamilyListContainer.classList.add("hidden");
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
               fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
+              const currentFontFamily = content.querySelector(
+                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
+              ).textContent;
+              refreshCheckIcons(currentFontFamily, allFontFamilyItems);
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
@@ -2958,6 +2974,27 @@
 
   let allFontWeightItems = [];
 
+  // font-familyのメニューで使用するアイコン設定
+  function createCheckIconFontFamily() {
+    const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
+    const checkIcon = document.createElementNS(namespace, "svg");
+    checkIcon.setAttribute("class", "font-menu__icon font-family hidden");
+    checkIcon.setAttribute("viewBox", "0 0 16 16");
+    checkIcon.setAttribute("fill", "none");
+
+    const path = document.createElementNS(namespace, "path");
+    path.setAttribute("fill-rule", "evenodd");
+    path.setAttribute("clip-rule", "evenodd");
+    path.setAttribute(
+      "d",
+      "M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z"
+    );
+    path.setAttribute("fill", "var(--figma-color-icon)");
+
+    checkIcon.appendChild(path);
+    return checkIcon;
+  }
+
   // フォントウェイトを表示する関数
   function makeFontWeightLists(
     fontFamilyName,
@@ -3099,7 +3136,7 @@
 
     // `selectedWeightLabel`に一致するアイテムを探し、そのチェックアイコンを表示
     allFontWeightItems.forEach((item) => {
-      const textElement = item.querySelector('.font-menu__text.font-weight');
+      const textElement = item.querySelector('.font-menu__text');
       if(textElement.textContent === selectedWeightLabel) {
         const iconToShow = item.querySelector('.font-menu__icon');
         iconToShow.classList.remove('hidden');
