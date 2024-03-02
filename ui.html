@@ -2628,88 +2628,8 @@
         // apply-style__listの要素に新しいリストアイテムを追加
         applyStyleList.appendChild(newItem);
 
-        // 新しいリストアイテムに関するイベントをここで追加しています
-        newItem.addEventListener("click", function (e) {
-          // クリックイベントのバブリングを止める
-          e.stopPropagation();
-  
-          // 他のアイテムのアクティブ状態を解除
-          removeAllActiveItems();
-          removeAllActiveButtons();
-  
-          // クリックされたアイテムにアクティブクラスを切り替え
-          newItem.classList.toggle("active");
-          selectedName = newItem.querySelector(
-            ".apply-style__item-title"
-          ).textContent; // スタイル名を取得
-          selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-  
-          // ボタンの状態を更新
-          updateButtonState();
-        });
-        // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-        const applyStyleEditButton = newItem.querySelector(
-          ".options-button.edit"
-        );
-        const applyStyleDeleteButton = newItem.querySelector(
-          ".options-button.delete"
-        );
-        applyStyleEditButton.addEventListener("click", function (e) {
-          // イベントのバブリングを阻止
-          e.stopPropagation();
-  
-          removeAllActiveButtons();
-  
-          // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(
-            ".options-button"
-          );
-  
-          // data-env 属性を持つ最も近い親要素を取得
-          const parentItem = buttonElement.closest("[data-env]");
-          // 親要素から data-env 属性の値を取得
-          const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
-          // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
-          const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
-
-          applyStylesContainer.classList.add("hidden");
-          editStyleContainer.classList.remove("hidden");
-
-          toggleTabContentAndResize(2);
-
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "get-saved-style",
-                key: dataEnvValue,
-                styleName: styleTitle,
-              },
-            },
-            "*"
-          );
-  
-          // 他のアクティブな項目を非アクティブにする
-          removeAllActiveItems();
-        });
-        applyStyleDeleteButton.addEventListener("click", function (e) {
-          e.stopPropagation(); // イベントバブリングを防ぐ
-          const envValue = newItem.getAttribute("data-env");
-          let itemToDelete = document.querySelector(
-            `.apply-style__item[data-env="${envValue}"]`
-          ); // DOM 要素を取得
-          if (itemToDelete) {
-            itemToDelete.remove(); // DOM 要素を削除
-          }
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "delete-style",
-                env: newItem.getAttribute("data-env"),
-              },
-            },
-            "*"
-          );
-        });
+        // 新しいリストアイテムに編集・削除イベントリスナーを追加
+        addEventListenersToStyleItem(newItem)
 
         sampleStyleButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
@@ -3266,91 +3186,9 @@
     // apply-style__listの要素に新しいリストアイテムを追加
     applyStyleList.appendChild(newItem);
   
-    // 新しいリストアイテムに関するイベントをここで追加しています
-    newItem.addEventListener("click", function (e) {
-      // クリックイベントのバブリングを止める
-      e.stopPropagation();
-  
-      // 他のアイテムのアクティブ状態を解除
-      removeAllActiveItems();
-      removeAllActiveButtons();
-  
-      // クリックされたアイテムにアクティブクラスを切り替え
-      newItem.classList.toggle("active");
-      selectedName = newItem.querySelector(
-        ".apply-style__item-title"
-      ).textContent; // スタイル名を取得
-      selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-      console.log("wow");
-  
-      // ボタンの状態を更新
-      updateButtonState();
-    });
-    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-    const applyStyleEditButton = newItem.querySelector(
-      ".options-button.edit"
-    );
-    const applyStyleDeleteButton = newItem.querySelector(
-      ".options-button.delete"
-    );
-    applyStyleEditButton.addEventListener("click", function (e) {
-      // イベントのバブリングを阻止
-      e.stopPropagation();
+    // 新しいリストアイテムに編集・削除イベントリスナーを追加
+    addEventListenersToStyleItem(newItem)
 
-      removeAllActiveButtons();
-
-      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-      const buttonElement = e.target.closest(
-        ".options-button"
-      );
-
-      // data-env 属性を持つ最も近い親要素を取得
-      const parentItem = buttonElement.closest("[data-env]");
-      // 親要素から data-env 属性の値を取得
-      const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
-      // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
-      const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
-
-      applyStylesContainer.classList.add("hidden");
-      editStyleContainer.classList.remove("hidden");
-
-      toggleTabContentAndResize(2);
-
-      parent.postMessage(
-        {
-          pluginMessage: {
-            type: "get-saved-style",
-            key: dataEnvValue,
-            styleName: styleTitle,
-          },
-        },
-        "*"
-      );
-
-      // 他のアクティブな項目を非アクティブにする
-      removeAllActiveItems();
-    });
-    applyStyleDeleteButton.addEventListener("click", function (e) {
-          e.stopPropagation(); // イベントバブリングを防ぐ
-          const envValue = newItem.getAttribute("data-env");
-          let itemToDelete = document.querySelector(
-            `.apply-style__item[data-env="${envValue}"]`
-          ); // DOM 要素を取得
-          if (itemToDelete) {
-            itemToDelete.remove(); // DOM 要素を削除
-          }
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "delete-style",
-                env: newItem.getAttribute("data-env"),
-              },
-            },
-            "*"
-          );
-        });
-
-  
     // フォントスタイル情報をそれぞれのドロップダウンから取得
     const japaneseFontFamily = document
       .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
@@ -3417,6 +3255,91 @@
     );
   });
   
+  function addEventListenersToStyleItem(newItem) {
+    // 新しいリストアイテムに関するイベントをここで追加しています
+    newItem.addEventListener("click", function (e) {
+      // クリックイベントのバブリングを止める
+      e.stopPropagation();
+
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+
+      // クリックされたアイテムにアクティブクラスを切り替え
+      newItem.classList.toggle("active");
+      selectedName = newItem.querySelector(
+        ".apply-style__item-title"
+      ).textContent; // スタイル名を取得
+      selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
+
+      // ボタンの状態を更新
+      updateButtonState();
+    });
+    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
+    const applyStyleEditButton = newItem.querySelector(
+      ".options-button.edit"
+    );
+    const applyStyleDeleteButton = newItem.querySelector(
+      ".options-button.delete"
+    );
+    applyStyleEditButton.addEventListener("click", function (e) {
+      // イベントのバブリングを阻止
+      e.stopPropagation();
+
+      removeAllActiveButtons();
+
+      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+      const buttonElement = e.target.closest(
+        ".options-button"
+      );
+
+      // data-env 属性を持つ最も近い親要素を取得
+      const parentItem = buttonElement.closest("[data-env]");
+      // 親要素から data-env 属性の値を取得
+      const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
+      // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
+      const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
+
+      applyStylesContainer.classList.add("hidden");
+      editStyleContainer.classList.remove("hidden");
+
+      toggleTabContentAndResize(2);
+
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "get-saved-style",
+            key: dataEnvValue,
+            styleName: styleTitle,
+          },
+        },
+        "*"
+      );
+
+      // 他のアクティブな項目を非アクティブにする
+      removeAllActiveItems();
+    });
+    applyStyleDeleteButton.addEventListener("click", function (e) {
+          e.stopPropagation(); // イベントバブリングを防ぐ
+          const envValue = newItem.getAttribute("data-env");
+          let itemToDelete = document.querySelector(
+            `.apply-style__item[data-env="${envValue}"]`
+          ); // DOM 要素を取得
+          if (itemToDelete) {
+            itemToDelete.remove(); // DOM 要素を削除
+          }
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: "delete-style",
+                env: newItem.getAttribute("data-env"),
+              },
+            },
+            "*"
+          );
+    });
+  }
+
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
     document
