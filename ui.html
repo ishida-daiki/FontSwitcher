@@ -425,6 +425,7 @@
     padding: 0 16px;
     line-height: 1.5;
     border-bottom: 1px var(--figma-color-border) solid;
+    overflow: hidden;
   }
   .center {
     text-align: center;
@@ -3156,6 +3157,12 @@
     // スタイル名のインプット要素から値を取得
     const styleNameInput = document.getElementById("styleNameInput");
     const styleName = styleNameInput.value.trim();
+    let fontFamilyJapanese = document.querySelector(
+      '[data-lang="Japanese"] .font-family .create-style__dropdown-label'
+    );
+    let fontFamilyEnglish = document.querySelector(
+      '[data-lang="English"] .font-family .create-style__dropdown-label'
+    );
     const timestamp = new Date().toISOString().replace(/[^\d]/g, "");
     // styleName が空でないことを確認します
     if (!styleName) {
@@ -3317,6 +3324,8 @@
       "*"
     );
     styleNameInput.value = "";
+    fontFamilyJapanese.textContent = "Noto Sans JP";
+    fontFamilyEnglish.textContent = "SF Pro";
     activateTab(tabs[0]); //インジケータはないので、なくてもよいが一応残している
     toggleTabContents(0);
     toggleTabContentAndResize(0);
