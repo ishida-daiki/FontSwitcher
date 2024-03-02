@@ -425,6 +425,7 @@
     padding: 0 16px;
     line-height: 1.5;
     border-bottom: 1px var(--figma-color-border) solid;
+    overflow: hidden;
   }
   .center {
     text-align: center;
@@ -700,6 +701,9 @@
     left: 8px;
     top: 4px;
     position: absolute;
+  }
+  .font-menu__icon.font-family {
+    top: 6px;
   }
 
   .font-menu__icon-img {
@@ -2384,6 +2388,7 @@
           let fontWeightLabel = content.querySelector(
             ".create-style__dropdown-toggle.font-weight .create-style__dropdown-label"
           );
+          let allFontFamilyItems = [];
   
           // 既存のリスト内容を一度クリアする
           scrollContainer.innerHTML = "";
@@ -2421,17 +2426,29 @@
               text.textContent = font.fontName.family;
               text.style.fontFamily = `"${font.fontName.family}"`;
               item.appendChild(text);
+
+              // チェックアイコンを追加
+              const checkIcon = createCheckIconFontFamily();
+              item.appendChild(checkIcon);
   
               // リストにメニュー項目を追加
               scrollContainer.appendChild(item);
+
+              // font-family メニュー配列に追加
+              allFontFamilyItems.push(item);
             }
           });
-  
+          
+
           dropDownToggle.addEventListener("click", () => {
             fontFamilyListContainer.classList.add("hidden");
             // ボタンに関連づけられたリストコンテナを取得する
             if (fontFamilyListContainer) {
               fontFamilyListContainer.classList.toggle("hidden"); // クリックごとにリストの表示・非表示を切り替える
+              const currentFontFamily = content.querySelector(
+                ".create-style__dropdown-toggle.font-family .create-style__dropdown-label"
+              ).textContent;
+              refreshCheckIcons(currentFontFamily, allFontFamilyItems);
               event.stopPropagation(); // ドキュメントレベルのイベントリスナーが反応しないようにする
             }
           });
@@ -2611,88 +2628,8 @@
         // apply-style__listの要素に新しいリストアイテムを追加
         applyStyleList.appendChild(newItem);
 
-        // 新しいリストアイテムに関するイベントをここで追加しています
-        newItem.addEventListener("click", function (e) {
-          // クリックイベントのバブリングを止める
-          e.stopPropagation();
-  
-          // 他のアイテムのアクティブ状態を解除
-          removeAllActiveItems();
-          removeAllActiveButtons();
-  
-          // クリックされたアイテムにアクティブクラスを切り替え
-          newItem.classList.toggle("active");
-          selectedName = newItem.querySelector(
-            ".apply-style__item-title"
-          ).textContent; // スタイル名を取得
-          selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-  
-          // ボタンの状態を更新
-          updateButtonState();
-        });
-        // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
-        const applyStyleEditButton = newItem.querySelector(
-          ".options-button.edit"
-        );
-        const applyStyleDeleteButton = newItem.querySelector(
-          ".options-button.delete"
-        );
-        applyStyleEditButton.addEventListener("click", function (e) {
-          // イベントのバブリングを阻止
-          e.stopPropagation();
-  
-          removeAllActiveButtons();
-  
-          // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(
-            ".options-button"
-          );
-  
-          // data-env 属性を持つ最も近い親要素を取得
-          const parentItem = buttonElement.closest("[data-env]");
-          // 親要素から data-env 属性の値を取得
-          const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
-          // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
-          const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
-
-          applyStylesContainer.classList.add("hidden");
-          editStyleContainer.classList.remove("hidden");
-
-          toggleTabContentAndResize(2);
-
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "get-saved-style",
-                key: dataEnvValue,
-                styleName: styleTitle,
-              },
-            },
-            "*"
-          );
-  
-          // 他のアクティブな項目を非アクティブにする
-          removeAllActiveItems();
-        });
-        applyStyleDeleteButton.addEventListener("click", function (e) {
-          e.stopPropagation(); // イベントバブリングを防ぐ
-          const envValue = newItem.getAttribute("data-env");
-          let itemToDelete = document.querySelector(
-            `.apply-style__item[data-env="${envValue}"]`
-          ); // DOM 要素を取得
-          if (itemToDelete) {
-            itemToDelete.remove(); // DOM 要素を削除
-          }
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: "delete-style",
-                env: newItem.getAttribute("data-env"),
-              },
-            },
-            "*"
-          );
-        });
+        // 新しいリストアイテムに編集・削除イベントリスナーを追加
+        addEventListenersToStyleItem(newItem)
 
         sampleStyleButton.addEventListener("click", function (e) {
           // イベントのバブリングを阻止
@@ -2958,6 +2895,27 @@
 
   let allFontWeightItems = [];
 
+  // font-familyのメニューで使用するアイコン設定
+  function createCheckIconFontFamily() {
+    const namespace = "http://www.w3.org/2000/svg"; // SVGの名前空間
+    const checkIcon = document.createElementNS(namespace, "svg");
+    checkIcon.setAttribute("class", "font-menu__icon font-family hidden");
+    checkIcon.setAttribute("viewBox", "0 0 16 16");
+    checkIcon.setAttribute("fill", "none");
+
+    const path = document.createElementNS(namespace, "path");
+    path.setAttribute("fill-rule", "evenodd");
+    path.setAttribute("clip-rule", "evenodd");
+    path.setAttribute(
+      "d",
+      "M13.2067 5.20718L7.70669 10.7072L6.99959 11.4143L6.29248 10.7072L3.29248 7.70718L4.70669 6.29297L6.99959 8.58586L11.7925 3.79297L13.2067 5.20718Z"
+    );
+    path.setAttribute("fill", "var(--figma-color-icon)");
+
+    checkIcon.appendChild(path);
+    return checkIcon;
+  }
+
   // フォントウェイトを表示する関数
   function makeFontWeightLists(
     fontFamilyName,
@@ -3099,7 +3057,7 @@
 
     // `selectedWeightLabel`に一致するアイテムを探し、そのチェックアイコンを表示
     allFontWeightItems.forEach((item) => {
-      const textElement = item.querySelector('.font-menu__text.font-weight');
+      const textElement = item.querySelector('.font-menu__text');
       if(textElement.textContent === selectedWeightLabel) {
         const iconToShow = item.querySelector('.font-menu__icon');
         iconToShow.classList.remove('hidden');
@@ -3119,6 +3077,12 @@
     // スタイル名のインプット要素から値を取得
     const styleNameInput = document.getElementById("styleNameInput");
     const styleName = styleNameInput.value.trim();
+    let fontFamilyJapanese = document.querySelector(
+      '[data-lang="Japanese"] .font-family .create-style__dropdown-label'
+    );
+    let fontFamilyEnglish = document.querySelector(
+      '[data-lang="English"] .font-family .create-style__dropdown-label'
+    );
     const timestamp = new Date().toISOString().replace(/[^\d]/g, "");
     // styleName が空でないことを確認します
     if (!styleName) {
@@ -3222,26 +3186,9 @@
     // apply-style__listの要素に新しいリストアイテムを追加
     applyStyleList.appendChild(newItem);
   
-    // 新しいリストアイテムに関するイベントをここで追加しています
-    newItem.addEventListener("click", function (e) {
-      // クリックイベントのバブリングを止める
-      e.stopPropagation();
-  
-      // 他のアイテムのアクティブ状態を解除
-      removeAllActiveItems();
-      removeAllActiveButtons();
-  
-      // クリックされたアイテムにアクティブクラスを切り替え
-      newItem.classList.toggle("active");
-      selectedName = newItem.querySelector(
-        ".apply-style__item-title"
-      ).textContent; // スタイル名を取得
-      selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
-  
-      // ボタンの状態を更新
-      updateButtonState();
-    });
-  
+    // 新しいリストアイテムに編集・削除イベントリスナーを追加
+    addEventListenersToStyleItem(newItem)
+
     // フォントスタイル情報をそれぞれのドロップダウンから取得
     const japaneseFontFamily = document
       .querySelector('[data-lang="Japanese"] [data-label-type="font-family"]')
@@ -3280,6 +3227,8 @@
       "*"
     );
     styleNameInput.value = "";
+    fontFamilyJapanese.textContent = "Noto Sans JP";
+    fontFamilyEnglish.textContent = "SF Pro";
     activateTab(tabs[0]); //インジケータはないので、なくてもよいが一応残している
     toggleTabContents(0);
     toggleTabContentAndResize(0);
@@ -3306,6 +3255,91 @@
     );
   });
   
+  function addEventListenersToStyleItem(newItem) {
+    // 新しいリストアイテムに関するイベントをここで追加しています
+    newItem.addEventListener("click", function (e) {
+      // クリックイベントのバブリングを止める
+      e.stopPropagation();
+
+      // 他のアイテムのアクティブ状態を解除
+      removeAllActiveItems();
+      removeAllActiveButtons();
+
+      // クリックされたアイテムにアクティブクラスを切り替え
+      newItem.classList.toggle("active");
+      selectedName = newItem.querySelector(
+        ".apply-style__item-title"
+      ).textContent; // スタイル名を取得
+      selectedEnv = newItem.getAttribute("data-env"); // 環境を取得
+
+      // ボタンの状態を更新
+      updateButtonState();
+    });
+    // 設定/編集ボタンに関するイベントリスナーをここで追加できます。
+    const applyStyleEditButton = newItem.querySelector(
+      ".options-button.edit"
+    );
+    const applyStyleDeleteButton = newItem.querySelector(
+      ".options-button.delete"
+    );
+    applyStyleEditButton.addEventListener("click", function (e) {
+      // イベントのバブリングを阻止
+      e.stopPropagation();
+
+      removeAllActiveButtons();
+
+      // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+      const buttonElement = e.target.closest(
+        ".options-button"
+      );
+
+      // data-env 属性を持つ最も近い親要素を取得
+      const parentItem = buttonElement.closest("[data-env]");
+      // 親要素から data-env 属性の値を取得
+      const dataEnvValue = parentItem ? parentItem.getAttribute('data-env') : null;
+      // apply-style__item-title クラスを持つ要素を親要素から検索し、そのテキスト内容を取得
+      const styleTitle = parentItem ? parentItem.querySelector('.apply-style__item-title').textContent : null;
+
+      applyStylesContainer.classList.add("hidden");
+      editStyleContainer.classList.remove("hidden");
+
+      toggleTabContentAndResize(2);
+
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "get-saved-style",
+            key: dataEnvValue,
+            styleName: styleTitle,
+          },
+        },
+        "*"
+      );
+
+      // 他のアクティブな項目を非アクティブにする
+      removeAllActiveItems();
+    });
+    applyStyleDeleteButton.addEventListener("click", function (e) {
+          e.stopPropagation(); // イベントバブリングを防ぐ
+          const envValue = newItem.getAttribute("data-env");
+          let itemToDelete = document.querySelector(
+            `.apply-style__item[data-env="${envValue}"]`
+          ); // DOM 要素を取得
+          if (itemToDelete) {
+            itemToDelete.remove(); // DOM 要素を削除
+          }
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: "delete-style",
+                env: newItem.getAttribute("data-env"),
+              },
+            },
+            "*"
+          );
+    });
+  }
+
   // すべてのボタンのアクティブ状態を解除する関数
   function removeAllActiveButtons() {
     document
