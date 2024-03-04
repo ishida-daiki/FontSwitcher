@@ -343,6 +343,10 @@
   .options-button.active .sample-style__options-svg {
     fill: var(--figma-color-icon-onbrand);
   }
+  .apply-style__list .apply-style__item:nth-child(n+6):last-child .options-button.edit:hover + .popup,
+  .apply-style__list .apply-style__item:nth-child(n+6):last-child .options-button.delete:hover + .popup {
+    display: none;
+  }
   /* ポップアップコンテナ (Element) */
   .popup {
     position: absolute;
