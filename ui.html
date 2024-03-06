@@ -445,7 +445,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--figma-color-bg-inverse);
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -462,7 +462,7 @@
     transform-origin: 50% 50%;
   }
   .progress-text {
-    color: var(--figma-color-text-oninverse);
+    color: #000;
   }
   .select-content {
     display: flex;
@@ -1305,6 +1305,8 @@
       
         <!-- ローディングインジケーター -->
         <div id="loadingIndicator" class="loading-indicator hidden">
+          <!-- Riveアニメーションの埋め込みコードを追加 -->
+          <iframe style="border: none" width="293" height="257" src="https://rive.app/s/B-nlkoQO4kWVnm1szGDuig/embed" allowfullscreen></iframe>
           <svg class="progress-ring" viewBox="0 0 240 240">
             <circle
               class="progress-ring__circle"
@@ -1316,8 +1318,6 @@
               cy="120"
             />
           </svg>
-          <!-- Riveアニメーションの埋め込みコードを追加 -->
-          <!-- <iframe style="border: none" width="240" height="240" src="https://rive.app/s/glK6npsX0UmOVp3TR09idQ/embed" allowfullscreen></iframe> -->
           <!-- ローディングテキストは必要に応じて表示 -->
           <span class="progress-text">Applying fonts...</span>
         </div>
@@ -1972,6 +1972,7 @@
   
 </body>
 
+<script src="https://unpkg.com/@rive-app/canvas@2.9.1"></script>
 <script>
   // 要素を取得します。
   const overlay = document.getElementById("overlay");

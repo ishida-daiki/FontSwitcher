@@ -12,5 +12,8 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.87.0",
     "typescript": "*"
+  },
+  "dependencies": {
+    "@rive-app/canvas": "^2.10.3"
   }
 }
