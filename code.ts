@@ -204,7 +204,7 @@ figma.ui.onmessage = async (msg) => {
     deleteDataFromClientStorage(msg.env);
   } else if (msg.type === "resize-ui") {
     figma.ui.resize(msg.width, msg.height);
-  } else if (msg.type === 'get-saved-style') {
+  } else if (msg.type === "get-saved-style") {
     // メッセージからスタイルのキーを取得
     const styleKey = msg.key;
     const savedStyle = await figma.clientStorage.getAsync(styleKey);
@@ -216,7 +216,7 @@ figma.ui.onmessage = async (msg) => {
 
     // UIに保存されたスタイルを送信
     figma.ui.postMessage({
-      type: 'set-saved-style',
+      type: "set-saved-style",
       styleKey,
       styleNames,
       englishFontWeight,
@@ -224,15 +224,19 @@ figma.ui.onmessage = async (msg) => {
       englishFontFamily,
       japaneseFontFamily,
     });
-  } else if (msg.type === 'update-style') {
+  } else if (msg.type === "update-style") {
     const { styleName, fontSettings, key } = msg;
-    
+
     // スタイル情報の全削除と新規追加を行う関数
-    const overwriteStyleForUser = async (styleName: string, fontSettings: any, key: string) => {
+    const overwriteStyleForUser = async (
+      styleName: string,
+      fontSettings: any,
+      key: string
+    ) => {
       // クライアントストレージに新しいスタイル情報を保存
-      await figma.clientStorage.setAsync(key, {[styleName]: fontSettings});
+      await figma.clientStorage.setAsync(key, { [styleName]: fontSettings });
     };
-    
+
     // スタイルを上書きして完了を待ちます
     await overwriteStyleForUser(styleName, fontSettings, key);
     // UIに直接新しいスタイルを送信

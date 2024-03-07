@@ -445,28 +445,34 @@
   /* ローディングインジケーターのスタイル */
   .loading-indicator {
     position: fixed;
+    gap: 48px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--figma-color-bg-inverse);
+    padding: 40px;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
-    opacity: 95%;
+    opacity: 100%;
   }
-  .progress-ring {
-    width: 240px;
-    height: 240px;
+  .progress-bar {
+    margin: 0 40px;
+    border-radius: 10px;
   }
-  .progress-ring__circle {
-    transition: stroke-dashoffset 0.35s;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
+  .progress-bar__rect {
+    fill: #e6e6e6; /* 背景バーの色 */
+    border-radius: 10px; /* 角丸 */
+  }
+  /* ローティングインジケーターが進捗に従って伸びる動きを実装します */
+  .progress-bar__indicator {
+    border-radius: 10px; /* 角丸 */
+    transition: width 0.35s; /* 進捗に応じてインジケーターが伸びる速度の調整 */
   }
   .progress-text {
-    color: var(--figma-color-text-oninverse);
+    color: #000;
   }
   .select-content {
     display: flex;
@@ -1309,19 +1315,23 @@
       
         <!-- ローディングインジケーター -->
         <div id="loadingIndicator" class="loading-indicator hidden">
-          <svg class="progress-ring" viewBox="0 0 240 240">
-            <circle
-              class="progress-ring__circle"
-              stroke="var(--figma-color-bg)"
-              stroke-width="10"
-              fill="transparent"
-              r="52"
-              cx="120"
-              cy="120"
-            />
-          </svg>
-          <!-- Riveアニメーションの埋め込みコードを追加 -->
-          <!-- <iframe style="border: none" width="240" height="240" src="https://rive.app/s/glK6npsX0UmOVp3TR09idQ/embed" allowfullscreen></iframe> -->
+          <div>
+            <!-- Riveアニメーションの埋め込みコードを追加 -->
+            <iframe style="border: none" width="293" height="257" src="https://rive.app/s/B-nlkoQO4kWVnm1szGDuig/embed" allowfullscreen></iframe>
+            <svg class="progress-bar" viewBox="0 0 240 6" width="240" height="6">
+              <rect
+                class="progress-bar__rect"
+                width="230" height="6"
+                fill="transparent"
+                stroke-width="10"
+              />
+              <rect
+                class="progress-bar__indicator"
+                width="0" height="6"
+                fill="var(--figma-color-bg)"
+              />
+            </svg>
+          </div>
           <!-- ローディングテキストは必要に応じて表示 -->
           <span class="progress-text">Applying fonts...</span>
         </div>
@@ -1976,6 +1986,7 @@
   
 </body>
 
+<script src="https://unpkg.com/@rive-app/canvas@2.9.1"></script>
 <script>
   // 要素を取得します。
   const overlay = document.getElementById("overlay");
@@ -2235,20 +2246,13 @@
     );
   }
   
-  // ローディング設定
-  const circumference = 2 * Math.PI * 52;
-  
-  // 最初に円をリングとして表示するために、
-  // stroke-dasharrayとstroke-dashoffsetを円周の長さにセットします
-  const circle = document.querySelector(".progress-ring__circle");
-  circle.style.strokeDasharray = `${circumference} ${circumference}`;
-  circle.style.strokeDashoffset = circumference;
-  
   function setProgress(percent) {
-    // パーセントに応じたオフセットを計算します
-    const offset = circumference - (percent / 100) * circumference;
-    // オフセットを設定することでリングを描画します
-    circle.style.strokeDashoffset = offset;
+    // パーセンテージに応じたバーの長さを計算します
+    const totalWidth = 230; // SVG内の全体の幅（stroke-widthを除く）
+    const width = (percent / 100) * totalWidth;
+    // インジケーターの幅を設定することでバーを描画します
+    const indicator = document.querySelector(".progress-bar__indicator");
+    indicator.setAttribute('width', width);
   }
   
   // メッセージがプラグインから送信されたときにイベントを発火させる

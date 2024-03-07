@@ -9,7 +9,9 @@
   "ui": "ui.html",
   "networkAccess": {
     "allowedDomains": [
-      "https://dmm-corp.com/"
+      "https://dmm-corp.com/",
+      "https://rive.app/",
+      "https://unpkg.com/@rive-app/"
     ]
   }
 }
