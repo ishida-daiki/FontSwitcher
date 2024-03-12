@@ -2960,10 +2960,6 @@
     }
   
     let defaultFontWeight;
-    // 'Regular' があるかどうか確認し、設定する
-    //const regularFontWeight = fontWeights.find(
-    //  (font) => font.fontName.style === "Regular"
-    //);
 
     // 'Auto' オプションを作成して追加
     const autoItem = document.createElement("div");
@@ -2992,6 +2988,78 @@
     divider.className = "font-menu__divider__item";
     dividerContainer.appendChild(divider);
     fontWeightListContainer.appendChild(dividerContainer);
+    
+    // フォントウェイトと数値のマッピング
+    const fontWeightOrder = {
+      compressedultralight: 1,
+      compressedthin: 2,
+      compressedlight: 3,
+      compressedregular: 4,
+      compressedmedium: 5,
+      compressedsemibold: 6,
+      compressedbold: 7,
+      compressedheavy: 8,
+      compressedblack: 9,
+      condensedultralight: 10,
+      condensedthin: 20,
+      condensedlight: 30,
+      condensedregular: 40,
+      condensedmedium: 50,
+      condensedsemibold: 60,
+      condensedbold: 70,
+      condensedheavy: 80,
+      condensedblack: 90,
+      extralight: 100,
+      ultralight: 100,
+      thin: 200,
+      light: 300,
+      demilight: 350,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
+      heavy: 860,
+      black: 900,
+      expandedultralight: 1000,
+      expandedthin: 2000,
+      expandedlight: 3000,
+      expandedregular: 4000,
+      expandedmedium: 5000,
+      expandedsemibold: 6000,
+      expandedbold: 7000,
+      expandedheavy: 8000,
+      expandedblack: 9000,
+      ultralightitalic: 10000,
+      thinitalic: 20000,
+      lightitalic: 30000,
+      regularitalic: 40000,
+      mediumitalic: 50000,
+      semibolditalic: 60000,
+      bolditalic: 70000,
+      heavyitalic: 80000,
+      blackitalic: 90000,
+      w0: 100,
+      w1: 200,
+      w2: 300,
+      w3: 400,
+      w4: 500,
+      w5: 600,
+      w6: 700,
+      w7: 800,
+      w8: 900,
+      w9: 1000,
+    };
+    fontWeights.sort((a, b) => {
+      // スペースを削除してフォント名から数値を取得
+      const styleA = a.fontName.style.replace(/\s+/g, '').toLowerCase();
+      const styleB = b.fontName.style.replace(/\s+/g, '').toLowerCase();
+      const weightA = fontWeightOrder[styleA] || 0;
+      const weightB = fontWeightOrder[styleB] || 0;
+      // 数値に基づいて並べ替え
+      return weightA - weightB;
+    });    
+
     fontWeights.forEach((font) => {
     // 新しいフォントウェイトのメニュー項目を作成
     const item = document.createElement("div");
