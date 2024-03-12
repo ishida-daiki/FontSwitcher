@@ -444,22 +444,22 @@ async function processTextNodes(
 
     let fontName: FontName;
 
-    // 日本語文字判定
+    // ラテン文字判定
     if (
-      /[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\uFF00-\uFFEF\u4E00-\u9FAF\u3400-\u4DBF]/.test(
+      /^[A-Za-z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]+$/.test(
         textSegment
       )
     ) {
       fontName = {
-        family: fontSettings.Japanese.fontFamily, // fontFamily から family に
-        style: fontSettings.Japanese.fontWeight, // fontWeight から style に
-      };
-    }
-    // 英数字（および記号）判定 - 日本語以外をデフォルトでここで処理する
-    else {
-      fontName = {
         family: fontSettings.English.fontFamily, // fontFamily から family に
         style: fontSettings.English.fontWeight, // fontWeight から style に
+      };
+    }
+    // ラテン文字以外をここで処理する
+    else {
+      fontName = {
+        family: fontSettings.Japanese.fontFamily, // fontFamily から family に
+        style: fontSettings.Japanese.fontWeight, // fontWeight から style に
       };
     }
 
