@@ -2290,6 +2290,12 @@
         // 進捗インジケータを更新する
         setProgress(progressPercent);
         break;
+      case "success-prosess":
+        alert('✨success✨');
+        break;
+      case "failed-prosess":
+        alert("😔failed\n\nAn error occurs when text styles within the same text are set to 'Mixed'.");
+        break;
       case "hide-loading":
         loadingIndicator.classList.add("hidden");
         break;
