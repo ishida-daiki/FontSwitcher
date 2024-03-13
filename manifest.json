@@ -7,9 +7,9 @@
   "enableProposedApi": false,
   "editorType": ["figma", "figjam"],
   "ui": "ui.html",
+  "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": [
-      "https://dmm-corp.com/",
       "https://rive.app/",
       "https://unpkg.com/@rive-app/"
     ]

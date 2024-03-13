@@ -176,9 +176,11 @@ figma.ui.onmessage = async (msg) => {
 
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
+      figma.ui.postMessage({ type: "success-prosess" });
     } catch (error) {
       // エラーをコンソールに出力
       console.error("Error processing text nodes:", error);
+      figma.ui.postMessage({ type: "failed-prosess" });
     } finally {
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
@@ -446,7 +448,7 @@ async function processTextNodes(
 
     // ラテン文字判定
     if (
-      /^[A-Za-z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]+$/.test(
+      /^[A-Za-z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ’]+$/.test(
         textSegment
       )
     ) {
