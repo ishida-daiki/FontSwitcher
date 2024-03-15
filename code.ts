@@ -148,7 +148,6 @@ figma.ui.onmessage = async (msg) => {
       const customFontsToLoadResults = await Promise.all(customFontsToLoad);
       // 結果の配列をフラット化して、FontName[]型となるようにします
       const allFontNamesToLoad: FontName[] = customFontsToLoadResults.flat();
-
       for (const font of allFontNamesToLoad) {
         // フォントのオブジェクトが正しくフォーマットされているか確認します
         if (font && font.family && font.style) {
@@ -164,7 +163,11 @@ figma.ui.onmessage = async (msg) => {
       }
 
       for (const textNode of textNodes) {
-        await processTextNodes(textNode, fontSettings);
+        let hasMissingFonts = false;
+        hasMissingFonts = await processTextNodes(textNode, fontSettings) as boolean;
+        if (hasMissingFonts) {
+          break; // フォントが不足している場合はループを抜ける
+        }
 
         // 処理されたノードの数をインクリメント
         processedNodes++;
@@ -172,15 +175,16 @@ figma.ui.onmessage = async (msg) => {
         // 進捗率を計算してUIに送信
         const progress = (processedNodes / totalNodes) * 100;
         figma.ui.postMessage({ type: "update-progress", progress: progress });
+        if (progress === 100) {
+          figma.ui.postMessage({ type: "success-prosess" });
+        }
       }
 
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
-      figma.ui.postMessage({ type: "success-prosess" });
     } catch (error) {
       // エラーをコンソールに出力
       console.error("Error processing text nodes:", error);
-      figma.ui.postMessage({ type: "failed-prosess" });
     } finally {
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
@@ -403,6 +407,13 @@ async function processTextNodes(
   textNode: TextNode,
   originalFontSettings: CustomFontSettings
 ) {
+  if (textNode.hasMissingFont) {
+    figma.ui.postMessage({ type: "missing-font", name: textNode.name });
+    return true; // hasMissingFontを示すためにtrueを返す
+  } else if(textNode.fontName === figma.mixed) {
+    figma.ui.postMessage({ type: "mix-font", name: textNode.name });
+    return true; // hasMissingFontを示すためにtrueを返す
+  }
   // 各テキストノードで独立した設定を使用するため、fontSettingsのコピーを作成
   const fontSettings = JSON.parse(JSON.stringify(originalFontSettings));
 
@@ -410,12 +421,8 @@ async function processTextNodes(
   const japaneseFontWeight = fontSettings.Japanese.fontWeight;
   const englishFontWeight = fontSettings.English.fontWeight;
   // テキストノードに既に設定されているフォントをロード
-  if (textNode.fontName !== figma.mixed) {
-    await figma.loadFontAsync(textNode.fontName as FontName);
-    defaultFontWeight = textNode.fontName.style;
-  } else {
-    console.log("fontName is mixed, cannot determine a single style.");
-  }
+  await figma.loadFontAsync(textNode.fontName as FontName);
+  defaultFontWeight = textNode.fontName.style;
 
   const characters = textNode.characters;
 

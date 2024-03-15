@@ -2341,8 +2341,11 @@
       case "success-prosess":
         alert('✨success✨');
         break;
-      case "failed-prosess":
-        alert("😔failed\n\nAn error occurs when text styles within the same text are set to 'Mixed'.");
+      case "mix-font":
+        alert(`😔 failed\n\nThe font for the ${message.name} is mixed.`);
+        break;
+      case "missing-font":
+        alert(`😔 failed\n\n${message.name} is missing fonts.`);
         break;
       case "hide-loading":
         loadingIndicator.classList.add("hidden");
