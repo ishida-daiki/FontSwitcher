@@ -2035,6 +2035,54 @@
 
   const scrollBar = applyStyleListContainer.querySelector(".scroll_container--scrollBar--YLWIi");
 
+  // sampleStyleButtonの処理追加
+  sampleStyleButton.addEventListener("click", function (e) {
+    console.log("ddd")
+    // イベントのバブリングを阻止
+    removeAllActiveButtons();
+    
+    // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
+    const buttonElement = e.target.closest(".options-button");
+    
+    // ボタンのアクティブ状態をトグルする
+    let isActive = buttonElement.classList.toggle("active");
+    if (isActive) {
+      e.stopPropagation();
+      sampleLaguageMenu.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+      document.body.classList.add("menu-open");
+    } else {
+      sampleLaguageMenu.classList.add("hidden");
+      overlay.classList.add("hidden");
+      document.body.classList.remove("menu-open");
+    }
+
+    // 他のアクティブな項目を非アクティブにする
+    removeAllActiveItems();
+  });
+  sampleStyleLaguages.forEach((item) => {
+    item.addEventListener("click", function (e) {
+      sampleLaguageMenu.classList.add("hidden");
+      overlay.classList.add("hidden");
+      document.body.classList.remove("menu-open");
+      let textStyle
+      
+      const menuItem = item.querySelector(".font-menu__text.sample");
+      if (menuItem.textContent === "Japanese") {
+        updateFontStyleAndIcon('Japanese');
+      } else if (menuItem.textContent === "English") {
+        updateFontStyleAndIcon('English');
+      }
+      const icon = item.querySelector(".font-menu__icon");
+      icon.classList.remove("hidden");
+    });
+  });
+  document.addEventListener("click", function (e) {
+    sampleLaguageMenu.classList.add("hidden");
+    overlay.classList.add("hidden");
+    document.body.classList.remove("menu-open");
+  });
+
   document.addEventListener("DOMContentLoaded", (event) => {
     updateFontStyleAndIcon('English');
     setupSliders();
@@ -2648,51 +2696,6 @@
         // 新しいリストアイテムに編集・削除イベントリスナーを追加
         addEventListenersToStyleItem(newItem)
 
-        sampleStyleButton.addEventListener("click", function (e) {
-          // イベントのバブリングを阻止
-          removeAllActiveButtons();
-          
-          // クリックされた要素がボタン自体ではなく子要素の場合、closestを使用してボタン要素を取得
-          const buttonElement = e.target.closest(".options-button");
-          
-          // ボタンのアクティブ状態をトグルする
-          let isActive = buttonElement.classList.toggle("active");
-          if (isActive) {
-            e.stopPropagation();
-            sampleLaguageMenu.classList.remove("hidden");
-            overlay.classList.remove("hidden");
-            document.body.classList.add("menu-open");
-          } else {
-            sampleLaguageMenu.classList.add("hidden");
-            overlay.classList.add("hidden");
-            document.body.classList.remove("menu-open");
-          }
-
-          // 他のアクティブな項目を非アクティブにする
-          removeAllActiveItems();
-        });
-        sampleStyleLaguages.forEach((item) => {
-          item.addEventListener("click", function (e) {
-            sampleLaguageMenu.classList.add("hidden");
-            overlay.classList.add("hidden");
-            document.body.classList.remove("menu-open");
-            let textStyle
-            
-            const menuItem = item.querySelector(".font-menu__text.sample");
-            if (menuItem.textContent === "Japanese") {
-              updateFontStyleAndIcon('Japanese');
-            } else if (menuItem.textContent === "English") {
-              updateFontStyleAndIcon('English');
-            }
-            const icon = item.querySelector(".font-menu__icon");
-            icon.classList.remove("hidden");
-          });
-        });
-        document.addEventListener("click", function (e) {
-          sampleLaguageMenu.classList.add("hidden");
-          overlay.classList.add("hidden");
-          document.body.classList.remove("menu-open");
-        });
         break;
       case "set-saved-style":
         // 設定されたスタイルを表示するためのコードをここに追加
