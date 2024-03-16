@@ -59,6 +59,9 @@ async function loadAllFontWeights(fontFamily: string) {
     .map((font) => font.fontName);
 }
 
+// フォントファミリーとフォントウェイトのマップを保持するオブジェクトを初期化
+let fontFamilyWeightsMap: { [key: string]: string[] } = {};
+
 figma.ui.onmessage = async (msg) => {
   // Applyボタンを押下したときに発生するイベント
   if (msg.type === "analyzeAndUpdateText") {
@@ -164,7 +167,10 @@ figma.ui.onmessage = async (msg) => {
 
       for (const textNode of textNodes) {
         let hasMissingFonts = false;
-        hasMissingFonts = await processTextNodes(textNode, fontSettings) as boolean;
+        hasMissingFonts = (await processTextNodes(
+          textNode,
+          fontSettings
+        )) as boolean;
         if (hasMissingFonts) {
           break; // フォントが不足している場合はループを抜ける
         }
@@ -194,6 +200,9 @@ figma.ui.onmessage = async (msg) => {
   else if (msg.type === "load-fonts-request") {
     const fonts = await figma.listAvailableFontsAsync();
     figma.ui.postMessage({ type: "load-fonts", fonts });
+
+    // 既存の fontFamilyWeightsMap の内容を更新
+    fontFamilyWeightsMap = initializeFontFamilyWeightMap(fonts);
   } else if (msg.type === "save-style") {
     const { styleName, fontSettings, key } = msg;
 
@@ -253,6 +262,23 @@ figma.ui.onmessage = async (msg) => {
     });
   }
 };
+
+// fontFamilyWeightsMap を初期化する関数を追加
+function initializeFontFamilyWeightMap(fonts: Font[]): { [key: string]: string[] } {
+  const map: { [key: string]: string[] } = {};
+  fonts.forEach((font) => {
+    const { family, style } = font.fontName;
+    if (!map[family]) {
+      map[family] = [];
+    }
+    map[family].push(style);
+  });
+  // 各ファミリーのウェイトをアルファベット順にソートする
+  for (const family in map) {
+    map[family].sort();
+  }
+  return map;
+}
 
 // 最上位の親を探す処理
 function findTopParent(node: SceneNode): SceneNode {
@@ -354,7 +380,7 @@ async function findClosestFontWeight(
 ): Promise<string> {
   const fonts = await figma.listAvailableFontsAsync();
   const familyFonts = fonts.filter((font) => font.fontName.family === family);
-  let closestWeight = "Regular"; // デフォルト値、見つからない場合に使う
+  let closestWeight = fontFamilyWeightsMap[family]?.[0] || "Regular"; // デフォルト値、見つからない場合に使う
   let exactMatchFound = false; // 完全一致したかどうかを追跡するためのフラグ
   let minimumDifference = Infinity; // 最小のウェイト差を保持する変数
 
@@ -410,7 +436,7 @@ async function processTextNodes(
   if (textNode.hasMissingFont) {
     figma.ui.postMessage({ type: "missing-font", name: textNode.name });
     return true; // hasMissingFontを示すためにtrueを返す
-  } else if(textNode.fontName === figma.mixed) {
+  } else if (textNode.fontName === figma.mixed) {
     figma.ui.postMessage({ type: "mix-font", name: textNode.name });
     return true; // hasMissingFontを示すためにtrueを返す
   }
