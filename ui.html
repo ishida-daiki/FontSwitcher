@@ -2347,6 +2347,9 @@
       case "missing-font":
         alert(`😔 failed\n\n${message.name} is missing fonts.`);
         break;
+      case "font-weight-adjusted":
+        alert(`No exact match was found, so the font weight for ${message.fontFamily} has been updated to an arbitrary value.`);
+        break;
       case "hide-loading":
         loadingIndicator.classList.add("hidden");
         break;
@@ -2418,7 +2421,6 @@
               if (sampleTextLang === targetLang) {
                 // sampleTextのフォントファミリーを更新
                 sampleText.style.fontFamily = mutation.target.textContent;
-                console.log('sampleTextのフォントファミリーを更新');
               }
             }
           }

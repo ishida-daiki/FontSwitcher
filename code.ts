@@ -59,6 +59,11 @@ async function loadAllFontWeights(fontFamily: string) {
     .map((font) => font.fontName);
 }
 
+// フォントファミリーとフォントウェイトのマップを保持するオブジェクトを初期化
+let fontFamilyWeightsMap: { [key: string]: string[] } = {};
+
+let adjustedFontWeights: { family: string; closestWeight: string }[] = [];
+
 figma.ui.onmessage = async (msg) => {
   // Applyボタンを押下したときに発生するイベント
   if (msg.type === "analyzeAndUpdateText") {
@@ -164,7 +169,10 @@ figma.ui.onmessage = async (msg) => {
 
       for (const textNode of textNodes) {
         let hasMissingFonts = false;
-        hasMissingFonts = await processTextNodes(textNode, fontSettings) as boolean;
+        hasMissingFonts = (await processTextNodes(
+          textNode,
+          fontSettings
+        )) as boolean;
         if (hasMissingFonts) {
           break; // フォントが不足している場合はループを抜ける
         }
@@ -179,7 +187,15 @@ figma.ui.onmessage = async (msg) => {
           figma.ui.postMessage({ type: "success-prosess" });
         }
       }
-
+      // 全てのテキストノードの処理が終わった後に実行する
+      if (adjustedFontWeights.length > 0) {
+        adjustedFontWeights.forEach((font) => {
+          // UIに一度だけ配列全体を送信する
+          figma.ui.postMessage({ type: "font-weight-adjusted", fontFamily: font.family, fontWeight: font.closestWeight });
+        });
+        // adjustedFontWeightsを空の配列にリセットする
+        adjustedFontWeights = [];
+      }
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
     } catch (error) {
@@ -194,6 +210,9 @@ figma.ui.onmessage = async (msg) => {
   else if (msg.type === "load-fonts-request") {
     const fonts = await figma.listAvailableFontsAsync();
     figma.ui.postMessage({ type: "load-fonts", fonts });
+
+    // 既存の fontFamilyWeightsMap の内容を更新
+    fontFamilyWeightsMap = initializeFontFamilyWeightMap(fonts);
   } else if (msg.type === "save-style") {
     const { styleName, fontSettings, key } = msg;
 
@@ -253,6 +272,23 @@ figma.ui.onmessage = async (msg) => {
     });
   }
 };
+
+// fontFamilyWeightsMap を初期化する関数を追加
+function initializeFontFamilyWeightMap(fonts: Font[]): { [key: string]: string[] } {
+  const map: { [key: string]: string[] } = {};
+  fonts.forEach((font) => {
+    const { family, style } = font.fontName;
+    if (!map[family]) {
+      map[family] = [];
+    }
+    map[family].push(style);
+  });
+  // 各ファミリーのウェイトをアルファベット順にソートする
+  for (const family in map) {
+    map[family].sort();
+  }
+  return map;
+}
 
 // 最上位の親を探す処理
 function findTopParent(node: SceneNode): SceneNode {
@@ -354,7 +390,7 @@ async function findClosestFontWeight(
 ): Promise<string> {
   const fonts = await figma.listAvailableFontsAsync();
   const familyFonts = fonts.filter((font) => font.fontName.family === family);
-  let closestWeight = "Regular"; // デフォルト値、見つからない場合に使う
+  let closestWeight = fontFamilyWeightsMap[family]?.[0] || "Regular"; // デフォルト値、見つからない場合に使う
   let exactMatchFound = false; // 完全一致したかどうかを追跡するためのフラグ
   let minimumDifference = Infinity; // 最小のウェイト差を保持する変数
 
@@ -391,15 +427,16 @@ async function findClosestFontWeight(
   }
 
   // ここで結果が確定
-  if (exactMatchFound) {
-    console.log("Exact match found, no need for further processing.");
-  } else {
-    console.log(
-      "No exact match found, closest weight selected:",
-      closestWeight
+  // findClosestFontWeight関数の一部を変更
+  if (!exactMatchFound) {
+    const isExistingCombination = adjustedFontWeights.some((item) => 
+      item.family === family && item.closestWeight === closestWeight
     );
+  
+    if (!isExistingCombination) {
+      adjustedFontWeights.push({ family: family, closestWeight: closestWeight });
+    }
   }
-
   return closestWeight;
 }
 // テキストノード処理ロジックを関数化
@@ -410,7 +447,7 @@ async function processTextNodes(
   if (textNode.hasMissingFont) {
     figma.ui.postMessage({ type: "missing-font", name: textNode.name });
     return true; // hasMissingFontを示すためにtrueを返す
-  } else if(textNode.fontName === figma.mixed) {
+  } else if (textNode.fontName === figma.mixed) {
     figma.ui.postMessage({ type: "mix-font", name: textNode.name });
     return true; // hasMissingFontを示すためにtrueを返す
   }

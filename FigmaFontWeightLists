@@ -1,0 +1,5330 @@
+// .Aqua Kana
+// : 
+// (2) ['Bold', 'Regular']
+// .Helvetica LT MM
+// : 
+// ['Regular']
+// .LastResort
+// : 
+// ['Regular']
+// .New York
+// : 
+// (28) ['Black', 'Black Italic', 'Bold', 'Bold G1', 'Bold G2', 'Bold G3', 'Bold G4', 'Bold Italic', 'Bold Italic G1', 'Bold Italic G2', 'Bold Italic G3', 'Bold Italic G4', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular G1', 'Regular G2', 'Regular G3', 'Regular G4', 'Regular Italic', 'Regular Italic G1', 'Regular Italic G2', 'Regular Italic G3', 'Regular Italic G4', 'Semibold', 'Semibold Italic']
+// .SF Arabic
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Arabic Rounded
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Armenian
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Armenian Rounded
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Camera
+// : 
+// (8) ['Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Compact
+// : 
+// (82) ['Black', 'Black Italic', 'Bold', 'Bold G1', 'Bold G2', 'Bold G3', 'Bold G4', 'Bold Italic', 'Bold Italic G1', 'Bold Italic G2', 'Bold Italic G3', 'Bold Italic G4', 'Heavy', 'Heavy G1', 'Heavy G2', 'Heavy G3', 'Heavy G4', 'Heavy Italic', 'Heavy Italic G1', 'Heavy Italic G2', 'Heavy Italic G3', 'Heavy Italic G4', 'Light', 'Light G1', 'Light G2', 'Light G3', 'Light G4', 'Light Italic', 'Light Italic G1', 'Light Italic G2', 'Light Italic G3', 'Light Italic G4', 'Medium', 'Medium G1', 'Medium G2', 'Medium G3', 'Medium G4', 'Medium Italic', 'Medium Italic G1', 'Medium Italic G2', 'Medium Italic G3', 'Medium Italic G4', 'Regular', 'Regular G1', 'Regular G2', 'Regular G3', 'Regular G4', 'Regular Italic', 'Regular Italic G1', 'Regular Italic G2', 'Regular Italic G3', 'Regular Italic G4', 'Semibold', 'Semibold G1', 'Semibold G2', 'Semibold G3', 'Semibold G4', 'Semibold Italic', 'Semibold Italic G1', 'Semibold Italic G2', 'Semibold Italic G3', 'Semibold Italic G4', 'Thin', 'Thin G1', 'Thin G2', 'Thin G3', 'Thin G4', 'Thin Italic', 'Thin Italic G1', 'Thin Italic G2', 'Thin Italic G3', 'Thin Italic G4', 'Ultralight', 'Ultralight G1', 'Ultralight G2', 'Ultralight G3', 'Ultralight G4', 'Ultralight Italic', 'Ultralight Italic G1', 'Ultralight Italic G2', 'Ultralight Italic G3', 'Ultralight Italic G4']
+// .SF Compact Rounded
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Georgian
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Georgian Rounded
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Hebrew
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF Hebrew Rounded
+// : 
+// (9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+// .SF NS Mono
+// : 
+// (12) ['Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+// .SF NS Rounded
+// : 
+// (46) ['Black', 'Bold', 'Bold G1', 'Bold G2', 'Bold G3', 'Bold G4', 'Heavy', 'Heavy G1', 'Heavy G2', 'Heavy G3', 'Heavy G4', 'Light', 'Light G1', 'Light G2', 'Light G3', 'Light G4', 'Medium', 'Medium G1', 'Medium G2', 'Medium G3', 'Medium G4', 'Regular', 'Regular G1', 'Regular G2', 'Regular G3', 'Regular G4', 'Semibold', 'Semibold G1', 'Semibold G2', 'Semibold G3', 'Semibold G4', 'Thin', 'Thin G1', 'Thin G2', 'Thin G3', 'Thin G4', 'Ultralight', 'UltralightG1', 'UltralightG2', 'UltralightG3', 'UltralightG4', 'Ultrathin', 'Ultrathin G1', 'Ultrathin G2', 'Ultrathin G3', 'Ultrathin G4']
+// .SF Soft Numeric
+// : 
+// (369) ['Black', 'Bold', 'Bold G1', 'Bold G2', 'Bold G3', 'Bold G4', 'Compressed Black', 'Compressed Bold', 'Compressed Bold G1', 'Compressed Bold G2', 'Compressed Bold G3', 'Compressed Bold G4', 'Compressed Heavy', 'Compressed Heavy G1', 'Compressed Heavy G2', 'Compressed Heavy G3', 'Compressed Heavy G4', 'Compressed Light', 'Compressed Light G1', 'Compressed Light G2', 'Compressed Light G3', 'Compressed Light G4', 'Compressed Medium', 'Compressed Medium G1', 'Compressed Medium G2', 'Compressed Medium G3', 'Compressed Medium G4', 'Compressed Regular', 'Compressed Regular G1', 'Compressed Regular G2', 'Compressed Regular G3', 'Compressed Regular G4', 'Compressed Semibold', 'Compressed Semibold G1', 'Compressed Semibold G2', 'Compressed Semibold G3', 'Compressed Semibold G4', 'Compressed Thin', 'Compressed Thin G1', 'Compressed Thin G2', 'Compressed Thin G3', 'Compressed Thin G4', 'Compressed Ultralight', 'Compressed Ultralight G1', 'Compressed Ultralight G2', 'Compressed Ultralight G3', 'Compressed Ultralight G4', 'Condensed Black', 'Condensed Bold', 'Condensed Bold G1', 'Condensed Bold G2', 'Condensed Bold G3', 'Condensed Bold G4', 'Condensed Heavy', 'Condensed Heavy G1', 'Condensed Heavy G2', 'Condensed Heavy G3', 'Condensed Heavy G4', 'Condensed Light', 'Condensed Light G1', 'Condensed Light G2', 'Condensed Light G3', 'Condensed Light G4', 'Condensed Medium', 'Condensed Medium G1', 'Condensed Medium G2', 'Condensed Medium G3', 'Condensed Medium G4', 'Condensed Regular', 'Condensed Regular G1', 'Condensed Regular G2', 'Condensed Regular G3', 'Condensed Regular G4', 'Condensed Semibold', 'Condensed Semibold G1', 'Condensed Semibold G2', 'Condensed Semibold G3', 'Condensed Semibold G4', 'Condensed Thin', 'Condensed Thin G1', 'Condensed Thin G2', 'Condensed Thin G3', 'Condensed Thin G4', 'Condensed Ultralight', 'Condensed Ultralight G1', 'Condensed Ultralight G2', 'Condensed Ultralight G3', 'Condensed Ultralight G4', 'Expanded Black', 'Expanded Bold', 'Expanded Bold G1', 'Expanded Bold G2', 'Expanded Bold G3', 'Expanded Bold G4', 'Expanded Heavy', 'Expanded Heavy G1', 'Expanded Heavy G2', 'Expanded Heavy G3', 'Expanded Heavy G4', 'Expanded Light', …]
+// .ThonburiUI
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// .ThonburiUIWatch
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// .Times LT MM
+// : 
+// ['Regular']
+// ?????
+// : 
+// ['??']
+
+
+// ABeeZee
+// : 
+// (2) ['Italic', 'Regular']
+// Abel
+// : 
+// ['Regular']
+// Abhaya Libre
+// : 
+// (2) ['Bold', 'Regular']
+// Abhaya Libre ExtraBold
+// : 
+// ['Regular']
+// Abhaya Libre Medium
+// : 
+// ['Regular']
+// Abhaya Libre SemiBold
+// : 
+// ['Regular']
+// Abril Fatface
+// : 
+// ['Regular']
+// Abyssinica SIL
+// : 
+// ['Regular']
+// Academy Engraved LET
+// : 
+// ['Plain']
+// Aclonica
+// : 
+// ['Regular']
+// Acme
+// : 
+// ['Regular']
+// Actor
+// : 
+// ['Regular']
+// Adamina
+// : 
+// ['Regular']
+// Adobe Blank
+// : 
+// ['Regular']
+// Advent Pro
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Aguafina Script
+// : 
+// ['Regular']
+// Akaya Kanadaka
+// : 
+// ['Regular']
+// Akaya Telivigala
+// : 
+// ['Regular']
+// Akronim
+// : 
+// ['Regular']
+// Aksara Bali Galang
+// : 
+// ['Regular']
+// Akshar
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Al Bayan
+// : 
+// (2) ['Bold', 'Plain']
+// Al Nile
+// : 
+// (2) ['Bold', 'Regular']
+// Al Tarikh
+// : 
+// ['Regular']
+// Aladin
+// : 
+// ['Regular']
+// Alata
+// : 
+// ['Regular']
+// Alatsi
+// : 
+// ['Regular']
+// Aldrich
+// : 
+// ['Regular']
+// Alef
+// : 
+// (2) ['Bold', 'Regular']
+// Alegreya
+// : 
+// (10) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+// Alegreya SC
+// : 
+// (10) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+// Alegreya Sans
+// : 
+// (14) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic']
+// Alegreya Sans SC
+// : 
+// (14) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic']
+// Aleo
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Alex Brush
+// : 
+// ['Regular']
+// Alfa Slab One
+// : 
+// ['Regular']
+// Alice
+// : 
+// ['Regular']
+// Alike
+// : 
+// ['Regular']
+// Alike Angular
+// : 
+// ['Regular']
+// Allan
+// : 
+// (2) ['Bold', 'Regular']
+// Allerta
+// : 
+// ['Regular']
+// Allerta Stencil
+// : 
+// ['Regular']
+// Allison
+// : 
+// ['Regular']
+// Allura
+// : 
+// ['Regular']
+// Almarai
+// : 
+// (4) ['Bold', 'ExtraBold', 'Light', 'Regular']
+// Almendra
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Almendra Display
+// : 
+// ['Regular']
+// Almendra SC
+// : 
+// ['Regular']
+// Alumni Sans
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Alumni Sans Collegiate One
+// : 
+// ['Regular']
+// Alumni Sans Inline One
+// : 
+// (2) ['Italic', 'Regular']
+// Amarante
+// : 
+// ['Regular']
+// Amaranth
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Amatic SC
+// : 
+// (2) ['Bold', 'Regular']
+// Amatica SC
+// : 
+// (2) ['Bold', 'Regular']
+// American Typewriter
+// : 
+// (7) ['Bold', 'Condensed', 'Condensed Bold', 'Condensed Light', 'Light', 'Regular', 'Semibold']
+// Amethysta
+// : 
+// ['Regular']
+// Amiko
+// : 
+// (3) ['Bold', 'Regular', 'SemiBold']
+// Amiri
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Amiri Quran Colored
+// : 
+// ['Regular']
+// Amita
+// : 
+// (2) ['Bold', 'Regular']
+// AmstelvarAlpha
+// : 
+// ['Default']
+// Anaheim
+// : 
+// ['Regular']
+// Andada Pro
+// : 
+// (10) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Andale Mono
+// : 
+// ['Regular']
+// Andika
+// : 
+// ['Regular']
+// Andika New Basic
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Anek Bangla
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Devanagari
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Gujarati
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Gurmukhi
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Kannada
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Latin
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Malayalam
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Odia
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Tamil
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Anek Telugu
+// : 
+// (8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Angkor
+// : 
+// ['Regular']
+// Annie Use Your Telescope
+// : 
+// ['Regular']
+// Anonymous Pro
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Antic
+// : 
+// ['Regular']
+// Antic Didone
+// : 
+// ['Regular']
+// Antic Slab
+// : 
+// ['Regular']
+// Anton
+// : 
+// ['Regular']
+// Antonio
+// : 
+// (5) ['Bold', 'Light', 'Regular', 'SemiBold', 'Thin']
+
+
+// Anybody
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Regular', 'SemiBold', 'Thin', 'Thin Italic', 'UltraCondensed Thin', 'UltraCondensed Thin Italic']
+// Aoboshi One
+// : 
+// ['Regular']
+// Apple Braille
+// : 
+// (5) ['Outline 6 Dot', 'Outline 8 Dot', 'Pinpoint 6 Dot', 'Pinpoint 8 Dot', 'Regular']
+// Apple Chancery
+// : 
+// ['Chancery']
+// Apple SD Gothic Neo
+// : 
+// (9) ['Bold', 'ExtraBold', 'Heavy', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin', 'UltraLight']
+// Apple Symbols
+// : 
+// ['Regular']
+// AppleGothic
+// : 
+// ['Regular']
+// AppleMyungjo
+// : 
+// ['Regular']
+// Arapey
+// : 
+// (2) ['Italic', 'Regular']
+// Arbutus
+// : 
+// ['Regular']
+// Arbutus Slab
+// : 
+// ['Regular']
+// Architects Daughter
+// : 
+// ['Regular']
+// Archivo
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Archivo Black
+// : 
+// ['Regular']
+// Archivo Narrow
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Are You Serious
+// : 
+// ['Regular']
+// Aref Ruqaa
+// : 
+// (2) ['Bold', 'Regular']
+// Aref Ruqaa Ink
+// : 
+// (2) ['Bold', 'Regular']
+// Arial
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Arial Black
+// : 
+// ['Regular']
+// Arial Hebrew
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Arial Hebrew Scholar
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Arial Narrow
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Arial Rounded MT Bold
+// : 
+// ['Regular']
+// Arial Unicode MS
+// : 
+// ['Regular']
+// Arima Madurai
+// : 
+// (8) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'Thin']
+// Arimo
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Arimo Hebrew Subset
+// : 
+// (2) ['Bold', 'Regular']
+// Arimo Hebrew Subset Italic
+// : 
+// (2) ['Bold Italic', 'Italic']
+// Arizonia
+// : 
+// ['Regular']
+// Armata
+// : 
+// ['Regular']
+// Arsenal
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Artifika
+// : 
+// ['Regular']
+// Arvo
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Arya
+// : 
+// (2) ['Bold', 'Regular']
+// Asap
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Asap Condensed
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Asar
+// : 
+// ['Regular']
+// Asset
+// : 
+// ['Regular']
+// Assistant
+// : 
+// (6) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular', 'SemiBold']
+// Astloch
+// : 
+// (2) ['Bold', 'Regular']
+// Asul
+// : 
+// (2) ['Bold', 'Regular']
+// Athelas
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Athiti
+// : 
+// (6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Atkinson Hyperlegible
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Atma
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Atomic Age
+// : 
+// ['Regular']
+// Aubrey
+// : 
+// ['Regular']
+// Audiowide
+// : 
+// ['Regular']
+// Autour One
+// : 
+// ['Regular']
+// Avenir
+// : 
+// (12) ['Black', 'Black Oblique', 'Book', 'Book Oblique', 'Heavy', 'Heavy Oblique', 'Light', 'Light Oblique', 'Medium', 'Medium Oblique', 'Oblique', 'Roman']
+// Avenir Next
+// : 
+// (12) ['Bold', 'Bold Italic', 'Demi Bold', 'Demi Bold Italic', 'Heavy', 'Heavy Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'Ultra Light', 'Ultra Light Italic']
+// Avenir Next Condensed
+// : 
+// (12) ['Bold', 'Bold Italic', 'Demi Bold', 'Demi Bold Italic', 'Heavy', 'Heavy Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'Ultra Light', 'Ultra Light Italic']
+// Average
+// : 
+// ['Regular']
+// Average Sans
+// : 
+// ['Regular']
+// Averia Gruesa Libre
+// : 
+// ['Regular']
+// Averia Libre
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Averia Sans Libre
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Averia Serif Libre
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Ayuthaya
+// : 
+// ['Regular']
+// Azeret Mono
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// B612
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// B612 Mono
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// BIZ UDGothic
+// : 
+// (2) ['Bold', 'Regular']
+// BIZ UDMincho
+// : 
+// ['Regular']
+// BIZ UDPGothic
+// : 
+// (2) ['Bold', 'Regular']
+// BIZ UDPMincho
+// : 
+// ['Regular']
+// BM HANNA_TTF
+// : 
+// ['Regular']
+// Babylonica
+// : 
+// ['Regular']
+// Bad Script
+// : 
+// ['Regular']
+// Baghdad
+// : 
+// ['Regular']
+// Bahiana
+// : 
+// ['Regular']
+// Bahianita
+// : 
+// ['Regular']
+// Bai Jamjuree
+// : 
+// (12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Bakbak One
+// : 
+// ['Regular']
+// Ballet
+// : 
+// ['Regular']
+// Baloo
+// : 
+// ['Regular']
+// Baloo 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Bhai
+// : 
+// ['Regular']
+// Baloo Bhai 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Bhaijaan
+// : 
+// ['Regular']
+// Baloo Bhaijaan 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Bhaina
+// : 
+// ['Regular']
+// Baloo Bhaina 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Chettan
+// : 
+// ['Regular']
+// Baloo Chettan 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Da
+// : 
+// ['Regular']
+// Baloo Da 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Paaji
+// : 
+// ['Regular']
+// Baloo Paaji 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Tamma
+// : 
+// ['Regular']
+// Baloo Tamma 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Tammudu
+// : 
+// ['Regular']
+// Baloo Tammudu 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Baloo Thambi
+// : 
+// ['Regular']
+// Baloo Thambi 2
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Balsamiq Sans
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Balthazar
+// : 
+// ['Regular']
+// Bangers
+// : 
+// ['Regular']
+// Bangla MN
+// : 
+// (2) ['Bold', 'Regular']
+// Bangla Sangam MN
+// : 
+// (2) ['Bold', 'Regular']
+// Barlow
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Barlow Condensed
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Barlow Semi Condensed
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Barriecito
+// : 
+// ['Regular']
+// Barrio
+// : 
+// ['Regular']
+// Basic
+// : 
+// ['Regular']
+// Baskerville
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Baskervville
+// : 
+// (2) ['Italic', 'Regular']
+// Battambang
+// : 
+// (5) ['Black', 'Bold', 'Light', 'Regular', 'Thin']
+// Baumans
+// : 
+// ['Regular']
+// Bayon
+// : 
+// ['Regular']
+// Be Vietnam
+// : 
+// (14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Be Vietnam Pro
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Beau Rivage
+// : 
+// ['Regular']
+// Bebas Neue
+// : 
+// ['Regular']
+// Beirut
+// : 
+// ['Regular']
+// Belgrano
+// : 
+// ['Regular']
+// Bellefair
+// : 
+// ['Regular']
+// Belleza
+// : 
+// ['Regular']
+// Bellota
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Bellota Text
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// BenchNine
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Benne
+// : 
+// ['Regular']
+// Bentham
+// : 
+// ['Regular']
+// Berkshire Swash
+// : 
+// ['Regular']
+// Besley
+// : 
+// (12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Beth Ellen
+// : 
+// ['Regular']
+// Bevan
+// : 
+// (2) ['Italic', 'Regular']
+// Bhavuka
+// : 
+// ['Regular']
+// BhuTuka Expanded One
+// : 
+// ['Regular']
+// Big Caslon
+// : 
+// ['Medium']
+// Big Shoulders Display
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Big Shoulders Inline Display
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Big Shoulders Inline Text
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Big Shoulders Stencil Display
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Big Shoulders Stencil Text
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Big Shoulders Text
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Bigelow Rules
+// : 
+// ['Regular']
+// Bigshot One
+// : 
+// ['Regular']
+// Bilbo
+// : 
+// ['Regular']
+// Bilbo Swash Caps
+// : 
+// ['Regular']
+// BioRhyme
+// : 
+// (5) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular']
+// BioRhyme Expanded
+// : 
+// (5) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular']
+// Birthstone
+// : 
+// ['Regular']
+// Birthstone Bounce
+// : 
+// (2) ['Medium', 'Regular']
+// Biryani
+// : 
+// (7) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular', 'SemiBold']
+// Bitter
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Black And White Picture
+// : 
+// ['Regular']
+// Black Han Sans
+// : 
+// ['Regular']
+// Black Ops One
+// : 
+// ['Regular']
+// Blaka Ink
+// : 
+// ['Regular']
+// Blinker
+// : 
+// (8) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular', 'SemiBold', 'Thin']
+// Bodoni 72
+// : 
+// (3) ['Bold', 'Book', 'Book Italic']
+// Bodoni 72 Oldstyle
+// : 
+// (3) ['Bold', 'Book', 'Book Italic']
+// Bodoni 72 Smallcaps
+// : 
+// ['Book']
+// Bodoni Moda
+// : 
+// (12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Bodoni Ornaments
+// : 
+// ['Regular']
+// Bokor
+// : 
+// ['Regular']
+// Bona Nova
+// : 
+// (3) ['Bold', 'Italic', 'Regular']
+// Bonbon
+// : 
+// ['Regular']
+// Bonheur Royale
+// : 
+// ['Regular']
+// Boogaloo
+// : 
+// ['Regular']
+// Bowlby One
+// : 
+// ['Regular']
+// Bowlby One SC
+// : 
+// ['Regular']
+// Bradley Hand
+// : 
+// ['Bold']
+// Brawler
+// : 
+// (2) ['Bold', 'Regular']
+// Bree Serif
+// : 
+// ['Regular']
+// Bruno Ace
+// : 
+// ['Regular']
+// Bruno Ace SC
+// : 
+// ['Regular']
+// Brush Script MT
+// : 
+// ['Italic']
+// Brygada 1918
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Bubblegum Sans
+// : 
+// ['Regular']
+// Bubbler One
+// : 
+// ['Regular']
+// Buda
+// : 
+// ['Light']
+// Buenard
+// : 
+// (2) ['Bold', 'Regular']
+// Bungee
+// : 
+// ['Regular']
+// Bungee Color
+// : 
+// ['Regular']
+// Bungee Hairline
+// : 
+// ['Regular']
+// Bungee Inline
+// : 
+// ['Regular']
+// Bungee Outline
+// : 
+// ['Regular']
+// Bungee Shade
+// : 
+// ['Regular']
+// Bungee Spice
+// : 
+// ['Regular']
+// Butcherman
+// : 
+// ['Regular']
+// Butcherman Caps
+// : 
+// ['Regular']
+// Butterfly Kids
+// : 
+// ['Regular']
+// Cabin
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Cabin Condensed
+// : 
+// (4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+// Cabin Sketch
+// : 
+// (2) ['Bold', 'Regular']
+// Caesar Dressing
+// : 
+// ['Regular']
+// Cagliostro
+// : 
+// ['Regular']
+// Cairo
+// : 
+// (9) ['Black', 'Bold', 'ExtraBlack', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Caladea
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Calistoga
+// : 
+// ['Regular']
+// Calligraffitti
+// : 
+// ['Regular']
+// Cambay
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Cambo
+// : 
+// ['Regular']
+// Candal
+// : 
+// ['Regular']
+// Cantarell
+// : 
+// (4) ['Bold', 'BoldOblique', 'Oblique', 'Regular']
+// Cantata One
+// : 
+// ['Regular']
+// CantoraOne
+// : 
+// ['Regular']
+// Capriola
+// : 
+// ['Regular']
+// Caramel
+// : 
+// ['Regular']
+// Carattere
+// : 
+// ['Regular']
+// Cardo
+// : 
+// (3) ['Bold', 'Italic', 'Regular']
+// Carme
+// : 
+// ['Regular']
+// Carrois Gothic
+// : 
+// ['Regular']
+// Carrois Gothic SC
+// : 
+// ['Regular']
+// Carter One
+// : 
+// ['Regular']
+// Castoro
+// : 
+// (2) ['Italic', 'Regular']
+// Catamaran
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Caudex
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Caveat
+// : 
+// (2) ['Bold', 'Regular']
+// Caveat Brush
+// : 
+// ['Regular']
+// Cedarville Cursive
+// : 
+// ['Regular']
+// Ceviche One
+// : 
+// ['Regular']
+// Chakra Petch
+// : 
+// (12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Chalkboard
+// : 
+// (2) ['Bold', 'Regular']
+// Chalkboard SE
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Chalkduster
+// : 
+// ['Regular']
+// Changa
+// : 
+// (7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Changa One
+// : 
+// (2) ['Italic', 'Regular']
+// Chango
+// : 
+// ['Regular']
+// Charm
+// : 
+// (2) ['Bold', 'Regular']
+// Charmonman
+// : 
+// (2) ['Bold', 'Regular']
+// Charter
+// : 
+// (6) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Roman']
+// Chathura
+// : 
+// (5) ['Bold', 'ExtraBold', 'Light', 'Regular', 'Thin']
+// Chau Philomene One
+// : 
+// (2) ['Italic', 'Regular']
+// Chela One
+// : 
+// ['Regular']
+// Chelsea Market
+// : 
+// ['Regular']
+// Chenla
+// : 
+// ['Regular']
+// Cherish
+// : 
+// ['Regular']
+// Cherry Bomb
+// : 
+// ['Regular']
+// Cherry Bomb One
+// : 
+// ['Regular']
+// Cherry Cream Soda
+// : 
+// ['Regular']
+// Cherry Swash
+// : 
+// (2) ['Bold', 'Regular']
+
+
+// Chewy
+// : 
+// ['Regular']
+// Chicle
+// : 
+// ['Regular']
+// Chilanka
+// : 
+// ['Regular']
+// Chivo
+// : 
+// (8) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Chokokutai
+// : 
+// ['Regular']
+// Chonburi
+// : 
+// ['Regular']
+// Cinzel
+// : 
+// (3) ['Black', 'Bold', 'Regular']
+// Cinzel Decorative
+// : 
+// (3) ['Black', 'Bold', 'Regular']
+// Clicker Script
+// : 
+// ['Regular']
+// Cochin
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Coda
+// : 
+// (2) ['ExtraBold', 'Regular']
+// Coda Caption
+// : 
+// ['ExtraBold']
+// Codystar
+// : 
+// (2) ['Light', 'Regular']
+// Coiny
+// : 
+// ['Regular']
+// Combo
+// : 
+// ['Regular']
+// Comfortaa
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Comforter
+// : 
+// ['Regular']
+// Comforter Brush
+// : 
+// ['Regular']
+// Comic Neue
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Comic Sans MS
+// : 
+// (2) ['Bold', 'Regular']
+// Coming Soon
+// : 
+// ['Regular']
+// Commissioner
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Concert One
+// : 
+// ['Regular']
+// Condiment
+// : 
+// ['Regular']
+// Content
+// : 
+// (2) ['Bold', 'Regular']
+// Contrail One
+// : 
+// ['Regular']
+// Convergence
+// : 
+// ['Regular']
+// Cookie
+// : 
+// ['Regular']
+// Copperplate
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Copse
+// : 
+// ['Regular']
+// Corben
+// : 
+// (2) ['Bold', 'Regular']
+// Corinthia
+// : 
+// (2) ['Bold', 'Regular']
+// Cormorant
+// : 
+// (10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Cormorant Garamond
+// : 
+// (10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Cormorant Infant
+// : 
+// (10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Cormorant SC
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Cormorant Unicase
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Cormorant Upright
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Corsiva Hebrew
+// : 
+// (2) ['Bold', 'Regular']
+// Courgette
+// : 
+// ['Regular']
+// Courier
+// : 
+// (4) ['Bold', 'Bold Oblique', 'Oblique', 'Regular']
+// Courier New
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Courier Prime
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Cousine
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Coustard
+// : 
+// (2) ['Black', 'Regular']
+// Covered By Your Grace
+// : 
+// ['Regular']
+// Crafty Girls
+// : 
+// ['Regular']
+// Creepster
+// : 
+// ['Regular']
+// Creepster Caps
+// : 
+// ['Regular']
+// Crete Round
+// : 
+// (2) ['Italic', 'Regular']
+// Crimson Pro
+// : 
+// (16) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Crimson Text
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Croissant One
+// : 
+// ['Regular']
+// Crushed
+// : 
+// ['Regular']
+// Cuprum
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Cute Font
+// : 
+// ['Regular']
+// Cutive
+// : 
+// ['Regular']
+// Cutive Mono
+// : 
+// ['Regular']
+// DIN Alternate
+// : 
+// ['Bold']
+// DIN Condensed
+// : 
+// ['Bold']
+// DM Mono
+// : 
+// (6) ['Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular']
+// DM Sans
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+// DM Serif Display
+// : 
+// (2) ['Italic', 'Regular']
+// DM Serif Text
+// : 
+// (2) ['Italic', 'Regular']
+// Damascus
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'Semi Bold']
+// Damion
+// : 
+// ['Regular']
+// Dancing Script
+// : 
+// (4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+// Dangrek
+// : 
+// ['Regular']
+// Darker Grotesque
+// : 
+// (7) ['Black', 'Bold', 'ExtraBold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Darumadrop One
+// : 
+// ['Regular']
+// David Libre
+// : 
+// (3) ['Bold', 'Medium', 'Regular']
+// Dawning of a New Day
+// : 
+// ['Regular']
+// Days One
+// : 
+// ['Regular']
+// DecoType Naskh
+// : 
+// ['Regular']
+// Decovar Alpha
+// : 
+// ['Regular24']
+// Dekko
+// : 
+// ['Regular']
+// Dela Gothic One
+// : 
+// ['Regular']
+// Delius
+// : 
+// ['Regular']
+// Delius Swash Caps
+// : 
+// ['Regular']
+// Delius Unicase
+// : 
+// (2) ['Bold', 'Regular']
+// Della Respira
+// : 
+// ['Regular']
+// Denk One
+// : 
+// ['Regular']
+// Devanagari MT
+// : 
+// (2) ['Bold', 'Regular']
+// Devanagari Sangam MN
+// : 
+// (2) ['Bold', 'Regular']
+// Devonshire
+// : 
+// ['Regular']
+// Dhurjati
+// : 
+// ['Regular']
+// Dhyana
+// : 
+// (2) ['Bold', 'Regular']
+// Didact Gothic
+// : 
+// ['Regular']
+// Didot
+// : 
+// (3) ['Bold', 'Italic', 'Regular']
+// Digital Numbers
+// : 
+// ['Regular']
+// Diplomata
+// : 
+// ['Regular']
+// Diplomata SC
+// : 
+// ['Regular']
+// Diwan Kufi
+// : 
+// ['Regular']
+// Diwan Thuluth
+// : 
+// ['Regular']
+// Do Hyeon
+// : 
+// ['Regular']
+// Dokdo
+// : 
+// ['Regular']
+// Domine
+// : 
+// (2) ['Bold', 'Regular']
+// Donegal One
+// : 
+// ['Regular']
+// Dongle
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Doppio One
+// : 
+// ['Regular']
+// Dorsa
+// : 
+// ['Regular']
+// Dosis
+// : 
+// (7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// DotGothic16
+// : 
+// ['Regular']
+// Dr Sugiyama
+// : 
+// ['Regular']
+// Droid Sans
+// : 
+// (2) ['Bold', 'Regular']
+// Duru Sans
+// : 
+// ['Regular']
+// Dynalight
+// : 
+// ['Regular']
+// EB Garamond
+// : 
+// (10) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Eagle Lake
+// : 
+// ['Regular']
+// East Sea Dokdo
+// : 
+// ['Regular']
+// Eater
+// : 
+// ['Regular']
+// Economica
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Eczar
+// : 
+// (5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+// Ek Mukta
+// : 
+// (7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// El Messiri
+// : 
+// (4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+// Electrolize
+// : 
+// ['Regular']
+// Elsie
+// : 
+// (2) ['Black', 'Regular']
+// Elsie Swash Caps
+// : 
+// (2) ['Black', 'Regular']
+// Emblema One
+// : 
+// ['Regular']
+// Emilys Candy
+// : 
+// ['Regular']
+// Encode Sans
+// : 
+// (45) ['Black', 'Bold', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed Regular', 'Condensed SemiBold', 'Condensed Thin', 'Expanded Black', 'Expanded Bold', 'Expanded ExtraBold', 'Expanded ExtraLight', 'Expanded Light', 'Expanded Medium', 'Expanded Regular', 'Expanded SemiBold', 'Expanded Thin', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed Regular', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'SemiExpanded Black', 'SemiExpanded Bold', 'SemiExpanded ExtraBold', 'SemiExpanded ExtraLight', 'SemiExpanded Light', 'SemiExpanded Medium', 'SemiExpanded Regular', 'SemiExpanded SemiBold', 'SemiExpanded Thin', 'Thin']
+// Encode Sans Condensed
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Encode Sans Expanded
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Encode Sans SC
+// : 
+// (45) ['Black', 'Bold', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed Regular', 'Condensed SemiBold', 'Condensed Thin', 'Expanded Black', 'Expanded Bold', 'Expanded ExtraBold', 'Expanded ExtraLight', 'Expanded Light', 'Expanded Medium', 'Expanded Regular', 'Expanded SemiBold', 'Expanded Thin', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed Regular', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'SemiExpanded Black', 'SemiExpanded Bold', 'SemiExpanded ExtraBold', 'SemiExpanded ExtraLight', 'SemiExpanded Light', 'SemiExpanded Medium', 'SemiExpanded Regular', 'SemiExpanded SemiBold', 'SemiExpanded Thin', 'Thin']
+// Encode Sans Semi Condensed
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Encode Sans Semi Expanded
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Engagement
+// : 
+// ['Regular']
+// Englebert
+// : 
+// ['Regular']
+// Enriqueta
+// : 
+// (4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+// Ephesis
+// : 
+// ['Regular']
+// Epilogue
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Erica One
+// : 
+// ['Regular']
+// Esteban
+// : 
+// ['Regular']
+// Estedad-VF
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Estonia
+// : 
+// ['Regular']
+// Euphemia UCAS
+// : 
+// (3) ['Bold', 'Italic', 'Regular']
+// Euphoria Script
+// : 
+// ['Regular']
+// Ewert
+// : 
+// ['Regular']
+// Exo
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Exo 2
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Expletus Sans
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Explora
+// : 
+// ['Regular']
+// Fahkwang
+// : 
+// (12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Familjen Grotesk
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Fanwood Text
+// : 
+// (2) ['Italic', 'Regular']
+// Farah
+// : 
+// ['Regular']
+// Farisi
+// : 
+// ['Regular']
+// Farro
+// : 
+// (4) ['Bold', 'Light', 'Medium', 'Regular']
+// Farsan
+// : 
+// ['Regular']
+// Fascinate
+// : 
+// ['Regular']
+// Fascinate Inline
+// : 
+// ['Regular']
+// Faster One
+// : 
+// ['Regular']
+// Fasthand
+// : 
+// ['Regular']
+// Fauna One
+// : 
+// ['Regular']
+// Faustina
+// : 
+// (12) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Federant
+// : 
+// ['Regular']
+// Federo
+// : 
+// ['Regular']
+// Felipa
+// : 
+// ['Regular']
+// Fenix
+// : 
+// ['Regular']
+// Festive
+// : 
+// ['Regular']
+// Figma Hand
+// : 
+// (2) ['Bold', 'Regular']
+// Finger Paint
+// : 
+// ['Regular']
+// Fira Code
+// : 
+// (6) ['Bold', 'Light', 'Medium', 'Regular', 'Retina', 'SemiBold']
+// Fira Mono
+// : 
+// (3) ['Bold', 'Medium', 'Regular']
+// Fira Sans
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Fira Sans Condensed
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Fira Sans Extra Condensed
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Fjalla One
+// : 
+// ['Regular']
+// Fjord
+// : 
+// ['One']
+// Flamenco
+// : 
+// (2) ['Light', 'Regular']
+// Flavors
+// : 
+// ['Regular']
+// Fleur De Leah
+// : 
+// ['Regular']
+// Flow Block
+// : 
+// ['Regular']
+// Flow Circular
+// : 
+// ['Regular']
+// Flow Rounded
+// : 
+// ['Regular']
+// Fondamento
+// : 
+// (2) ['Italic', 'Regular']
+// Font Awesome 5 Brands
+// : 
+// ['Regular']
+// Font Awesome 5 Free
+// : 
+// (2) ['Regular', 'Solid']
+// Font Awesome 6 Brands
+// : 
+// ['Regular']
+// Font Awesome 6 Free
+// : 
+// (2) ['Regular', 'Solid']
+// Fontdiner Swanky
+// : 
+// ['Regular']
+// Forum
+// : 
+// ['Regular']
+// Francois One
+// : 
+// ['Regular']
+// Frank Ruhl Libre
+// : 
+// (5) ['Black', 'Bold', 'Light', 'Medium', 'Regular']
+// Fraunces
+// : 
+// (12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Freckle Face
+// : 
+// ['Regular']
+// Fredericka the Great
+// : 
+// ['Regular']
+// Fredoka
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Fredoka One
+// : 
+// ['Regular']
+// Freehand
+// : 
+// ['Regular']
+// Fresca
+// : 
+// ['Regular']
+// Frijole
+// : 
+// ['Regular']
+// Fruktur
+// : 
+// ['Regular']
+// Fugaz One
+// : 
+// ['Regular']
+// Fuggles
+// : 
+// ['Regular']
+// Futura
+// : 
+// (5) ['Bold', 'Condensed ExtraBold', 'Condensed Medium', 'Medium', 'Medium Italic']
+// Fuzzy Bubbles
+// : 
+// (2) ['Bold', 'Regular']
+// GFS Didot
+// : 
+// ['Regular']
+// GFS Neohellenic
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Gabriela
+// : 
+// ['Regular']
+// Gaegu
+// : 
+// (3) ['Bold', 'Light', 'Regular']
+// Gafata
+// : 
+// ['Regular']
+// Galada
+// : 
+// ['Regular']
+// Galdeano
+// : 
+// ['Regular']
+// Galindo
+// : 
+// ['Regular']
+// Galvji
+// : 
+// (4) ['Bold', 'Bold Oblique', 'Italic', 'Regular']
+// Gamja Flower
+// : 
+// ['Regular']
+// Gayathri
+// : 
+// (3) ['Bold', 'Regular', 'Thin']
+// Geeza Pro
+// : 
+// (2) ['Bold', 'Regular']
+// Gelasio
+// : 
+// (8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Gemunu Libre
+// : 
+// (7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Geneva
+// : 
+// ['Regular']
+// Genos
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Gentium Basic
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Gentium Book Basic
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Geo
+// : 
+// (2) ['Oblique', 'Regular']
+// Georama
+// : 
+// (20) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraCondensed Thin', 'ExtraCondensed Thin Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Georgia
+// : 
+// (4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+// Geostar
+// : 
+// ['Regular']
+// Geostar Fill
+// : 
+// ['Regular']
+// Germania One
+// : 
+// ['Regular']
+// Gideon Roman
+// : 
+// ['Regular']
+// Gidugu
+// : 
+// ['Regular']
+// Gilda Display
+// : 
+// ['Regular']
+// Gill Sans
+// : 
+// (9) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'UltraBold']
+// Girassol
+// : 
+// ['Regular']
+// Give You Glory
+// : 
+// ['Regular']
+// Glass Antiqua
+// : 
+// ['Regular']
+// Glegoo
+// : 
+// (2) ['Bold', 'Regular']
+// Gloria Hallelujah
+// : 
+// ['Regular']
+// Glory
+// : 
+// (16) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Gluten
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Goblin One
+// : 
+// ['Regular']
+// Gochi Hand
+// : 
+// ['Regular']
+// Goldman
+// : 
+// (2) ['Bold', 'Regular']
+// Gorditas
+// : 
+// (2) ['Bold', 'Regular']
+// Gothic A1
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Gotu
+// : 
+// ['Regular']
+// Goudy Bookletter 1911
+// : 
+// ['Regular']
+// Gowun Batang
+// : 
+// (2) ['Bold', 'Regular']
+// Gowun Dodum
+// : 
+// ['Regular']
+// Graduate
+// : 
+// ['Regular']
+// Grand Hotel
+// : 
+// ['Regular']
+// Grandstander
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Grantha Sangam MN
+// : 
+// (2) ['Bold', 'Regular']
+// Grape Nuts
+// : 
+// ['Regular']
+// Gravitas One
+// : 
+// ['Regular']
+// Great Vibes
+// : 
+// ['Regular']
+// Grechen Fuemen
+// : 
+// ['Regular']
+// Grenze
+// : 
+// (18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// Grenze Gotisch
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Grey Qo
+// : 
+// ['Regular']
+// Griffy
+// : 
+// ['Regular']
+// Gruppo
+// : 
+// ['Regular']
+// Gudea
+// : 
+// (3) ['Bold', 'Italic', 'Regular']
+// Gugi
+// : 
+// ['Regular']
+// Gujarati MT
+// : 
+// (2) ['Bold', 'Regular']
+// Gujarati Sangam MN
+// : 
+// (2) ['Bold', 'Regular']
+// Gupter
+// : 
+// (3) ['Bold', 'Medium', 'Regular']
+// Gurajada
+// : 
+// ['Regular']
+// Gurmukhi MN
+// : 
+// (2) ['Bold', 'Regular']
+// Gurmukhi MT
+// : 
+// ['Regular']
+// Gurmukhi Sangam MN
+// : 
+// (2) ['Bold', 'Regular']
+// Gwendolyn
+// : 
+// (2) ['Bold', 'Regular']
+// Habibi
+// : 
+// ['Regular']
+// Hachi Maru Pop
+// : 
+// ['Regular']
+// Hahmlet
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Halant
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hammersmith One
+// : 
+// ['Regular']
+// Hanalei
+// : 
+// ['Regular']
+// Hanalei Fill
+// : 
+// ['Regular']
+// Handjet
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Handlee
+// : 
+// ['Regular']
+// Hannari
+// : 
+// ['Regular']
+// Hanuman
+// : 
+// (5) ['Black', 'Bold', 'Light', 'Regular', 'Thin']
+// Happy Monkey
+// : 
+// ['Regular']
+// Harmattan
+// : 
+// (2) ['Bold', 'Regular']
+// HeadlandOne
+// : 
+// ['Regular']
+// Heebo
+// : 
+// (7) ['Black', 'Bold', 'ExtraBold', 'Light', 'Medium', 'Regular', 'Thin']
+// Heiti SC
+// : 
+// (2) ['Light', 'Medium']
+// Heiti TC
+// : 
+// (2) ['Light', 'Medium']
+// Helvetica
+// : 
+// (6) ['Bold', 'Bold Oblique', 'Light', 'Light Oblique', 'Oblique', 'Regular']
+// Helvetica Neue
+// : 
+// (14) ['Bold', 'Bold Italic', 'Condensed Black', 'Condensed Bold', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic', 'UltraLight', 'UltraLight Italic']
+// Henny Penny
+// : 
+// ['Regular']
+// Hepta Slab
+// : 
+// (10) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Hairline', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Herculanum
+// : 
+// ['Regular']
+// Hermeneus One
+// : 
+// ['Regular']
+// Herr Von Muellerhoff
+// : 
+// ['Regular']
+// Hi Melody
+// : 
+// ['Regular']
+// Hina Mincho
+// : 
+// ['Regular']
+// Hind
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Colombo
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Guntur
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Jalandhar
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Kochi
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Madurai
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Mysuru
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Siliguri
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hind Vadodara
+// : 
+// (5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Hiragino Kaku Gothic Pro
+// : 
+// (2) ['W3', 'W6']
+// Hiragino Kaku Gothic ProN
+// : 
+// (2) ['W3', 'W6']
+// Hiragino Kaku Gothic Std
+// : 
+// ['W8']
+// Hiragino Kaku Gothic StdN
+// : 
+// ['W8']
+// Hiragino Maru Gothic Pro
+// : 
+// ['W4']
+// Hiragino Maru Gothic ProN
+// : 
+// ['W4']
+// Hiragino Mincho Pro
+// : 
+// (2) ['W3', 'W6']
+// Hiragino Mincho ProN
+// : 
+// (2) ['W3', 'W6']
+// Hiragino Sans
+// : 
+// (10) ['W0', 'W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9']
+// Hiragino Sans GB
+// : 
+// (2) ['W3', 'W6']
+// Hoefler Text
+// : 
+// (5) ['Black', 'Black Italic', 'Italic', 'Ornaments', 'Regular']
+// Holtwood One SC
+// : 
+// ['Regular']
+// Homemade Apple
+// : 
+// ['Regular']
+// Homenaje
+// : 
+// ['Regular']
+// Hubballi
+// : 
+// ['Regular']
+// Hurricane
+// : 
+// ['Regular']
+// IBM Plex Mono
+// : 
+// (14) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// IBM Plex Sans
+// : 
+// (14) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// IBM Plex Sans Condensed
+// : 
+// (14) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// IBM Plex Sans Devanagari
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// IBM Plex Sans Hebrew
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// IBM Plex Sans KR
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// IBM Plex Sans Thai
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// IBM Plex Sans Thai Looped
+// : 
+// (7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// IBM Plex Serif
+// : 
+// (14) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+// IM FELL DW Pica
+// : 
+// (2) ['Italic', 'Regular']
+// IM FELL DW Pica SC
+// : 
+// ['Regular']
+// IM FELL Double Pica
+// : 
+// (2) ['Italic', 'Regular']
+// IM FELL Double Pica SC
+// : 
+// ['Regular']
+// IM FELL English
+// : 
+// (2) ['Italic', 'Regular']
+// IM FELL English SC
+// : 
+// ['Regular']
+// IM FELL French Canon
+// : 
+// (2) ['Italic', 'Regular']
+// IM FELL French Canon SC
+// : 
+// ['Regular']
+// IM FELL Great Primer
+// : 
+// (2) ['Italic', 'Regular']
+// IM FELL Great Primer SC
+// : 
+// ['Regular']
+// ITF Devanagari
+// : 
+// (5) ['Bold', 'Book', 'Demi', 'Light', 'Medium']
+// ITF Devanagari Marathi
+// : 
+// (5) ['Bold', 'Book', 'Demi', 'Light', 'Medium']
+// Ibarra Real Nova
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+// Iceberg
+// : 
+// ['Regular']
+// Iceland
+// : 
+// ['Regular']
+// Imbue
+// : 
+// (9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+// Impact
+// : 
+// ['Regular']
+// Imperial Script
+// : 
+// ['Regular']
+// Imprima
+// : 
+// ['Regular']
+// InaiMathi
+// : 
+// (2) ['Bold', 'Regular']
+// Inconsolata
+// : 
+// (80) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed Regular', 'Condensed SemiBold', 'Expanded', 'Expanded Black', 'Expanded Bold', 'Expanded ExtraBold', 'Expanded ExtraLight', 'Expanded Light', 'Expanded Medium', 'Expanded Regular', 'Expanded SemiBold', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed Regular', 'ExtraCondensed SemiBold', 'ExtraExpanded', 'ExtraExpanded Black', 'ExtraExpanded Bold', 'ExtraExpanded ExtraBold', 'ExtraExpanded ExtraLight', 'ExtraExpanded Light', 'ExtraExpanded Medium', 'ExtraExpanded Regular', 'ExtraExpanded SemiBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed Regular', 'SemiCondensed SemiBold', 'SemiExpanded', 'SemiExpanded Black', 'SemiExpanded Bold', 'SemiExpanded ExtraBold', 'SemiExpanded ExtraLight', 'SemiExpanded Light', 'SemiExpanded Medium', 'SemiExpanded Regular', 'SemiExpanded SemiBold', 'UltraCondensed', 'UltraCondensed Black', 'UltraCondensed Bold', 'UltraCondensed ExtraBold', 'UltraCondensed ExtraLight', 'UltraCondensed Light', 'UltraCondensed Medium', 'UltraCondensed Regular', 'UltraCondensed SemiBold', 'UltraExpanded', 'UltraExpanded Black', 'UltraExpanded Bold', 'UltraExpanded ExtraBold', 'UltraExpanded ExtraLight', 'UltraExpanded Light', 'UltraExpanded Medium', 'UltraExpanded Regular', 'UltraExpanded SemiBold']
+// Inder
+// : 
+// ['Regular']
+// Indie Flower
+// : 
+// ['Regular']
+// Ingrid Darling
+// : 
+// ['Regular']
+// Inika
+// : 
+// (2) ['Bold', 'Regular']
+// Inknut Antiqua
+// : 
+// (7) ['Black', 'Bold', 'ExtraBold', 'Light', 'Medium', 'Regular', 'SemiBold']
+// Inria Sans
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Inria Serif
+// : 
+// (6) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+// Inspiration
+// : 
+// ['Regular']
+
+
+Inter
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Extra Bold', 'Extra Bold Italic', 'Extra Light', 'Extra Light Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Semi Bold', 'Semi Bold Italic', 'Thin', 'Thin Italic']
+Iowan Old Style
+: 
+(7) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Roman', 'Titling']
+Irish Grover
+: 
+['Regular']
+Island Moments
+: 
+['Regular']
+Istok Web
+: 
+(4) ['Bold', 'BoldItalic', 'Italic', 'Regular']
+Italiana
+: 
+['Regular']
+Italianno
+: 
+['Regular']
+Itim
+: 
+['Regular']
+Jacques Francois
+: 
+['Regular']
+Jacques Francois Shadow
+: 
+['Regular']
+Jaldi
+: 
+(2) ['Bold', 'Regular']
+JejuGothic
+: 
+['Regular']
+JejuHallasan
+: 
+['Regular']
+JejuMyeongjo
+: 
+['Regular']
+JetBrains Mono
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic']
+Jim Nightshade
+: 
+['Regular']
+Jockey One
+: 
+['Regular']
+Jolly Lodger
+: 
+['Regular']
+Jomhuria
+: 
+['Regular']
+Jomolhari
+: 
+['Regular']
+Josefin Sans
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Josefin Slab
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Jost
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Joti One
+: 
+['Regular']
+Jua
+: 
+['Regular']
+Judson
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Julee
+: 
+['Regular']
+Julius Sans One
+: 
+['Regular']
+Junge
+: 
+['Regular']
+Jura
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Just Another Hand
+: 
+['Regular']
+Just Me Again Down Here
+: 
+['Regular']
+K2D
+: 
+(16) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Kadwa
+: 
+(2) ['Bold', 'Regular']
+Kailasa
+: 
+(2) ['Bold', 'Regular']
+Kaisei Decol
+: 
+(3) ['Bold', 'Medium', 'Regular']
+Kaisei HarunoUmi
+: 
+(3) ['Bold', 'Medium', 'Regular']
+Kaisei Opti
+: 
+(3) ['Bold', 'Medium', 'Regular']
+Kaisei Tokumin
+: 
+(4) ['Bold', 'ExtraBold', 'Medium', 'Regular']
+Kalam
+: 
+(3) ['Bold', 'Light', 'Regular']
+Kameron
+: 
+(2) ['Bold', 'Regular']
+Kanit
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Kannada MN
+: 
+(2) ['Bold', 'Regular']
+Kannada Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Kantumruy
+: 
+(3) ['Bold', 'Light', 'Regular']
+Kapakana
+: 
+(2) ['Light', 'Regular']
+Karantina
+: 
+(3) ['Bold', 'Light', 'Regular']
+Karla
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular']
+Karma
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Katibeh
+: 
+['Regular']
+Kaushan Script
+: 
+['Regular']
+Kavivanar
+: 
+['Regular']
+Kavoon
+: 
+['Regular']
+Kdam Thmor
+: 
+['Regular']
+Keania One
+: 
+['Regular']
+Kefa
+: 
+(2) ['Bold', 'Regular']
+Kelly Slab
+: 
+['Regular']
+Kenia
+: 
+['Regular']
+Khand
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Khmer
+: 
+['Regular']
+Khmer MN
+: 
+(2) ['Bold', 'Regular']
+Khmer Sangam MN
+: 
+['Regular']
+Khula
+: 
+(5) ['Bold', 'ExtraBold', 'Light', 'Regular', 'SemiBold']
+Kings
+: 
+['Regular']
+Kirang Haerang
+: 
+['Regular']
+Kite One
+: 
+['Regular']
+Kiwi Maru
+: 
+(3) ['Light', 'Medium', 'Regular']
+Klee One
+: 
+(2) ['Regular', 'SemiBold']
+Knewave
+: 
+['Regular']
+KoHo
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+KoPub Batang
+: 
+(3) ['Bold', 'Light', 'Regular']
+Kodchasan
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Koh Santepheap
+: 
+(5) ['Black', 'Bold', 'Light', 'Regular', 'Thin']
+Kohinoor Bangla
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'Semibold']
+Kohinoor Devanagari
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'Semibold']
+Kohinoor Gujarati
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'Semibold']
+Kohinoor Telugu
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'Semibold']
+Kokonor
+: 
+['Regular']
+Kokoro
+: 
+['Regular']
+Kolker Brush
+: 
+['Regular']
+Kosugi
+: 
+['Regular']
+Kosugi Maru
+: 
+['Regular']
+Kotta One
+: 
+['Regular']
+Koulen
+: 
+['Regular']
+Kranky
+: 
+['Regular']
+Kreon
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Kristi
+: 
+['Regular']
+Krona One
+: 
+['Regular']
+Krub
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Krungthep
+: 
+['Regular']
+Kufam
+: 
+(10) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+KufiStandardGK
+: 
+['Regular']
+Kulim Park
+: 
+(10) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Kumar One
+: 
+['Regular']
+Kumbh Sans
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Kurale
+: 
+['Regular']
+Kyiv*Type Serif
+: 
+(19) ['Black', 'Black2', 'Black3', 'Bold', 'Bold2', 'Bold3', 'Heavy', 'Heavy2', 'Heavy3', 'Light', 'Light2', 'Light3', 'Medium', 'Medium2', 'Medium3', 'Regular', 'Regular2', 'Regular3', 'Thin']
+Kyiv*Type Titling
+: 
+(19) ['Black', 'Black2', 'Black3', 'Bold', 'Bold2', 'Bold3', 'Heavy', 'Heavy2', 'Heavy3', 'Light', 'Light2', 'Light3', 'Medium', 'Medium2', 'Medium3', 'Regular', 'Regular2', 'Regular3', 'Thin']
+KyivType Sans
+: 
+(7) ['Black-', 'Bold-', 'Heavy-', 'Light-', 'Medium-', 'Regular', 'Regular-']
+La Belle Aurore
+: 
+['Regular']
+Lacquer
+: 
+['Regular']
+Laila
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Lakki Reddy
+: 
+['Regular']
+Lalezar
+: 
+['Regular']
+Lancelot
+: 
+['Regular']
+Langar
+: 
+['Regular']
+Lao MN
+: 
+(2) ['Bold', 'Regular']
+Lao Muang Don
+: 
+['Regular']
+Lao Muang Khong
+: 
+['Regular']
+Lao Sangam MN
+: 
+['Regular']
+Lao Sans Pro
+: 
+['Regular']
+Lateef
+: 
+['Regular']
+Lato
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Lavishly Yours
+: 
+['Regular']
+League Gothic
+: 
+['Regular']
+League Script
+: 
+['League Script']
+League Spartan
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Leckerli One
+: 
+['Regular']
+Ledger
+: 
+['Regular']
+Lekton
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Lemon
+: 
+['Regular']
+Lemonada
+: 
+(4) ['Bold', 'Light', 'Regular', 'SemiBold']
+Lexend
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Deca
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Exa
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Giga
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Mega
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Peta
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Tera
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Lexend Zetta
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Libre Barcode 39
+: 
+['Regular']
+Libre Barcode 39 Extended
+: 
+['Regular']
+Libre Barcode 39 Extended Text
+: 
+['Regular']
+Libre Barcode 39 Text
+: 
+['Regular']
+Libre Barcode 128
+: 
+['Regular']
+Libre Barcode 128 Text
+: 
+['Regular']
+Libre Barcode EAN13 Text
+: 
+['Regular']
+Libre Baskerville
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Libre Bodoni
+: 
+(6) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+Libre Caslon Display
+: 
+['Regular']
+Libre Caslon Text
+: 
+(8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Libre Franklin
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Licorice
+: 
+['Regular']
+Life Savers
+: 
+(3) ['Bold', 'ExtraBold', 'Regular']
+Ligconsolata
+: 
+(2) ['Bold', 'Regular']
+Lilita One
+: 
+['Regular']
+Lily Script One
+: 
+['Regular']
+Limelight
+: 
+['Regular']
+Linden Hill
+: 
+(2) ['Italic', 'Regular']
+Literata
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Liu Jian Mao Cao
+: 
+['Regular']
+Livvic
+: 
+(16) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Lobster
+: 
+['Regular']
+Lobster Two
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Lohit Bengali
+: 
+['Regular']
+Lohit Devanagari
+: 
+['Regular']
+Lohit Tamil
+: 
+['Regular']
+Londrina Outline
+: 
+['Regular']
+Londrina Shadow
+: 
+['Regular']
+Londrina Sketch
+: 
+['Regular']
+Londrina Solid
+: 
+(4) ['Black', 'Light', 'Regular', 'Thin']
+Long Cang
+: 
+['Regular']
+Lora
+: 
+(8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Love Light
+: 
+['Regular']
+Love Ya Like A Sister
+: 
+['Regular']
+Loved by the King
+: 
+['Regular']
+Lovers Quarrel
+: 
+['Regular']
+Lucida Grande
+: 
+(2) ['Bold', 'Regular']
+Luckiest Guy
+: 
+['Regular']
+Luminari
+: 
+['Regular']
+Lusitana
+: 
+(2) ['Bold', 'Regular']
+Lustria
+: 
+['Regular']
+Luxurious Roman
+: 
+['Regular']
+Luxurious Script
+: 
+['Regular']
+M PLUS 1
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+M PLUS 1 Code
+: 
+(7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+M PLUS 2
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+M PLUS Code Latin
+: 
+(7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Ma Shan Zheng
+: 
+['Regular']
+Macondo
+: 
+['Regular']
+Macondo Swash Caps
+: 
+['Regular']
+Mada
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Magra
+: 
+(2) ['Bold', 'Regular']
+Maiden Orange
+: 
+['Regular']
+Maitree
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Major Mono Display
+: 
+['Regular']
+Mako
+: 
+['Regular']
+Malayalam MN
+: 
+(2) ['Bold', 'Regular']
+Malayalam Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Mali
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Mallanna
+: 
+['Regular']
+Mandali
+: 
+['Regular']
+Manjari
+: 
+(3) ['Bold', 'Regular', 'Thin']
+Manrope
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mansalva
+: 
+['Regular']
+Manuale
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Marcellus
+: 
+['Regular']
+Marcellus SC
+: 
+['Regular']
+Marck Script
+: 
+['Regular']
+Margarine
+: 
+['Regular']
+Marion
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Markazi Text
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Marker Felt
+: 
+(2) ['Thin', 'Wide']
+Marko One
+: 
+['Regular']
+Marmelad
+: 
+['Regular']
+Martel
+: 
+(7) ['Bold', 'DemiBold', 'ExtraBold', 'Heavy', 'Light', 'Regular', 'UltraLight']
+Martel Sans
+: 
+(7) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular', 'SemiBold']
+Marvel
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Mate
+: 
+(2) ['Italic', 'Regular']
+Mate SC
+: 
+['Regular']
+Material Icons
+: 
+['Regular']
+Maven Pro
+: 
+(6) ['Black', 'Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+McLaren
+: 
+['Regular']
+Mea Culpa
+: 
+['Regular']
+Meddon
+: 
+['Regular']
+MedievalSharp
+: 
+['Regular']
+Medula One
+: 
+['Regular']
+Meera Inimai
+: 
+['Regular']
+Megrim
+: 
+['Medium']
+Meie Script
+: 
+['Regular']
+Meiryo
+: 
+(2) ['Italic', 'Regular']
+Meiryo UI
+: 
+(2) ['Italic', 'Regular']
+Menlo
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Meow Script
+: 
+['Regular']
+Merge One
+: 
+['Regular']
+Merienda
+: 
+(2) ['Bold', 'Regular']
+Merienda One
+: 
+['Regular']
+Merriweather
+: 
+(8) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+Merriweather Sans
+: 
+(8) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+Mervale Script
+: 
+['Regular']
+Metal
+: 
+['Regular']
+Metal Mania
+: 
+['Regular']
+Metamorphous
+: 
+['Regular']
+Metrophobic
+: 
+['Regular']
+Miama
+: 
+['Regular']
+Michroma
+: 
+['Regular']
+Microsoft Sans Serif
+: 
+['Regular']
+Milonga
+: 
+['Regular']
+Miltonian
+: 
+['Regular']
+Miltonian Tattoo
+: 
+['Regular']
+Mina
+: 
+(2) ['Bold', 'Regular']
+Miniver
+: 
+['Regular']
+Miriam Libre
+: 
+(2) ['Bold', 'Regular']
+Mirza
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Mishafi
+: 
+['Regular']
+Mishafi Gold
+: 
+['Regular']
+Miss Fajardose
+: 
+['Regular']
+Mitr
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mochiy Pop One
+: 
+['Regular']
+Mochiy Pop P One
+: 
+['Regular']
+Modak
+: 
+['Regular']
+Modern Antiqua
+: 
+['Regular']
+Mogra
+: 
+['Regular']
+Mohave
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Molengo
+: 
+['Regular']
+Molle
+: 
+['Regular']
+Monaco
+: 
+['Regular']
+Monda
+: 
+(2) ['Bold', 'Regular']
+Monofett
+: 
+['Regular']
+Monomaniac One
+: 
+['Regular']
+Monoton
+: 
+['Regular']
+Monsieur La Doulaise
+: 
+['Regular']
+Montaga
+: 
+['Regular']
+Montagu Slab
+: 
+(7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+MonteCarlo
+: 
+['Regular']
+Montez
+: 
+['Regular']
+Montserrat
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Montserrat Alternates
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Montserrat Subrayada
+: 
+(2) ['Bold', 'Regular']
+Moo Lah Lah
+: 
+['Regular']
+Moon Dance
+: 
+['Regular']
+Moul
+: 
+['Regular']
+Moulpali
+: 
+['Regular']
+Mountains of Christmas
+: 
+(2) ['Bold', 'Regular']
+Mouse Memoirs
+: 
+['Regular']
+Mplus 1p
+: 
+(6) ['Black', 'ExtraBold', 'Light', 'Medium', 'Regular', 'Thin']
+Mplus 1p Bold
+: 
+['Bold']
+Mr Bedfort
+: 
+['Regular']
+Mr Dafoe
+: 
+['Regular']
+Mr De Haviland
+: 
+['Regular']
+Mrs Saint Delafield
+: 
+['Regular']
+Mrs Sheppards
+: 
+['Regular']
+Ms Madi
+: 
+['Regular']
+Mshtakan
+: 
+(4) ['Bold', 'BoldOblique', 'Oblique', 'Regular']
+Mukta
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mukta Mahee
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mukta Malar
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mukta Vaani
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Mulish
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBlack', 'ExtraBlack Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Muna
+: 
+(3) ['Black', 'Bold', 'Regular']
+Murecho
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+MuseoModerno
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+My Soul
+: 
+['Regular']
+Myanmar Khyay
+: 
+['Regular']
+Myanmar MN
+: 
+(2) ['Bold', 'Regular']
+Myanmar Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Myanmar Sans Pro
+: 
+['Regular']
+Myriad Pro
+: 
+['Regular']
+Myriad Pro Light
+: 
+['Regular']
+Mystery Quest
+: 
+['Regular']
+NATS
+: 
+['Regular']
+NTR
+: 
+['Regular']
+Nadeem
+: 
+['Regular']
+Nanum Brush Script
+: 
+['Regular']
+Nanum Pen
+: 
+['Regular']
+NanumGothic
+: 
+(3) ['Bold', 'ExtraBold', 'Regular']
+NanumGothicCoding
+: 
+(2) ['Bold', 'Regular']
+NanumMyeongjo
+: 
+(3) ['Bold', 'ExtraBold', 'Regular']
+Neonderthaw
+: 
+['Regular']
+Nerko One
+: 
+['Regular']
+Neucha
+: 
+['Regular']
+Neuton
+: 
+(6) ['Bold', 'ExtraBold', 'ExtraLight', 'Italic', 'Light', 'Regular']
+New Peninim MT
+: 
+(4) ['Bold', 'Bold Inclined', 'Inclined', 'Regular']
+New Rocker
+: 
+['Regular']
+New Tegomin
+: 
+['Regular']
+New York
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+New York Extra Large
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+New York Large
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+New York Medium
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+New York Small
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+News Cycle
+: 
+(2) ['Bold', 'Regular']
+Newsreader
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Nico Moji
+: 
+['Regular']
+Niconne
+: 
+['Regular']
+Nikukyu
+: 
+['Regular']
+Niramit
+: 
+(12) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Nixie One
+: 
+['Regular']
+Nobile
+: 
+(6) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+Nokora
+: 
+(5) ['Black', 'Bold', 'Light', 'Regular', 'Thin']
+Norican
+: 
+['Regular']
+Nosifer
+: 
+['Regular']
+Nosifer Caps
+: 
+['Regular']
+Notable
+: 
+['Regular']
+Noteworthy
+: 
+(2) ['Bold', 'Light']
+Nothing You Could Do
+: 
+['Regular']
+Noticia Text
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Noto Color Emoji Compat Test
+: 
+['Regular']
+Noto Looped Thai
+: 
+(37) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Extrabold', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Looped Thai UI
+: 
+(37) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Extrabold', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Music
+: 
+['Regular']
+Noto Nastaliq Urdu
+: 
+(2) ['Bold', 'Regular']
+Noto Rashi Hebrew
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Sans
+: 
+(144) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Condensed', 'Condensed Black', 'Condensed Black Italic', 'Condensed Bold', 'Condensed Bold Italic', 'Condensed ExtraBold', 'Condensed ExtraBold Italic', 'Condensed ExtraLight', 'Condensed ExtraLight Italic', 'Condensed Italic', 'Condensed Light', 'Condensed Light Italic', 'Condensed Medium', 'Condensed Medium Italic', 'Condensed SemiBold', 'Condensed SemiBold Italic', 'Condensed Thin', 'Condensed Thin Italic', 'Display Black', 'Display Black Italic', 'Display Bold', 'Display Bold Italic', 'Display Condensed', 'Display Condensed Black', 'Display Condensed Black Italic', 'Display Condensed Bold', 'Display Condensed Bold Italic', 'Display Condensed ExtraBold', 'Display Condensed ExtraBold Italic', 'Display Condensed ExtraLight', 'Display Condensed ExtraLight Italic', 'Display Condensed Italic', 'Display Condensed Light', 'Display Condensed Light Italic', 'Display Condensed Medium', 'Display Condensed Medium Italic', 'Display Condensed SemiBold', 'Display Condensed SemiBold Italic', 'Display Condensed Thin', 'Display Condensed Thin Italic', 'Display ExtraBold', 'Display ExtraBold Italic', 'Display ExtraCondensed', 'Display ExtraCondensed Black', 'Display ExtraCondensed Black Italic', 'Display ExtraCondensed Bold', 'Display ExtraCondensed Bold Italic', 'Display ExtraCondensed ExtraBold', 'Display ExtraCondensed ExtraBold Italic', 'Display ExtraCondensed ExtraLight', 'Display ExtraCondensed ExtraLight Italic', 'Display ExtraCondensed Italic', 'Display ExtraCondensed Light', 'Display ExtraCondensed Light Italic', 'Display ExtraCondensed Medium', 'Display ExtraCondensed Medium Italic', 'Display ExtraCondensed SemiBold', 'Display ExtraCondensed SemiBold Italic', 'Display ExtraCondensed Thin', 'Display ExtraCondensed Thin Italic', 'Display ExtraLight', 'Display ExtraLight Italic', 'Display Italic', 'Display Light', 'Display Light Italic', 'Display Medium', 'Display Medium Italic', 'Display Regular', 'Display SemiBold', 'Display SemiBold Italic', 'Display SemiCondensed', 'Display SemiCondensed Black', 'Display SemiCondensed Black Italic', 'Display SemiCondensed Bold', 'Display SemiCondensed Bold Italic', 'Display SemiCondensed ExtraBold', 'Display SemiCondensed ExtraBold Italic', 'Display SemiCondensed ExtraLight', 'Display SemiCondensed ExtraLight Italic', 'Display SemiCondensed Italic', 'Display SemiCondensed Light', 'Display SemiCondensed Light Italic', 'Display SemiCondensed Medium', 'Display SemiCondensed Medium Italic', 'Display SemiCondensed SemiBold', 'Display SemiCondensed SemiBold Italic', 'Display SemiCondensed Thin', 'Display SemiCondensed Thin Italic', 'Display Thin', 'Display Thin Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Black Italic', 'ExtraCondensed Bold', …]
+Noto Sans Adlam
+: 
+['Regular']
+Noto Sans Arabic
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Armenian
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Sans Avestan
+: 
+['Regular']
+Noto Sans Bamum
+: 
+['Regular']
+Noto Sans Bassa Vah
+: 
+['Regular']
+Noto Sans Batak
+: 
+['Regular']
+Noto Sans Bengali
+: 
+(12) ['Black', 'Bold', 'Condensed', 'ExtraBold', 'ExtraCondensed', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'Thin']
+Noto Sans Bengali UI
+: 
+(12) ['Black', 'Bold', 'Condensed', 'ExtraBold', 'ExtraCondensed', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'Thin']
+Noto Sans Bhaiksuki
+: 
+['Regular']
+Noto Sans Brahmi
+: 
+['Regular']
+Noto Sans Buginese
+: 
+['Regular']
+Noto Sans Buhid
+: 
+['Regular']
+Noto Sans Canadian Aboriginal
+: 
+['Regular']
+Noto Sans Carian
+: 
+['Regular']
+Noto Sans Caucasian Albanian
+: 
+['Regular']
+Noto Sans Chakma
+: 
+['Regular']
+Noto Sans Cham
+: 
+['Regular']
+Noto Sans Coptic
+: 
+['Regular']
+Noto Sans Cuneiform
+: 
+['Regular']
+Noto Sans Cypriot
+: 
+['Regular']
+Noto Sans Duployan
+: 
+['Regular']
+Noto Sans Egyptian Hieroglyphs
+: 
+['Regular']
+Noto Sans Elbasan
+: 
+['Regular']
+Noto Sans Glagolitic
+: 
+['Regular']
+Noto Sans Gothic
+: 
+['Regular']
+Noto Sans Gujarati
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Gujarati UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Gunjala Gondi
+: 
+['Regular']
+Noto Sans HK
+: 
+(7) ['Black', 'Bold', 'DemiLight', 'Light', 'Medium', 'Regular', 'Thin']
+Noto Sans Hanifi Rohingya
+: 
+['Regular']
+Noto Sans Hanunoo
+: 
+['Regular']
+Noto Sans Hatran
+: 
+['Regular']
+Noto Sans Hebrew
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold ', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Hebrew Droid
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Noto Sans Hebrew New
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold ', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Imperial Aramaic
+: 
+['Regular']
+Noto Sans Inscriptional Pahlavi
+: 
+['Regular']
+Noto Sans Inscriptional Parthian
+: 
+['Regular']
+Noto Sans JP
+: 
+(10) ['Black', 'Bold', 'DemiLight', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Sans Javanese
+: 
+(2) ['Bold', 'Regular']
+Noto Sans KR
+: 
+(7) ['Black', 'Bold', 'DemiLight', 'Light', 'Medium', 'Regular', 'Thin']
+Noto Sans Kaithi
+: 
+['Regular']
+Noto Sans Kannada
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Kannada UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Kayah Li
+: 
+['Regular']
+Noto Sans Kharoshthi
+: 
+['Regular']
+Noto Sans Khojki
+: 
+['Regular']
+Noto Sans Khudawadi
+: 
+['Regular']
+Noto Sans Lepcha
+: 
+['Regular']
+Noto Sans Limbu
+: 
+['Regular']
+Noto Sans Linear A
+: 
+['Regular']
+Noto Sans Linear B
+: 
+['Regular']
+Noto Sans Lisu
+: 
+['Regular']
+Noto Sans Lycian
+: 
+['Regular']
+Noto Sans Lydian
+: 
+['Regular']
+Noto Sans Mahajani
+: 
+['Regular']
+Noto Sans Malayalam
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Malayalam UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Mandaic
+: 
+['Regular']
+Noto Sans Manichaean
+: 
+['Regular']
+Noto Sans Marchen
+: 
+['Regular']
+Noto Sans Masaram Gondi
+: 
+['Regular']
+Noto Sans Meetei Mayek
+: 
+['Regular']
+Noto Sans Mende Kikakui
+: 
+['Regular']
+Noto Sans Meroitic
+: 
+['Regular']
+Noto Sans Miao
+: 
+['Regular']
+Noto Sans Modi
+: 
+['Regular']
+Noto Sans Mongolian
+: 
+['Regular']
+Noto Sans Mro
+: 
+['Regular']
+Noto Sans Multani
+: 
+['Regular']
+Noto Sans Myanmar
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Sans NKo
+: 
+['Regular']
+Noto Sans Nabataean
+: 
+['Regular']
+Noto Sans New Tai Lue
+: 
+(4) ['Bold', 'Medium', 'Regular', 'Semibold']
+Noto Sans Newa
+: 
+['Regular']
+Noto Sans Ol Chiki
+: 
+['Regular']
+Noto Sans Old Hungarian
+: 
+['Regular']
+Noto Sans Old Italic
+: 
+['Regular']
+Noto Sans Old North Arabian
+: 
+['Regular']
+Noto Sans Old Permic
+: 
+['Regular']
+Noto Sans Old Persian
+: 
+['Regular']
+Noto Sans Old South Arabian
+: 
+['Regular']
+Noto Sans Old Turkic
+: 
+['Regular']
+Noto Sans Oriya
+: 
+(2) ['Bold', 'Regular']
+Noto Sans Osage
+: 
+['Regular']
+Noto Sans Osmanya
+: 
+['Regular']
+Noto Sans Pahawh Hmong
+: 
+['Regular']
+Noto Sans Palmyrene
+: 
+['Regular']
+Noto Sans Pau Cin Hau
+: 
+['Regular']
+Noto Sans PhagsPa
+: 
+['Regular']
+Noto Sans Phoenician
+: 
+['Regular']
+Noto Sans Psalter Pahlavi
+: 
+['Regular']
+Noto Sans Rejang
+: 
+['Regular']
+Noto Sans SC
+: 
+(7) ['Black', 'Bold', 'DemiLight', 'Light', 'Medium', 'Regular', 'Thin']
+Noto Sans Samaritan
+: 
+['Regular']
+Noto Sans Saurashtra
+: 
+['Regular']
+Noto Sans Sharada
+: 
+['Regular']
+Noto Sans Siddham
+: 
+['Regular']
+Noto Sans Sora Sompeng
+: 
+['Regular']
+Noto Sans Sundanese
+: 
+['Regular']
+Noto Sans Syloti Nagri
+: 
+['Regular']
+Noto Sans Symbols
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Sans Symbols2
+: 
+['Regular']
+Noto Sans Syriac
+: 
+['Regular']
+Noto Sans TC
+: 
+(7) ['Black', 'Bold', 'DemiLight', 'Light', 'Medium', 'Regular', 'Thin']
+Noto Sans Tagalog
+: 
+['Regular']
+Noto Sans Tagbanwa
+: 
+['Regular']
+Noto Sans Tai Le
+: 
+['Regular']
+Noto Sans Tai Tham
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Noto Sans Tai Viet
+: 
+['Regular']
+Noto Sans Takri
+: 
+['Regular']
+Noto Sans Tamil
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Tamil Supplement
+: 
+['Regular']
+Noto Sans Tamil UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Telugu
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Telugu UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Thaana
+: 
+['Regular']
+Noto Sans Thai
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold ', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Thai UI
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold ', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Sans Tifinagh
+: 
+['Regular']
+Noto Sans Tirhuta
+: 
+['Regular']
+Noto Sans Ugaritic
+: 
+['Regular']
+Noto Sans Vai
+: 
+['Regular']
+Noto Sans Wancho
+: 
+['Regular']
+Noto Sans Warang Citi
+: 
+['Regular']
+Noto Sans Yi
+: 
+['Regular']
+Noto Sans Zawgyi
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif
+: 
+(72) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'Display Black', 'Display Bold', 'Display Condensed', 'Display Condensed Black', 'Display Condensed Bold', 'Display Condensed ExtraBold', 'Display Condensed ExtraLight', 'Display Condensed Light', 'Display Condensed Medium', 'Display Condensed SemiBold', 'Display Condensed Thin', 'Display ExtraBold', 'Display ExtraCondensed', 'Display ExtraCondensed Black', 'Display ExtraCondensed Bold', 'Display ExtraCondensed ExtraBold', 'Display ExtraCondensed ExtraLight', 'Display ExtraCondensed Light', 'Display ExtraCondensed Medium', 'Display ExtraCondensed SemiBold', 'Display ExtraCondensed Thin', 'Display ExtraLight', 'Display Light', 'Display Medium', 'Display Regular', 'Display SemiBold', 'Display SemiCondensed', 'Display SemiCondensed Black', 'Display SemiCondensed Bold', 'Display SemiCondensed ExtraBold', 'Display SemiCondensed ExtraLight', 'Display SemiCondensed Light', 'Display SemiCondensed Medium', 'Display SemiCondensed SemiBold', 'Display SemiCondensed Thin', 'Display Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Serif Ahom
+: 
+['Regular']
+Noto Serif Balinese
+: 
+['Regular']
+Noto Serif Bengali
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Serif Gujarati
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif HK
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Noto Serif Hmong Nyiakeng
+: 
+['Regular']
+Noto Serif JP
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Noto Serif KR
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Noto Serif Kannada
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif Malayalam
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif Myanmar
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif SC
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Noto Serif TC
+: 
+(7) ['Black', 'Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Noto Serif Tamil
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Serif Tamil Slanted
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Serif Telugu
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Noto Serif Thai
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Noto Serif Yezidi
+: 
+['Regular']
+Noto Traditional Nushu
+: 
+['Regular']
+NotoSerifTamilSlanted
+: 
+(36) ['Black', 'Bold', 'Condensed', 'Condensed Black', 'Condensed Bold', 'Condensed ExtraBold', 'Condensed ExtraLight', 'Condensed Light', 'Condensed Medium', 'Condensed SemiBold', 'Condensed Thin', 'ExtraBold', 'ExtraCondensed', 'ExtraCondensed Black', 'ExtraCondensed Bold', 'ExtraCondensed ExtraBold', 'ExtraCondensed ExtraLight', 'ExtraCondensed Light', 'ExtraCondensed Medium', 'ExtraCondensed SemiBold', 'ExtraCondensed Thin', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'SemiCondensed', 'SemiCondensed Black', 'SemiCondensed Bold', 'SemiCondensed ExtraBold', 'SemiCondensed ExtraLight', 'SemiCondensed Light', 'SemiCondensed Medium', 'SemiCondensed SemiBold', 'SemiCondensed Thin', 'Thin']
+Nova Cut
+: 
+['Book']
+Nova Flat
+: 
+['Book']
+Nova Oval
+: 
+['Book']
+Nova Round
+: 
+['Book']
+Nova Script
+: 
+['Regular']
+Nova Slim
+: 
+['Book']
+Nova Square
+: 
+['Book']
+NovaMono
+: 
+['Regular']
+Numans
+: 
+['Regular']
+Nunito
+: 
+(16) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Nunito Sans
+: 
+(14) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+OFL Sorts Mill Goudy TT
+: 
+(2) ['Italic', 'Regular']
+Odibee Sans
+: 
+['Regular']
+Odor Mean Chey
+: 
+['Regular']
+OdorMeanChey
+: 
+['Regular']
+Offside
+: 
+['Regular']
+Oi
+: 
+['Regular']
+Old Standard TT
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Oldenburg
+: 
+['Regular']
+Ole
+: 
+['Regular']
+Oleo Script
+: 
+(2) ['Bold', 'Regular']
+Oleo Script Swash Caps
+: 
+(2) ['Bold', 'Regular']
+Oooh Baby
+: 
+['Regular']
+Open Sans
+: 
+(20) ['Bold', 'Bold Italic', 'Condensed Bold', 'Condensed Bold Italic', 'Condensed ExtraBold', 'Condensed ExtraBold Italic', 'Condensed Italic', 'Condensed Light', 'Condensed Light Italic', 'Condensed Regular', 'Condensed SemiBold', 'Condensed SemiBold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Open Sans Condensed
+: 
+(3) ['Bold', 'Light', 'Light Italic']
+Open Sans Hebrew
+: 
+(8) ['Bold', 'Bold Italic', 'Extra Bold', 'Extra Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+Open Sans Hebrew Condensed
+: 
+(8) ['Bold', 'Bold Italic', 'Extra Bold', 'Extra Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+Optima
+: 
+(5) ['Bold', 'Bold Italic', 'ExtraBlack', 'Italic', 'Regular']
+Oranienbaum
+: 
+['Regular']
+Orbitron
+: 
+(6) ['Black', 'Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Oregano
+: 
+(2) ['Italic', 'Regular']
+Orelega One
+: 
+['Regular']
+Orienta
+: 
+['Regular']
+Original Surfer
+: 
+['Regular']
+Oriya MN
+: 
+(2) ['Bold', 'Regular']
+Oriya Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Osaka
+: 
+['Regular']
+Oswald
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Otomanopee One
+: 
+['Regular']
+Outfit
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Over the Rainbow
+: 
+['Regular']
+Overlock
+: 
+(6) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Regular']
+Overlock SC
+: 
+['Regular']
+Overpass
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Overpass Mono
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Ovo
+: 
+['Regular']
+Oxanium
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Oxygen
+: 
+(3) ['Bold', 'Light', 'Regular']
+Oxygen Mono
+: 
+['Regular']
+PT Mono
+: 
+(2) ['Bold', 'Regular']
+PT Sans
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+PT Sans Caption
+: 
+(2) ['Bold', 'Regular']
+PT Sans Narrow
+: 
+(2) ['Bold', 'Regular']
+PT Serif
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+PT Serif Caption
+: 
+(2) ['Italic', 'Regular']
+Pacifico
+: 
+['Regular']
+Padauk
+: 
+(2) ['Bold', 'Regular']
+Palanquin
+: 
+(7) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Palanquin Dark
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Palatino
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Palette Mosaic
+: 
+['Regular']
+Pangolin
+: 
+['Regular']
+Paprika
+: 
+['Regular']
+Papyrus
+: 
+(2) ['Condensed', 'Regular']
+Parisienne
+: 
+['Regular']
+Party LET
+: 
+['Plain']
+Passero One
+: 
+['Regular']
+Passion One
+: 
+(3) ['Black', 'Bold', 'Regular']
+Passions Conflict
+: 
+['Regular']
+Pathway Gothic One
+: 
+['Regular']
+Patrick Hand
+: 
+['Regular']
+Patrick Hand SC
+: 
+['Regular']
+Pattaya
+: 
+['Regular']
+Patua One
+: 
+['Regular']
+Pavanam
+: 
+['Regular']
+Paytone One
+: 
+['Regular']
+Pecita
+: 
+['Book']
+Peddana
+: 
+['Regular']
+Peralta
+: 
+['Regular']
+Permanent Marker
+: 
+['Regular']
+Petemoss
+: 
+['Regular']
+Petit Formal Script
+: 
+['Regular']
+Petrona
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Phetsarath
+: 
+(2) ['Bold', 'Regular']
+Philosopher
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Phosphate
+: 
+(2) ['Inline', 'Solid']
+Piazzolla
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Piedra
+: 
+['Regular']
+PingFang HK
+: 
+(6) ['Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+PingFang SC
+: 
+(6) ['Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+PingFang TC
+: 
+(6) ['Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+Pinyon Script
+: 
+['Regular']
+Pirata One
+: 
+['Regular']
+Plantagenet Cherokee
+: 
+['Regular']
+Plaster
+: 
+['Regular']
+Play
+: 
+(2) ['Bold', 'Regular']
+Playball
+: 
+['Regular']
+Playfair Display
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Playfair Display SC
+: 
+(6) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Regular']
+Plus Jakarta Sans
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Podkova
+: 
+(5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+PoetsenOne
+: 
+['Regular']
+Poiret One
+: 
+['Regular']
+Poller One
+: 
+['Regular']
+Poly
+: 
+(2) ['Italic', 'Regular']
+Pompiere
+: 
+['Regular']
+Ponnala
+: 
+['Regular']
+Pontano Sans
+: 
+['Regular']
+Poor Story
+: 
+['Regular']
+Poppins
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Port Lligat Sans
+: 
+['Regular']
+Port Lligat Slab
+: 
+['Regular']
+Porter Sans Block
+: 
+['Block']
+Post No Bills Colombo
+: 
+(2) ['Bold', 'Regular']
+Post No Bills Colombo ExtraBold
+: 
+['Regular']
+Post No Bills Colombo Light
+: 
+['Regular']
+Post No Bills Colombo Medium
+: 
+['Regular']
+Post No Bills Colombo SemiBold
+: 
+['Regular']
+Post No Bills Jaffna
+: 
+(2) ['Bold', 'Regular']
+Post No Bills Jaffna ExtraBold
+: 
+['Regular']
+Post No Bills Jaffna Light
+: 
+['Regular']
+Post No Bills Jaffna Medium
+: 
+['Regular']
+Post No Bills Jaffna SemiBold
+: 
+['Regular']
+Potta One
+: 
+['Regular']
+Pragati Narrow
+: 
+(2) ['Bold', 'Regular']
+Praise
+: 
+['Regular']
+Prata
+: 
+['Regular']
+Preahvihear
+: 
+['Regular']
+Press Start 2P
+: 
+['Regular']
+Pridi
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Princess Sofia
+: 
+['Regular']
+Prociono
+: 
+['Regular']
+Prompt
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Prosto One
+: 
+['Regular']
+Proza Libre
+: 
+(10) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Public Sans
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Puppies Play
+: 
+['Regular']
+Puritan
+: 
+(4) ['Bold', 'BoldItalic', 'Italic', 'Regular']
+Purple Purse
+: 
+['Regular']
+Qahiri
+: 
+['Regular']
+Quando
+: 
+['Regular']
+Quantico
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Quattrocento
+: 
+(2) ['Bold', 'Regular']
+Quattrocento Sans
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Questrial
+: 
+['Regular']
+Quicksand
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Quintessential
+: 
+['Regular']
+Qwigley
+: 
+['Regular']
+Qwitcher Grypen
+: 
+(2) ['Bold', 'Regular']
+RU Serius
+: 
+['Regular']
+Raanana
+: 
+(2) ['Bold', 'Regular']
+Racing Sans One
+: 
+['Regular']
+Radio Canada
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Radley
+: 
+(2) ['Italic', 'Regular']
+Rajdhani
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Rakkas
+: 
+['Regular']
+Raleway
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Raleway Dots
+: 
+['Regular']
+Ramabhadra
+: 
+['Regular']
+Ramaraja
+: 
+['Regular']
+Rambla
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Rammetto One
+: 
+['Regular']
+Rampart One
+: 
+['Regular']
+Ranchers
+: 
+['Regular']
+Rancho
+: 
+['Regular']
+Ranga
+: 
+(2) ['Bold', 'Regular']
+Rasa
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Rationale
+: 
+['Regular']
+Ravi Prakash
+: 
+['Regular']
+Readex Pro
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Recursive
+: 
+(64) ['Mono Casual', 'Mono Casual Black', 'Mono Casual Black Italic', 'Mono Casual Bold', 'Mono Casual Bold Italic', 'Mono Casual ExtraBlack', 'Mono Casual ExtraBlack Italic', 'Mono Casual ExtraBold', 'Mono Casual ExtraBold Italic', 'Mono Casual Italic', 'Mono Casual Light', 'Mono Casual Light Italic', 'Mono Casual Medium', 'Mono Casual Medium Italic', 'Mono Casual SemiBold', 'Mono Casual SemiBold Italic', 'Mono Linear', 'Mono Linear Black', 'Mono Linear Black Italic', 'Mono Linear Bold', 'Mono Linear Bold Italic', 'Mono Linear ExtraBlack', 'Mono Linear ExtraBlack Italic', 'Mono Linear ExtraBold', 'Mono Linear ExtraBold Italic', 'Mono Linear Italic', 'Mono Linear Light', 'Mono Linear Light Italic', 'Mono Linear Medium', 'Mono Linear Medium Italic', 'Mono Linear SemiBold', 'Mono Linear SemiBold Italic', 'Sans Casual', 'Sans Casual Black', 'Sans Casual Black Italic', 'Sans Casual Bold', 'Sans Casual Bold Italic', 'Sans Casual ExtraBlack', 'Sans Casual ExtraBlack Italic', 'Sans Casual ExtraBold', 'Sans Casual ExtraBold Italic', 'Sans Casual Italic', 'Sans Casual Light', 'Sans Casual Light Italic', 'Sans Casual Medium', 'Sans Casual Medium Italic', 'Sans Casual SemiBold', 'Sans Casual SemiBold Italic', 'Sans Linear', 'Sans Linear Black', 'Sans Linear Black Italic', 'Sans Linear Bold', 'Sans Linear Bold Italic', 'Sans Linear ExtraBlack', 'Sans Linear ExtraBlack Italic', 'Sans Linear ExtraBold', 'Sans Linear ExtraBold Italic', 'Sans Linear Italic', 'Sans Linear Light', 'Sans Linear Light Italic', 'Sans Linear Medium', 'Sans Linear Medium Italic', 'Sans Linear SemiBold', 'Sans Linear SemiBold Italic']
+Red Hat Display
+: 
+(14) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Red Hat Mono
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Red Hat Text
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Red Rose
+: 
+(3) ['Bold', 'Light', 'Regular']
+Redacted
+: 
+['Regular']
+Redacted Script
+: 
+(3) ['Bold', 'Light', 'Regular']
+Redressed
+: 
+['Regular']
+Reem Kufi
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Reem Kufi Fun
+: 
+(4) ['Bold', 'Medium', 'Regular', 'SemiBold']
+Reem Kufi Ink
+: 
+(2) ['Bold', 'Regular']
+Reenie Beanie
+: 
+['Regular']
+Reggae One
+: 
+['Regular']
+Revalia
+: 
+['Regular']
+Rhodium Libre
+: 
+['Regular']
+Ribeye
+: 
+['Regular']
+Ribeye Marrow
+: 
+['Regular']
+Righteous
+: 
+['Regular']
+Risque
+: 
+['Regular']
+Road Rage
+: 
+['Regular']
+Roboto
+: 
+(36) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Condensed Black', 'Condensed Black Italic', 'Condensed Bold', 'Condensed Bold Italic', 'Condensed ExtraBold', 'Condensed ExtraBold Italic', 'Condensed ExtraLight', 'Condensed ExtraLight Italic', 'Condensed Italic', 'Condensed Light', 'Condensed Light Italic', 'Condensed Medium', 'Condensed Medium Italic', 'Condensed Regular', 'Condensed SemiBold', 'Condensed SemiBold Italic', 'Condensed Thin', 'Condensed Thin Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Roboto Condensed
+: 
+(8) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular']
+Roboto Flex
+: 
+(20) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBlack', 'ExtraBlack Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Roboto Mono
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic']
+Roboto Serif
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Roboto Slab
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Rochester
+: 
+['Regular']
+Rock 3D
+: 
+['Regular']
+Rock Salt
+: 
+['Regular']
+RocknRoll One
+: 
+['Regular']
+Rockwell
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Rokkitt
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Romanesco
+: 
+['Regular']
+Ropa Sans
+: 
+(2) ['Italic', 'Regular']
+Rosario
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Rosarivo
+: 
+(2) ['Italic', 'Regular']
+Rouge Script
+: 
+['Regular']
+Rounded Mplus 1c
+: 
+(6) ['Black', 'ExtraBold', 'Light', 'Medium', 'Regular', 'Thin']
+Rounded Mplus 1c Bold
+: 
+['Bold']
+Rowdies
+: 
+(3) ['Bold', 'Light', 'Regular']
+Rozha One
+: 
+['Regular']
+Rubik
+: 
+(14) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Rubik Beastly
+: 
+['Regular']
+Rubik Bubbles
+: 
+['Regular']
+Rubik Glitch
+: 
+['Regular']
+Rubik Microbe
+: 
+['Regular']
+Rubik Mono One
+: 
+['Regular']
+Rubik Moonrocks
+: 
+['Regular']
+Rubik One
+: 
+['Regular']
+Rubik Puddles
+: 
+['Regular']
+Rubik Wet Paint
+: 
+['Regular']
+Ruda
+: 
+(6) ['Black', 'Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Rufina
+: 
+(2) ['Bold', 'Regular']
+Ruge Boogie
+: 
+['Regular']
+Ruluko
+: 
+['Regular']
+Rum Raisin
+: 
+['Regular']
+Ruslan Display
+: 
+['Regular']
+Russo One
+: 
+['Regular']
+Ruthie
+: 
+['Regular']
+Rye
+: 
+['Regular']
+SF Arabic
+: 
+(9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+SF Arabic Rounded
+: 
+(9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+SF Compact
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic', 'Thin', 'Thin Italic', 'Ultralight', 'Ultralight Italic']
+SF Compact Display
+: 
+(9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+SF Compact Rounded
+: 
+(9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+SF Compact Text
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Semibold', 'Semibold Italic', 'Thin', 'Thin Italic', 'Ultralight', 'Ultralight Italic']
+SF Mono
+: 
+(12) ['Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic']
+SF Pro
+: 
+(45) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Compressed Black', 'Compressed Bold', 'Compressed Heavy', 'Compressed Light', 'Compressed Medium', 'Compressed Regular', 'Compressed Semibold', 'Compressed Thin', 'Compressed Ultralight', 'Condensed Black', 'Condensed Bold', 'Condensed Heavy', 'Condensed Light', 'Condensed Medium', 'Condensed Regular', 'Condensed Semibold', 'Condensed Thin', 'Condensed Ultralight', 'Expanded Black', 'Expanded Bold', 'Expanded Heavy', 'Expanded Light', 'Expanded Medium', 'Expanded Regular', 'Expanded Semibold', 'Expanded Thin', 'Expanded Ultralight', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic', 'Thin', 'Thin Italic', 'Ultralight', 'Ultralight Italic']
+SF Pro Display
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic', 'Thin', 'Thin Italic', 'Ultralight', 'Ultralight Italic']
+SF Pro Rounded
+: 
+(9) ['Black', 'Bold', 'Heavy', 'Light', 'Medium', 'Regular', 'Semibold', 'Thin', 'Ultralight']
+SF Pro Text
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Heavy', 'Heavy Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Regular Italic', 'Semibold', 'Semibold Italic', 'Thin', 'Thin Italic', 'Ultralight', 'Ultralight Italic']
+STIX Two Math
+: 
+['Regular']
+STIX Two Text
+: 
+(8) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+STIXGeneral
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+STIXIntegralsD
+: 
+(2) ['Bold', 'Regular']
+STIXIntegralsSm
+: 
+(2) ['Bold', 'Regular']
+STIXIntegralsUp
+: 
+(2) ['Bold', 'Regular']
+STIXIntegralsUpD
+: 
+(2) ['Bold', 'Regular']
+STIXIntegralsUpSm
+: 
+(2) ['Bold', 'Regular']
+STIXNonUnicode
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+STIXSizeFiveSym
+: 
+['Regular']
+STIXSizeFourSym
+: 
+(2) ['Bold', 'Regular']
+STIXSizeOneSym
+: 
+(2) ['Bold', 'Regular']
+STIXSizeThreeSym
+: 
+(2) ['Bold', 'Regular']
+STIXSizeTwoSym
+: 
+(2) ['Bold', 'Regular']
+STIXVariants
+: 
+(2) ['Bold', 'Regular']
+STSong
+: 
+['Regular']
+Sacramento
+: 
+['Regular']
+Sahitya
+: 
+(2) ['Bold', 'Regular']
+Sail
+: 
+['Regular']
+Saira
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Saira Condensed
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Saira ExtraCondensed
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Saira SemiCondensed
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Saira Stencil One
+: 
+['Regular']
+Salsa
+: 
+['Regular']
+Sana
+: 
+['Regular']
+Sanchez
+: 
+(2) ['Italic', 'Regular']
+Sancreek
+: 
+['Regular']
+Sansation
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Sansation Light
+: 
+(2) ['Light', 'Light Italic']
+Sansita
+: 
+(8) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Regular']
+Sansita One
+: 
+['Regular']
+Sansita Swashed
+: 
+(7) ['Black', 'Bold', 'ExtraBold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Sarabun
+: 
+(16) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Sarala
+: 
+(2) ['Bold', 'Regular']
+Sarina
+: 
+['Regular']
+Sarpanch
+: 
+(6) ['Black', 'Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Sassy Frass
+: 
+['Regular']
+Sathu
+: 
+['Regular']
+Satisfy
+: 
+['Regular']
+Savoye LET
+: 
+['Plain']
+Sawarabi Gothic
+: 
+['Regular']
+Sawarabi Mincho
+: 
+['Regular']
+Scada
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Scheherazade
+: 
+(2) ['Bold', 'Regular']
+Scheherazade New
+: 
+(2) ['Bold', 'Regular']
+Schoolbell
+: 
+['Regular']
+Scope One
+: 
+['Regular']
+Seaweed Script
+: 
+['Regular']
+Secular One
+: 
+['Regular']
+Sedan
+: 
+(2) ['Italic', 'Regular']
+Sedan SC
+: 
+['Regular']
+Sedgwick Ave
+: 
+['Regular']
+Sedgwick Ave Display
+: 
+['Regular']
+Sen
+: 
+(3) ['Bold', 'ExtraBold', 'Regular']
+Send Flowers
+: 
+['Regular']
+SeoulHangang
+: 
+(4) ['B', 'EB', 'L', 'M']
+SeoulHangang CB
+: 
+['Regular']
+SeoulHangang CBL
+: 
+['Regular']
+SeoulHangang CEB
+: 
+['Regular']
+SeoulHangang CL
+: 
+['Regular']
+SeoulHangang CM
+: 
+['Regular']
+SeoulNamsan
+: 
+(5) ['B', 'EB', 'L', 'M', 'vert']
+SeoulNamsan CB
+: 
+['Regular']
+SeoulNamsan CBL
+: 
+['Regular']
+SeoulNamsan CEB
+: 
+['Regular']
+SeoulNamsan CL
+: 
+['Regular']
+SeoulNamsan CM
+: 
+['Regular']
+Seravek
+: 
+(10) ['Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular']
+Sevillana
+: 
+['Regular']
+Seymour One
+: 
+['Book']
+Shadows Into Light
+: 
+['Regular']
+Shadows Into Light Two
+: 
+['Regular']
+Shalimar
+: 
+['Regular']
+Shanti
+: 
+['Regular']
+Share
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Share Tech
+: 
+['Regular']
+Share Tech Mono
+: 
+['Regular']
+Shippori Antique
+: 
+['Regular']
+Shippori Antique B1
+: 
+['Regular']
+Shippori Mincho
+: 
+(5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Shippori Mincho B1
+: 
+(5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Shizuru
+: 
+['Regular']
+Shojumaru
+: 
+['Regular']
+Short Stack
+: 
+['Regular']
+Shree Devanagari 714
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Shrikhand
+: 
+['Regular']
+Siemreap
+: 
+['Regular']
+Sigmar One
+: 
+['Regular']
+SignPainter
+: 
+(2) ['HouseScript', 'HouseScript Semibold']
+Signika
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Signika Negative
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Signika Negative SC
+: 
+(4) ['Bold', 'Light', 'Regular', 'SemiBold']
+Signika SC
+: 
+(4) ['Bold', 'Light', 'Regular', 'SemiBold']
+Silom
+: 
+['Regular']
+Simonetta
+: 
+(4) ['Black', 'Black Italic', 'Italic', 'Regular']
+Single Day
+: 
+['Regular']
+Sinhala MN
+: 
+(2) ['Bold', 'Regular']
+Sinhala Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Sintony
+: 
+(2) ['Bold', 'Regular']
+SirinStencil
+: 
+['Regular']
+Sitara
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Six Caps
+: 
+['Regular']
+Skia
+: 
+(10) ['Black', 'Black Condensed', 'Black Extended', 'Bold', 'Condensed', 'Extended', 'Light', 'Light Condensed', 'Light Extended', 'Regular']
+Skranji
+: 
+(2) ['Bold', 'Regular']
+Slabo 13px
+: 
+['Regular']
+Slabo 27px
+: 
+['Regular']
+Slackey
+: 
+['Regular']
+Slackside One
+: 
+['Regular']
+Smokum
+: 
+['Regular']
+Smooch
+: 
+['Regular']
+Smooch Sans
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Smythe
+: 
+['Regular']
+Snell Roundhand
+: 
+(3) ['Black', 'Bold', 'Regular']
+Sniglet
+: 
+(2) ['ExtraBold', 'Regular']
+Snippet
+: 
+['Regular']
+Snowburst One
+: 
+['Regular']
+Sofadi One
+: 
+['Regular']
+Sofia
+: 
+['Regular']
+Sofia Sans
+: 
+(22) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBlack', 'ExtraBlack Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Hairline', 'Hairline Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Solway
+: 
+(5) ['Bold', 'ExtraBold', 'Light', 'Medium', 'Regular']
+Sometype Mono
+: 
+(6) ['Bold', 'Bold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular']
+Song Myung
+: 
+['Regular']
+Songti SC
+: 
+(4) ['Black', 'Bold', 'Light', 'Regular']
+Songti TC
+: 
+(3) ['Bold', 'Light', 'Regular']
+Sonsie One
+: 
+['Regular']
+Sora
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Regular', 'SemiBold', 'Thin']
+Sorts Mill Goudy
+: 
+(2) ['Italic', 'Regular']
+Souliyo Unicode
+: 
+['Regular']
+Source Code Pro
+: 
+(16) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Source Sans 3
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Source Sans Pro
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Source Serif 4
+: 
+(16) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Source Serif Pro
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Space Grotesk
+: 
+(4) ['Bold', 'Light', 'Medium', 'Regular']
+Space Mono
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Spartan
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Special Elite
+: 
+['Regular']
+Spectral
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Spectral SC
+: 
+(14) ['Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Spicy Rice
+: 
+['Regular']
+Spinnaker
+: 
+['Regular']
+Spirax
+: 
+['Regular']
+Spline Sans
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Spline Sans Mono
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Squada One
+: 
+['Regular']
+Square Peg
+: 
+['Regular']
+Sree Krushnadevaraya
+: 
+['Regular']
+Sriracha
+: 
+['Regular']
+Srisakdi
+: 
+(2) ['Bold', 'Regular']
+Staatliches
+: 
+['Regular']
+Stalemate
+: 
+['Regular']
+Stalinist One
+: 
+['Regular']
+Stardos Stencil
+: 
+(2) ['Bold', 'Regular']
+Stick
+: 
+['Regular']
+Stick No Bills
+: 
+(7) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Stint Ultra Condensed
+: 
+['Regular']
+Stint Ultra Expanded
+: 
+['Regular']
+Stoke
+: 
+(2) ['Light', 'Regular']
+Strait
+: 
+['Regular']
+Strong
+: 
+['Regular']
+Style Script
+: 
+['Regular']
+Stylish
+: 
+['Regular']
+Sudo Var
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'Thin', 'Thin Italic']
+Sue Ellen Francisco
+: 
+['Regular']
+Suez One
+: 
+['Regular']
+Suisse Int'l
+: 
+(3) ['Light', 'Medium', 'Regular']
+Suisse Int'l Mono
+: 
+['Regular']
+Sukhumvit Set
+: 
+(6) ['Bold', 'Light', 'Medium', 'Semi Bold', 'Text', 'Thin']
+Sulphur Point
+: 
+(3) ['Bold', 'Light', 'Regular']
+Sumana
+: 
+(2) ['Bold', 'Regular']
+Sunflower
+: 
+(3) ['Bold', 'Light', 'Medium']
+Sunshiney
+: 
+['Regular']
+Superclarendon
+: 
+(8) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Regular']
+Supermercado
+: 
+['Regular']
+Sura
+: 
+(2) ['Bold', 'Regular']
+Suranna
+: 
+['Regular']
+Suravaram
+: 
+['Regular']
+Suwannaphum
+: 
+(5) ['Black', 'Bold', 'Light', 'Regular', 'Thin']
+Swanky and Moo Moo
+: 
+['Regular']
+Symbol
+: 
+['Regular']
+Syncopate
+: 
+(2) ['Bold', 'Regular']
+Syne
+: 
+(5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Syne Mono
+: 
+['Regular']
+Syne Tactile
+: 
+['Regular']
+System Font
+: 
+(10) ['Light Italic', 'Medium Italic', 'Regular Italic', 'Thin Italic', 'Ultra Compressed Ultralight', 'Ultra Compressed Ultralight G1', 'Ultra Compressed Ultralight G2', 'Ultra Compressed Ultralight G3', 'Ultra Compressed Ultralight G4', 'Ultralight Italic']
+Tahoma
+: 
+(2) ['Bold', 'Regular']
+Tajawal
+: 
+(7) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular']
+Tamil MN
+: 
+(2) ['Bold', 'Regular']
+Tamil Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Tangerine
+: 
+(2) ['Bold', 'Regular']
+Tapestry
+: 
+['Regular']
+Taprom
+: 
+['Regular']
+Tauri
+: 
+['Regular']
+Taviraj
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Teko
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Telex
+: 
+['Regular']
+Telugu MN
+: 
+(2) ['Bold', 'Regular']
+Telugu Sangam MN
+: 
+(2) ['Bold', 'Regular']
+Tenali Ramakrishna
+: 
+['Regular']
+Tenor Sans
+: 
+['Regular']
+Text Me One
+: 
+['Regular']
+Texturina
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Thabit
+: 
+(4) ['Bold', 'Bold Oblique', 'Oblique', 'Regular']
+TharLon
+: 
+['Regular']
+Thasadith
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+The Girl Next Door
+: 
+['Regular']
+The Nautigal
+: 
+(2) ['Bold', 'Regular']
+Thonburi
+: 
+(3) ['Bold', 'Light', 'Regular']
+Tienne
+: 
+(3) ['Black', 'Bold', 'Regular']
+Tillana
+: 
+(5) ['Bold', 'ExtraBold', 'Medium', 'Regular', 'SemiBold']
+Times
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Times New Roman
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Timmana
+: 
+['Regular']
+Tinos
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Tiro Bangla
+: 
+(2) ['Italic', 'Regular']
+Tiro Devanagari Hindi
+: 
+(2) ['Italic', 'Regular']
+Tiro Devanagari Marathi
+: 
+(2) ['Italic', 'Regular']
+Tiro Devanagari Sanskrit
+: 
+(2) ['Italic', 'Regular']
+Tiro Gurmukhi
+: 
+(2) ['Italic', 'Regular']
+Tiro Kannada
+: 
+(2) ['Italic', 'Regular']
+Tiro Tamil
+: 
+(2) ['Italic', 'Regular']
+Tiro Telugu
+: 
+(2) ['Italic', 'Regular']
+Titan One
+: 
+['Regular']
+Titillium Web
+: 
+(11) ['Black', 'Bold', 'Bold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Tomorrow
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Tourney
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Trade Winds
+: 
+['Regular']
+Train One
+: 
+['Regular']
+Trattatello
+: 
+['Regular']
+Trebuchet MS
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Trirong
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Trispace
+: 
+(8) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Trocchi
+: 
+['Regular']
+Trochut
+: 
+(3) ['Bold', 'Italic', 'Regular']
+Truculenta
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Trykker
+: 
+['Regular']
+Tsukimi Rounded
+: 
+(5) ['Bold', 'Light', 'Medium', 'Regular', 'SemiBold']
+Tuffy
+: 
+(3) ['Bold', 'BoldItalic', 'MagerKursiv']
+Tulpen One
+: 
+['Regular']
+Turret Road
+: 
+(6) ['Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular']
+Twinkle Star
+: 
+['Regular']
+Ubuntu
+: 
+(8) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular']
+Ubuntu Condensed
+: 
+['Regular']
+Ubuntu Mono
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Uchen
+: 
+['Regular']
+Ultra
+: 
+['Regular']
+Uncial Antiqua
+: 
+['Regular']
+Underdog
+: 
+['Regular']
+Unica One
+: 
+['Regular']
+UnifrakturCook
+: 
+['Bold']
+UnifrakturMaguntia
+: 
+['Book']
+Unkempt
+: 
+(2) ['Bold', 'Regular']
+Unlock
+: 
+['Regular']
+Unna
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Updock
+: 
+['Regular']
+Urbanist
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+VT323
+: 
+['Regular']
+Vampiro One
+: 
+['Regular']
+Varela
+: 
+['Regular']
+Varela Round
+: 
+['Regular']
+Varta
+: 
+(4) ['Bold', 'Light', 'Regular', 'SemiBold']
+Vast Shadow
+: 
+['Regular']
+Vazirmatn
+: 
+(9) ['Black', 'Bold', 'ExtraBold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold', 'Thin']
+Verdana
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Vesper Libre
+: 
+(4) ['Bold', 'Heavy', 'Medium', 'Regular']
+Viaoda Libre
+: 
+['Regular']
+Vibes
+: 
+['Regular']
+Vibur
+: 
+['Medium']
+Vidaloka
+: 
+['Regular']
+Viga
+: 
+['Regular']
+Voces
+: 
+['Regular']
+Volkhov
+: 
+(4) ['Bold', 'Bold Italic', 'Italic', 'Regular']
+Vollkorn
+: 
+(12) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Vollkorn SC
+: 
+(4) ['Black', 'Bold', 'Regular', 'SemiBold']
+Voltaire
+: 
+['Regular']
+Vujahday Script
+: 
+['Regular']
+Waiting for the Sunrise
+: 
+['Regular']
+Wallpoet
+: 
+['Regular']
+Walter Turncoat
+: 
+['Regular']
+Warnes
+: 
+['Regular']
+Waseem
+: 
+(2) ['Light', 'Regular']
+Water Brush
+: 
+['Regular']
+Waterfall
+: 
+['Regular']
+Wavefont
+: 
+['Light']
+Webdings
+: 
+['Regular']
+Wellfleet
+: 
+['Regular']
+Wendy One
+: 
+['Regular']
+Whisper
+: 
+['Regular']
+WindSong
+: 
+(2) ['Medium', 'Regular']
+Wingdings
+: 
+['Regular']
+Wingdings 2
+: 
+['Regular']
+Wingdings 3
+: 
+['Regular']
+Wire One
+: 
+['Regular']
+Work Sans
+: 
+(18) ['Black', 'Black Italic', 'Bold', 'Bold Italic', 'ExtraBold', 'ExtraBold Italic', 'ExtraLight', 'ExtraLight Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic', 'Thin', 'Thin Italic']
+Xanh Mono
+: 
+(2) ['Italic', 'Regular']
+Yaldevi
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Yaldevi Colombo
+: 
+(2) ['Bold', 'Regular']
+Yaldevi Colombo ExtraLight
+: 
+['Regular']
+Yaldevi Colombo Light
+: 
+['Regular']
+Yaldevi Colombo Medium
+: 
+['Regular']
+Yaldevi Colombo SemiBold
+: 
+['Regular']
+Yanone Kaffeesatz
+: 
+(6) ['Bold', 'ExtraLight', 'Light', 'Medium', 'Regular', 'SemiBold']
+Yantramanav
+: 
+(6) ['Black', 'Bold', 'Light', 'Medium', 'Regular', 'Thin']
+Yatra One
+: 
+['Regular']
+Yellowtail
+: 
+['Regular']
+Yeon Sung
+: 
+['Regular']
+Yeseva One
+: 
+['Regular']
+Yesteryear
+: 
+['Regular']
+Yinmar
+: 
+['Regular']
+Yomogi
+: 
+['Regular']
+Yrsa
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Yu Gothic
+: 
+(4) ['Bold', 'Light', 'Medium', 'Regular']
+Yu Gothic UI
+: 
+(5) ['Bold', 'Light', 'Regular', 'Semibold', 'Semilight']
+Yuji Boku
+: 
+['Regular']
+Yuji Hentaigana Akari
+: 
+['Regular']
+Yuji Hentaigana Akebono
+: 
+['Regular']
+Yuji Mai
+: 
+['Regular']
+Yuji Syuku
+: 
+['Regular']
+Yusei Magic
+: 
+['Regular']
+ZCOOL KuaiLe
+: 
+['Regular']
+ZCOOL QingKe HuangYou
+: 
+['Regular']
+ZCOOL XiaoWei
+: 
+['Regular']
+Zapf Dingbats
+: 
+['Regular']
+Zapfino
+: 
+['Regular']
+Zen Antique
+: 
+['Regular']
+Zen Antique Soft
+: 
+['Regular']
+Zen Dots
+: 
+['Regular']
+Zen Kaku Gothic Antique
+: 
+(5) ['Black', 'Bold', 'Light', 'Medium', 'Regular']
+Zen Kaku Gothic New
+: 
+(5) ['Black', 'Bold', 'Light', 'Medium', 'Regular']
+Zen Kurenaido
+: 
+['Regular']
+Zen Loop
+: 
+(2) ['Italic', 'Regular']
+Zen Maru Gothic
+: 
+(5) ['Black', 'Bold', 'Light', 'Medium', 'Regular']
+Zen Old Mincho
+: 
+(5) ['Black', 'Bold', 'Medium', 'Regular', 'SemiBold']
+Zen Tokyo Zoo
+: 
+['Regular']
+Zeyada
+: 
+['Regular']
+Zhi Mang Xing
+: 
+['Regular']
+Zilla Slab
+: 
+(10) ['Bold', 'Bold Italic', 'Italic', 'Light', 'Light Italic', 'Medium', 'Medium Italic', 'Regular', 'SemiBold', 'SemiBold Italic']
+Zilla Slab Highlight
+: 
+(2) ['Bold', 'Regular']
+jsMath-cmbx10
+: 
+['cmbx10']
+jsMath-cmex10
+: 
+['cmex10']
+jsMath-cmmi10
+: 
+['cmmi10']
+jsMath-cmr10
+: 
+['cmr10']
+jsMath-cmsy10
+: 
+['cmsy10']
+jsMath-cmti10
+: 
+['cmti10']
