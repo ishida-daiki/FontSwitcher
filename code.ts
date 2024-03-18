@@ -62,6 +62,8 @@ async function loadAllFontWeights(fontFamily: string) {
 // フォントファミリーとフォントウェイトのマップを保持するオブジェクトを初期化
 let fontFamilyWeightsMap: { [key: string]: string[] } = {};
 
+let adjustedFontWeights: { family: string; closestWeight: string }[] = [];
+
 figma.ui.onmessage = async (msg) => {
   // Applyボタンを押下したときに発生するイベント
   if (msg.type === "analyzeAndUpdateText") {
@@ -185,7 +187,15 @@ figma.ui.onmessage = async (msg) => {
           figma.ui.postMessage({ type: "success-prosess" });
         }
       }
-
+      // 全てのテキストノードの処理が終わった後に実行する
+      if (adjustedFontWeights.length > 0) {
+        adjustedFontWeights.forEach((font) => {
+          // UIに一度だけ配列全体を送信する
+          figma.ui.postMessage({ type: "font-weight-adjusted", fontFamily: font.family, fontWeight: font.closestWeight });
+        });
+        // adjustedFontWeightsを空の配列にリセットする
+        adjustedFontWeights = [];
+      }
       // ローディングを非表示にする
       figma.ui.postMessage({ type: "hide-loading" });
     } catch (error) {
@@ -417,15 +427,16 @@ async function findClosestFontWeight(
   }
 
   // ここで結果が確定
-  if (exactMatchFound) {
-    console.log("Exact match found, no need for further processing.");
-  } else {
-    console.log(
-      "No exact match found, closest weight selected:",
-      closestWeight
+  // findClosestFontWeight関数の一部を変更
+  if (!exactMatchFound) {
+    const isExistingCombination = adjustedFontWeights.some((item) => 
+      item.family === family && item.closestWeight === closestWeight
     );
+  
+    if (!isExistingCombination) {
+      adjustedFontWeights.push({ family: family, closestWeight: closestWeight });
+    }
   }
-
   return closestWeight;
 }
 // テキストノード処理ロジックを関数化
